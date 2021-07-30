@@ -1,0 +1,3 @@
+[submodule "deps/cwire"]
+	path = deps/cwire
+	url = https://github.com/Wykerd/cwire.git
