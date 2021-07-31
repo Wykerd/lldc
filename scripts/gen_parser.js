@@ -210,6 +210,8 @@ typedef struct lldc_${path.join('_')}_arr_s {
         schema.items.type == 'object' ? 
             schema.items.properties ?
                 `lldc_${[...path, 'item'].join('_')}_t `:
+            schema.items.existing_parser ?
+                `lldc_${schema.items.existing_parser}_t ` :
                 `yyjson_val *` :
             typedef 
     }*items;
@@ -332,7 +334,7 @@ static
 int lldc__${path.join('_')}_parse (lldc_${o_path.join('_')}_t *_obj, yyjson_val *json)
 {
     _obj->${snakeCase(key)}._mlog = _obj->_mlog;
-    return lldc_${schema.existing_parser}_parse(&_obj->_mctx, &_obj->${snakeCase(key)}, json, 1);
+    return lldc_${schema.existing_parser}_parse(_obj->_mctx, &_obj->${snakeCase(key)}, json, 1);
 }`);
     }
 
@@ -349,7 +351,7 @@ static
 int lldc__${path.join('_')}_parse (lldc_${o_path.join('_')}_t *_obj, yyjson_val *json)
 {
     _obj->${snakeCase(key)}._mlog = _obj->_mlog;
-    return lldc_${schema.existing_parser}_parse(&_obj->_mctx, &_obj->${snakeCase(key)}, json, 1);
+    return lldc_${schema.existing_parser}_parse(_obj->_mctx, &_obj->${snakeCase(key)}, json, 1);
 }`);
     }
 
@@ -468,7 +470,7 @@ ${impl}
 static
 int lldc__${path.join('_')}_item_parse (lldc_${schema.existing_parser}_t *_obj, yyjson_val *json)
 {
-    return lldc_${schema.existing_parser}_parse(&_obj->_mctx, _obj, json, 1);
+    return lldc_${schema.existing_parser}_parse(_obj->_mctx, _obj, json, 1);
 }`);
     }
 
