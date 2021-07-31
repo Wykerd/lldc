@@ -1,3 +1,11 @@
+/**
+ * Copyright 2021 Daniel Wykerd
+ *
+ * Use of this source code is governed by an MIT-style
+ * license that can be found in the LICENSE file or at
+ * https://opensource.org/licenses/MIT.
+ */
+
 #ifndef LLDC_COMMON_H
 #define LLDC_COMMON_H
 

@@ -18,6 +18,8 @@ add_library(lldc
     ${CMAKE_CURRENT_SOURCE_DIR}/deps/yyjson/yyjson.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/spooky.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/hashmap.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/parse.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/parsers.c
 )
 
 set_target_properties(cwire PROPERTIES
@@ -29,6 +31,7 @@ find_package(UV REQUIRED)
 
 target_include_directories(lldc PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include 
+    ${CMAKE_CURRENT_SOURCE_DIR}/deps/yyjson
     ${UV_INCLUDE_DIR}
 )
 

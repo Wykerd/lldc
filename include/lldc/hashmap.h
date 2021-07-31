@@ -1,3 +1,11 @@
+/**
+ * Copyright 2021 Daniel Wykerd
+ *
+ * Use of this source code is governed by an MIT-style
+ * license that can be found in the LICENSE file or at
+ * https://opensource.org/licenses/MIT.
+ */
+
 #ifndef LLDC_HASHMAP_H
 #define LLDC_HASHMAP_H
 
@@ -33,6 +41,8 @@ typedef struct lldc_hashmap_s {
 
 double lldc_hashmap_load_factor (lldc_hashmap_t *map);
 uint64_t lldc_hashmap_hash_str (const void *str);
+void *lldc_hashmap_dup_echo (cwr_malloc_ctx_t *m_ctx, const void *str);
+void lldc_hashmap_free_noop (cwr_malloc_ctx_t *m_ctx, void *str);
 void *lldc_hashmap_dup_str (cwr_malloc_ctx_t *m_ctx, const void *str);
 void lldc_hashmap_free_str (cwr_malloc_ctx_t *m_ctx, void *str);
 int lldc_hashmap_init_str (lldc_hashmap_t *map, cwr_malloc_ctx_t *m_ctx);

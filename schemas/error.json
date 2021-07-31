@@ -1,0 +1,35 @@
+{
+    "title": "Discord Error",
+    "description": "Error Messages",
+    "type": "object",
+    "properties": {
+        "code": {
+            "description": "Error code",
+            "type": "int"
+        },
+        "errors": {
+            "description": "JSON object\nSee the Developer page for info: https://discord.com/developers/docs/reference#error-messages",
+            "type": "object"
+        },
+        "message": {
+            "description": "Human readable error message",
+            "type": "string"
+        }
+    },
+    "_test": [
+        {
+            "code": 50035,
+            "errors": {
+                "access_token": {
+                    "_errors": [
+                        {
+                            "code": "BASE_TYPE_REQUIRED",
+                            "message": "This field is required"
+                        }
+                    ]
+                }
+            },
+            "message": "Invalid Form Body"
+        }
+    ]
+}

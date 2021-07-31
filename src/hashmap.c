@@ -1,3 +1,11 @@
+/**
+ * Copyright 2021 Daniel Wykerd
+ *
+ * Use of this source code is governed by an MIT-style
+ * license that can be found in the LICENSE file or at
+ * https://opensource.org/licenses/MIT.
+ */
+
 #include <lldc/hashmap.h>
 #include <lldc/spooky.h>
 #include <string.h>
@@ -11,6 +19,7 @@ double lldc_hashmap_load_factor (lldc_hashmap_t *map)
 
 uint64_t lldc_hashmap_hash_str (const void *str)
 {
+    const char*ss = str;
     return spooky_hash64(str, strlen(str), 0);
 }
 
@@ -18,9 +27,21 @@ void *lldc_hashmap_dup_str (cwr_malloc_ctx_t *m_ctx, const void *str)
 {
     size_t len = strlen(str);
     char *n_str = cwr_malloc(m_ctx, len + 1);
+    if (!n_str)
+        return NULL;
     memcpy(n_str, str, len);
     n_str[len] = '\0';
     return n_str;
+}
+
+void *lldc_hashmap_dup_echo (cwr_malloc_ctx_t *m_ctx, const void *str)
+{
+    return str;
+}
+
+void lldc_hashmap_free_noop (cwr_malloc_ctx_t *m_ctx, void *str)
+{
+    /* noop */
 }
 
 void lldc_hashmap_free_str (cwr_malloc_ctx_t *m_ctx, void *str)
