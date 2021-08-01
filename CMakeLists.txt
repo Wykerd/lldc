@@ -15,9 +15,13 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/deps/cwire)
 find_package(UV REQUIRED)
 
 add_library(lldc
-    ${CMAKE_CURRENT_SOURCE_DIR}/deps/yyjson/yyjson.c
+    # Utils
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/common.c
+    # Hashing
     ${CMAKE_CURRENT_SOURCE_DIR}/src/spooky.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/hashmap.c
+    # Parsing
+    ${CMAKE_CURRENT_SOURCE_DIR}/deps/yyjson/yyjson.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/parse.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/parsers.c
 )

@@ -38,4 +38,29 @@
 
 typedef uint64_t snowflake_t;
 
+/**
+ * decode a percent-encoded C string with optional path normalization
+ *
+ * The buffer pointed to by @dst must be at least strlen(@src) bytes.
+ * Decoding stops at the first character from @src that decodes to null.
+ *
+ * @param dst       destination buffer
+ * @param src       source buffer
+ * @return          number of valid characters in @dst
+ * @author          Johan Lindh <johan@linkdata.se>
+ * @legalese        BSD licensed (http://opensource.org/licenses/BSD-2-Clause)
+ */
+size_t lldc_urldecode(char* dst, const char* src);
+
+/**
+ * url encode a C string
+ * 
+ * Source: http://www.geekhideout.com/urlcode.shtml
+ * License: Public Domain
+ * Make sure output buffer is `strlen(str) * 3 + 1` in size 
+ * @param dst       destination buffer
+ * @param src       source buffer
+ */
+size_t lldc_urlencode(char* dst, const char *str);
+
 #endif

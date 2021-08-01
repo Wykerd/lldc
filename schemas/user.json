@@ -1,0 +1,77 @@
+{
+    "title": "User",
+    "description": "User Structure",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "the user's id",
+            "type": "snowflake"
+        },
+        "username": {
+            "description": "the user's username, not unique across the platform",
+            "type": "string"
+        },
+        "discriminator": {
+            "description": "the user's 4-digit discord-tag",
+            "type": "string"
+        },
+        "avatar": {
+            "description": "OPTIONAL: the user's avatar hash",
+            "type": "string"
+        },
+        "bot": {
+            "description": "whether the user belongs to an OAuth2 application",
+            "type": "boolean"
+        },
+        "system": {
+            "description": "whether the user is an Official Discord System user (part of the urgent message system)",
+            "type": "boolean"
+        },
+        "mfa_enabled": {
+            "description": "whether the user has two factor enabled on their account",
+            "type": "boolean"
+        },
+        "locale": {
+            "description": "the user's chosen language option",
+            "type": "string"
+        },
+        "flags": {
+            "description": "the flags on a user's account",
+            "type": "int",
+            "enum_prefix": "LLDC_USER_FLAG_",
+            "enum_type": "user_flag",
+            "enum": [
+                [0, "None"],
+                ["1 << 0", "Discord Employee"],
+                ["1 << 1", "Partnered Server Owner"],
+                ["1 << 2", "HypeSquad Events"],
+                ["1 << 3", "Bug Hunter Level 1"],
+                ["1 << 6", "House Bravery"],
+                ["1 << 7", "House Brilliance"],
+                ["1 << 8", "House Balance"],
+                ["1 << 9", "Early Supporter"],
+                ["1 << 10", "Team User"],
+                ["1 << 14", "Bug Hunter Level 2"],
+                ["1 << 16", "Verified Bot"],
+                ["1 << 17", "Early Verified Bot Developer"],
+                ["1 << 18", "Discord Certified Moderator"]
+            ]
+        },
+        "premium_type": {
+            "description": "the type of Nitro subscription on a user's account",
+            "type": "int",
+            "enum_prefix": "LLDC_PREMIUM_",
+            "enum_type": "user_premium",
+            "enum": [
+                [0, "None"],
+                [1, "Nitro Classic"],
+                [2, "Nitro"]
+            ]
+        },
+        "public_flags": {
+            "description": "the public flags on a user's account",
+            "type": "int",
+            "enum_type": "user_premium"
+        }
+    }
+}

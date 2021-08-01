@@ -36,7 +36,7 @@ void *lldc_hashmap_dup_str (cwr_malloc_ctx_t *m_ctx, const void *str)
 
 void *lldc_hashmap_dup_echo (cwr_malloc_ctx_t *m_ctx, const void *str)
 {
-    return str;
+    return (void *)str;
 }
 
 void lldc_hashmap_free_noop (cwr_malloc_ctx_t *m_ctx, void *str)

@@ -1,0 +1,19 @@
+{
+    "title": "Audit Log Changes",
+    "description": "audit log changes",
+    "type": "object",
+    "properties": {
+        "new_value": {
+            "description": "OPTIONAL: new value of the key",
+            "type": "raw"
+        },
+        "old_value": {
+            "description": "OPTIONAL: old value of the key",
+            "type": "raw"
+        },
+        "key": {
+            "description": "name of audit log change key",
+            "type": "string"
+        }
+    }
+}

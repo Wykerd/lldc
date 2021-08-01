@@ -1,0 +1,86 @@
+{
+    "title": "Audit Log Entry",
+    "description": "audit log entry",
+    "type": "object",
+    "properties": {
+        "target_id": {
+            "description": "OPTIONAL: id of the affected entity (webhook, user, role, etc.)",
+            "type": "snowflake"
+        },
+        "changes": {
+            "description": "OPTIONAL: changes made to the target_id",
+            "type": "array",
+            "items": {
+                "description": "array of audit log change objects",
+                "type": "object",
+                "existing_parser": "audit_log_changes"
+            }
+        },
+        "user_id": {
+            "description": "OPTIONAL: the user who made the changes",
+            "type": "snowflake"
+        },
+        "id": {
+            "description": "id of the entry",
+            "type": "snowflake"
+        },
+        "action_type": {
+            "description": "type of action that occured",
+            "type": "int",
+            "enum_prefix": "LLDC_AE_",
+            "enum_type": "auditlog_event",
+            "enum": [
+                [1,"GUILD_UPDATE"],
+                [10,"CHANNEL_CREATE"],
+                [11,"CHANNEL_UPDATE"],
+                [12,"CHANNEL_DELETE"],
+                [13,"CHANNEL_OVERWRITE_CREATE"],
+                [14,"CHANNEL_OVERWRITE_UPDATE"],
+                [15,"CHANNEL_OVERWRITE_DELETE"],
+                [20,"MEMBER_KICK"],
+                [21,"MEMBER_PRUNE"],
+                [22,"MEMBER_BAN_ADD"],
+                [23,"MEMBER_BAN_REMOVE"],
+                [24,"MEMBER_UPDATE"],
+                [25,"MEMBER_ROLE_UPDATE"],
+                [26,"MEMBER_MOVE"],
+                [27,"MEMBER_DISCONNECT"],
+                [28,"BOT_ADD"],
+                [30,"ROLE_CREATE"],
+                [31,"ROLE_UPDATE"],
+                [32,"ROLE_DELETE"],
+                [40,"INVITE_CREATE"],
+                [41,"INVITE_UPDATE"],
+                [42,"INVITE_DELETE"],
+                [50,"WEBHOOK_CREATE"],
+                [51,"WEBHOOK_UPDATE"],
+                [52,"WEBHOOK_DELETE"],
+                [60,"EMOJI_CREATE"],
+                [61,"EMOJI_UPDATE"],
+                [62,"EMOJI_DELETE"],
+                [72,"MESSAGE_DELETE"],
+                [73,"MESSAGE_BULK_DELETE"],
+                [74,"MESSAGE_PIN"],
+                [75,"MESSAGE_UNPIN"],
+                [80,"INTEGRATION_CREATE"],
+                [81,"INTEGRATION_UPDATE"],
+                [82,"INTEGRATION_DELETE"],
+                [83,"STAGE_INSTANCE_CREATE"],
+                [84,"STAGE_INSTANCE_UPDATE"],
+                [85,"STAGE_INSTANCE_DELETE"],
+                [90,"STICKER_CREATE"],
+                [91,"STICKER_UPDATE"],
+                [92,"STICKER_DELETE"]
+            ]
+        },
+        "options": {
+            "description": "OPTIONAL: additional info for certain action types",
+            "type": "object",
+            "existing_parser": "audit_log_options"
+        },
+        "reason": {
+            "description": "OPTIONAL: the reason for the change (0-512 characters)",
+            "type": "string"
+        }
+    }
+}

@@ -1,3 +1,16 @@
 [
-    "error.json"
+    "error.json",
+    
+    "user.json",
+    "user.arr.json",
+    
+    "webhook.json",
+    "webhook.arr.json",
+    
+    "interaction.account.json",
+
+    "auditlog.changes.json",
+    "auditlog.options.json",
+    "auditlog.entries.json",
+    "auditlog.json"
 ]

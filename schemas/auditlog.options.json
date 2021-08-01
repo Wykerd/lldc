@@ -1,0 +1,39 @@
+{
+    "title": "Audit Log Options",
+    "description": "Optional Audit Entry Info",
+    "type": "object",
+    "properties": {
+        "delete_member_days": {
+            "description": "number of days after which inactive members were kicked",
+            "type": "string"
+        },
+        "members_removed": {
+            "description": "number of members removed by the prune",
+            "type": "string"
+        },
+        "channel_id": {
+            "description": "channel in which the entities were targeted",
+            "type": "snowflake"
+        },
+        "message_id": {
+            "description": "id of the message that was targeted",
+            "type": "snowflake"
+        },
+        "count": {
+            "description": "number of entities that were targeted",
+            "type": "string"
+        },
+        "id": {
+            "description": "id of the overwritten entity",
+            "type": "snowflake"
+        },
+        "type": {
+            "description": "type of overwritten entity - \"0\" for \"role\" or \"1\" for \"member\"",
+            "type": "string"
+        },
+        "role_name": {
+            "description": "name of the role if type is \"0\" (not present if type is \"1\")",
+            "type": "string"
+        }
+    }
+}

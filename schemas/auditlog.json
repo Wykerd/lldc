@@ -1,0 +1,53 @@
+{
+    "title": "Audit Log",
+    "description": "Audit Logs",
+    "type": "object",
+    "properties": {
+        "webhooks": {
+            "description": "list of webhooks found in the audit log",
+            "type": "array",
+            "existing_parser": "webhook_arr"
+        },
+        "users": {
+            "description": "list of users found in the audit log",
+            "type": "array",
+            "existing_parser": "user_arr"
+        },
+        "integrations": {
+            "description": "list of partial integration objects",
+            "type": "array",
+            "items": {
+                "description": "partial integration objects",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "integration id",
+                        "type": "snowflake"
+                    },
+                    "name": {
+                        "description": "integration name",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "integration type (twitch, youtube, or discord)",
+                        "type": "string"
+                    },
+                    "account": {
+                        "description": "integration account information",
+                        "type": "object",
+                        "existing_parser": "interaction_account"
+                    }
+                }
+            }
+        },
+        "audit_log_entries": {
+            "description": "list of audit log entries",
+            "type": "array",
+            "items": {
+                "description": "array of audit log entry objects",
+                "type": "object",
+                "existing_parser": "audit_log_entry"
+            }
+        }
+    }
+}

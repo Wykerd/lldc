@@ -1,0 +1,10 @@
+{
+    "title": "Webhook",
+    "description": "Webhook Array",
+    "type": "array",
+    "items": {
+        "description": "Webhook Objects",
+        "type": "object",
+        "existing_parser": "webhook"
+    }
+}

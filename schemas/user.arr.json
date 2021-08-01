@@ -1,0 +1,10 @@
+{
+    "title": "User",
+    "description": "User Array",
+    "type": "array",
+    "items": {
+        "description": "User Objects",
+        "type": "object",
+        "existing_parser": "user"
+    }
+}

@@ -128,6 +128,22 @@ int lldc__${[...path, snakeCase(key)].join('_')}_parse (lldc_${path.join('_')}_t
 }`)
     }
 
+    rawJson (key, schema, path) {
+        this.methods.unshift(
+`/**
+ * ${key} Parser
+ * ${schema.description.replace(/\n/g, '\n * ')}
+ * type: object.rawobj
+ */
+static
+int lldc__${[...path, snakeCase(key)].join('_')}_parse (lldc_${path.join('_')}_t *obj, yyjson_val *json) 
+{
+    obj->${snakeCase(key)} = json;
+
+    return 0;
+}`)
+    }
+
     arrRawObj (key, schema, path) {
         this.methods.unshift(
 `/**
@@ -183,6 +199,10 @@ typedef struct lldc_${path.join('_')}_s {
 
                 case 'string':
                     typedef += 'const char *';
+                    break;
+
+                case 'raw':
+                    typedef += 'yyjson_val *';
                     break;
 
                 case 'object':
@@ -246,6 +266,8 @@ typedef struct lldc_${path.join('_')}_arr_s {
     cwr_malloc_ctx_t *_mctx;
     lldc_parser_malloc_ledger_t *_mlog;
     ${
+        schema.items.type == 'raw' ?
+            'yyjson_val *' :
         schema.items.type == 'object' ? 
             schema.items.properties ?
                 `lldc_${[...path, 'item'].join('_')}_t `:
@@ -520,12 +542,28 @@ int lldc__${path.join('_')}_item_parse (lldc_${schema.existing_parser}_t *_obj, 
  * ${schema.description.replace(/\n/g, '\n * ')}
  * type: array.rawobj
  */
-static
+static inline
 int lldc__${path.join('_')}_item_parse (yyjson_val **_obj, yyjson_val *json)
 {
     if (!yyjson_is_obj(json))
         return -1;
 
+    *_obj = json;
+
+    return 0;
+}`)
+    }
+
+    rawArrRawObj (key, schema, path) {
+        this.methods.unshift(
+`/**
+ * ${key} Parser
+ * ${schema.description.replace(/\n/g, '\n * ')}
+ * type: array.rawobj
+ */
+static inline
+int lldc__${path.join('_')}_item_parse (yyjson_val **_obj, yyjson_val *json)
+{
     *_obj = json;
 
     return 0;
@@ -539,7 +577,7 @@ int lldc__${path.join('_')}_item_parse (yyjson_val **_obj, yyjson_val *json)
  * ${schema.description.replace(/\n/g, '\n * ')}
  * type: array.rawarr
  */
-static
+static inline
 int lldc__${path.join('_')}_item_parse (yyjson_val **_obj, yyjson_val *json)
 {
     if (!yyjson_is_arr(json))
@@ -574,6 +612,9 @@ int lldc__${path.join('_')}_item_parse (yyjson_val **_obj, yyjson_val *json)
                     else
                         return this.objArrRawObj(key, schema, path);
                 }
+
+            case 'raw':
+                return this.rawArrRawObj(key, schema, path);
 
             case 'array':
                 {
@@ -615,6 +656,9 @@ int lldc__${path.join('_')}_item_parse (yyjson_val **_obj, yyjson_val *json)
                     else
                         return this.objRawObj(key, schema, path);
                 }
+
+            case 'raw':
+                return this.rawJson(key, schema, path);
 
             case 'array':
                 {

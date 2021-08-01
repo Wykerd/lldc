@@ -1,0 +1,87 @@
+{
+    "title": "Webhook",
+    "description": "Used to represent a webhook",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "the id of the webhook",
+            "type": "snowflake"
+        },
+        "type": {
+            "description": "the type of the webhook",
+            "type": "int",
+            "enum_prefix": "LLDC_WEBHOOK_",
+            "enum_type": "webhook_type",
+            "enum": [
+                [1, "Incoming", "Incoming Webhooks can post messages to channels with a generated token"],
+                [2, "Channel Follower", "Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels"],
+                [3, "Application", "Application webhooks are webhooks used with Interactions"]
+            ]
+        },
+        "guild_id": {
+            "description": "OPTIONAL: the guild id this webhook is for, if any",
+            "type": "snowflake"
+        },
+        "channel_id": {
+            "description": "OPTIONAL: the channel id this webhook is for, if any",
+            "type": "snowflake"
+        },
+        "user": {
+            "description": "OPTIONAL: the user this webhook was created by (not returned when getting a webhook with its token)",
+            "type": "object",
+            "existing_parser": "user"
+        },
+        "name": {
+            "description": "OPTIONAL: the default name of the webhook",
+            "type": "string"
+        },
+        "avatar": {
+            "description": "OPTIONAL: the default user avatar hash of the webhook",
+            "type": "string"
+        },
+        "token": {
+            "description": "OPTIONAL: the secure token of the webhook (returned for Incoming Webhooks)",
+            "type": "string"
+        },
+        "application_id": {
+            "description": "OPTIONAL: the bot/OAuth2 application that created this webhook",
+            "type": "snowflake"
+        },
+        "source_guild": {
+            "description": "OPTIONAL: the partial guild of the channel that this webhook is following (returned for Channel Follower Webhooks)",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "guild id",
+                    "type": "snowflake"
+                },
+                "name": {
+                    "description": "guild name (2-100 characters, excluding trailing and leading whitespace)",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "OPTIONAL: icon hash",
+                    "type": "string"
+                }
+            }
+        },
+        "source_channel": {
+            "description": "OPTIONAL: the partial channel that this webhook is following (returned for Channel Follower Webhooks)",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "the id of this channel",
+                    "type": "snowflake"
+                },
+                "name": {
+                    "description": "the name of the channel (1-100 characters)",
+                    "type": "string"
+                }
+            }
+        },
+        "url": {
+            "description": "OPTIONAL: the url used for executing the webhook (returned by the webhooks OAuth2 flow)",
+            "type": "string"
+        }
+    }
+}
