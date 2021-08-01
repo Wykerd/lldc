@@ -1,0 +1,224 @@
+{
+    "title": "Channel Overwrite",
+    "description": "Represents a guild or DM channel within Discord",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "role or user id",
+            "type": "snowflake"
+        },
+        "type": {
+            "description": "either 0 (role) or 1 (member)",
+            "type": "int",
+            "enum_prefix": "LLDC_CH_OVERWRITE_",
+            "enum_type": "channel_overwrite_type",
+            "enum": [
+                [
+                    0,
+                    "role"
+                ],
+                [
+                    1,
+                    "member"
+                ]
+            ]
+        },
+        "allow": {
+            "description": "permission bit set",
+            "type": "toint",
+            "enum_prefix": "LLDC_PERMISSION_",
+            "enum_def": true,
+            "enum": [
+                [
+                    "1 << 0",
+                    "CREATE_INSTANT_INVITE",
+                    "Allows creation of instant invites"
+                ],
+                [
+                    "1 << 1",
+                    "KICK_MEMBERS",
+                    "Allows kicking members"
+                ],
+                [
+                    "1 << 2",
+                    "BAN_MEMBERS",
+                    "Allows banning members"
+                ],
+                [
+                    "1 << 3",
+                    "ADMINISTRATOR",
+                    "Allows all permissions and bypasses channel permission overwrites"
+                ],
+                [
+                    "1 << 4",
+                    "MANAGE_CHANNELS",
+                    "Allows management and editing of channels"
+                ],
+                [
+                    "1 << 5",
+                    "MANAGE_GUILD",
+                    "Allows management and editing of the guild"
+                ],
+                [
+                    "1 << 6",
+                    "ADD_REACTIONS",
+                    "Allows for the addition of reactions to messages"
+                ],
+                [
+                    "1 << 7",
+                    "VIEW_AUDIT_LOG",
+                    "Allows for viewing of audit logs"
+                ],
+                [
+                    "1 << 8",
+                    "PRIORITY_SPEAKER",
+                    "Allows for using priority speaker in a voice channel"
+                ],
+                [
+                    "1 << 9",
+                    "STREAM",
+                    "Allows the user to go live"
+                ],
+                [
+                    "1 << 10",
+                    "VIEW_CHANNEL",
+                    "Allows guild members to view a channel, which includes reading messages in text channels"
+                ],
+                [
+                    "1 << 11",
+                    "SEND_MESSAGES",
+                    "Allows for sending messages in a channel"
+                ],
+                [
+                    "1 << 12",
+                    "SEND_TTS_MESSAGES",
+                    "Allows for sending of /tts messages"
+                ],
+                [
+                    "1 << 13",
+                    "MANAGE_MESSAGES",
+                    "Allows for deletion of other users messages"
+                ],
+                [
+                    "1 << 14",
+                    "EMBED_LINKS",
+                    "Links sent by users with this permission will be auto-embedded"
+                ],
+                [
+                    "1 << 15",
+                    "ATTACH_FILES",
+                    "Allows for uploading images and files"
+                ],
+                [
+                    "1 << 16",
+                    "READ_MESSAGE_HISTORY",
+                    "Allows for reading of message history"
+                ],
+                [
+                    "1 << 17",
+                    "MENTION_EVERYONE",
+                    "Allows for using the @everyone tag to notify all users in a channel, and the @here tag to notify all online users in a channel"
+                ],
+                [
+                    "1 << 18",
+                    "USE_EXTERNAL_EMOJIS",
+                    "Allows the usage of custom emojis from other servers"
+                ],
+                [
+                    "1 << 19",
+                    "VIEW_GUILD_INSIGHTS",
+                    "Allows for viewing guild insights"
+                ],
+                [
+                    "1 << 20",
+                    "CONNECT",
+                    "Allows for joining of a voice channel"
+                ],
+                [
+                    "1 << 21",
+                    "SPEAK",
+                    "Allows for speaking in a voice channel"
+                ],
+                [
+                    "1 << 22",
+                    "MUTE_MEMBERS",
+                    "Allows for muting members in a voice channel"
+                ],
+                [
+                    "1 << 23",
+                    "DEAFEN_MEMBERS",
+                    "Allows for deafening of members in a voice channel"
+                ],
+                [
+                    "1 << 24",
+                    "MOVE_MEMBERS",
+                    "Allows for moving of members between voice channels"
+                ],
+                [
+                    "1 << 25",
+                    "USE_VAD",
+                    "Allows for using voice-activity-detection in a voice channel"
+                ],
+                [
+                    "1 << 26",
+                    "CHANGE_NICKNAME",
+                    "Allows for modification of own nickname"
+                ],
+                [
+                    "1 << 27",
+                    "MANAGE_NICKNAMES",
+                    "Allows for modification of other users nicknames"
+                ],
+                [
+                    "1 << 28",
+                    "MANAGE_ROLES",
+                    "Allows management and editing of roles"
+                ],
+                [
+                    "1 << 29",
+                    "MANAGE_WEBHOOKS",
+                    "Allows management and editing of webhooks"
+                ],
+                [
+                    "1 << 30",
+                    "MANAGE_EMOJIS_AND_STICKERS",
+                    "Allows management and editing of emojis and stickers"
+                ],
+                [
+                    "1 << 31",
+                    "USE_SLASH_COMMANDS",
+                    "Allows members to use slash commands in text channels"
+                ],
+                [
+                    "1 << 32",
+                    "REQUEST_TO_SPEAK",
+                    "Allows for requesting to speak in stage channels. (This permission is under active development and may be changed or removed.)"
+                ],
+                [
+                    "1 << 34",
+                    "MANAGE_THREADS",
+                    "Allows for deleting and archiving threads, and viewing all private threads"
+                ],
+                [
+                    "1 << 35",
+                    "USE_PUBLIC_THREADS",
+                    "Allows for creating and participating in threads"
+                ],
+                [
+                    "1 << 36",
+                    "USE_PRIVATE_THREADS",
+                    "Allows for creating and participating in private threads"
+                ],
+                [
+                    "1 << 37",
+                    "USE_EXTERNAL_STICKERS",
+                    "Allows the usage of custom stickers from other servers"
+                ]
+            ]
+        },
+        "deny": {
+            "description": "permission bit set",
+            "type": "toint"
+        }
+    }
+}

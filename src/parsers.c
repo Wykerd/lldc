@@ -17,6 +17,525 @@
 #include <lldc/hashmap.h>
 #include <stdlib.h>
 /**
+ * permissions Parser
+ * OPTIONAL: computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction
+ * type: object.touint
+ */
+static
+int lldc__channel_permissions_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->permissions = (uint64_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * default_auto_archive_duration Parser
+ * OPTIONAL: default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
+ * type: object.int
+ */
+static
+int lldc__channel_default_auto_archive_duration_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->default_auto_archive_duration = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * member_count Parser
+ * OPTIONAL: an approximate count of users in a thread, stops counting at 50
+ * type: object.int
+ */
+static
+int lldc__channel_member_count_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->member_count = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * message_count Parser
+ * OPTIONAL: an approximate count of messages in a thread, stops counting at 50
+ * type: object.int
+ */
+static
+int lldc__channel_message_count_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->message_count = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * video_quality_mode Parser
+ * OPTIONAL: the camera video quality mode of the voice channel, 1 when not present
+ * type: object.int
+ */
+static
+int lldc__channel_video_quality_mode_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->video_quality_mode = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * rtc_region Parser
+ * OPTIONAL: voice region id for the voice channel, automatic when set to null
+ * type: object.string
+ */
+static
+int lldc__channel_rtc_region_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->rtc_region = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * last_pin_timestamp Parser
+ * OPTIONAL: when the last pinned message was pinned. This may be null in events such as GUILD_CREATE when a message is not pinned.
+ * type: object.timestamp
+ */
+static
+int lldc__channel_last_pin_timestamp_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+    {
+        obj->last_pin_timestamp = NAN;
+        return -1;
+    }
+
+    obj->last_pin_timestamp = lldc_date_parse(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * parent_id Parser
+ * OPTIONAL: for guild channels: id of the parent category for a channel (each parent category can contain up to 50 channels), for threads: id of the text channel this thread was created
+ * type: object.snowflake
+ */
+static
+int lldc__channel_parent_id_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_get_str(json))
+        return -1;
+
+    obj->parent_id = (snowflake_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * application_id Parser
+ * OPTIONAL: application id of the group DM creator if it is bot-created
+ * type: object.snowflake
+ */
+static
+int lldc__channel_application_id_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_get_str(json))
+        return -1;
+
+    obj->application_id = (snowflake_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * owner_id Parser
+ * OPTIONAL: id of the creator of the group DM or thread
+ * type: object.snowflake
+ */
+static
+int lldc__channel_owner_id_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_get_str(json))
+        return -1;
+
+    obj->owner_id = (snowflake_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * icon Parser
+ * OPTIONAL: icon hash
+ * type: object.string
+ */
+static
+int lldc__channel_icon_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->icon = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * rate_limit_per_user Parser
+ * OPTIONAL: amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected
+ * type: object.int
+ */
+static
+int lldc__channel_rate_limit_per_user_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->rate_limit_per_user = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * user_limit Parser
+ * OPTIONAL: the user limit of the voice channel
+ * type: object.int
+ */
+static
+int lldc__channel_user_limit_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->user_limit = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * bitrate Parser
+ * OPTIONAL: the bitrate (in bits) of the voice channel
+ * type: object.int
+ */
+static
+int lldc__channel_bitrate_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->bitrate = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * last_message_id Parser
+ * OPTIONAL: the id of the last message sent in this channel (may not point to an existing or valid message)
+ * type: object.snowflake
+ */
+static
+int lldc__channel_last_message_id_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_get_str(json))
+        return -1;
+
+    obj->last_message_id = (snowflake_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * nsfw Parser
+ * OPTIONAL: whether the channel is nsfw
+ * type: object.bool
+ */
+static
+int lldc__channel_nsfw_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_bool(json))
+        return -1;
+
+    obj->nsfw = yyjson_get_bool(json);
+
+    return 0;
+}
+/**
+ * topic Parser
+ * OPTIONAL: the channel topic (0-1024 characters)
+ * type: object.string
+ */
+static
+int lldc__channel_topic_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->topic = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * name Parser
+ * OPTIONAL: the name of the channel (1-100 characters)
+ * type: object.string
+ */
+static
+int lldc__channel_name_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * position Parser
+ * OPTIONAL: sorting position of the channel
+ * type: object.int
+ */
+static
+int lldc__channel_position_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->position = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * guild_id Parser
+ * OPTIONAL: the id of the guild (may be missing for some channel objects received over gateway guild dispatches)
+ * type: object.snowflake
+ */
+static
+int lldc__channel_guild_id_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_get_str(json))
+        return -1;
+
+    obj->guild_id = (snowflake_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * type Parser
+ * the type of channel
+ * type: object.int
+ */
+static
+int lldc__channel_type_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->type = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * id Parser
+ * the id of this channel
+ * type: object.snowflake
+ */
+static
+int lldc__channel_id_parse (lldc_channel_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_get_str(json))
+        return -1;
+
+    obj->id = (snowflake_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * flags Parser
+ * any user-thread settings, currently only used for notifications
+ * type: object.int
+ */
+static
+int lldc__thread_member_flags_parse (lldc_thread_member_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->flags = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * join_timestamp Parser
+ * the time the current user last joined the thread
+ * type: object.timestamp
+ */
+static
+int lldc__thread_member_join_timestamp_parse (lldc_thread_member_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+    {
+        obj->join_timestamp = NAN;
+        return -1;
+    }
+
+    obj->join_timestamp = lldc_date_parse(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * user_id Parser
+ * OPTIONAL: the id of the user
+ * type: object.snowflake
+ */
+static
+int lldc__thread_member_user_id_parse (lldc_thread_member_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_get_str(json))
+        return -1;
+
+    obj->user_id = (snowflake_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * id Parser
+ * OPTIONAL: the id of the thread
+ * type: object.snowflake
+ */
+static
+int lldc__thread_member_id_parse (lldc_thread_member_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_get_str(json))
+        return -1;
+
+    obj->id = (snowflake_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * locked Parser
+ * OPTIONAL: whether the thread is locked; when a thread is locked, only users with MANAGE_THREADS can unarchive it
+ * type: object.bool
+ */
+static
+int lldc__thread_metadata_locked_parse (lldc_thread_metadata_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_bool(json))
+        return -1;
+
+    obj->locked = yyjson_get_bool(json);
+
+    return 0;
+}
+/**
+ * archive_timestamp Parser
+ * timestamp when the thread's archive status was last changed, used for calculating recent activity
+ * type: object.timestamp
+ */
+static
+int lldc__thread_metadata_archive_timestamp_parse (lldc_thread_metadata_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+    {
+        obj->archive_timestamp = NAN;
+        return -1;
+    }
+
+    obj->archive_timestamp = lldc_date_parse(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * auto_archive_duration Parser
+ * duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
+ * type: object.int
+ */
+static
+int lldc__thread_metadata_auto_archive_duration_parse (lldc_thread_metadata_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->auto_archive_duration = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * archived Parser
+ * whether the thread is archived
+ * type: object.bool
+ */
+static
+int lldc__thread_metadata_archived_parse (lldc_thread_metadata_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_bool(json))
+        return -1;
+
+    obj->archived = yyjson_get_bool(json);
+
+    return 0;
+}
+/**
+ * deny Parser
+ * permission bit set
+ * type: object.touint
+ */
+static
+int lldc__channel_overwrite_deny_parse (lldc_channel_overwrite_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->deny = (uint64_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * allow Parser
+ * permission bit set
+ * type: object.touint
+ */
+static
+int lldc__channel_overwrite_allow_parse (lldc_channel_overwrite_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->allow = (uint64_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * type Parser
+ * either 0 (role) or 1 (member)
+ * type: object.int
+ */
+static
+int lldc__channel_overwrite_type_parse (lldc_channel_overwrite_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->type = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * id Parser
+ * role or user id
+ * type: object.snowflake
+ */
+static
+int lldc__channel_overwrite_id_parse (lldc_channel_overwrite_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_get_str(json))
+        return -1;
+
+    obj->id = (snowflake_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}
+/**
  * type Parser
  * integration type (twitch, youtube, or discord)
  * type: object.string
@@ -1562,6 +2081,306 @@ int lldc_audit_log_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_t *obj, yyjson
     lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_audit_log_t));
+
+    obj->_mctx = _mctx;
+    if (!has_existing_ledger)
+        obj->_mlog = &obj->__mlog;
+    else
+        obj->_mlog = ledger;
+
+    yyjson_val *key, *val;
+    yyjson_obj_iter iter;
+    yyjson_obj_iter_init(json, &iter);
+    while ((key = yyjson_obj_iter_next(&iter))) {
+        val = yyjson_obj_iter_get_val(key);
+        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        if (parser)
+            parser(obj, val);
+    }
+
+    return 0;
+}
+int lldc_channel_overwrite_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_overwrite_t *obj, yyjson_val *json, int has_existing_ledger)
+{
+
+    static lldc_parser_def_t parser_def[4] = {
+        { "id", (int (*)(void *, yyjson_val *))lldc__channel_overwrite_id_parse },
+        { "type", (int (*)(void *, yyjson_val *))lldc__channel_overwrite_type_parse },
+        { "allow", (int (*)(void *, yyjson_val *))lldc__channel_overwrite_allow_parse },
+        { "deny", (int (*)(void *, yyjson_val *))lldc__channel_overwrite_deny_parse }
+    };
+
+    static lldc_hashmap_entry_t parser_table[8] = { 0 };
+    static lldc_hashmap_t parsers = {  
+        .size = 8,
+        .len = 0,
+        .table = parser_table,
+        .hash = lldc_hashmap_hash_str,
+        .compare = (int (*)(const void *, const void *))strcmp,
+        .dup_key = lldc_hashmap_dup_echo,
+        .free_key = lldc_hashmap_free_noop
+    };
+    LLDC_PARSER_LOAD(4)
+
+    if (!yyjson_is_obj(json))
+        return -1;
+
+    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    
+    memset(obj, 0, sizeof(lldc_channel_overwrite_t));
+
+    obj->_mctx = _mctx;
+    if (!has_existing_ledger)
+        obj->_mlog = &obj->__mlog;
+    else
+        obj->_mlog = ledger;
+
+    yyjson_val *key, *val;
+    yyjson_obj_iter iter;
+    yyjson_obj_iter_init(json, &iter);
+    while ((key = yyjson_obj_iter_next(&iter))) {
+        val = yyjson_obj_iter_get_val(key);
+        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        if (parser)
+            parser(obj, val);
+    }
+
+    return 0;
+}
+/**
+* Channel Overwrite Parser
+* Channel Overwrite Objects
+* type: object.object
+*/
+static
+int lldc__channel_overwrite_item_parse (lldc_channel_overwrite_t *_obj, yyjson_val *json)
+{
+    return lldc_channel_overwrite_parse(_obj->_mctx, _obj, json, 1);
+}
+int lldc_channel_overwrite_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_overwrite_arr_t *obj, yyjson_val *json, int has_existing_ledger)
+{
+
+    if (!yyjson_is_arr(json))
+        return -1;
+
+    size_t arr_size = yyjson_arr_size(json);
+    if (!arr_size)
+    {
+        obj->items = NULL;
+        obj->len = 0;
+        return 0;
+    }
+
+    obj->_mctx = _mctx;
+    if (!has_existing_ledger)
+        obj->_mlog = &obj->__mlog;
+
+    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    if (obj->items == NULL)
+    {
+        obj->len = 0;
+        return -1;
+    }
+    obj->len = arr_size;
+
+    size_t idx, max;
+    yyjson_val *val;
+    yyjson_arr_foreach(json, idx, max, val) {
+        obj->items[idx]._mctx = obj->_mctx;
+        obj->items[idx]._mlog = obj->_mlog;
+        lldc__channel_overwrite_item_parse(&obj->items[idx], val);
+    }
+
+    return 0;
+}
+int lldc_thread_metadata_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_metadata_t *obj, yyjson_val *json, int has_existing_ledger)
+{
+
+    static lldc_parser_def_t parser_def[4] = {
+        { "archived", (int (*)(void *, yyjson_val *))lldc__thread_metadata_archived_parse },
+        { "auto_archive_duration", (int (*)(void *, yyjson_val *))lldc__thread_metadata_auto_archive_duration_parse },
+        { "archive_timestamp", (int (*)(void *, yyjson_val *))lldc__thread_metadata_archive_timestamp_parse },
+        { "locked", (int (*)(void *, yyjson_val *))lldc__thread_metadata_locked_parse }
+    };
+
+    static lldc_hashmap_entry_t parser_table[8] = { 0 };
+    static lldc_hashmap_t parsers = {  
+        .size = 8,
+        .len = 0,
+        .table = parser_table,
+        .hash = lldc_hashmap_hash_str,
+        .compare = (int (*)(const void *, const void *))strcmp,
+        .dup_key = lldc_hashmap_dup_echo,
+        .free_key = lldc_hashmap_free_noop
+    };
+    LLDC_PARSER_LOAD(4)
+
+    if (!yyjson_is_obj(json))
+        return -1;
+
+    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    
+    memset(obj, 0, sizeof(lldc_thread_metadata_t));
+
+    obj->_mctx = _mctx;
+    if (!has_existing_ledger)
+        obj->_mlog = &obj->__mlog;
+    else
+        obj->_mlog = ledger;
+
+    yyjson_val *key, *val;
+    yyjson_obj_iter iter;
+    yyjson_obj_iter_init(json, &iter);
+    while ((key = yyjson_obj_iter_next(&iter))) {
+        val = yyjson_obj_iter_get_val(key);
+        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        if (parser)
+            parser(obj, val);
+    }
+
+    return 0;
+}
+int lldc_thread_member_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_member_t *obj, yyjson_val *json, int has_existing_ledger)
+{
+
+    static lldc_parser_def_t parser_def[4] = {
+        { "id", (int (*)(void *, yyjson_val *))lldc__thread_member_id_parse },
+        { "user_id", (int (*)(void *, yyjson_val *))lldc__thread_member_user_id_parse },
+        { "join_timestamp", (int (*)(void *, yyjson_val *))lldc__thread_member_join_timestamp_parse },
+        { "flags", (int (*)(void *, yyjson_val *))lldc__thread_member_flags_parse }
+    };
+
+    static lldc_hashmap_entry_t parser_table[8] = { 0 };
+    static lldc_hashmap_t parsers = {  
+        .size = 8,
+        .len = 0,
+        .table = parser_table,
+        .hash = lldc_hashmap_hash_str,
+        .compare = (int (*)(const void *, const void *))strcmp,
+        .dup_key = lldc_hashmap_dup_echo,
+        .free_key = lldc_hashmap_free_noop
+    };
+    LLDC_PARSER_LOAD(4)
+
+    if (!yyjson_is_obj(json))
+        return -1;
+
+    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    
+    memset(obj, 0, sizeof(lldc_thread_member_t));
+
+    obj->_mctx = _mctx;
+    if (!has_existing_ledger)
+        obj->_mlog = &obj->__mlog;
+    else
+        obj->_mlog = ledger;
+
+    yyjson_val *key, *val;
+    yyjson_obj_iter iter;
+    yyjson_obj_iter_init(json, &iter);
+    while ((key = yyjson_obj_iter_next(&iter))) {
+        val = yyjson_obj_iter_get_val(key);
+        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        if (parser)
+            parser(obj, val);
+    }
+
+    return 0;
+}
+/**
+* permission_overwrites Parser
+* OPTIONAL: explicit permission overwrites for members and roles
+* type: object.object
+*/
+static
+int lldc__channel_permission_overwrites_parse (lldc_channel_t *_obj, yyjson_val *json)
+{
+    _obj->permission_overwrites._mlog = _obj->_mlog;
+    return lldc_channel_overwrite_arr_parse(_obj->_mctx, &_obj->permission_overwrites, json, 1);
+}
+/**
+* recipients Parser
+* OPTIONAL: the recipients of the DM
+* type: object.object
+*/
+static
+int lldc__channel_recipients_parse (lldc_channel_t *_obj, yyjson_val *json)
+{
+    _obj->recipients._mlog = _obj->_mlog;
+    return lldc_user_arr_parse(_obj->_mctx, &_obj->recipients, json, 1);
+}
+/**
+* thread_metadata Parser
+* OPTIONAL: thread-specific fields not needed by other channels
+* type: object.object
+*/
+static
+int lldc__channel_thread_metadata_parse (lldc_channel_t *_obj, yyjson_val *json)
+{
+    _obj->thread_metadata._mlog = _obj->_mlog;
+    return lldc_thread_metadata_parse(_obj->_mctx, &_obj->thread_metadata, json, 1);
+}
+/**
+* member Parser
+* OPTIONAL: thread member object for the current user, if they have joined the thread, only included on certain API endpoints
+* type: object.object
+*/
+static
+int lldc__channel_member_parse (lldc_channel_t *_obj, yyjson_val *json)
+{
+    _obj->member._mlog = _obj->_mlog;
+    return lldc_thread_member_parse(_obj->_mctx, &_obj->member, json, 1);
+}
+int lldc_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_t *obj, yyjson_val *json, int has_existing_ledger)
+{
+
+    static lldc_parser_def_t parser_def[26] = {
+        { "id", (int (*)(void *, yyjson_val *))lldc__channel_id_parse },
+        { "type", (int (*)(void *, yyjson_val *))lldc__channel_type_parse },
+        { "guild_id", (int (*)(void *, yyjson_val *))lldc__channel_guild_id_parse },
+        { "position", (int (*)(void *, yyjson_val *))lldc__channel_position_parse },
+        { "permission_overwrites", (int (*)(void *, yyjson_val *))lldc__channel_permission_overwrites_parse },
+        { "name", (int (*)(void *, yyjson_val *))lldc__channel_name_parse },
+        { "topic", (int (*)(void *, yyjson_val *))lldc__channel_topic_parse },
+        { "nsfw", (int (*)(void *, yyjson_val *))lldc__channel_nsfw_parse },
+        { "last_message_id", (int (*)(void *, yyjson_val *))lldc__channel_last_message_id_parse },
+        { "bitrate", (int (*)(void *, yyjson_val *))lldc__channel_bitrate_parse },
+        { "user_limit", (int (*)(void *, yyjson_val *))lldc__channel_user_limit_parse },
+        { "rate_limit_per_user", (int (*)(void *, yyjson_val *))lldc__channel_rate_limit_per_user_parse },
+        { "recipients", (int (*)(void *, yyjson_val *))lldc__channel_recipients_parse },
+        { "icon", (int (*)(void *, yyjson_val *))lldc__channel_icon_parse },
+        { "owner_id", (int (*)(void *, yyjson_val *))lldc__channel_owner_id_parse },
+        { "application_id", (int (*)(void *, yyjson_val *))lldc__channel_application_id_parse },
+        { "parent_id", (int (*)(void *, yyjson_val *))lldc__channel_parent_id_parse },
+        { "last_pin_timestamp", (int (*)(void *, yyjson_val *))lldc__channel_last_pin_timestamp_parse },
+        { "rtc_region", (int (*)(void *, yyjson_val *))lldc__channel_rtc_region_parse },
+        { "video_quality_mode", (int (*)(void *, yyjson_val *))lldc__channel_video_quality_mode_parse },
+        { "message_count", (int (*)(void *, yyjson_val *))lldc__channel_message_count_parse },
+        { "member_count", (int (*)(void *, yyjson_val *))lldc__channel_member_count_parse },
+        { "thread_metadata", (int (*)(void *, yyjson_val *))lldc__channel_thread_metadata_parse },
+        { "member", (int (*)(void *, yyjson_val *))lldc__channel_member_parse },
+        { "default_auto_archive_duration", (int (*)(void *, yyjson_val *))lldc__channel_default_auto_archive_duration_parse },
+        { "permissions", (int (*)(void *, yyjson_val *))lldc__channel_permissions_parse }
+    };
+
+    static lldc_hashmap_entry_t parser_table[64] = { 0 };
+    static lldc_hashmap_t parsers = {  
+        .size = 64,
+        .len = 0,
+        .table = parser_table,
+        .hash = lldc_hashmap_hash_str,
+        .compare = (int (*)(const void *, const void *))strcmp,
+        .dup_key = lldc_hashmap_dup_echo,
+        .free_key = lldc_hashmap_free_noop
+    };
+    LLDC_PARSER_LOAD(26)
+
+    if (!yyjson_is_obj(json))
+        return -1;
+
+    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    
+    memset(obj, 0, sizeof(lldc_channel_t));
 
     obj->_mctx = _mctx;
     if (!has_existing_ledger)

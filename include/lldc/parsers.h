@@ -227,6 +227,36 @@ typedef enum lldc_channel_overwrite_type {
 #define LLDC_PERMISSION_USE_PRIVATE_THREADS (1 << 36)
 /* Allows the usage of custom stickers from other servers */
 #define LLDC_PERMISSION_USE_EXTERNAL_STICKERS (1 << 37)
+typedef enum lldc_channel_type {
+    /* a text channel within a server */
+    LLDC_CH_TYPE_GUILD_TEXT = (0),
+    /* a direct message between users */
+    LLDC_CH_TYPE_DM = (1),
+    /* a voice channel within a server */
+    LLDC_CH_TYPE_GUILD_VOICE = (2),
+    /* a direct message between multiple users */
+    LLDC_CH_TYPE_GROUP_DM = (3),
+    /* an organizational category that contains up to 50 channels */
+    LLDC_CH_TYPE_GUILD_CATEGORY = (4),
+    /* a channel that users can follow and crosspost into their own server */
+    LLDC_CH_TYPE_GUILD_NEWS = (5),
+    /* a channel in which game developers can sell their game on Discord */
+    LLDC_CH_TYPE_GUILD_STORE = (6),
+    /* a temporary sub-channel within a GUILD_NEWS channel */
+    LLDC_CH_TYPE_GUILD_NEWS_THREAD = (10),
+    /* a temporary sub-channel within a GUILD_TEXT channel */
+    LLDC_CH_TYPE_GUILD_PUBLIC_THREAD = (11),
+    /* a temporary sub-channel within a GUILD_TEXT channel that is only viewable by those invited and those with the MANAGE_THREADS permission */
+    LLDC_CH_TYPE_GUILD_PRIVATE_THREAD = (12),
+    /* a voice channel for hosting events with an audience */
+    LLDC_CH_TYPE_GUILD_STAGE_VOICE = (13)
+} lldc_channel_type_t;
+typedef enum lldc_channel_video_quality_mode {
+    /* Discord chooses the quality for optimal performance */
+    LLDC_QUALITY_AUTO = (1),
+    /* 720p */
+    LLDC_QUALITY_FULL = (2)
+} lldc_channel_video_quality_mode_t;
 /* Error Messages */
 typedef struct lldc_discord_error_s {
     cwr_malloc_ctx_t *_mctx;
@@ -586,6 +616,168 @@ typedef struct lldc_channel_overwrite_s {
      */
     uint64_t deny;
 } lldc_channel_overwrite_t;
+/* Channel Overwrite Array */
+typedef struct lldc_channel_overwrite_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_channel_overwrite_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_channel_overwrite_arr_t;
+/* The thread metadata object contains a number of thread-specific channel fields that are not needed by other channel types. */
+typedef struct lldc_thread_metadata_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * whether the thread is archived 
+     */
+    int archived;
+    /** 
+     * duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 
+     */
+    int auto_archive_duration;
+    /** 
+     * timestamp when the thread's archive status was last changed, used for calculating recent activity 
+     */
+    double archive_timestamp;
+    /** 
+     * OPTIONAL: whether the thread is locked; when a thread is locked, only users with MANAGE_THREADS can unarchive it 
+     */
+    int locked;
+} lldc_thread_metadata_t;
+/* A thread member is used to indicate whether a user has joined a thread or not. */
+typedef struct lldc_thread_member_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: the id of the thread 
+     */
+    snowflake_t id;
+    /** 
+     * OPTIONAL: the id of the user 
+     */
+    snowflake_t user_id;
+    /** 
+     * the time the current user last joined the thread 
+     */
+    double join_timestamp;
+    /** 
+     * any user-thread settings, currently only used for notifications 
+     */
+    int flags;
+} lldc_thread_member_t;
+/* Represents a guild or DM channel within Discord */
+typedef struct lldc_channel_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * the id of this channel 
+     */
+    snowflake_t id;
+    /** 
+     * the type of channel 
+     */
+    lldc_channel_type_t type;
+    /** 
+     * OPTIONAL: the id of the guild (may be missing for some channel objects received over gateway guild dispatches) 
+     */
+    snowflake_t guild_id;
+    /** 
+     * OPTIONAL: sorting position of the channel 
+     */
+    int position;
+    /** 
+     * OPTIONAL: explicit permission overwrites for members and roles 
+     */
+    lldc_channel_overwrite_arr_t permission_overwrites;
+    /** 
+     * OPTIONAL: the name of the channel (1-100 characters) 
+     */
+    const char *name;
+    /** 
+     * OPTIONAL: the channel topic (0-1024 characters) 
+     */
+    const char *topic;
+    /** 
+     * OPTIONAL: whether the channel is nsfw 
+     */
+    int nsfw;
+    /** 
+     * OPTIONAL: the id of the last message sent in this channel (may not point to an existing or valid message) 
+     */
+    snowflake_t last_message_id;
+    /** 
+     * OPTIONAL: the bitrate (in bits) of the voice channel 
+     */
+    int bitrate;
+    /** 
+     * OPTIONAL: the user limit of the voice channel 
+     */
+    int user_limit;
+    /** 
+     * OPTIONAL: amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected 
+     */
+    int rate_limit_per_user;
+    /** 
+     * OPTIONAL: the recipients of the DM 
+     */
+    lldc_user_arr_t recipients;
+    /** 
+     * OPTIONAL: icon hash 
+     */
+    const char *icon;
+    /** 
+     * OPTIONAL: id of the creator of the group DM or thread 
+     */
+    snowflake_t owner_id;
+    /** 
+     * OPTIONAL: application id of the group DM creator if it is bot-created 
+     */
+    snowflake_t application_id;
+    /** 
+     * OPTIONAL: for guild channels: id of the parent category for a channel (each parent category can contain up to 50 channels), for threads: id of the text channel this thread was created 
+     */
+    snowflake_t parent_id;
+    /** 
+     * OPTIONAL: when the last pinned message was pinned. This may be null in events such as GUILD_CREATE when a message is not pinned. 
+     */
+    double last_pin_timestamp;
+    /** 
+     * OPTIONAL: voice region id for the voice channel, automatic when set to null 
+     */
+    const char *rtc_region;
+    /** 
+     * OPTIONAL: the camera video quality mode of the voice channel, 1 when not present 
+     */
+    lldc_channel_video_quality_mode_t video_quality_mode;
+    /** 
+     * OPTIONAL: an approximate count of messages in a thread, stops counting at 50 
+     */
+    int message_count;
+    /** 
+     * OPTIONAL: an approximate count of users in a thread, stops counting at 50 
+     */
+    int member_count;
+    /** 
+     * OPTIONAL: thread-specific fields not needed by other channels 
+     */
+    lldc_thread_metadata_t thread_metadata;
+    /** 
+     * OPTIONAL: thread member object for the current user, if they have joined the thread, only included on certain API endpoints 
+     */
+    lldc_thread_member_t member;
+    /** 
+     * OPTIONAL: default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 
+     */
+    int default_auto_archive_duration;
+    /** 
+     * OPTIONAL: computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction 
+     */
+    uint64_t permissions;
+} lldc_channel_t;
 /**
 * Discord Error Parser
 * Error Messages
@@ -641,4 +833,24 @@ int lldc_audit_log_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_t *obj, yyjson
 * Represents a guild or DM channel within Discord
 */
 int lldc_channel_overwrite_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_overwrite_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Channel Overwrite Parser
+* Channel Overwrite Array
+*/
+int lldc_channel_overwrite_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_overwrite_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Thread Metadata Parser
+* The thread metadata object contains a number of thread-specific channel fields that are not needed by other channel types.
+*/
+int lldc_thread_metadata_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_metadata_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Thread Member Parser
+* A thread member is used to indicate whether a user has joined a thread or not.
+*/
+int lldc_thread_member_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_member_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Channel Parser
+* Represents a guild or DM channel within Discord
+*/
+int lldc_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_t *obj, yyjson_val *json, int has_existing_ledger);
 #endif

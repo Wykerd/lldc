@@ -1,0 +1,180 @@
+{
+    "title": "Channel",
+    "description": "Represents a guild or DM channel within Discord",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "the id of this channel",
+            "type": "snowflake"
+        },
+        "type": {
+            "description": "the type of channel",
+            "type": "int",
+            "enum_prefix": "LLDC_CH_TYPE_",
+            "enum_type": "channel_type",
+            "enum": [
+                [
+                    "0",
+                    "GUILD_TEXT",
+                    "a text channel within a server"
+                ],
+                [
+                    "1",
+                    "DM",
+                    "a direct message between users"
+                ],
+                [
+                    "2",
+                    "GUILD_VOICE",
+                    "a voice channel within a server"
+                ],
+                [
+                    "3",
+                    "GROUP_DM",
+                    "a direct message between multiple users"
+                ],
+                [
+                    "4",
+                    "GUILD_CATEGORY",
+                    "an organizational category that contains up to 50 channels"
+                ],
+                [
+                    "5",
+                    "GUILD_NEWS",
+                    "a channel that users can follow and crosspost into their own server"
+                ],
+                [
+                    "6",
+                    "GUILD_STORE",
+                    "a channel in which game developers can sell their game on Discord"
+                ],
+                [
+                    "10",
+                    "GUILD_NEWS_THREAD",
+                    "a temporary sub-channel within a GUILD_NEWS channel"
+                ],
+                [
+                    "11",
+                    "GUILD_PUBLIC_THREAD",
+                    "a temporary sub-channel within a GUILD_TEXT channel"
+                ],
+                [
+                    "12",
+                    "GUILD_PRIVATE_THREAD",
+                    "a temporary sub-channel within a GUILD_TEXT channel that is only viewable by those invited and those with the MANAGE_THREADS permission"
+                ],
+                [
+                    "13",
+                    "GUILD_STAGE_VOICE",
+                    "a voice channel for hosting events with an audience"
+                ]
+            ]
+        },
+        "guild_id": {
+            "description": "OPTIONAL: the id of the guild (may be missing for some channel objects received over gateway guild dispatches)",
+            "type": "snowflake"
+        },
+        "position": {
+            "description": "OPTIONAL: sorting position of the channel",
+            "type": "int"
+        },
+        "permission_overwrites": {
+            "description": "OPTIONAL: explicit permission overwrites for members and roles",
+            "type": "array",
+            "existing_parser": "channel_overwrite_arr"
+        },
+        "name": {
+            "description": "OPTIONAL: the name of the channel (1-100 characters)",
+            "type": "string"
+        },
+        "topic": {
+            "description": "OPTIONAL: the channel topic (0-1024 characters)",
+            "type": "string"
+        },
+        "nsfw": {
+            "description": "OPTIONAL: whether the channel is nsfw",
+            "type": "boolean"
+        },
+        "last_message_id": {
+            "description": "OPTIONAL: the id of the last message sent in this channel (may not point to an existing or valid message)",
+            "type": "snowflake"
+        },
+        "bitrate": {
+            "description": "OPTIONAL: the bitrate (in bits) of the voice channel",
+            "type": "int"
+        },
+        "user_limit": {
+            "description": "OPTIONAL: the user limit of the voice channel",
+            "type": "int"
+        },
+        "rate_limit_per_user": {
+            "description": "OPTIONAL: amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected",
+            "type": "int"
+        },
+        "recipients": {
+            "description": "OPTIONAL: the recipients of the DM",
+            "type": "array",
+            "existing_parser": "user_arr"
+        },
+        "icon": {
+            "description": "OPTIONAL: icon hash",
+            "type": "string"
+        },
+        "owner_id": {
+            "description": "OPTIONAL: id of the creator of the group DM or thread",
+            "type": "snowflake"
+        },
+        "application_id": {
+            "description": "OPTIONAL: application id of the group DM creator if it is bot-created",
+            "type": "snowflake"
+        },
+        "parent_id": {
+            "description": "OPTIONAL: for guild channels: id of the parent category for a channel (each parent category can contain up to 50 channels), for threads: id of the text channel this thread was created",
+            "type": "snowflake"
+        },
+        "last_pin_timestamp": {
+            "description": "OPTIONAL: when the last pinned message was pinned. This may be null in events such as GUILD_CREATE when a message is not pinned.",
+            "type": "timestamp"
+        },
+        "rtc_region": {
+            "description": "OPTIONAL: voice region id for the voice channel, automatic when set to null",
+            "type": "string"
+        },
+        "video_quality_mode": {
+            "description": "OPTIONAL: the camera video quality mode of the voice channel, 1 when not present",
+            "type": "int",
+            "enum_prefix": "LLDC_QUALITY_",
+            "enum_type": "channel_video_quality_mode",
+            "enum": [
+                [1,"AUTO","Discord chooses the quality for optimal performance"],
+                [2,"FULL","720p"]
+            ]
+        },
+        "message_count": {
+            "description": "OPTIONAL: an approximate count of messages in a thread, stops counting at 50",
+            "type": "int"
+        },
+        "member_count": {
+            "description": "OPTIONAL: an approximate count of users in a thread, stops counting at 50",
+            "type": "int"
+        },
+        "thread_metadata": {
+            "description": "OPTIONAL: thread-specific fields not needed by other channels",
+            "type": "object",
+            "existing_parser": "thread_metadata"
+        },
+        "member": {
+            "description": "OPTIONAL: thread member object for the current user, if they have joined the thread, only included on certain API endpoints",
+            "type": "object",
+            "existing_parser": "thread_member"
+        },
+        "default_auto_archive_duration": {
+            "description": "OPTIONAL: default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080",
+            "type": "int"
+        },
+        "permissions": {
+            "description": "OPTIONAL: computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction",
+            "type": "toint"
+        }
+    }
+}

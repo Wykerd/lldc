@@ -1,0 +1,10 @@
+{
+    "title": "Channel Overwrite",
+    "description": "Channel Overwrite Array",
+    "type": "array",
+    "items": {
+        "description": "Channel Overwrite Objects",
+        "type": "object",
+        "existing_parser": "channel_overwrite"
+    }
+}

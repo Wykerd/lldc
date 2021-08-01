@@ -348,12 +348,11 @@ done:
     return rv;
 }
 
-/* OS dependent: return the UTC time in ms since 1970. */
+/* End Date Utils */
+
 double lldc_date_now () 
 {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
+    uv_timeval64_t tv;
+    uv_gettimeofday(&tv);
     return ((int64_t)tv.tv_sec) * 1000.0 + (tv.tv_usec / 1000.0);
 }
-
-/* End Date Utils */

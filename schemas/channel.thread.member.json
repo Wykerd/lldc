@@ -1,0 +1,23 @@
+{
+    "title": "Thread Member",
+    "description": "A thread member is used to indicate whether a user has joined a thread or not.",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "OPTIONAL: the id of the thread",
+            "type": "snowflake"
+        },
+        "user_id": {
+            "description": "OPTIONAL: the id of the user",
+            "type": "snowflake"
+        },
+        "join_timestamp": {
+            "description": "the time the current user last joined the thread",
+            "type": "timestamp"
+        },
+        "flags": {
+            "description": "any user-thread settings, currently only used for notifications",
+            "type": "int"
+        }
+    }
+}

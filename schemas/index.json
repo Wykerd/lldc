@@ -12,5 +12,11 @@
     "auditlog.changes.json",
     "auditlog.options.json",
     "auditlog.entries.json",
-    "auditlog.json"
+    "auditlog.json",
+
+    "channel.overwrite.json",
+    "channel.overwrite.arr.json",
+    "channel.thread.metadata.json",
+    "channel.thread.member.json",
+    "channel.json"
 ]
