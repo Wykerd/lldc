@@ -1,0 +1,10 @@
+{
+    "title": "Activity",
+    "description": "Activity Array",
+    "type": "array",
+    "items": {
+        "description": "Activity Objects",
+        "type": "object",
+        "existing_parser": "activity"
+    }
+}

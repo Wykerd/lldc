@@ -1,0 +1,19 @@
+{
+    "title": "Activity Party",
+    "description": "Activity Party Structure",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "OPTIONAL: the id of the party",
+            "type": "string"
+        },
+        "size": {
+            "description": "OPTIONAL: used to show the party's current and maximum size",
+            "type": "array",
+            "items": {
+                "description": "array of two integers (current_size, max_size)",
+                "type": "int"
+            }
+        }
+    }
+}

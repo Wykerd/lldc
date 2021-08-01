@@ -1,0 +1,15 @@
+{
+    "title": "Role Tags",
+    "description": "Role Tags Structure",
+    "type": "object",
+    "properties": {
+        "bot_id": {
+            "description": "OPTIONAL: the id of the bot this role belongs to",
+            "type": "snowflake"
+        },
+        "integration_id": {
+            "description": "OPTIONAL: the id of the integration this role belongs to",
+            "type": "snowflake"
+        }
+    }
+}

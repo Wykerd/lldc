@@ -1,0 +1,10 @@
+{
+    "title": "Stage Instance",
+    "description": "Stage Instance Array",
+    "type": "array",
+    "items": {
+        "description": "Stage Instance Objects",
+        "type": "object",
+        "existing_parser": "stage_instance"
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "title": "Followed Channel",
+    "description": "Followed Channel Structure",
+    "type": "object",
+    "properties": {
+        "channel_id": {
+            "description": "source channel id",
+            "type": "snowflake"
+        },
+        "webhook_id": {
+            "description": "created target webhook id",
+            "type": "snowflake"
+        }
+    }
+}

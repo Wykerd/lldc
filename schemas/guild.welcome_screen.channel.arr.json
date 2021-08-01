@@ -1,0 +1,10 @@
+{
+    "title": "Welcome Screen Channel",
+    "description": "Welcome Screen Channel Array",
+    "type": "array",
+    "items": {
+        "description": "Welcome Screen Channel Objects",
+        "type": "object",
+        "existing_parser": "welcome_screen_channel"
+    }
+}

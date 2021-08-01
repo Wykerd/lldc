@@ -1,0 +1,16 @@
+{
+    "title": "Welcome Screen",
+    "description": "Welcome Screen Structure",
+    "type": "object",
+    "properties": {
+        "description": {
+            "description": "OPTIONAL: the server description shown in the welcome screen",
+            "type": "string"
+        },
+        "welcome_channels": {
+            "description": "the channels shown in the welcome screen, up to 5",
+            "type": "array",
+            "existing_parser": "welcome_screen_channel_arr"
+        }
+    }
+}

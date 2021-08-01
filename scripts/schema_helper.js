@@ -3,7 +3,25 @@
  * Click on a table and convert it to a bare bones schema
  */
 
- function enum_from_table (table) {
+function enum_from_table2 (table) {
+    // Select rows from table_id
+    var rows = table.querySelectorAll('tr');
+    // Construct csv
+    var enums = [];
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll('td, th');
+        for (var j = 0; j < cols.length; j++) {
+            var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').trim();
+            row.push(data);
+        }
+        enums.push([row[0].split('(').pop().replace(/(\(|\))/g, ''), row[1].replace(/\*/g, '').trim()]);
+    }
+    enums.shift();
+    console.log('enum');
+    console.log(JSON.stringify(enums, null, '    '))
+}
+
+function enum_from_table1 (table) {
     // Select rows from table_id
     var rows = table.querySelectorAll('tr');
     // Construct csv
@@ -18,8 +36,10 @@
     }
     enums.shift();
     console.log('enum');
-    console.log(JSON.stringify(enums, null, '  '))
+    console.log(JSON.stringify(enums, null, '    '))
 }
+
+globalThis.enum_from_table = enum_from_table1;
 
 function structure_boiler (table) {
     // Select rows from table_id

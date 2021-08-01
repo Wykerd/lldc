@@ -1,0 +1,60 @@
+{
+    "title": "Voice State", 
+    "description": "Used to represent a user's voice connection status.",
+    "type": "object",
+    "properties": {
+        "guild_id": {
+            "description": "OPTIONAL: the guild id this voice state is for",
+            "type": "snowflake"
+        },
+        "channel_id": {
+            "description": "OPTIONAL: the channel id this user is connected to",
+            "type": "snowflake"
+        },
+        "user_id": {
+            "description": "the user id this voice state is for",
+            "type": "snowflake"
+        },
+        "member": {
+            "description": "OPTIONAL: the guild member this voice state is for",
+            "type": "object",
+            "existing_parser": "guild_member"
+        },
+        "session_id": {
+            "description": "the session id for this voice state",
+            "type": "string"
+        },
+        "deaf": {
+            "description": "whether this user is deafened by the server",
+            "type": "boolean"
+        },
+        "mute": {
+            "description": "whether this user is muted by the server",
+            "type": "boolean"
+        },
+        "self_deaf": {
+            "description": "whether this user is locally deafened",
+            "type": "boolean"
+        },
+        "self_mute": {
+            "description": "whether this user is locally muted",
+            "type": "boolean"
+        },
+        "self_stream": {
+            "description": "OPTIONAL: whether this user is streaming using \"Go Live\"",
+            "type": "boolean"
+        },
+        "self_video": {
+            "description": "whether this user's camera is enabled",
+            "type": "boolean"
+        },
+        "suppress": {
+            "description": "whether this user is muted by the current user",
+            "type": "boolean"
+        },
+        "request_to_speak_timestamp": {
+            "description": "OPTIONAL: the time at which the user requested to speak",
+            "type": "timestamp"
+        }
+    }
+}

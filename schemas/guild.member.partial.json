@@ -37,7 +37,7 @@
         },
         "permissions": {
             "description": "OPTIONAL: total permissions of the member in the channel, including overwrites, returned when in the interaction object",
-            "type": "string"
+            "type": "toint"
         }
     }
 }

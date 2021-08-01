@@ -17,6 +17,20 @@
  * Structures: array, object
  */
 
+/**
+ * Special keys
+ * 
+ * existing_parser - uses a existing parser (lldc_${existing_parser}_parse)
+ * 
+ * enum - actual enum values as a array [value, key, description][]
+ * enum_type - type name
+ * enum_prefix - prefix to enum names
+ * enum_def - use #define instead of enum
+ * 
+ * no_parse - do not generate a parser. only generates types and enums. root only.
+ * 
+ * typedef_ahead - push the typedef ahead of the actual implementation
+ */
 
 const _snakeCase = require('./snakecase');
 
@@ -54,6 +68,7 @@ class SchemaParser {
     }
 
     objString (key, schema, path) {
+        this.enumGen(schema);
         this.methods.unshift(
 `/**
  * ${key} Parser
@@ -73,6 +88,7 @@ int lldc__${[...path, snakeCase(key)].join('_')}_parse (lldc_${path.join('_')}_t
     }
 
     objSnowflake (key, schema, path) {
+        this.enumGen(schema);
         this.methods.unshift(
 `/**
  * ${key} Parser
@@ -96,6 +112,8 @@ int lldc__${[...path, snakeCase(key)].join('_')}_parse (lldc_${path.join('_')}_t
             if (schema.enum_def)
             {
                 this.enums.push(schema.enum.map(e => {
+                    if (schema.type == 'string')
+                        return `/* ${e[2] ?? e[1]} */\n#define ${schema.enum_prefix}${snakeCase(e[1]).toUpperCase()} ${JSON.stringify(e[0])}`;
                     return `/* ${e[2] ?? e[1]} */\n#define ${schema.enum_prefix}${snakeCase(e[1]).toUpperCase()} (${e[0]})`;
                 }).join('\n'));
                 return;
@@ -850,7 +868,86 @@ ${this.arrImpl(key, schema, path, isRoot)}
 }`);
     }
 
+    typegenArrNest (schema, o_path) {
+        console.log(o_path);
+        const path = [...o_path, 'item'];
+
+        this.enumGen(schema);
+
+        if (!((schema.items.type == 'array') || (schema.items.type == 'object')))
+            return this.enumGen(schema.items);
+
+        if (schema.items.type == 'array')
+            this.typegenArrNest(schema.items, path);
+        else if (schema.items.type == 'object')
+            this.typegenObj('item', schema.items, path);
+
+        if (schema.items)
+            this.arrTypeGen(schema, path, false);
+    }
+
+    typegenArr (key, schema, o_path, isRoot = false) {
+        const path = [...o_path, snakeCase(key)];
+
+        this.enumGen(schema);
+
+        if (!((schema.items.type == 'array') || (schema.items.type == 'object')))
+            return this.enumGen(schema.items);
+
+        if (schema.items.type == 'array')
+            this.typegenArrNest(schema.items, path);
+        else if (schema.items.type == 'object')
+            this.typegenObj('item', schema.items, path);
+
+        if (schema.items)
+            this.arrTypeGen(schema, path, isRoot);
+    }
+
+    typegenProp (key, schema, o_path) {
+        switch (schema.type) {
+            case 'object':
+                return this.typegenObj(key, schema, o_path, false);
+
+            case 'array':
+                return this.typegenArr(key, schema, o_path, false);
+        
+            default:
+                return;
+        }
+    }
+
+    typegenObj (key, schema, o_path, isRoot = false) {
+        const path = [...o_path, snakeCase(key)];
+
+        const keys = Object.keys(schema.properties);
+
+        keys.forEach(key => {
+            this.typegenProp(key, schema.properties[key], path)
+        });
+
+        this.enumGen(schema);
+
+        if (schema.properties)
+            this.objTypeGen(schema, path, keys, isRoot);
+    }
+
+    typegen (schema) {
+        switch (schema.type) {
+            case 'object':
+                return this.typegenObj(schema.title, schema, [], true);
+
+            case 'array':
+                return this.typegenArr(schema.title, schema, [], true);
+        
+            default:
+                throw new Error('Expected "object" or "array" as root type in ' + schema.title);
+        }
+    }
+
     parse(schema) {
+        if (schema.no_parse)
+            return this.typegen(schema);
+
         switch (schema.type) {
             case 'object':
                 return this.obj(schema.title, schema, [], true);

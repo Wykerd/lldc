@@ -1,0 +1,82 @@
+{
+    "title": "Sticker",
+    "description": "Represents a sticker that can be sent in messages.",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "id of the sticker",
+            "type": "snowflake"
+        },
+        "pack_id": {
+            "description": "OPTIONAL: for standard stickers, id of the pack the sticker is from",
+            "type": "snowflake"
+        },
+        "name": {
+            "description": "name of the sticker",
+            "type": "string"
+        },
+        "description": {
+            "description": "OPTIONAL: description of the sticker",
+            "type": "string"
+        },
+        "tags": {
+            "description": "for guild stickers, the Discord name of a unicode emoji representing the sticker's expression. for standard stickers, a comma-separated list of related expressions.",
+            "type": "string"
+        },
+        "type": {
+            "description": "type of sticker",
+            "type": "int",
+            "enum_prefix": "LLDC_STICKER_TYPE_",
+            "enum_type": "sticker_type",
+            "enum": [
+                [
+                    "1",
+                    "STANDARD",
+                    "an official sticker in a pack, part of Nitro or in a removed purchasable pack"
+                ],
+                [
+                    "2",
+                    "GUILD",
+                    "a sticker uploaded to a Boosted guild for the guild's members"
+                ]
+            ]
+        },
+        "format_type": {
+            "description": "type of sticker format",
+            "type": "int",
+            "enum_prefix": "LLDC_STICKER_FORMAT_",
+            "enum_type": "sticker_format",
+            "enum": [
+                [
+                    "1",
+                    "PNG"
+                ],
+                [
+                    "2",
+                    "APNG"
+                ],
+                [
+                    "3",
+                    "LOTTIE"
+                ]
+            ]
+        },
+        "available": {
+            "description": "OPTIONAL: whether this guild sticker can be used, may be false due to loss of Server Boosts",
+            "type": "boolean"
+        },
+        "guild_id": {
+            "description": "OPTIONAL: id of the guild that owns this sticker",
+            "type": "snowflake"
+        },
+        "user": {
+            "description": "OPTIONAL: the user that uploaded the guild sticker",
+            "type": "object",
+            "existing_parser": "user"
+        },
+        "sort_value": {
+            "description": "OPTIONAL: the standard sticker's sort order within its pack",
+            "type": "int"
+        }
+    }
+}

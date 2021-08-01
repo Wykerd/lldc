@@ -1,0 +1,10 @@
+{
+    "title": "Role",
+    "description": "Role Array",
+    "type": "array",
+    "items": {
+        "description": "Role Objects",
+        "type": "object",
+        "existing_parser": "role"
+    }
+}

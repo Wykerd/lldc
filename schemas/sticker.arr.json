@@ -1,0 +1,10 @@
+{
+    "title": "Sticker",
+    "description": "Sticker Array",
+    "type": "array",
+    "items": {
+        "description": "Sticker Objects",
+        "type": "object",
+        "existing_parser": "sticker"
+    }
+}

@@ -1,0 +1,142 @@
+{
+    "title": "Activity",
+    "description": "Presence Activity",
+    "type": "object",
+    "properties": {
+        "name": {
+            "description": "the activity's name",
+            "type": "string"
+        },
+        "type": {
+            "description": "activity type",
+            "type": "int",
+            "enum_prefix": "LLDC_ACTIVITY_",
+            "enum_type": "activity_type",
+            "enum": [
+                [
+                    "0",
+                    "Game"
+                ],
+                [
+                    "1",
+                    "Streaming"
+                ],
+                [
+                    "2",
+                    "Listening"
+                ],
+                [
+                    "3",
+                    "Watching"
+                ],
+                [
+                    "4",
+                    "Custom"
+                ],
+                [
+                    "5",
+                    "Competing"
+                ]
+            ]
+        },
+        "url": {
+            "description": "OPTIONAL: stream url, is validated when type is 1",
+            "type": "string"
+        },
+        "created_at": {
+            "description": "unix timestamp (in milliseconds) of when the activity was added to the user's session",
+            "type": "int"
+        },
+        "timestamps": {
+            "description": "OPTIONAL: unix timestamps for start and/or end of the game",
+            "type": "object",
+            "existing_parser": "activity_timestamps"
+        },
+        "application_id": {
+            "description": "OPTIONAL: application id for the game",
+            "type": "snowflake"
+        },
+        "details": {
+            "description": "OPTIONAL: what the player is currently doing",
+            "type": "string"
+        },
+        "state": {
+            "description": "OPTIONAL: the user's current party status",
+            "type": "string"
+        },
+        "emoji": {
+            "description": "OPTIONAL: the emoji used for a custom status",
+            "type": "object",
+            "existing_parser": "emoji"
+        },
+        "party": {
+            "description": "OPTIONAL: information for the current party of the player",
+            "type": "object",
+            "existing_parser": "activity_party"
+        },
+        "assets": {
+            "description": "OPTIONAL: images for the presence and their hover texts",
+            "type": "object",
+            "existing_parser": "activity_assets"
+        },
+        "secrets": {
+            "description": "OPTIONAL: secrets for Rich Presence joining and spectating",
+            "type": "object",
+            "existing_parser": "activity_secrets"
+        },
+        "instance": {
+            "description": "OPTIONAL: whether or not the activity is an instanced game session",
+            "type": "boolean"
+        },
+        "flags": {
+            "description": "OPTIONAL: activity flags ORd together, describes what the payload includes",
+            "type": "int",
+            "enum_prefix": "LLDC_ACTIVITY_FLAGS_",
+            "enum_type": "activity_flags",
+            "enum": [
+                [
+                    "1 << 0",
+                    "INSTANCE"
+                ],
+                [
+                    "1 << 1",
+                    "JOIN"
+                ],
+                [
+                    "1 << 2",
+                    "SPECTATE"
+                ],
+                [
+                    "1 << 3",
+                    "JOIN_REQUEST"
+                ],
+                [
+                    "1 << 4",
+                    "SYNC"
+                ],
+                [
+                    "1 << 5",
+                    "PLAY"
+                ]
+            ]
+        },
+        "buttons": {
+            "description": "OPTIONAL: the custom buttons shown in the Rich Presence (max 2)",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "description": "When received over the gateway, the buttons field is an array of strings, which are the button labels. Bots cannot access a user's activity button URLs. When sending, the buttons field must be an array of the below object:",
+                "properties": {
+                    "label": {
+                        "description": "the text shown on the button (1-32 characters)",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "the url opened when clicking the button (1-512 characters)",
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

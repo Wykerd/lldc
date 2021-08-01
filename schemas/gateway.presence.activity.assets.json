@@ -1,0 +1,23 @@
+{
+    "title": "Activity Assets",
+    "description": "Activity Assets Structure",
+    "type": "object",
+    "properties": {
+        "large_image": {
+            "description": "OPTIONAL: the id for a large asset of the activity, usually a snowflake",
+            "type": "string"
+        },
+        "large_text": {
+            "description": "OPTIONAL: text displayed when hovering over the large image of the activity",
+            "type": "string"
+        },
+        "small_image": {
+            "description": "OPTIONAL: the id for a small asset of the activity, usually a snowflake",
+            "type": "string"
+        },
+        "small_text": {
+            "description": "OPTIONAL: text displayed when hovering over the small image of the activity",
+            "type": "string"
+        }
+    }
+}

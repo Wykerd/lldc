@@ -1,0 +1,10 @@
+{
+    "title": "Channel",
+    "description": "Channel Array",
+    "type": "array",
+    "items": {
+        "description": "Channel Objects",
+        "type": "object",
+        "existing_parser": "channel"
+    }
+}

@@ -1,0 +1,45 @@
+{
+    "title": "Stage Instance",
+    "description": "Stage Instance Structure",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "The id of this Stage instance",
+            "type": "snowflake"
+        },
+        "guild_id": {
+            "description": "The guild id of the associated Stage channel",
+            "type": "snowflake"
+        },
+        "channel_id": {
+            "description": "The id of the associated Stage channel",
+            "type": "snowflake"
+        },
+        "topic": {
+            "description": "The topic of the Stage instance (1-120 characters)",
+            "type": "string"
+        },
+        "privacy_level": {
+            "description": "The privacy level of the Stage instance",
+            "type": "int",
+            "enum_type": "stage_instance_privacy_level",
+            "enum_prefix": "LLDC_STAGE_INSTANCE_PRIVACY_",
+            "enum": [
+                [
+                    "1",
+                    "PUBLIC",
+                    "The Stage instance is visible publicly, such as on Stage discovery."
+                ],
+                [
+                    "2",
+                    "GUILD_ONLY",
+                    "The Stage instance is visible to only guild members."
+                ]
+            ]
+        },
+        "discoverable_disabled": {
+            "description": "Whether or not Stage discovery is disabled",
+            "type": "boolean"
+        }
+    }
+}

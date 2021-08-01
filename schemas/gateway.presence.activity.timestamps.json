@@ -1,0 +1,15 @@
+{
+    "title": "Activity Timestamps",
+    "description": "Start and End timestamps",
+    "type": "object",
+    "properties": {
+        "start": {
+            "description": "OPTIONAL: unix time (in milliseconds) of when the activity started",
+            "type": "int"
+        },
+        "end": {
+            "description": "OPTIONAL: unix time (in milliseconds) of when the activity ends",
+            "type": "int"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "title": "Voice State",
+    "description": "Voice State Array",
+    "type": "array",
+    "items": {
+        "description": "Voice State Objects",
+        "type": "object",
+        "existing_parser": "voice_state"
+    }
+}

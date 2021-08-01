@@ -1,0 +1,10 @@
+{
+    "title": "Guild Member",
+    "description": "Guild Member Array",
+    "type": "array",
+    "items": {
+        "description": "Guild Member Objects",
+        "type": "object",
+        "existing_parser": "guild_member"
+    }
+}

@@ -18,10 +18,15 @@
     "auditlog.json",
 
     "guild.member.json",
+    "guild.member.arr.json",
     "guild.member.partial.json",
 
     "channel.overwrite.json",
     "channel.overwrite.arr.json",
+    "permissions.role.tags.json",
+    "permissions.role.json",
+    "permissions.role.arr.json",
+
     "channel.thread.metadata.json",
     "channel.thread.member.json",
 
@@ -42,8 +47,8 @@
     "channel.embed.json",
     "channel.embed.arr.json",
 
-    "channel.emoji.json",
-    "channel.emoji.arr.json",
+    "emoji.json",
+    "emoji.arr.json",
 
     "channel.reaction.json",
     "channel.reaction.arr.json",
@@ -54,6 +59,8 @@
     "interaction.component.arr.json",
     "interaction.component.json",
 
+    "sticker.json",
+    "sticker.arr.json",
     "sticker.item.json",
     "sticker.item.arr.json",
 
@@ -61,6 +68,33 @@
     "channel.message.reference.json",
     "channel.message.interaction.json",
     "channel.message.json",
+    
+    "channel.allowed_mentions.json",
+    "channel.followed_channel.json",
 
-    "channel.json"
+    "channel.json",
+    "channel.arr.json",
+
+    "voice.state.json",
+    "voice.state.arr.json",
+
+    "gateway.presence.activity.timestamps.json",
+    "gateway.presence.activity.party.json",
+    "gateway.presence.activity.assets.json",
+    "gateway.presence.activity.secrets.json",
+    "gateway.presence.activity.json",
+    "gateway.presence.activity.bot.json",
+    "gateway.presence.activity.arr.json",
+    "gateway.presence.status.json",
+    "gateway.presence.update.json",
+    "gateway.presence.update.arr.json",
+
+    "stage_instance.json",
+    "stage_instance.arr.json",
+
+    "guild.features.json",
+    "guild.welcome_screen.channel.json",
+    "guild.welcome_screen.channel.arr.json",
+    "guild.welcome_screen.json",
+    "guild.json"
 ]

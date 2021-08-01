@@ -1,0 +1,21 @@
+{
+    "title": "Activity Bot",
+    "description": "Presence Activity for Bot",
+    "type": "object",
+    "no_parse": true,
+    "properties": {
+        "name": {
+            "description": "the activity's name",
+            "type": "string"
+        },
+        "type": {
+            "description": "activity type",
+            "type": "int",
+            "enum_type": "activity_type"
+        },
+        "url": {
+            "description": "OPTIONAL: stream url, is validated when type is 1",
+            "type": "string"
+        }
+    }
+}

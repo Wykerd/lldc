@@ -269,6 +269,12 @@ typedef enum lldc_component_style {
     /* grey, navigates to a URL */
     LLDC_COMPONENT_STYLE_LINK = (5)
 } lldc_component_style_t;
+typedef enum lldc_sticker_type {
+    /* an official sticker in a pack, part of Nitro or in a removed purchasable pack */
+    LLDC_STICKER_TYPE_STANDARD = (1),
+    /* a sticker uploaded to a Boosted guild for the guild's members */
+    LLDC_STICKER_TYPE_GUILD = (2)
+} lldc_sticker_type_t;
 typedef enum lldc_sticker_format {
     /* PNG */
     LLDC_STICKER_FORMAT_PNG = (1),
@@ -287,6 +293,76 @@ typedef enum lldc_message_activity_type {
     /* JOIN_REQUEST */
     LLDC_MSG_ACTIVITY_JOIN_REQUEST = (5)
 } lldc_message_activity_type_t;
+typedef enum lldc_message_type {
+    /* DEFAULT */
+    LLDC_MSG_DEFAULT = (0),
+    /* RECIPIENT_ADD */
+    LLDC_MSG_RECIPIENT_ADD = (1),
+    /* RECIPIENT_REMOVE */
+    LLDC_MSG_RECIPIENT_REMOVE = (2),
+    /* CALL */
+    LLDC_MSG_CALL = (3),
+    /* CHANNEL_NAME_CHANGE */
+    LLDC_MSG_CHANNEL_NAME_CHANGE = (4),
+    /* CHANNEL_ICON_CHANGE */
+    LLDC_MSG_CHANNEL_ICON_CHANGE = (5),
+    /* CHANNEL_PINNED_MESSAGE */
+    LLDC_MSG_CHANNEL_PINNED_MESSAGE = (6),
+    /* GUILD_MEMBER_JOIN */
+    LLDC_MSG_GUILD_MEMBER_JOIN = (7),
+    /* USER_PREMIUM_GUILD_SUBSCRIPTION */
+    LLDC_MSG_USER_PREMIUM_GUILD_SUBSCRIPTION = (8),
+    /* USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1 */
+    LLDC_MSG_USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1 = (9),
+    /* USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2 */
+    LLDC_MSG_USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2 = (10),
+    /* USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3 */
+    LLDC_MSG_USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3 = (11),
+    /* CHANNEL_FOLLOW_ADD */
+    LLDC_MSG_CHANNEL_FOLLOW_ADD = (12),
+    /* GUILD_DISCOVERY_DISQUALIFIED */
+    LLDC_MSG_GUILD_DISCOVERY_DISQUALIFIED = (14),
+    /* GUILD_DISCOVERY_REQUALIFIED */
+    LLDC_MSG_GUILD_DISCOVERY_REQUALIFIED = (15),
+    /* GUILD_DISCOVERY_GRACE_PERIOD_INITIAL_WARNING */
+    LLDC_MSG_GUILD_DISCOVERY_GRACE_PERIOD_INITIAL_WARNING = (16),
+    /* GUILD_DISCOVERY_GRACE_PERIOD_FINAL_WARNING */
+    LLDC_MSG_GUILD_DISCOVERY_GRACE_PERIOD_FINAL_WARNING = (17),
+    /* THREAD_CREATED */
+    LLDC_MSG_THREAD_CREATED = (18),
+    /* REPLY */
+    LLDC_MSG_REPLY = (19),
+    /* APPLICATION_COMMAND */
+    LLDC_MSG_APPLICATION_COMMAND = (20),
+    /* THREAD_STARTER_MESSAGE */
+    LLDC_MSG_THREAD_STARTER_MESSAGE = (21),
+    /* GUILD_INVITE_REMINDER */
+    LLDC_MSG_GUILD_INVITE_REMINDER = (22)
+} lldc_message_type_t;
+typedef enum lldc_message_flags {
+    /* this message has been published to subscribed channels (via Channel Following) */
+    LLDC_MSG_FLAG_CROSSPOSTED = (1 << 0),
+    /* this message originated from a message in another channel (via Channel Following) */
+    LLDC_MSG_FLAG_IS_CROSSPOST = (1 << 1),
+    /* do not include any embeds when serializing this message */
+    LLDC_MSG_FLAG_SUPPRESS_EMBEDS = (1 << 2),
+    /* the source message for this crosspost has been deleted (via Channel Following) */
+    LLDC_MSG_FLAG_SOURCE_MESSAGE_DELETED = (1 << 3),
+    /* this message came from the urgent message system */
+    LLDC_MSG_FLAG_URGENT = (1 << 4),
+    /* this message has an associated thread, with the same id as the message */
+    LLDC_MSG_FLAG_HAS_THREAD = (1 << 5),
+    /* this message is only visible to the user who invoked the Interaction */
+    LLDC_MSG_FLAG_EPHEMERAL = (1 << 6),
+    /* this message is an Interaction Response and the bot is "thinking" */
+    LLDC_MSG_FLAG_LOADING = (1 << 7)
+} lldc_message_flags_t;
+/* Controls role mentions */
+#define LLDC_ALLOWED_MENTION_ROLE_MENTIONS "roles"
+/* Controls user mentions */
+#define LLDC_ALLOWED_MENTION_USER_MENTIONS "users"
+/* Controls @everyone and @here mentions */
+#define LLDC_ALLOWED_MENTION_EVERYONE_MENTIONS "everyone"
 typedef enum lldc_channel_type {
     /* a text channel within a server */
     LLDC_CH_TYPE_GUILD_TEXT = (0),
@@ -317,6 +393,148 @@ typedef enum lldc_channel_video_quality_mode {
     /* 720p */
     LLDC_QUALITY_FULL = (2)
 } lldc_channel_video_quality_mode_t;
+typedef enum lldc_activity_type {
+    /* Game */
+    LLDC_ACTIVITY_GAME = (0),
+    /* Streaming */
+    LLDC_ACTIVITY_STREAMING = (1),
+    /* Listening */
+    LLDC_ACTIVITY_LISTENING = (2),
+    /* Watching */
+    LLDC_ACTIVITY_WATCHING = (3),
+    /* Custom */
+    LLDC_ACTIVITY_CUSTOM = (4),
+    /* Competing */
+    LLDC_ACTIVITY_COMPETING = (5)
+} lldc_activity_type_t;
+typedef enum lldc_activity_flags {
+    /* INSTANCE */
+    LLDC_ACTIVITY_FLAGS_INSTANCE = (1 << 0),
+    /* JOIN */
+    LLDC_ACTIVITY_FLAGS_JOIN = (1 << 1),
+    /* SPECTATE */
+    LLDC_ACTIVITY_FLAGS_SPECTATE = (1 << 2),
+    /* JOIN_REQUEST */
+    LLDC_ACTIVITY_FLAGS_JOIN_REQUEST = (1 << 3),
+    /* SYNC */
+    LLDC_ACTIVITY_FLAGS_SYNC = (1 << 4),
+    /* PLAY */
+    LLDC_ACTIVITY_FLAGS_PLAY = (1 << 5)
+} lldc_activity_flags_t;
+/* ONLINE */
+#define LLDC_CLIENT_STATUS_ONLINE "online"
+/* IDLE */
+#define LLDC_CLIENT_STATUS_IDLE "idle"
+/* DND */
+#define LLDC_CLIENT_STATUS_DND "dnd"
+typedef enum lldc_stage_instance_privacy_level {
+    /* The Stage instance is visible publicly, such as on Stage discovery. */
+    LLDC_STAGE_INSTANCE_PRIVACY_PUBLIC = (1),
+    /* The Stage instance is visible to only guild members. */
+    LLDC_STAGE_INSTANCE_PRIVACY_GUILD_ONLY = (2)
+} lldc_stage_instance_privacy_level_t;
+/* guild has access to set an animated guild icon */
+#define LLDC_GUILD_FEATURE_ANIMATED_ICON "ANIMATED_ICON"
+/* guild has access to set a guild banner image */
+#define LLDC_GUILD_FEATURE_BANNER "BANNER"
+/* guild has access to use commerce features (i.e. create store channels) */
+#define LLDC_GUILD_FEATURE_COMMERCE "COMMERCE"
+/* guild can enable welcome screen, Membership Screening, stage channels and discovery, and receives community updates */
+#define LLDC_GUILD_FEATURE_COMMUNITY "COMMUNITY"
+/* guild is able to be discovered in the directory */
+#define LLDC_GUILD_FEATURE_DISCOVERABLE "DISCOVERABLE"
+/* guild is able to be featured in the directory */
+#define LLDC_GUILD_FEATURE_FEATURABLE "FEATURABLE"
+/* guild has access to set an invite splash background */
+#define LLDC_GUILD_FEATURE_INVITE_SPLASH "INVITE_SPLASH"
+/* guild has enabled Membership Screening */
+#define LLDC_GUILD_FEATURE_MEMBER_VERIFICATION_GATE_ENABLED "MEMBER_VERIFICATION_GATE_ENABLED"
+/* guild has access to create news channels */
+#define LLDC_GUILD_FEATURE_NEWS "NEWS"
+/* guild is partnered */
+#define LLDC_GUILD_FEATURE_PARTNERED "PARTNERED"
+/* guild can be previewed before joining via Membership Screening or the directory */
+#define LLDC_GUILD_FEATURE_PREVIEW_ENABLED "PREVIEW_ENABLED"
+/* guild has access to set a vanity URL */
+#define LLDC_GUILD_FEATURE_VANITY_URL "VANITY_URL"
+/* guild is verified */
+#define LLDC_GUILD_FEATURE_VERIFIED "VERIFIED"
+/* guild has access to set 384kbps bitrate in voice (previously VIP voice servers) */
+#define LLDC_GUILD_FEATURE_VIP_REGIONS "VIP_REGIONS"
+/* guild has enabled the welcome screen */
+#define LLDC_GUILD_FEATURE_WELCOME_SCREEN_ENABLED "WELCOME_SCREEN_ENABLED"
+/* guild has enabled ticketed events */
+#define LLDC_GUILD_FEATURE_TICKETED_EVENTS_ENABLED "TICKETED_EVENTS_ENABLED"
+/* guild has enabled monetization */
+#define LLDC_GUILD_FEATURE_MONETIZATION_ENABLED "MONETIZATION_ENABLED"
+/* guild has increased custom sticker slots */
+#define LLDC_GUILD_FEATURE_MORE_STICKERS "MORE_STICKERS"
+/* guild has access to the three day archive time for threads */
+#define LLDC_GUILD_FEATURE_THREE_DAY_THREAD_ARCHIVE "THREE_DAY_THREAD_ARCHIVE"
+/* guild has access to the seven day archive time for threads */
+#define LLDC_GUILD_FEATURE_SEVEN_DAY_THREAD_ARCHIVE "SEVEN_DAY_THREAD_ARCHIVE"
+/* guild has access to create private threads */
+#define LLDC_GUILD_FEATURE_PRIVATE_THREADS "PRIVATE_THREADS"
+typedef enum lldc_guild_verification_level {
+    /* unrestricted */
+    LLDC_VERIFICATION_LEVEL_NONE = (0),
+    /* must have verified email on account */
+    LLDC_VERIFICATION_LEVEL_LOW = (1),
+    /* must be registered on Discord for longer than 5 minutes */
+    LLDC_VERIFICATION_LEVEL_MEDIUM = (2),
+    /* must be a member of the server for longer than 10 minutes */
+    LLDC_VERIFICATION_LEVEL_HIGH = (3),
+    /* must have a verified phone number */
+    LLDC_VERIFICATION_LEVEL_VERY_HIGH = (4)
+} lldc_guild_verification_level_t;
+typedef enum lldc_guild_message_notifications_level {
+    /* members will receive notifications for all messages by default */
+    LLDC_MSG_NOTIFICATION_ALL_MESSAGES = (0),
+    /* members will receive notifications only for messages that @mention them by default */
+    LLDC_MSG_NOTIFICATION_ONLY_MENTIONS = (1)
+} lldc_guild_message_notifications_level_t;
+typedef enum lldc_guild_explicit_content_filter_level {
+    /* media content will not be scanned */
+    LLDC_EXPLICIT_FILTER_DISABLED = (0),
+    /* media content sent by members without roles will be scanned */
+    LLDC_EXPLICIT_FILTER_MEMBERS_WITHOUT_ROLES = (1),
+    /* media content sent by all members will be scanned */
+    LLDC_EXPLICIT_FILTER_ALL_MEMBERS = (2)
+} lldc_guild_explicit_content_filter_level_t;
+typedef enum lldc_guild_mfa_level {
+    /* guild has no MFA/2FA requirement for moderation actions */
+    LLDC_MFA_NONE = (0),
+    /* guild has a 2FA requirement for moderation actions */
+    LLDC_MFA_ELEVATED = (1)
+} lldc_guild_mfa_level_t;
+typedef enum lldc_guild_system_channel_flags {
+    /* Suppress member join notifications */
+    LLDC_GUILD_SYSTEM_SUPPRESS_JOIN_NOTIFICATIONS = (1 << 0),
+    /* Suppress server boost notifications */
+    LLDC_GUILD_SYSTEM_SUPPRESS_PREMIUM_SUBSCRIPTIONS = (1 << 1),
+    /* Suppress server setup tips */
+    LLDC_GUILD_SYSTEM_SUPPRESS_GUILD_REMINDER_NOTIFICATIONS = (1 << 2)
+} lldc_guild_system_channel_flags_t;
+typedef enum lldc_guild_premium_tier {
+    /* guild has not unlocked any Server Boost perks */
+    LLDC_GUILD_PREMIUM_NONE = (0),
+    /* guild has unlocked Server Boost level 1 perks */
+    LLDC_GUILD_PREMIUM_TIER_1 = (1),
+    /* guild has unlocked Server Boost level 2 perks */
+    LLDC_GUILD_PREMIUM_TIER_2 = (2),
+    /* guild has unlocked Server Boost level 3 perks */
+    LLDC_GUILD_PREMIUM_TIER_3 = (3)
+} lldc_guild_premium_tier_t;
+typedef enum lldc_guild_nsfw_level {
+    /* DEFAULT */
+    LLDC_GUILD_NSFW_DEFAULT = (0),
+    /* EXPLICIT */
+    LLDC_GUILD_NSFW_EXPLICIT = (1),
+    /* SAFE */
+    LLDC_GUILD_NSFW_SAFE = (2),
+    /* AGE_RESTRICTED */
+    LLDC_GUILD_NSFW_AGE_RESTRICTED = (3)
+} lldc_guild_nsfw_level_t;
 /* Error Messages */
 typedef struct lldc_discord_error_s {
     cwr_malloc_ctx_t *_mctx;
@@ -810,8 +1028,16 @@ typedef struct lldc_guild_member_s {
     /** 
      * OPTIONAL: total permissions of the member in the channel, including overwrites, returned when in the interaction object 
      */
-    const char *permissions;
+    uint64_t permissions;
 } lldc_guild_member_t;
+/* Guild Member Array */
+typedef struct lldc_guild_member_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_guild_member_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_guild_member_arr_t;
 /* Partial Guild Member (excluding user) */
 typedef struct lldc_partial_guild_member_s {
     cwr_malloc_ctx_t *_mctx;
@@ -848,7 +1074,7 @@ typedef struct lldc_partial_guild_member_s {
     /** 
      * OPTIONAL: total permissions of the member in the channel, including overwrites, returned when in the interaction object 
      */
-    const char *permissions;
+    uint64_t permissions;
 } lldc_partial_guild_member_t;
 /* Represents a guild or DM channel within Discord */
 typedef struct lldc_channel_overwrite_s {
@@ -880,6 +1106,70 @@ typedef struct lldc_channel_overwrite_arr_s {
     size_t len;
     lldc_parser_malloc_ledger_t __mlog;
 } lldc_channel_overwrite_arr_t;
+/* Role Tags Structure */
+typedef struct lldc_role_tags_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: the id of the bot this role belongs to 
+     */
+    snowflake_t bot_id;
+    /** 
+     * OPTIONAL: the id of the integration this role belongs to 
+     */
+    snowflake_t integration_id;
+} lldc_role_tags_t;
+/* Roles represent a set of permissions attached to a group of users. Roles have unique names, colors, and can be "pinned" to the side bar, causing their members to be listed separately. Roles are unique per guild, and can have separate permission profiles for the global context (guild) and channel context. The @everyone role has the same ID as the guild it belongs to. */
+typedef struct lldc_role_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * role id 
+     */
+    snowflake_t id;
+    /** 
+     * role name 
+     */
+    const char *name;
+    /** 
+     * integer representation of hexadecimal color code 
+     */
+    int color;
+    /** 
+     * if this role is pinned in the user listing 
+     */
+    int hoist;
+    /** 
+     * position of this role 
+     */
+    int position;
+    /** 
+     * permission bit set 
+     */
+    uint64_t permissions;
+    /** 
+     * whether this role is managed by an integration 
+     */
+    int managed;
+    /** 
+     * whether this role is mentionable 
+     */
+    int mentionable;
+    /** 
+     * OPTIONAL: the tags this role has 
+     */
+    lldc_role_tags_t tags;
+} lldc_role_t;
+/* Role Array */
+typedef struct lldc_role_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_role_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_role_arr_t;
 /* The thread metadata object contains a number of thread-specific channel fields that are not needed by other channel types. */
 typedef struct lldc_thread_metadata_s {
     cwr_malloc_ctx_t *_mctx;
@@ -1394,6 +1684,64 @@ struct lldc_component_s {
      */
     lldc_component_arr_t components;
 };
+/* Represents a sticker that can be sent in messages. */
+typedef struct lldc_sticker_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * id of the sticker 
+     */
+    snowflake_t id;
+    /** 
+     * OPTIONAL: for standard stickers, id of the pack the sticker is from 
+     */
+    snowflake_t pack_id;
+    /** 
+     * name of the sticker 
+     */
+    const char *name;
+    /** 
+     * OPTIONAL: description of the sticker 
+     */
+    const char *description;
+    /** 
+     * for guild stickers, the Discord name of a unicode emoji representing the sticker's expression. for standard stickers, a comma-separated list of related expressions. 
+     */
+    const char *tags;
+    /** 
+     * type of sticker 
+     */
+    lldc_sticker_type_t type;
+    /** 
+     * type of sticker format 
+     */
+    lldc_sticker_format_t format_type;
+    /** 
+     * OPTIONAL: whether this guild sticker can be used, may be false due to loss of Server Boosts 
+     */
+    int available;
+    /** 
+     * OPTIONAL: id of the guild that owns this sticker 
+     */
+    snowflake_t guild_id;
+    /** 
+     * OPTIONAL: the user that uploaded the guild sticker 
+     */
+    lldc_user_t user;
+    /** 
+     * OPTIONAL: the standard sticker's sort order within its pack 
+     */
+    int sort_value;
+} lldc_sticker_t;
+/* Sticker Array */
+typedef struct lldc_sticker_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_sticker_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_sticker_arr_t;
 /* The smallest amount of data required to render a sticker. A partial sticker object. */
 typedef struct lldc_sticker_item_s {
     cwr_malloc_ctx_t *_mctx;
@@ -1558,15 +1906,15 @@ typedef struct lldc_message_s {
     /** 
      * type of message 
      */
-    int type;
+    lldc_message_type_t type;
     /** 
      * OPTIONAL: sent with Rich Presence-related chat embeds 
      */
-    yyjson_val *activity;
+    lldc_message_activity_t activity;
     /** 
      * OPTIONAL: sent with Rich Presence-related chat embeds 
      */
-    yyjson_val *application;
+    lldc_application_t application;
     /** 
      * OPTIONAL: if the message is a response to an Interaction, this is the id of the interaction's application 
      */
@@ -1578,7 +1926,7 @@ typedef struct lldc_message_s {
     /** 
      * OPTIONAL: message flags combined as a bitfield 
      */
-    int flags;
+    lldc_message_flags_t flags;
     /** 
      * OPTIONAL: sent if the message is a response to an Interaction 
      */
@@ -1596,6 +1944,42 @@ typedef struct lldc_message_s {
      */
     lldc_sticker_item_arr_t sticker_items;
 } lldc_message_t;
+/* The allowed mention field allows for more granular control over mentions without various hacks to the message content. This will always validate against message content to avoid phantom pings (e.g. to ping everyone, you must still have @everyone in the message content), and check against user/bot permissions. */
+typedef struct lldc_allowed_mentions_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * An array of allowed mention types to parse from the content. 
+     */
+    lldc_parser_string_arr_t parse;
+    /** 
+     * Array of role_ids to mention (Max size of 100) 
+     */
+    lldc_parser_snowflake_arr_t roles;
+    /** 
+     * Array of user_ids to mention (Max size of 100) 
+     */
+    lldc_parser_snowflake_arr_t users;
+    /** 
+     * For replies, whether to mention the author of the message being replied to (default false) 
+     */
+    int replied_user;
+} lldc_allowed_mentions_t;
+/* Followed Channel Structure */
+typedef struct lldc_followed_channel_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * source channel id 
+     */
+    snowflake_t channel_id;
+    /** 
+     * created target webhook id 
+     */
+    snowflake_t webhook_id;
+} lldc_followed_channel_t;
 /* Represents a guild or DM channel within Discord */
 typedef struct lldc_channel_s {
     cwr_malloc_ctx_t *_mctx;
@@ -1706,6 +2090,600 @@ typedef struct lldc_channel_s {
      */
     uint64_t permissions;
 } lldc_channel_t;
+/* Channel Array */
+typedef struct lldc_channel_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_channel_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_channel_arr_t;
+/* Used to represent a user's voice connection status. */
+typedef struct lldc_voice_state_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: the guild id this voice state is for 
+     */
+    snowflake_t guild_id;
+    /** 
+     * OPTIONAL: the channel id this user is connected to 
+     */
+    snowflake_t channel_id;
+    /** 
+     * the user id this voice state is for 
+     */
+    snowflake_t user_id;
+    /** 
+     * OPTIONAL: the guild member this voice state is for 
+     */
+    lldc_guild_member_t member;
+    /** 
+     * the session id for this voice state 
+     */
+    const char *session_id;
+    /** 
+     * whether this user is deafened by the server 
+     */
+    int deaf;
+    /** 
+     * whether this user is muted by the server 
+     */
+    int mute;
+    /** 
+     * whether this user is locally deafened 
+     */
+    int self_deaf;
+    /** 
+     * whether this user is locally muted 
+     */
+    int self_mute;
+    /** 
+     * OPTIONAL: whether this user is streaming using "Go Live" 
+     */
+    int self_stream;
+    /** 
+     * whether this user's camera is enabled 
+     */
+    int self_video;
+    /** 
+     * whether this user is muted by the current user 
+     */
+    int suppress;
+    /** 
+     * OPTIONAL: the time at which the user requested to speak 
+     */
+    double request_to_speak_timestamp;
+} lldc_voice_state_t;
+/* Voice State Array */
+typedef struct lldc_voice_state_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_voice_state_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_voice_state_arr_t;
+/* Start and End timestamps */
+typedef struct lldc_activity_timestamps_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: unix time (in milliseconds) of when the activity started 
+     */
+    int start;
+    /** 
+     * OPTIONAL: unix time (in milliseconds) of when the activity ends 
+     */
+    int end;
+} lldc_activity_timestamps_t;
+/* Activity Party Structure */
+typedef struct lldc_activity_party_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: the id of the party 
+     */
+    const char *id;
+    /** 
+     * OPTIONAL: used to show the party's current and maximum size 
+     */
+    lldc_parser_int_arr_t size;
+} lldc_activity_party_t;
+/* Activity Assets Structure */
+typedef struct lldc_activity_assets_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: the id for a large asset of the activity, usually a snowflake 
+     */
+    const char *large_image;
+    /** 
+     * OPTIONAL: text displayed when hovering over the large image of the activity 
+     */
+    const char *large_text;
+    /** 
+     * OPTIONAL: the id for a small asset of the activity, usually a snowflake 
+     */
+    const char *small_image;
+    /** 
+     * OPTIONAL: text displayed when hovering over the small image of the activity 
+     */
+    const char *small_text;
+} lldc_activity_assets_t;
+/* Activity Secrets Structure */
+typedef struct lldc_activity_secrets_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: the secret for joining a party 
+     */
+    const char *join;
+    /** 
+     * OPTIONAL: the secret for spectating a game 
+     */
+    const char *spectate;
+    /** 
+     * OPTIONAL: the secret for a specific instanced match 
+     */
+    const char *match;
+} lldc_activity_secrets_t;
+/* When received over the gateway, the buttons field is an array of strings, which are the button labels. Bots cannot access a user's activity button URLs. When sending, the buttons field must be an array of the below object: */
+typedef struct lldc_activity_buttons_item_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    /** 
+     * the text shown on the button (1-32 characters) 
+     */
+    const char *label;
+    /** 
+     * the url opened when clicking the button (1-512 characters) 
+     */
+    const char *url;
+} lldc_activity_buttons_item_t;
+/* OPTIONAL: the custom buttons shown in the Rich Presence (max 2) */
+typedef struct lldc_activity_buttons_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_activity_buttons_item_t *items;
+    size_t len;
+} lldc_activity_buttons_arr_t;
+/* Presence Activity */
+typedef struct lldc_activity_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * the activity's name 
+     */
+    const char *name;
+    /** 
+     * activity type 
+     */
+    lldc_activity_type_t type;
+    /** 
+     * OPTIONAL: stream url, is validated when type is 1 
+     */
+    const char *url;
+    /** 
+     * unix timestamp (in milliseconds) of when the activity was added to the user's session 
+     */
+    int created_at;
+    /** 
+     * OPTIONAL: unix timestamps for start and/or end of the game 
+     */
+    lldc_activity_timestamps_t timestamps;
+    /** 
+     * OPTIONAL: application id for the game 
+     */
+    snowflake_t application_id;
+    /** 
+     * OPTIONAL: what the player is currently doing 
+     */
+    const char *details;
+    /** 
+     * OPTIONAL: the user's current party status 
+     */
+    const char *state;
+    /** 
+     * OPTIONAL: the emoji used for a custom status 
+     */
+    lldc_emoji_t emoji;
+    /** 
+     * OPTIONAL: information for the current party of the player 
+     */
+    lldc_activity_party_t party;
+    /** 
+     * OPTIONAL: images for the presence and their hover texts 
+     */
+    lldc_activity_assets_t assets;
+    /** 
+     * OPTIONAL: secrets for Rich Presence joining and spectating 
+     */
+    lldc_activity_secrets_t secrets;
+    /** 
+     * OPTIONAL: whether or not the activity is an instanced game session 
+     */
+    int instance;
+    /** 
+     * OPTIONAL: activity flags ORd together, describes what the payload includes 
+     */
+    lldc_activity_flags_t flags;
+    /** 
+     * OPTIONAL: the custom buttons shown in the Rich Presence (max 2) 
+     */
+    lldc_activity_buttons_arr_t buttons;
+} lldc_activity_t;
+/* Presence Activity for Bot */
+typedef struct lldc_activity_bot_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * the activity's name 
+     */
+    const char *name;
+    /** 
+     * activity type 
+     */
+    lldc_activity_type_t type;
+    /** 
+     * OPTIONAL: stream url, is validated when type is 1 
+     */
+    const char *url;
+} lldc_activity_bot_t;
+/* Activity Array */
+typedef struct lldc_activity_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_activity_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_activity_arr_t;
+/* Active sessions are indicated with an "online", "idle", or "dnd" string per platform. If a user is offline or invisible, the corresponding field is not present. */
+typedef struct lldc_client_status_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: the user's status set for an active desktop (Windows, Linux, Mac) application session 
+     */
+    const char *desktop;
+    /** 
+     * OPTIONAL: the user's status set for an active mobile (iOS, Android) application session 
+     */
+    const char *mobile;
+    /** 
+     * OPTIONAL: the user's status set for an active web (browser, bot account) application session 
+     */
+    const char *web;
+} lldc_client_status_t;
+/* A user's presence is their current state on a guild. This event is sent when a user's presence or info, such as name or avatar, is updated. */
+typedef struct lldc_presence_update_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * the user presence is being updated for 
+     */
+    lldc_user_t user;
+    /** 
+     * id of the guild 
+     */
+    snowflake_t guild_id;
+    /** 
+     * either "idle", "dnd", "online", or "offline" 
+     */
+    const char *status;
+    /** 
+     * user's current activities 
+     */
+    lldc_activity_arr_t activities;
+    /** 
+     * user's platform-dependent status 
+     */
+    lldc_client_status_t client_status;
+} lldc_presence_update_t;
+/* Presence Update Array */
+typedef struct lldc_presence_update_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_presence_update_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_presence_update_arr_t;
+/* Stage Instance Structure */
+typedef struct lldc_stage_instance_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * The id of this Stage instance 
+     */
+    snowflake_t id;
+    /** 
+     * The guild id of the associated Stage channel 
+     */
+    snowflake_t guild_id;
+    /** 
+     * The id of the associated Stage channel 
+     */
+    snowflake_t channel_id;
+    /** 
+     * The topic of the Stage instance (1-120 characters) 
+     */
+    const char *topic;
+    /** 
+     * The privacy level of the Stage instance 
+     */
+    lldc_stage_instance_privacy_level_t privacy_level;
+    /** 
+     * Whether or not Stage discovery is disabled 
+     */
+    int discoverable_disabled;
+} lldc_stage_instance_t;
+/* Stage Instance Array */
+typedef struct lldc_stage_instance_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_stage_instance_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_stage_instance_arr_t;
+/* Welcome Screen Channel Structure */
+typedef struct lldc_welcome_screen_channel_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * the channel's id 
+     */
+    snowflake_t channel_id;
+    /** 
+     * the description shown for the channel 
+     */
+    const char *description;
+    /** 
+     * OPTIONAL: the emoji id, if the emoji is custom 
+     */
+    snowflake_t emoji_id;
+    /** 
+     * OPTIONAL: the emoji name if custom, the unicode character if standard, or null if no emoji is set 
+     */
+    const char *emoji_name;
+} lldc_welcome_screen_channel_t;
+/* Welcome Screen Channel Array */
+typedef struct lldc_welcome_screen_channel_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_welcome_screen_channel_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_welcome_screen_channel_arr_t;
+/* Welcome Screen Structure */
+typedef struct lldc_welcome_screen_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: the server description shown in the welcome screen 
+     */
+    const char *description;
+    /** 
+     * the channels shown in the welcome screen, up to 5 
+     */
+    lldc_welcome_screen_channel_arr_t welcome_channels;
+} lldc_welcome_screen_t;
+/* Guilds in Discord represent an isolated collection of users and channels, and are often referred to as "servers" in the UI. */
+typedef struct lldc_guild_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * guild id 
+     */
+    snowflake_t id;
+    /** 
+     * guild name (2-100 characters, excluding trailing and leading whitespace) 
+     */
+    const char *name;
+    /** 
+     * OPTIONAL: icon hash 
+     */
+    const char *icon;
+    /** 
+     * OPTIONAL: icon hash, returned when in the template object 
+     */
+    const char *icon_hash;
+    /** 
+     * OPTIONAL: splash hash 
+     */
+    const char *splash;
+    /** 
+     * OPTIONAL: discovery splash hash; only present for guilds with the "DISCOVERABLE" feature 
+     */
+    const char *discovery_splash;
+    /** 
+     * OPTIONAL: true if the user is the owner of the guild 
+     */
+    int owner;
+    /** 
+     * id of owner 
+     */
+    snowflake_t owner_id;
+    /** 
+     * OPTIONAL: total permissions for the user in the guild (excludes overwrites) 
+     */
+    uint64_t permissions;
+    /** 
+     * OPTIONAL: voice region id for the guild (deprecated) 
+     */
+    const char *region;
+    /** 
+     * OPTIONAL: id of afk channel 
+     */
+    snowflake_t afk_channel_id;
+    /** 
+     * afk timeout in seconds 
+     */
+    int afk_timeout;
+    /** 
+     * OPTIONAL: true if the server widget is enabled 
+     */
+    int widget_enabled;
+    /** 
+     * OPTIONAL: the channel id that the widget will generate an invite to, or null if set to no invite 
+     */
+    snowflake_t widget_channel_id;
+    /** 
+     * verification level required for the guild 
+     */
+    lldc_guild_verification_level_t verification_level;
+    /** 
+     * default message notifications level 
+     */
+    lldc_guild_message_notifications_level_t default_message_notifications;
+    /** 
+     * explicit content filter level 
+     */
+    lldc_guild_explicit_content_filter_level_t explicit_content_filter;
+    /** 
+     * roles in the guild 
+     */
+    lldc_role_t roles;
+    /** 
+     * custom guild emojis 
+     */
+    lldc_emoji_t emojis;
+    /** 
+     * enabled guild features 
+     */
+    lldc_parser_string_arr_t features;
+    /** 
+     * required MFA level for the guild 
+     */
+    lldc_guild_mfa_level_t mfa_level;
+    /** 
+     * OPTIONAL: application id of the guild creator if it is bot-created 
+     */
+    snowflake_t application_id;
+    /** 
+     * OPTIONAL: the id of the channel where guild notices such as welcome messages and boost events are posted 
+     */
+    snowflake_t system_channel_id;
+    /** 
+     * system channel flags 
+     */
+    lldc_guild_system_channel_flags_t system_channel_flags;
+    /** 
+     * OPTIONAL: the id of the channel where Community guilds can display rules and/or guidelines 
+     */
+    snowflake_t rules_channel_id;
+    /** 
+     * OPTIONAL: when this guild was joined at 
+     */
+    double joined_at;
+    /** 
+     * OPTIONAL: true if this is considered a large guild 
+     */
+    int large;
+    /** 
+     * OPTIONAL: true if this guild is unavailable due to an outage 
+     */
+    int unavailable;
+    /** 
+     * OPTIONAL: total number of members in this guild 
+     */
+    int member_count;
+    /** 
+     * OPTIONAL: states of members currently in voice channels; lacks the guild_id key 
+     */
+    lldc_voice_state_arr_t voice_states;
+    /** 
+     * OPTIONAL: users in the guild 
+     */
+    lldc_guild_member_arr_t members;
+    /** 
+     * OPTIONAL: channels in the guild 
+     */
+    lldc_channel_arr_t channels;
+    /** 
+     * OPTIONAL: all active threads in the guild that current user has permission to view 
+     */
+    lldc_channel_arr_t threads;
+    /** 
+     * OPTIONAL: presences of the members in the guild, will only include non-offline members if the size is greater than large threshold 
+     */
+    lldc_presence_update_arr_t presences;
+    /** 
+     * OPTIONAL: the maximum number of presences for the guild (null is always returned, apart from the largest of guilds) 
+     */
+    int max_presences;
+    /** 
+     * OPTIONAL: the maximum number of members for the guild 
+     */
+    int max_members;
+    /** 
+     * OPTIONAL: the vanity url code for the guild 
+     */
+    const char *vanity_url_code;
+    /** 
+     * OPTIONAL: the description of a Community guild 
+     */
+    const char *description;
+    /** 
+     * OPTIONAL: banner hash 
+     */
+    const char *banner;
+    /** 
+     * premium tier (Server Boost level) 
+     */
+    lldc_guild_premium_tier_t premium_tier;
+    /** 
+     * OPTIONAL: the number of boosts this guild currently has 
+     */
+    int premium_subscription_count;
+    /** 
+     * the preferred locale of a Community guild; used in server discovery and notices from Discord; defaults to "en-US" 
+     */
+    const char *preferred_locale;
+    /** 
+     * OPTIONAL: the id of the channel where admins and moderators of Community guilds receive notices from Discord 
+     */
+    snowflake_t public_updates_channel_id;
+    /** 
+     * OPTIONAL: the maximum amount of users in a video channel 
+     */
+    int max_video_channel_users;
+    /** 
+     * OPTIONAL: approximate number of members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true 
+     */
+    int approximate_member_count;
+    /** 
+     * OPTIONAL: approximate number of non-offline members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true 
+     */
+    int approximate_presence_count;
+    /** 
+     * OPTIONAL: the welcome screen of a Community guild, shown to new members, returned in an Invite's guild object 
+     */
+    lldc_welcome_screen_t welcome_screen;
+    /** 
+     * guild NSFW level 
+     */
+    lldc_guild_nsfw_level_t nsfw_level;
+    /** 
+     * OPTIONAL: Stage instances in the guild 
+     */
+    lldc_stage_instance_arr_t stage_instances;
+    /** 
+     * OPTIONAL: custom guild stickers 
+     */
+    lldc_sticker_arr_t stickers;
+} lldc_guild_t;
 /**
 * Discord Error Parser
 * Error Messages
@@ -1777,6 +2755,11 @@ int lldc_audit_log_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_t *obj, yyjson
 */
 int lldc_guild_member_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_member_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
+* Guild Member Parser
+* Guild Member Array
+*/
+int lldc_guild_member_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_member_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
 * Partial Guild Member Parser
 * Partial Guild Member (excluding user)
 */
@@ -1791,6 +2774,21 @@ int lldc_channel_overwrite_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_overwrit
 * Channel Overwrite Array
 */
 int lldc_channel_overwrite_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_overwrite_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Role Tags Parser
+* Role Tags Structure
+*/
+int lldc_role_tags_parse (cwr_malloc_ctx_t *_mctx, lldc_role_tags_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Role Parser
+* Roles represent a set of permissions attached to a group of users. Roles have unique names, colors, and can be "pinned" to the side bar, causing their members to be listed separately. Roles are unique per guild, and can have separate permission profiles for the global context (guild) and channel context. The @everyone role has the same ID as the guild it belongs to.
+*/
+int lldc_role_parse (cwr_malloc_ctx_t *_mctx, lldc_role_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Role Parser
+* Role Array
+*/
+int lldc_role_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_role_arr_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
 * Thread Metadata Parser
 * The thread metadata object contains a number of thread-specific channel fields that are not needed by other channel types.
@@ -1917,6 +2915,16 @@ int lldc_component_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_component_arr_t *obj
 */
 int lldc_component_parse (cwr_malloc_ctx_t *_mctx, lldc_component_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
+* Sticker Parser
+* Represents a sticker that can be sent in messages.
+*/
+int lldc_sticker_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Sticker Parser
+* Sticker Array
+*/
+int lldc_sticker_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
 * Sticker Item Parser
 * The smallest amount of data required to render a sticker. A partial sticker object.
 */
@@ -1947,8 +2955,103 @@ int lldc_message_interaction_parse (cwr_malloc_ctx_t *_mctx, lldc_message_intera
 */
 int lldc_message_parse (cwr_malloc_ctx_t *_mctx, lldc_message_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
+* Followed Channel Parser
+* Followed Channel Structure
+*/
+int lldc_followed_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_followed_channel_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
 * Channel Parser
 * Represents a guild or DM channel within Discord
 */
 int lldc_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Channel Parser
+* Channel Array
+*/
+int lldc_channel_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Voice State Parser
+* Used to represent a user's voice connection status.
+*/
+int lldc_voice_state_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_state_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Voice State Parser
+* Voice State Array
+*/
+int lldc_voice_state_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_state_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Activity Timestamps Parser
+* Start and End timestamps
+*/
+int lldc_activity_timestamps_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_timestamps_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Activity Party Parser
+* Activity Party Structure
+*/
+int lldc_activity_party_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_party_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Activity Assets Parser
+* Activity Assets Structure
+*/
+int lldc_activity_assets_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_assets_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Activity Secrets Parser
+* Activity Secrets Structure
+*/
+int lldc_activity_secrets_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_secrets_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Activity Parser
+* Presence Activity
+*/
+int lldc_activity_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Activity Parser
+* Activity Array
+*/
+int lldc_activity_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Client Status Parser
+* Active sessions are indicated with an "online", "idle", or "dnd" string per platform. If a user is offline or invisible, the corresponding field is not present.
+*/
+int lldc_client_status_parse (cwr_malloc_ctx_t *_mctx, lldc_client_status_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Presence Update Parser
+* A user's presence is their current state on a guild. This event is sent when a user's presence or info, such as name or avatar, is updated.
+*/
+int lldc_presence_update_parse (cwr_malloc_ctx_t *_mctx, lldc_presence_update_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Presence Update Parser
+* Presence Update Array
+*/
+int lldc_presence_update_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_presence_update_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Stage Instance Parser
+* Stage Instance Structure
+*/
+int lldc_stage_instance_parse (cwr_malloc_ctx_t *_mctx, lldc_stage_instance_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Stage Instance Parser
+* Stage Instance Array
+*/
+int lldc_stage_instance_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_stage_instance_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Welcome Screen Channel Parser
+* Welcome Screen Channel Structure
+*/
+int lldc_welcome_screen_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_welcome_screen_channel_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Welcome Screen Channel Parser
+* Welcome Screen Channel Array
+*/
+int lldc_welcome_screen_channel_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_welcome_screen_channel_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Welcome Screen Parser
+* Welcome Screen Structure
+*/
+int lldc_welcome_screen_parse (cwr_malloc_ctx_t *_mctx, lldc_welcome_screen_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Guild Parser
+* Guilds in Discord represent an isolated collection of users and channels, and are often referred to as "servers" in the UI.
+*/
+int lldc_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_t *obj, yyjson_val *json, int has_existing_ledger);
 #endif

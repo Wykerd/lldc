@@ -1,0 +1,44 @@
+{
+    "title": "Role",
+    "description": "Roles represent a set of permissions attached to a group of users. Roles have unique names, colors, and can be \"pinned\" to the side bar, causing their members to be listed separately. Roles are unique per guild, and can have separate permission profiles for the global context (guild) and channel context. The @everyone role has the same ID as the guild it belongs to.",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "role id",
+            "type": "snowflake"
+        },
+        "name": {
+            "description": "role name",
+            "type": "string"
+        },
+        "color": {
+            "description": "integer representation of hexadecimal color code",
+            "type": "int"
+        },
+        "hoist": {
+            "description": "if this role is pinned in the user listing",
+            "type": "boolean"
+        },
+        "position": {
+            "description": "position of this role",
+            "type": "int"
+        },
+        "permissions": {
+            "description": "permission bit set",
+            "type": "toint"
+        },
+        "managed": {
+            "description": "whether this role is managed by an integration",
+            "type": "boolean"
+        },
+        "mentionable": {
+            "description": "whether this role is mentionable",
+            "type": "boolean"
+        },
+        "tags": {
+            "description": "OPTIONAL: the tags this role has",
+            "type": "object",
+            "existing_parser": "role_tags"
+        }
+    }
+}

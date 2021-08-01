@@ -14,22 +14,7 @@
         "format_type": {
             "description": "type of sticker format",
             "type": "int",
-            "enum_prefix": "LLDC_STICKER_FORMAT_",
-            "enum_type": "sticker_format",
-            "enum": [
-                [
-                    "1",
-                    "PNG"
-                ],
-                [
-                    "2",
-                    "APNG"
-                ],
-                [
-                    "3",
-                    "LOTTIE"
-                ]
-            ]
+            "enum_type": "sticker_format"
         }
     }
 }

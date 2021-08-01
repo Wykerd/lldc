@@ -1,0 +1,10 @@
+{
+    "title": "Presence Update",
+    "description": "Presence Update Array",
+    "type": "array",
+    "items": {
+        "description": "Presence Update Objects",
+        "type": "object",
+        "existing_parser": "presence_update"
+    }
+}

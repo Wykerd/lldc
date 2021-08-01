@@ -1,0 +1,23 @@
+{
+    "title": "Welcome Screen Channel",
+    "description": "Welcome Screen Channel Structure",
+    "type": "object",
+    "properties": {
+        "channel_id": {
+            "description": "the channel's id",
+            "type": "snowflake"
+        },
+        "description": {
+            "description": "the description shown for the channel",
+            "type": "string"
+        },
+        "emoji_id": {
+            "description": "OPTIONAL: the emoji id, if the emoji is custom",
+            "type": "snowflake"
+        },
+        "emoji_name": {
+            "description": "OPTIONAL: the emoji name if custom, the unicode character if standard, or null if no emoji is set",
+            "type": "string"
+        }
+    }
+}

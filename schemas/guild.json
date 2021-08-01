@@ -1,0 +1,360 @@
+{
+    "title": "Guild",
+    "description": "Guilds in Discord represent an isolated collection of users and channels, and are often referred to as \"servers\" in the UI.",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "guild id",
+            "type": "snowflake"
+        },
+        "name": {
+            "description": "guild name (2-100 characters, excluding trailing and leading whitespace)",
+            "type": "string"
+        },
+        "icon": {
+            "description": "OPTIONAL: icon hash",
+            "type": "string"
+        },
+        "icon_hash": {
+            "description": "OPTIONAL: icon hash, returned when in the template object",
+            "type": "string"
+        },
+        "splash": {
+            "description": "OPTIONAL: splash hash",
+            "type": "string"
+        },
+        "discovery_splash": {
+            "description": "OPTIONAL: discovery splash hash; only present for guilds with the \"DISCOVERABLE\" feature",
+            "type": "string"
+        },
+        "owner": {
+            "description": "OPTIONAL: true if the user is the owner of the guild",
+            "type": "boolean"
+        },
+        "owner_id": {
+            "description": "id of owner",
+            "type": "snowflake"
+        },
+        "permissions": {
+            "description": "OPTIONAL: total permissions for the user in the guild (excludes overwrites)",
+            "type": "toint"
+        },
+        "region": {
+            "description": "OPTIONAL: voice region id for the guild (deprecated)",
+            "type": "string"
+        },
+        "afk_channel_id": {
+            "description": "OPTIONAL: id of afk channel",
+            "type": "snowflake"
+        },
+        "afk_timeout": {
+            "description": "afk timeout in seconds",
+            "type": "int"
+        },
+        "widget_enabled": {
+            "description": "OPTIONAL: true if the server widget is enabled",
+            "type": "boolean"
+        },
+        "widget_channel_id": {
+            "description": "OPTIONAL: the channel id that the widget will generate an invite to, or null if set to no invite",
+            "type": "snowflake"
+        },
+        "verification_level": {
+            "description": "verification level required for the guild",
+            "type": "int",
+            "enum_prefix": "LLDC_VERIFICATION_LEVEL_",
+            "enum_type": "guild_verification_level",
+            "enum": [
+                [
+                    "0",
+                    "NONE",
+                    "unrestricted"
+                ],
+                [
+                    "1",
+                    "LOW",
+                    "must have verified email on account"
+                ],
+                [
+                    "2",
+                    "MEDIUM",
+                    "must be registered on Discord for longer than 5 minutes"
+                ],
+                [
+                    "3",
+                    "HIGH",
+                    "must be a member of the server for longer than 10 minutes"
+                ],
+                [
+                    "4",
+                    "VERY_HIGH",
+                    "must have a verified phone number"
+                ]
+            ]
+        },
+        "default_message_notifications": {
+            "description": "default message notifications level",
+            "type": "int",
+            "enum_prefix": "LLDC_MSG_NOTIFICATION_",
+            "enum_type": "guild_message_notifications_level",
+            "enum": [
+                [
+                    "0",
+                    "ALL_MESSAGES",
+                    "members will receive notifications for all messages by default"
+                ],
+                [
+                    "1",
+                    "ONLY_MENTIONS",
+                    "members will receive notifications only for messages that @mention them by default"
+                ]
+            ]
+        },
+        "explicit_content_filter": {
+            "description": "explicit content filter level",
+            "type": "int",
+            "enum_prefix": "LLDC_EXPLICIT_FILTER_",
+            "enum_type": "guild_explicit_content_filter_level",
+            "enum": [
+                [
+                    "0",
+                    "DISABLED",
+                    "media content will not be scanned"
+                ],
+                [
+                    "1",
+                    "MEMBERS_WITHOUT_ROLES",
+                    "media content sent by members without roles will be scanned"
+                ],
+                [
+                    "2",
+                    "ALL_MEMBERS",
+                    "media content sent by all members will be scanned"
+                ]
+            ]
+        },
+        "roles": {
+            "description": "roles in the guild",
+            "type": "array",
+            "existing_parser": "role"
+        },
+        "emojis": {
+            "description": "custom guild emojis",
+            "type": "array",
+            "existing_parser": "emoji"
+        },
+        "features": {
+            "description": "enabled guild features",
+            "type": "array",
+            "items": {
+                "description": "array of guild feature strings",
+                "type": "string"
+            }
+        },
+        "mfa_level": {
+            "description": "required MFA level for the guild",
+            "type": "int",
+            "enum_prefix": "LLDC_MFA_",
+            "enum_type": "guild_mfa_level",
+            "enum": [
+                [
+                    "0",
+                    "NONE",
+                    "guild has no MFA/2FA requirement for moderation actions"
+                ],
+                [
+                    "1",
+                    "ELEVATED",
+                    "guild has a 2FA requirement for moderation actions"
+                ]
+            ]
+        },
+        "application_id": {
+            "description": "OPTIONAL: application id of the guild creator if it is bot-created",
+            "type": "snowflake"
+        },
+        "system_channel_id": {
+            "description": "OPTIONAL: the id of the channel where guild notices such as welcome messages and boost events are posted",
+            "type": "snowflake"
+        },
+        "system_channel_flags": {
+            "description": "system channel flags",
+            "type": "int",
+            "enum_prefix": "LLDC_GUILD_SYSTEM_",
+            "enum_type": "guild_system_channel_flags",
+            "enum": [
+                [
+                    "1 << 0",
+                    "SUPPRESS_JOIN_NOTIFICATIONS",
+                    "Suppress member join notifications"
+                ],
+                [
+                    "1 << 1",
+                    "SUPPRESS_PREMIUM_SUBSCRIPTIONS",
+                    "Suppress server boost notifications"
+                ],
+                [
+                    "1 << 2",
+                    "SUPPRESS_GUILD_REMINDER_NOTIFICATIONS",
+                    "Suppress server setup tips"
+                ]
+            ]
+        },
+        "rules_channel_id": {
+            "description": "OPTIONAL: the id of the channel where Community guilds can display rules and/or guidelines",
+            "type": "snowflake"
+        },
+        "joined_at": {
+            "description": "OPTIONAL: when this guild was joined at",
+            "type": "timestamp"
+        },
+        "large": {
+            "description": "OPTIONAL: true if this is considered a large guild",
+            "type": "boolean"
+        },
+        "unavailable": {
+            "description": "OPTIONAL: true if this guild is unavailable due to an outage",
+            "type": "boolean"
+        },
+        "member_count": {
+            "description": "OPTIONAL: total number of members in this guild",
+            "type": "int"
+        },
+        "voice_states": {
+            "description": "OPTIONAL: states of members currently in voice channels; lacks the guild_id key",
+            "type": "array",
+            "existing_parser": "voice_state_arr"
+        },
+        "members": {
+            "description": "OPTIONAL: users in the guild",
+            "type": "array",
+            "existing_parser": "guild_member_arr"
+        },
+        "channels": {
+            "description": "OPTIONAL: channels in the guild",
+            "type": "array",
+            "existing_parser": "channel_arr"
+        },
+        "threads": {
+            "description": "OPTIONAL: all active threads in the guild that current user has permission to view",
+            "type": "array",
+            "existing_parser": "channel_arr"
+        },
+        "presences": {
+            "description": "OPTIONAL: presences of the members in the guild, will only include non-offline members if the size is greater than large threshold",
+            "type": "array",
+            "existing_parser": "presence_update_arr"
+        },
+        "max_presences": {
+            "description": "OPTIONAL: the maximum number of presences for the guild (null is always returned, apart from the largest of guilds)",
+            "type": "int"
+        },
+        "max_members": {
+            "description": "OPTIONAL: the maximum number of members for the guild",
+            "type": "int"
+        },
+        "vanity_url_code": {
+            "description": "OPTIONAL: the vanity url code for the guild",
+            "type": "string"
+        },
+        "description": {
+            "description": "OPTIONAL: the description of a Community guild",
+            "type": "string"
+        },
+        "banner": {
+            "description": "OPTIONAL: banner hash",
+            "type": "string"
+        },
+        "premium_tier": {
+            "description": "premium tier (Server Boost level)",
+            "type": "int",
+            "enum_prefix": "LLDC_GUILD_PREMIUM_",
+            "enum_type": "guild_premium_tier",
+            "enum": [
+                [
+                    "0",
+                    "NONE",
+                    "guild has not unlocked any Server Boost perks"
+                ],
+                [
+                    "1",
+                    "TIER_1",
+                    "guild has unlocked Server Boost level 1 perks"
+                ],
+                [
+                    "2",
+                    "TIER_2",
+                    "guild has unlocked Server Boost level 2 perks"
+                ],
+                [
+                    "3",
+                    "TIER_3",
+                    "guild has unlocked Server Boost level 3 perks"
+                ]
+            ]
+        },
+        "premium_subscription_count": {
+            "description": "OPTIONAL: the number of boosts this guild currently has",
+            "type": "int"
+        },
+        "preferred_locale": {
+            "description": "the preferred locale of a Community guild; used in server discovery and notices from Discord; defaults to \"en-US\"",
+            "type": "string"
+        },
+        "public_updates_channel_id": {
+            "description": "OPTIONAL: the id of the channel where admins and moderators of Community guilds receive notices from Discord",
+            "type": "snowflake"
+        },
+        "max_video_channel_users": {
+            "description": "OPTIONAL: the maximum amount of users in a video channel",
+            "type": "int"
+        },
+        "approximate_member_count": {
+            "description": "OPTIONAL: approximate number of members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true",
+            "type": "int"
+        },
+        "approximate_presence_count": {
+            "description": "OPTIONAL: approximate number of non-offline members in this guild, returned from the GET /guilds/<id> endpoint when with_counts is true",
+            "type": "int"
+        },
+        "welcome_screen": {
+            "description": "OPTIONAL: the welcome screen of a Community guild, shown to new members, returned in an Invite's guild object",
+            "type": "object",
+            "existing_parser": "welcome_screen"
+        },
+        "nsfw_level": {
+            "description": "guild NSFW level",
+            "type": "int",
+            "enum_prefix": "LLDC_GUILD_NSFW_",
+            "enum_type": "guild_nsfw_level",
+            "enum": [
+                [
+                    "0",
+                    "DEFAULT"
+                ],
+                [
+                    "1",
+                    "EXPLICIT"
+                ],
+                [
+                    "2",
+                    "SAFE"
+                ],
+                [
+                    "3",
+                    "AGE_RESTRICTED"
+                ]
+            ]
+        },
+        "stage_instances": {
+            "description": "OPTIONAL: Stage instances in the guild",
+            "type": "array",
+            "existing_parser": "stage_instance_arr"
+        },
+        "stickers": {
+            "description": "OPTIONAL: custom guild stickers",
+            "type": "array",
+            "existing_parser": "sticker_arr"
+        }
+    }
+}
