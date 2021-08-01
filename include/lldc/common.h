@@ -12,6 +12,7 @@
 #include <cwire/common.h>
 #include <stddef.h>
 #include <inttypes.h>
+#include <math.h>
 
 /* Library information */
 #define LLDC_VERSION                0x00000100
@@ -62,5 +63,18 @@ size_t lldc_urldecode(char* dst, const char* src);
  * @param src       source buffer
  */
 size_t lldc_urlencode(char* dst, const char *str);
+
+/**
+ * ISO Date parser
+ * @param s     ISO date
+ * @return      number of milliseconds since the Unix Epoch
+ */
+double lldc_date_parse (const char *s);
+
+/**
+ * Get current time
+ * @return      number of milliseconds since the Unix Epoch
+ */
+double lldc_date_now ();
 
 #endif

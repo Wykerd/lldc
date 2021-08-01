@@ -12,6 +12,11 @@
  * Feel free to improve it if you want to contribute!
  */
 
+/**
+ * Types: int, uint, toint, string, snowflake, timestamp, double
+ * Structures: array, object
+ */
+
 const header = `/**
 * Copyright 2021 Daniel Wykerd
 *
@@ -79,6 +84,13 @@ int lldc__${[...path, snakeCase(key)].join('_')}_parse (lldc_${path.join('_')}_t
 
     enumGen (schema) {
         if (schema.enum) {
+            if (schema.enum_def)
+            {
+                this.enums.push(schema.enum.map(e => {
+                    return `/* ${e[2] ?? e[1]} */\n#define ${schema.enum_prefix}${snakeCase(e[1]).toUpperCase()} (${e[0]})`;
+                }).join('\n'));
+                return;
+            }
             this.enums.push(`typedef enum lldc_${schema.enum_type} {
 ${
     schema.enum.map(e => {
@@ -104,6 +116,72 @@ int lldc__${[...path, snakeCase(key)].join('_')}_parse (lldc_${path.join('_')}_t
         return -1;
 
     obj->${snakeCase(key)} = yyjson_get_${type}(json);
+
+    return 0;
+}`)
+    }
+
+    objTimestamp (key, schema, path) {
+        this.enumGen(schema);
+        this.methods.unshift(
+`/**
+ * ${key} Parser
+ * ${schema.description.replace(/\n/g, '\n * ')}
+ * type: object.timestamp
+ */
+static
+int lldc__${[...path, snakeCase(key)].join('_')}_parse (lldc_${path.join('_')}_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+    {
+        obj->${snakeCase(key)} = NAN;
+        return -1;
+    }
+
+    obj->${snakeCase(key)} = lldc_date_parse(yyjson_get_str(json));
+
+    return 0;
+}`)
+    }
+
+    objDouble (key, schema, path) {
+        this.enumGen(schema);
+        this.methods.unshift(
+`/**
+ * ${key} Parser
+ * ${schema.description.replace(/\n/g, '\n * ')}
+ * type: object.double
+ */
+static
+int lldc__${[...path, snakeCase(key)].join('_')}_parse (lldc_${path.join('_')}_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_real(json))
+    {
+        obj->${snakeCase(key)} = NAN;
+        return -1;
+    }
+
+    obj->${snakeCase(key)} = yyjson_get_real(json);
+
+    return 0;
+}`)
+    }
+
+    objToUint (key, schema, path) {
+        this.enumGen(schema);
+        this.methods.unshift(
+`/**
+ * ${key} Parser
+ * ${schema.description.replace(/\n/g, '\n * ')}
+ * type: object.touint
+ */
+static
+int lldc__${[...path, snakeCase(key)].join('_')}_parse (lldc_${path.join('_')}_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->${snakeCase(key)} = (uint64_t)atoll(yyjson_get_str(json));
 
     return 0;
 }`)
@@ -178,6 +256,7 @@ typedef struct lldc_${path.join('_')}_s {
      * ${schema.properties[key].description.replace(/\n/g, '\n     * ')} 
      */\n    `;
             switch (schema.properties[key].type) {
+                case 'toint':
                 case 'uint':
                     typedef += 
                         schema.properties[key].enum_type ? 
@@ -187,6 +266,11 @@ typedef struct lldc_${path.join('_')}_s {
 
                 case 'snowflake':
                     typedef += 'snowflake_t ';
+                    break;
+
+                case 'timestamp':
+                case 'double':
+                    typedef += 'double ';
                     break;
 
                 case 'int':
@@ -247,8 +331,11 @@ typedef struct lldc_${path.join('_')}_s {
                 case 'uint':
                 case 'snowflake':
                 case 'int':
+                case 'toint':
                 case 'boolean':
                 case 'string':
+                case 'double':
+                case 'timestamp':
                     typedef = `lldc_parser_${schema.items.items.type}_arr_t `;
                     break;
 
@@ -468,7 +555,7 @@ ${this.objImpl(key, schema, path, keys, false, false)}
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
     return lldc_parser_${schema.items.type}_arr_parse(obj, json);`;
-        let type = `parser_${schema.items.type}_arr`;
+        let type = `parser_${schema.items.type == 'toint' ? 'uint': schema.items.type}`;
 
         switch (schema.items.type) {
             case 'object':
@@ -598,6 +685,9 @@ int lldc__${path.join('_')}_item_parse (yyjson_val **_obj, yyjson_val *json)
         switch (schema.type) {
             case 'uint':
             case 'int':
+            case 'double':
+            case 'timestamp':
+            case 'toint':
             case 'snowflake':
             case 'string':
             case 'boolean':
@@ -637,6 +727,15 @@ int lldc__${path.join('_')}_item_parse (yyjson_val **_obj, yyjson_val *json)
             case 'uint':
             case 'int':
                 return this.objPrimative(key, schema, path, schema.type);
+
+            case 'double':
+                return this.objDouble(key, schema, path);
+            
+            case 'timestamp':
+                return this.objTimestamp(key, schema, path);
+
+            case 'toint':
+                return this.objToUint(key, schema, path);
 
             case 'snowflake':
                 return this.objSnowflake(key, schema, path, schema.type);
@@ -763,3 +862,57 @@ fs.writeFileSync(
         ...parser.methods,
     ].join('\n')
 )
+
+// Quick and simple export target #table_id into a csv
+function enum_from_table (table_id) {
+    // Select rows from table_id
+    var rows = document.querySelectorAll('table#' + table_id + ' tr');
+    // Construct csv
+    var csv = [];
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll('td, th');
+        for (var j = 0; j < cols.length; j++) {
+            var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').trim();
+            row.push(data);
+        }
+        csv.push([row[1].split('(').pop().replace(/(\(|\))/g, ''), row[0].replace(/\*/g, '').trim(), row[2]]);
+    }
+    csv.shift();
+    console.log(JSON.stringify(csv, null, '  '))
+}
+
+function structure_boiler (table_id) {
+    // Select rows from table_id
+    var rows = document.querySelectorAll('table#' + table_id + ' tr');
+    var properties = {};
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll('td, th');
+        for (var j = 0; j < cols.length; j++) {
+            var data = cols[j].innerText.replace(/(\r\n|\n|\r)/gm, '').trim();
+            row.push(data);
+        }
+        let optional = false;
+        let field = row[0].replace(/\*/g, '').trim();
+        if (field.includes('?'))
+        {
+            optional = true;
+            field = field.replace(/\?/g, '');
+        };
+        let type = row[1].replace(/\*/g, '').trim();
+        if (type.includes('?'))
+        {
+            optional = true;
+            type = type.replace(/\?/g, '');
+        };
+        let description = optional ? 'OPTIONAL: ' + row[2] : row[2];
+        if (type === 'integer')
+        {
+            type = 'int';
+        };
+        properties[field] = {
+            description,
+            type
+        }
+    }
+    console.log(JSON.stringify(properties, null, '    '))
+}

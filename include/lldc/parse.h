@@ -67,6 +67,14 @@ typedef struct lldc_parser_uint_arr_s {
     size_t len;
 } lldc_parser_uint_arr_t;
 
+typedef struct lldc_parser_double_arr_s {
+    LLDC_PARSER_BASE
+    double *items;
+    size_t len;
+} lldc_parser_double_arr_t;
+
+typedef lldc_parser_double_arr_t lldc_parser_timestamp_arr_t;
+
 typedef struct lldc_parser_snowflake_arr_s {
     LLDC_PARSER_BASE
     snowflake_t *items;
@@ -76,8 +84,11 @@ typedef struct lldc_parser_snowflake_arr_s {
 int lldc_parser_int_arr_parse (lldc_parser_int_arr_t *arr, yyjson_val *json);
 int lldc_parser_uint_arr_parse (lldc_parser_uint_arr_t *arr, yyjson_val *json);
 int lldc_parser_string_arr_parse (lldc_parser_string_arr_t *arr, yyjson_val *json);
+int lldc_parser_toint_arr_parse(lldc_parser_uint_arr_t *arr, yyjson_val *json);
+int lldc_parser_double_arr_parse(lldc_parser_double_arr_t *arr, yyjson_val *json);
+int lldc_parser_timestamp_arr_parse(lldc_parser_timestamp_arr_t *arr, yyjson_val *json);
 
 #define lldc_parser_boolean_arr_parse(arr, json) lldc_parser_int_arr_parse((lldc_parser_int_arr_t *)arr, json)
-#define lldc_parser_snowflake_arr_parse(arr, json) lldc_parser_uint_arr_parse((lldc_parser_uint_arr_t *)arr, json)
+#define lldc_parser_snowflake_arr_parse(arr, json) lldc_parser_toint_arr_parse((lldc_parser_uint_arr_t *)arr, json)
 
 #endif

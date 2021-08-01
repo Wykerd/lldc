@@ -43,6 +43,8 @@ target_link_libraries(lldc PUBLIC
     # Event Loop
     ${UV_LIBRARIES} 
     cwire
+    # Math
+    m
 )
 
 # DEMO

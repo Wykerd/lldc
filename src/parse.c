@@ -8,6 +8,7 @@
 
 #include <lldc/parse.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define LLDC_PARSER_LEDGER_DEF_SIZE 8
 
@@ -151,6 +152,99 @@ int lldc_parser_string_arr_parse (lldc_parser_string_arr_t *arr, yyjson_val *jso
     yyjson_arr_foreach(json, idx, max, val) {
         if (yyjson_is_str(val))
             arr->items[idx] = lldc_parser_strdup((lldc_parser_obj_t *)arr, yyjson_get_str(val));
+    }
+
+    return 0;
+}
+
+int lldc_parser_toint_arr_parse(lldc_parser_uint_arr_t *arr, yyjson_val *json)
+{
+    if (!yyjson_is_arr(json))
+        return -1;
+
+    size_t arr_size = yyjson_arr_size(json);
+    if (!arr_size)
+    {
+        arr->items = NULL;
+        arr->len = 0;
+        return 0;
+    }
+
+    arr->items = lldc_parser_malloc((lldc_parser_obj_t *)arr, sizeof(*arr->items) * arr_size);
+    if (arr->items == NULL)
+    {
+        arr->len = 0;
+        return -1;
+    }
+    arr->len = arr_size;
+
+    size_t idx, max;
+    yyjson_val *val;
+    yyjson_arr_foreach(json, idx, max, val) {
+        if (yyjson_is_str(val))
+            arr->items[idx] = (uint64_t)atoll(yyjson_get_str(val));
+    }
+
+    return 0;
+}
+
+int lldc_parser_double_arr_parse(lldc_parser_double_arr_t *arr, yyjson_val *json)
+{
+    if (!yyjson_is_arr(json))
+        return -1;
+
+    size_t arr_size = yyjson_arr_size(json);
+    if (!arr_size)
+    {
+        arr->items = NULL;
+        arr->len = 0;
+        return 0;
+    }
+
+    arr->items = lldc_parser_malloc((lldc_parser_obj_t *)arr, sizeof(*arr->items) * arr_size);
+    if (arr->items == NULL)
+    {
+        arr->len = 0;
+        return -1;
+    }
+    arr->len = arr_size;
+
+    size_t idx, max;
+    yyjson_val *val;
+    yyjson_arr_foreach(json, idx, max, val) {
+        if (yyjson_is_real(val))
+            arr->items[idx] = yyjson_get_real(val);
+    }
+
+    return 0;
+}
+
+int lldc_parser_timestamp_arr_parse(lldc_parser_timestamp_arr_t *arr, yyjson_val *json)
+{
+    if (!yyjson_is_arr(json))
+        return -1;
+
+    size_t arr_size = yyjson_arr_size(json);
+    if (!arr_size)
+    {
+        arr->items = NULL;
+        arr->len = 0;
+        return 0;
+    }
+
+    arr->items = lldc_parser_malloc((lldc_parser_obj_t *)arr, sizeof(*arr->items) * arr_size);
+    if (arr->items == NULL)
+    {
+        arr->len = 0;
+        return -1;
+    }
+    arr->len = arr_size;
+
+    size_t idx, max;
+    yyjson_val *val;
+    yyjson_arr_foreach(json, idx, max, val) {
+        if (yyjson_is_str(val))
+            arr->items[idx] = lldc_date_parse(yyjson_get_str(val));
     }
 
     return 0;
