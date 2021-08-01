@@ -32,6 +32,7 @@ class SchemaParser {
     types = [];
     methods = [];
     signatures = [];
+    enums = [];
 
     static getTableSize (entries)
     {
@@ -57,7 +58,39 @@ int lldc__${[...path, snakeCase(key)].join('_')}_parse (lldc_${path.join('_')}_t
 }`)
     }
 
+    objSnowflake (key, schema, path) {
+        this.methods.unshift(
+`/**
+ * ${key} Parser
+ * ${schema.description.replace(/\n/g, '\n * ')}
+ * type: object.snowflake
+ */
+static
+int lldc__${[...path, snakeCase(key)].join('_')}_parse (lldc_${path.join('_')}_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_get_str(json))
+        return -1;
+
+    obj->${snakeCase(key)} = (snowflake_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}`)
+    }
+
+    enumGen (schema) {
+        if (schema.enum) {
+            this.enums.push(`typedef enum lldc_${schema.enum_type} {
+${
+    schema.enum.map(e => {
+        return `    /* ${e[2] ?? e[1]} */\n    ${schema.enum_prefix}${snakeCase(e[1]).toUpperCase()} = (${e[0]})`;
+    }).join(',\n')
+}
+} lldc_${schema.enum_type}_t;`)
+        }
+    }
+
     objPrimative (key, schema, path, type) {
+        this.enumGen(schema);
         this.methods.unshift(
 `/**
  * ${key} Parser
@@ -130,7 +163,10 @@ typedef struct lldc_${path.join('_')}_s {
      */\n    `;
             switch (schema.properties[key].type) {
                 case 'uint':
-                    typedef += 'uint64_t ';
+                    typedef += 
+                        schema.properties[key].enum_type ? 
+                            `lldc_${schema.properties[key].enum_type}_t ` :
+                            'uint64_t ';
                     break;
 
                 case 'snowflake':
@@ -139,7 +175,10 @@ typedef struct lldc_${path.join('_')}_s {
 
                 case 'int':
                 case 'boolean':
-                    typedef += 'int ';
+                    typedef += 
+                        schema.properties[key].enum_type ? 
+                            `lldc_${schema.properties[key].enum_type}_t ` :
+                            'int ';
                     break;
 
                 case 'string':
@@ -558,6 +597,9 @@ int lldc__${path.join('_')}_item_parse (yyjson_val **_obj, yyjson_val *json)
             case 'int':
                 return this.objPrimative(key, schema, path, schema.type);
 
+            case 'snowflake':
+                return this.objSnowflake(key, schema, path, schema.type);
+
             case 'string':
                 return this.objString(key, schema, path);
 
@@ -660,6 +702,7 @@ fs.writeFileSync(
         '#define LLDC_PARSERS_H',
         '#include <lldc/parse.h>',
         '#include <yyjson.h>',
+        ...parser.enums, 
         ...parser.types, 
         ...parser.signatures,
         '#endif'
@@ -672,6 +715,7 @@ fs.writeFileSync(
         header,
         '#include <lldc/parsers.h>',
         '#include <lldc/hashmap.h>',
+        '#include <stdlib.h>',
         ...parser.methods,
     ].join('\n')
 )
