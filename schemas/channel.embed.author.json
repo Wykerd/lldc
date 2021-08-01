@@ -1,0 +1,23 @@
+{
+    "title": "Embed Author",
+    "description": "Embed Author Structure",
+    "type": "object",
+    "properties": {
+        "name": {
+            "description": "OPTIONAL: name of author",
+            "type": "string"
+        },
+        "url": {
+            "description": "OPTIONAL: url of author",
+            "type": "string"
+        },
+        "icon_url": {
+            "description": "OPTIONAL: url of author icon (only supports http(s) and attachments)",
+            "type": "string"
+        },
+        "proxy_icon_url": {
+            "description": "OPTIONAL: a proxied url of author icon",
+            "type": "string"
+        }
+    }
+}

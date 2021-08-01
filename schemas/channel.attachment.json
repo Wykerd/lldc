@@ -1,0 +1,39 @@
+{
+    "title": "Attachment",
+    "description": "Attachment Structure",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "attachment id",
+            "type": "snowflake"
+        },
+        "filename": {
+            "description": "name of file attached",
+            "type": "string"
+        },
+        "content_type": {
+            "description": "OPTIONAL: the attachment's media type",
+            "type": "string"
+        },
+        "size": {
+            "description": "size of file in bytes",
+            "type": "int"
+        },
+        "url": {
+            "description": "source url of file",
+            "type": "string"
+        },
+        "proxy_url": {
+            "description": "a proxied url of file",
+            "type": "string"
+        },
+        "height": {
+            "description": "OPTIONAL: height of file (if image)",
+            "type": "int"
+        },
+        "width": {
+            "description": "OPTIONAL: width of file (if image)",
+            "type": "int"
+        }
+    }
+}

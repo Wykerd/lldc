@@ -3,20 +3,64 @@
     
     "user.json",
     "user.arr.json",
+
+    "application.team.member.json",
+    "application.team.member.arr.json",
+    "application.team.json",
+    "application.json",
     
     "webhook.json",
     "webhook.arr.json",
-    
-    "interaction.account.json",
 
     "auditlog.changes.json",
     "auditlog.options.json",
     "auditlog.entries.json",
     "auditlog.json",
 
+    "guild.member.json",
+    "guild.member.partial.json",
+
     "channel.overwrite.json",
     "channel.overwrite.arr.json",
     "channel.thread.metadata.json",
     "channel.thread.member.json",
+
+    "channel.attachment.json",
+    "channel.attachment.arr.json",
+
+    "channel.channel_mention.json",
+    "channel.channel_mention.arr.json",
+    
+    "channel.embed.author.json",
+    "channel.embed.footer.json",
+    "channel.embed.image.json",
+    "channel.embed.provider.json",
+    "channel.embed.thumbnail.json",
+    "channel.embed.video.json",
+    "channel.embed.field.json",
+    "channel.embed.field.arr.json",
+    "channel.embed.json",
+    "channel.embed.arr.json",
+
+    "channel.emoji.json",
+    "channel.emoji.arr.json",
+
+    "channel.reaction.json",
+    "channel.reaction.arr.json",
+
+    "interaction.account.json",
+    "interaction.component.select.option.json",
+    "interaction.component.select.option.arr.json",
+    "interaction.component.arr.json",
+    "interaction.component.json",
+
+    "sticker.item.json",
+    "sticker.item.arr.json",
+
+    "channel.message.activity.json",
+    "channel.message.reference.json",
+    "channel.message.interaction.json",
+    "channel.message.json",
+
     "channel.json"
 ]

@@ -1,0 +1,23 @@
+{
+    "title": "Channel Mention",
+    "description": "Channel Mention Structure",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "id of the channel",
+            "type": "snowflake"
+        },
+        "guild_id": {
+            "description": "id of the guild containing the channel",
+            "type": "snowflake"
+        },
+        "type": {
+            "description": "the type of channel",
+            "type": "int"
+        },
+        "name": {
+            "description": "the name of the channel",
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "title": "Reaction",
+    "description": "Reaction Array",
+    "type": "array",
+    "items": {
+        "description": "Reaction Objects",
+        "type": "object",
+        "existing_parser": "reaction"
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "title": "Embed Image",
+    "description": "Embed Image Structure",
+    "type": "object",
+    "properties": {
+        "url": {
+            "description": "OPTIONAL: source url of image (only supports http(s) and attachments)",
+            "type": "string"
+        },
+        "proxy_url": {
+            "description": "OPTIONAL: a proxied url of the image",
+            "type": "string"
+        },
+        "height": {
+            "description": "OPTIONAL: height of image",
+            "type": "int"
+        },
+        "width": {
+            "description": "OPTIONAL: width of image",
+            "type": "int"
+        }
+    }
+}

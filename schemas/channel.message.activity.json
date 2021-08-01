@@ -1,0 +1,35 @@
+{
+    "title": "Message Activity",
+    "description": "Message Activity Structure",
+    "type": "object",
+    "properties": {
+        "type": {
+            "description": "type of message activity",
+            "type": "int",
+            "enum_prefix": "LLDC_MSG_ACTIVITY_",
+            "enum_type": "message_activity_type",
+            "enum": [
+                [
+                    "1",
+                    "JOIN"
+                ],
+                [
+                    "2",
+                    "SPECTATE"
+                ],
+                [
+                    "3",
+                    "LISTEN"
+                ],
+                [
+                    "5",
+                    "JOIN_REQUEST"
+                ]
+            ]
+        },
+        "party_id": {
+            "description": "OPTIONAL: party_id from a Rich Presence event",
+            "type": "string"
+        }
+    }
+}

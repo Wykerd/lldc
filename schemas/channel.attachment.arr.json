@@ -1,0 +1,10 @@
+{
+    "title": "Attachment",
+    "description": "Attachment Array",
+    "type": "array",
+    "items": {
+        "description": "Attachment Objects",
+        "type": "object",
+        "existing_parser": "attachment"
+    }
+}

@@ -1,0 +1,66 @@
+{
+    "title": "Embed",
+    "description": "Embed Structure",
+    "type": "object",
+    "properties": {
+        "title": {
+            "description": "OPTIONAL: title of embed",
+            "type": "string"
+        },
+        "type": {
+            "description": "OPTIONAL: type of embed (always \"rich\" for webhook embeds)",
+            "type": "string"
+        },
+        "description": {
+            "description": "OPTIONAL: description of embed",
+            "type": "string"
+        },
+        "url": {
+            "description": "OPTIONAL: url of embed",
+            "type": "string"
+        },
+        "timestamp": {
+            "description": "OPTIONAL: timestamp of embed content",
+            "type": "timestamp"
+        },
+        "color": {
+            "description": "OPTIONAL: color code of the embed",
+            "type": "int"
+        },
+        "footer": {
+            "description": "OPTIONAL: footer information",
+            "type": "object",
+            "existing_parser": "embed_footer"
+        },
+        "image": {
+            "description": "OPTIONAL: image information",
+            "type": "object",
+            "existing_parser": "embed_image"
+        },
+        "thumbnail": {
+            "description": "OPTIONAL: thumbnail information",
+            "type": "object",
+            "existing_parser": "embed_thumbnail"
+        },
+        "video": {
+            "description": "OPTIONAL: video information",
+            "type": "object",
+            "existing_parser": "embed_video"
+        },
+        "provider": {
+            "description": "OPTIONAL: provider information",
+            "type": "object",
+            "existing_parser": "embed_provider"
+        },
+        "author": {
+            "description": "OPTIONAL: author information",
+            "type": "object",
+            "existing_parser": "embed_author"
+        },
+        "fields": {
+            "description": "OPTIONAL: fields information",
+            "type": "array",
+            "existing_parser": "embed_field_arr"
+        }
+    }
+}

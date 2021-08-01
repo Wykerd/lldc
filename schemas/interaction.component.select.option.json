@@ -1,0 +1,28 @@
+{
+    "title": "Select Option",
+    "description": "Select Option Structure",
+    "type": "object",
+    "properties": {
+        "label": {
+            "description": "the user-facing name of the option, max 25 characters",
+            "type": "string"
+        },
+        "value": {
+            "description": "the dev-define value of the option, max 100 characters",
+            "type": "string"
+        },
+        "description": {
+            "description": "OPTIONAL: an additional description of the option, max 50 characters",
+            "type": "string"
+        },
+        "emoji": {
+            "description": "OPTIONAL: id, name, and animated",
+            "type": "object",
+            "existing_parser": "emoji"
+        },
+        "default": {
+            "description": "OPTIONAL: will render this option as selected by default",
+            "type": "boolean"
+        }
+    }
+}

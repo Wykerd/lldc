@@ -1,0 +1,20 @@
+{
+    "title": "Reaction",
+    "description": "Reaction Structure",
+    "type": "object",
+    "properties": {
+        "count": {
+            "description": "times this emoji has been used to react",
+            "type": "int"
+        },
+        "me": {
+            "description": "whether the current user reacted using this emoji",
+            "type": "boolean"
+        },
+        "emoji": {
+            "description": "emoji information",
+            "type": "object",
+            "existing_parser": "emoji"
+        }
+    }
+}

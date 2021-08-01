@@ -17,6 +17,8 @@
 #define LLDC_PARSERS_H
 #include <lldc/parse.h>
 #include <yyjson.h>
+/* Component Structure */
+typedef struct lldc_component_s lldc_component_t;
 typedef enum lldc_user_flag {
     /* None */
     LLDC_USER_FLAG_NONE = (0),
@@ -55,6 +57,26 @@ typedef enum lldc_user_premium {
     /* Nitro */
     LLDC_PREMIUM_NITRO = (2)
 } lldc_user_premium_t;
+typedef enum lldc_application_member_state {
+    /* INVITED */
+    LLDC_APP_MS_INVITED = (1),
+    /* ACCEPTED */
+    LLDC_APP_MS_ACCEPTED = (2)
+} lldc_application_member_state_t;
+typedef enum lldc_application_flags {
+    /* GATEWAY_PRESENCE */
+    LLDC_APP_FLAG_GATEWAY_PRESENCE = (1 << 12),
+    /* GATEWAY_PRESENCE_LIMITED */
+    LLDC_APP_FLAG_GATEWAY_PRESENCE_LIMITED = (1 << 13),
+    /* GATEWAY_GUILD_MEMBERS */
+    LLDC_APP_FLAG_GATEWAY_GUILD_MEMBERS = (1 << 14),
+    /* GATEWAY_GUILD_MEMBERS_LIMITED */
+    LLDC_APP_FLAG_GATEWAY_GUILD_MEMBERS_LIMITED = (1 << 15),
+    /* VERIFICATION_PENDING_GUILD_LIMIT */
+    LLDC_APP_FLAG_VERIFICATION_PENDING_GUILD_LIMIT = (1 << 16),
+    /* EMBEDDED */
+    LLDC_APP_FLAG_EMBEDDED = (1 << 17)
+} lldc_application_flags_t;
 typedef enum lldc_webhook_type {
     /* Incoming Webhooks can post messages to channels with a generated token */
     LLDC_WEBHOOK_INCOMING = (1),
@@ -227,6 +249,44 @@ typedef enum lldc_channel_overwrite_type {
 #define LLDC_PERMISSION_USE_PRIVATE_THREADS (1 << 36)
 /* Allows the usage of custom stickers from other servers */
 #define LLDC_PERMISSION_USE_EXTERNAL_STICKERS (1 << 37)
+typedef enum lldc_component_type {
+    /* A container for other components */
+    LLDC_COMPONENT_ACTION_ROW = (1),
+    /* A button object */
+    LLDC_COMPONENT_BUTTON = (2),
+    /* A select menu for picking from choices */
+    LLDC_COMPONENT_SELECT_MENU = (3)
+} lldc_component_type_t;
+typedef enum lldc_component_style {
+    /* blurple */
+    LLDC_COMPONENT_STYLE_PRIMARY = (1),
+    /* grey */
+    LLDC_COMPONENT_STYLE_SECONDARY = (2),
+    /* green */
+    LLDC_COMPONENT_STYLE_SUCCESS = (3),
+    /* red */
+    LLDC_COMPONENT_STYLE_DANGER = (4),
+    /* grey, navigates to a URL */
+    LLDC_COMPONENT_STYLE_LINK = (5)
+} lldc_component_style_t;
+typedef enum lldc_sticker_format {
+    /* PNG */
+    LLDC_STICKER_FORMAT_PNG = (1),
+    /* APNG */
+    LLDC_STICKER_FORMAT_APNG = (2),
+    /* LOTTIE */
+    LLDC_STICKER_FORMAT_LOTTIE = (3)
+} lldc_sticker_format_t;
+typedef enum lldc_message_activity_type {
+    /* JOIN */
+    LLDC_MSG_ACTIVITY_JOIN = (1),
+    /* SPECTATE */
+    LLDC_MSG_ACTIVITY_SPECTATE = (2),
+    /* LISTEN */
+    LLDC_MSG_ACTIVITY_LISTEN = (3),
+    /* JOIN_REQUEST */
+    LLDC_MSG_ACTIVITY_JOIN_REQUEST = (5)
+} lldc_message_activity_type_t;
 typedef enum lldc_channel_type {
     /* a text channel within a server */
     LLDC_CH_TYPE_GUILD_TEXT = (0),
@@ -334,6 +394,136 @@ typedef struct lldc_user_arr_s {
     size_t len;
     lldc_parser_malloc_ledger_t __mlog;
 } lldc_user_arr_t;
+/* Team Member Object */
+typedef struct lldc_team_member_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * the user's membership state on the team 
+     */
+    lldc_application_member_state_t membership_state;
+    /** 
+     * the id of the parent team of which they are a member 
+     */
+    snowflake_t team_id;
+    /** 
+     * the avatar, discriminator, id, and username of the user 
+     */
+    lldc_user_t user;
+} lldc_team_member_t;
+/* Team Member Array */
+typedef struct lldc_team_member_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_team_member_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_team_member_arr_t;
+/* Team Object */
+typedef struct lldc_team_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: a hash of the image of the team's icon 
+     */
+    const char *icon;
+    /** 
+     * the unique id of the team 
+     */
+    snowflake_t id;
+    /** 
+     * the members of the team 
+     */
+    lldc_team_member_arr_t members;
+    /** 
+     * the name of the team 
+     */
+    const char *name;
+    /** 
+     * the user id of the current team owner 
+     */
+    snowflake_t owner_user_id;
+} lldc_team_t;
+/* Application Structure */
+typedef struct lldc_application_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * the id of the app 
+     */
+    snowflake_t id;
+    /** 
+     * the name of the app 
+     */
+    const char *name;
+    /** 
+     * OPTIONAL: the icon hash of the app 
+     */
+    const char *icon;
+    /** 
+     * the description of the app 
+     */
+    const char *description;
+    /** 
+     * OPTIONAL: an array of rpc origin urls, if rpc is enabled 
+     */
+    lldc_parser_string_arr_t rpc_origins;
+    /** 
+     * when false only app owner can join the app's bot to guilds 
+     */
+    int bot_public;
+    /** 
+     * when true the app's bot will only join upon completion of the full oauth2 code grant flow 
+     */
+    int bot_require_code_grant;
+    /** 
+     * OPTIONAL: the url of the app's terms of service 
+     */
+    const char *terms_of_service_url;
+    /** 
+     * OPTIONAL: the url of the app's privacy policy 
+     */
+    const char *privacy_policy_url;
+    /** 
+     * OPTIONAL: partial user object containing info on the owner of the application 
+     */
+    lldc_user_t owner;
+    /** 
+     * if this application is a game sold on Discord, this field will be the summary field for the store page of its primary sku 
+     */
+    const char *summary;
+    /** 
+     * the hex encoded key for verification in interactions and the GameSDK's GetTicket 
+     */
+    const char *verify_key;
+    /** 
+     * OPTIONAL: if the application belongs to a team, this will be a list of the members of that team 
+     */
+    lldc_team_t team;
+    /** 
+     * OPTIONAL: if this application is a game sold on Discord, this field will be the guild to which it has been linked 
+     */
+    snowflake_t guild_id;
+    /** 
+     * OPTIONAL: if this application is a game sold on Discord, this field will be the id of the "Game SKU" that is created, if exists 
+     */
+    snowflake_t primary_sku_id;
+    /** 
+     * OPTIONAL: if this application is a game sold on Discord, this field will be the URL slug that links to the store page 
+     */
+    const char *slug;
+    /** 
+     * OPTIONAL: the application's default rich presence invite cover image hash 
+     */
+    const char *cover_image;
+    /** 
+     * OPTIONAL: the application's public flags 
+     */
+    lldc_application_flags_t flags;
+} lldc_application_t;
 /* OPTIONAL: the partial guild of the channel that this webhook is following (returned for Channel Follower Webhooks) */
 typedef struct lldc_webhook_source_guild_s {
     cwr_malloc_ctx_t *_mctx;
@@ -426,20 +616,6 @@ typedef struct lldc_webhook_arr_s {
     size_t len;
     lldc_parser_malloc_ledger_t __mlog;
 } lldc_webhook_arr_t;
-/* Integration Account Structure */
-typedef struct lldc_interaction_account_s {
-    cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
-    /** 
-     * id of the account 
-     */
-    const char *id;
-    /** 
-     * name of the account 
-     */
-    const char *name;
-} lldc_interaction_account_t;
 /* audit log changes */
 typedef struct lldc_audit_log_changes_s {
     cwr_malloc_ctx_t *_mctx;
@@ -594,6 +770,86 @@ typedef struct lldc_audit_log_s {
      */
     lldc_audit_log_audit_log_entries_arr_t audit_log_entries;
 } lldc_audit_log_t;
+/* Guild Member */
+typedef struct lldc_guild_member_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: the user this guild member represents 
+     */
+    lldc_user_t user;
+    /** 
+     * OPTIONAL: this users guild nickname 
+     */
+    const char *nick;
+    /** 
+     * array of role object ids 
+     */
+    lldc_parser_snowflake_arr_t roles;
+    /** 
+     * when the user joined the guild 
+     */
+    double joined_at;
+    /** 
+     * OPTIONAL: when the user started boosting the guild 
+     */
+    double premium_since;
+    /** 
+     * whether the user is deafened in voice channels 
+     */
+    int deaf;
+    /** 
+     * whether the user is muted in voice channels 
+     */
+    int mute;
+    /** 
+     * OPTIONAL: whether the user has not yet passed the guild's Membership Screening requirements 
+     */
+    int pending;
+    /** 
+     * OPTIONAL: total permissions of the member in the channel, including overwrites, returned when in the interaction object 
+     */
+    const char *permissions;
+} lldc_guild_member_t;
+/* Partial Guild Member (excluding user) */
+typedef struct lldc_partial_guild_member_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: this users guild nickname 
+     */
+    const char *nick;
+    /** 
+     * array of role object ids 
+     */
+    lldc_parser_snowflake_arr_t roles;
+    /** 
+     * when the user joined the guild 
+     */
+    double joined_at;
+    /** 
+     * OPTIONAL: when the user started boosting the guild 
+     */
+    double premium_since;
+    /** 
+     * whether the user is deafened in voice channels 
+     */
+    int deaf;
+    /** 
+     * whether the user is muted in voice channels 
+     */
+    int mute;
+    /** 
+     * OPTIONAL: whether the user has not yet passed the guild's Membership Screening requirements 
+     */
+    int pending;
+    /** 
+     * OPTIONAL: total permissions of the member in the channel, including overwrites, returned when in the interaction object 
+     */
+    const char *permissions;
+} lldc_partial_guild_member_t;
 /* Represents a guild or DM channel within Discord */
 typedef struct lldc_channel_overwrite_s {
     cwr_malloc_ctx_t *_mctx;
@@ -668,6 +924,678 @@ typedef struct lldc_thread_member_s {
      */
     int flags;
 } lldc_thread_member_t;
+/* Attachment Structure */
+typedef struct lldc_attachment_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * attachment id 
+     */
+    snowflake_t id;
+    /** 
+     * name of file attached 
+     */
+    const char *filename;
+    /** 
+     * OPTIONAL: the attachment's media type 
+     */
+    const char *content_type;
+    /** 
+     * size of file in bytes 
+     */
+    int size;
+    /** 
+     * source url of file 
+     */
+    const char *url;
+    /** 
+     * a proxied url of file 
+     */
+    const char *proxy_url;
+    /** 
+     * OPTIONAL: height of file (if image) 
+     */
+    int height;
+    /** 
+     * OPTIONAL: width of file (if image) 
+     */
+    int width;
+} lldc_attachment_t;
+/* Attachment Array */
+typedef struct lldc_attachment_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_attachment_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_attachment_arr_t;
+/* Channel Mention Structure */
+typedef struct lldc_channel_mention_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * id of the channel 
+     */
+    snowflake_t id;
+    /** 
+     * id of the guild containing the channel 
+     */
+    snowflake_t guild_id;
+    /** 
+     * the type of channel 
+     */
+    int type;
+    /** 
+     * the name of the channel 
+     */
+    const char *name;
+} lldc_channel_mention_t;
+/* Channel Mention Array */
+typedef struct lldc_channel_mention_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_channel_mention_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_channel_mention_arr_t;
+/* Embed Author Structure */
+typedef struct lldc_embed_author_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: name of author 
+     */
+    const char *name;
+    /** 
+     * OPTIONAL: url of author 
+     */
+    const char *url;
+    /** 
+     * OPTIONAL: url of author icon (only supports http(s) and attachments) 
+     */
+    const char *icon_url;
+    /** 
+     * OPTIONAL: a proxied url of author icon 
+     */
+    const char *proxy_icon_url;
+} lldc_embed_author_t;
+/* Embed Footer Structure */
+typedef struct lldc_embed_footer_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * footer text 
+     */
+    const char *text;
+    /** 
+     * OPTIONAL: url of footer icon (only supports http(s) and attachments) 
+     */
+    const char *icon_url;
+    /** 
+     * OPTIONAL: a proxied url of footer icon 
+     */
+    const char *proxy_icon_url;
+} lldc_embed_footer_t;
+/* Embed Image Structure */
+typedef struct lldc_embed_image_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: source url of image (only supports http(s) and attachments) 
+     */
+    const char *url;
+    /** 
+     * OPTIONAL: a proxied url of the image 
+     */
+    const char *proxy_url;
+    /** 
+     * OPTIONAL: height of image 
+     */
+    int height;
+    /** 
+     * OPTIONAL: width of image 
+     */
+    int width;
+} lldc_embed_image_t;
+/* Embed Provider Structure */
+typedef struct lldc_embed_provider_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: name of provider 
+     */
+    const char *name;
+    /** 
+     * OPTIONAL: url of provider 
+     */
+    const char *url;
+} lldc_embed_provider_t;
+/* Embed Thumbnail Structure */
+typedef struct lldc_embed_thumbnail_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: source url of thumbnail (only supports http(s) and attachments) 
+     */
+    const char *url;
+    /** 
+     * OPTIONAL: a proxied url of the thumbnail 
+     */
+    const char *proxy_url;
+    /** 
+     * OPTIONAL: height of thumbnail 
+     */
+    int height;
+    /** 
+     * OPTIONAL: width of thumbnail 
+     */
+    int width;
+} lldc_embed_thumbnail_t;
+/* Embed Video Structure */
+typedef struct lldc_embed_video_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: source url of video 
+     */
+    const char *url;
+    /** 
+     * OPTIONAL: a proxied url of the video 
+     */
+    const char *proxy_url;
+    /** 
+     * OPTIONAL: height of video 
+     */
+    int height;
+    /** 
+     * OPTIONAL: width of video 
+     */
+    int width;
+} lldc_embed_video_t;
+/* Embed Field Structure */
+typedef struct lldc_embed_field_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * name of the field 
+     */
+    const char *name;
+    /** 
+     * value of the field 
+     */
+    const char *value;
+    /** 
+     * OPTIONAL: whether or not this field should display inline 
+     */
+    int is_inline;
+} lldc_embed_field_t;
+/* Embed Field Array */
+typedef struct lldc_embed_field_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_embed_field_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_embed_field_arr_t;
+/* Embed Structure */
+typedef struct lldc_embed_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: title of embed 
+     */
+    const char *title;
+    /** 
+     * OPTIONAL: type of embed (always "rich" for webhook embeds) 
+     */
+    const char *type;
+    /** 
+     * OPTIONAL: description of embed 
+     */
+    const char *description;
+    /** 
+     * OPTIONAL: url of embed 
+     */
+    const char *url;
+    /** 
+     * OPTIONAL: timestamp of embed content 
+     */
+    double timestamp;
+    /** 
+     * OPTIONAL: color code of the embed 
+     */
+    int color;
+    /** 
+     * OPTIONAL: footer information 
+     */
+    lldc_embed_footer_t footer;
+    /** 
+     * OPTIONAL: image information 
+     */
+    lldc_embed_image_t image;
+    /** 
+     * OPTIONAL: thumbnail information 
+     */
+    lldc_embed_thumbnail_t thumbnail;
+    /** 
+     * OPTIONAL: video information 
+     */
+    lldc_embed_video_t video;
+    /** 
+     * OPTIONAL: provider information 
+     */
+    lldc_embed_provider_t provider;
+    /** 
+     * OPTIONAL: author information 
+     */
+    lldc_embed_author_t author;
+    /** 
+     * OPTIONAL: fields information 
+     */
+    lldc_embed_field_arr_t fields;
+} lldc_embed_t;
+/* Embed Array */
+typedef struct lldc_embed_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_embed_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_embed_arr_t;
+/* Emoji Structure */
+typedef struct lldc_emoji_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: emoji id 
+     */
+    snowflake_t id;
+    /** 
+     * OPTIONAL: emoji name 
+     */
+    const char *name;
+    /** 
+     * OPTIONAL: roles allowed to use this emoji 
+     */
+    lldc_parser_snowflake_arr_t roles;
+    /** 
+     * OPTIONAL: user that created this emoji 
+     */
+    lldc_user_t user;
+    /** 
+     * OPTIONAL: whether this emoji must be wrapped in colons 
+     */
+    int require_colons;
+    /** 
+     * OPTIONAL: whether this emoji is managed 
+     */
+    int managed;
+    /** 
+     * OPTIONAL: whether this emoji is animated 
+     */
+    int animated;
+    /** 
+     * OPTIONAL: whether this emoji can be used, may be false due to loss of Server Boosts 
+     */
+    int available;
+} lldc_emoji_t;
+/* Emoji Array */
+typedef struct lldc_emoji_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_emoji_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_emoji_arr_t;
+/* Reaction Structure */
+typedef struct lldc_reaction_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * times this emoji has been used to react 
+     */
+    int count;
+    /** 
+     * whether the current user reacted using this emoji 
+     */
+    int me;
+    /** 
+     * emoji information 
+     */
+    lldc_emoji_t emoji;
+} lldc_reaction_t;
+/* Reaction Array */
+typedef struct lldc_reaction_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_reaction_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_reaction_arr_t;
+/* Integration Account Structure */
+typedef struct lldc_interaction_account_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * id of the account 
+     */
+    const char *id;
+    /** 
+     * name of the account 
+     */
+    const char *name;
+} lldc_interaction_account_t;
+/* Select Option Structure */
+typedef struct lldc_select_option_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * the user-facing name of the option, max 25 characters 
+     */
+    const char *label;
+    /** 
+     * the dev-define value of the option, max 100 characters 
+     */
+    const char *value;
+    /** 
+     * OPTIONAL: an additional description of the option, max 50 characters 
+     */
+    const char *description;
+    /** 
+     * OPTIONAL: id, name, and animated 
+     */
+    lldc_emoji_t emoji;
+    /** 
+     * OPTIONAL: will render this option as selected by default 
+     */
+    int is_default;
+} lldc_select_option_t;
+/* Select Option Array */
+typedef struct lldc_select_option_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_select_option_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_select_option_arr_t;
+/* Component Array */
+typedef struct lldc_component_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_component_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_component_arr_t;
+/* Component Structure */
+struct lldc_component_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * component type 
+     */
+    lldc_component_type_t type;
+    /** 
+     * OPTIONAL: a developer-defined identifier for the component, max 100 characters 
+     */
+    const char *custom_id;
+    /** 
+     * OPTIONAL: whether the component is disabled, default false 
+     */
+    int disabled;
+    /** 
+     * OPTIONAL: one of button styles 
+     */
+    lldc_component_style_t style;
+    /** 
+     * OPTIONAL: text that appears on the button, max 80 characters 
+     */
+    const char *label;
+    /** 
+     * OPTIONAL: name, id, and animated 
+     */
+    lldc_emoji_t emoji;
+    /** 
+     * OPTIONAL: a url for link-style buttons 
+     */
+    const char *url;
+    /** 
+     * the choices in the select, max 25 
+     */
+    lldc_select_option_arr_t options;
+    /** 
+     * OPTIONAL: custom placeholder text if nothing is selected, max 100 characters 
+     */
+    const char *placeholder;
+    /** 
+     * OPTIONAL: the minimum number of items that must be chosen; default 1, min 0, max 25 
+     */
+    int min_values;
+    /** 
+     * OPTIONAL: the maximum number of items that can be chosen; default 1, max 25 
+     */
+    int max_values;
+    /** 
+     * OPTIONAL: a list of child components 
+     */
+    lldc_component_arr_t components;
+};
+/* The smallest amount of data required to render a sticker. A partial sticker object. */
+typedef struct lldc_sticker_item_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * id of the sticker 
+     */
+    snowflake_t id;
+    /** 
+     * name of the sticker 
+     */
+    const char *name;
+    /** 
+     * type of sticker format 
+     */
+    lldc_sticker_format_t format_type;
+} lldc_sticker_item_t;
+/* Sticker Item Array */
+typedef struct lldc_sticker_item_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_sticker_item_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_sticker_item_arr_t;
+/* Message Activity Structure */
+typedef struct lldc_message_activity_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * type of message activity 
+     */
+    lldc_message_activity_type_t type;
+    /** 
+     * OPTIONAL: party_id from a Rich Presence event 
+     */
+    const char *party_id;
+} lldc_message_activity_t;
+/* Message Reference Structure */
+typedef struct lldc_message_reference_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: id of the originating message 
+     */
+    snowflake_t message_id;
+    /** 
+     * OPTIONAL: id of the originating message's channel 
+     */
+    snowflake_t channel_id;
+    /** 
+     * OPTIONAL: id of the originating message's guild 
+     */
+    snowflake_t guild_id;
+    /** 
+     * OPTIONAL: when sending, whether to error if the referenced message doesn't exist instead of sending as a normal (non-reply) message, default true 
+     */
+    int fail_if_not_exists;
+} lldc_message_reference_t;
+/* Message Interaction Structure */
+typedef struct lldc_message_interaction_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * id of the interaction 
+     */
+    snowflake_t id;
+    /** 
+     * the type of interaction 
+     */
+    int type;
+    /** 
+     * the name of the application command 
+     */
+    const char *name;
+    /** 
+     * the user who invoked the interaction 
+     */
+    lldc_user_t user;
+} lldc_message_interaction_t;
+/* Represents a message sent in a channel within Discord. */
+typedef struct lldc_message_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * id of the message 
+     */
+    snowflake_t id;
+    /** 
+     * id of the channel the message was sent in 
+     */
+    snowflake_t channel_id;
+    /** 
+     * OPTIONAL: id of the guild the message was sent in 
+     */
+    snowflake_t guild_id;
+    /** 
+     * the author of this message (not guaranteed to be a valid user, see below) 
+     */
+    lldc_user_t author;
+    /** 
+     * OPTIONAL: member properties for this message's author 
+     */
+    lldc_partial_guild_member_t member;
+    /** 
+     * contents of the message 
+     */
+    const char *content;
+    /** 
+     * when this message was sent 
+     */
+    double timestamp;
+    /** 
+     * OPTIONAL: when this message was edited (or null if never) 
+     */
+    double edited_timestamp;
+    /** 
+     * whether this was a TTS message 
+     */
+    int tts;
+    /** 
+     * whether this message mentions everyone 
+     */
+    int mention_everyone;
+    /** 
+     * users specifically mentioned in the message 
+     */
+    lldc_user_arr_t mentions;
+    /** 
+     * roles specifically mentioned in this message 
+     */
+    lldc_parser_snowflake_arr_t mention_roles;
+    /** 
+     * OPTIONAL: channels specifically mentioned in this message 
+     */
+    lldc_channel_mention_t mention_channels;
+    /** 
+     * any attached files 
+     */
+    lldc_attachment_arr_t attachments;
+    /** 
+     * any embedded content 
+     */
+    lldc_embed_arr_t embeds;
+    /** 
+     * OPTIONAL: reactions to the message 
+     */
+    lldc_reaction_t reactions;
+    /** 
+     * whether this message is pinned 
+     */
+    int pinned;
+    /** 
+     * OPTIONAL: if the message is generated by a webhook, this is the webhook's id 
+     */
+    snowflake_t webhook_id;
+    /** 
+     * type of message 
+     */
+    int type;
+    /** 
+     * OPTIONAL: sent with Rich Presence-related chat embeds 
+     */
+    yyjson_val *activity;
+    /** 
+     * OPTIONAL: sent with Rich Presence-related chat embeds 
+     */
+    yyjson_val *application;
+    /** 
+     * OPTIONAL: if the message is a response to an Interaction, this is the id of the interaction's application 
+     */
+    snowflake_t application_id;
+    /** 
+     * OPTIONAL: data showing the source of a crosspost, channel follow add, pin, or reply message 
+     */
+    lldc_message_reference_t message_reference;
+    /** 
+     * OPTIONAL: message flags combined as a bitfield 
+     */
+    int flags;
+    /** 
+     * OPTIONAL: sent if the message is a response to an Interaction 
+     */
+    lldc_message_interaction_t interaction;
+    /** 
+     * OPTIONAL: the thread that was started from this message, includes thread member object. You should parse this yourself if you want it. 
+     */
+    yyjson_val *thread;
+    /** 
+     * OPTIONAL: sent if the message contains components like buttons, action rows, or other interactive components 
+     */
+    lldc_component_arr_t components;
+    /** 
+     * OPTIONAL: sent if the message contains stickers 
+     */
+    lldc_sticker_item_arr_t sticker_items;
+} lldc_message_t;
 /* Represents a guild or DM channel within Discord */
 typedef struct lldc_channel_s {
     cwr_malloc_ctx_t *_mctx;
@@ -794,6 +1722,26 @@ int lldc_user_parse (cwr_malloc_ctx_t *_mctx, lldc_user_t *obj, yyjson_val *json
 */
 int lldc_user_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_user_arr_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
+* Team Member Parser
+* Team Member Object
+*/
+int lldc_team_member_parse (cwr_malloc_ctx_t *_mctx, lldc_team_member_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Team Member Parser
+* Team Member Array
+*/
+int lldc_team_member_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_team_member_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Team Parser
+* Team Object
+*/
+int lldc_team_parse (cwr_malloc_ctx_t *_mctx, lldc_team_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Application Parser
+* Application Structure
+*/
+int lldc_application_parse (cwr_malloc_ctx_t *_mctx, lldc_application_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
 * Webhook Parser
 * Used to represent a webhook
 */
@@ -803,11 +1751,6 @@ int lldc_webhook_parse (cwr_malloc_ctx_t *_mctx, lldc_webhook_t *obj, yyjson_val
 * Webhook Array
 */
 int lldc_webhook_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_webhook_arr_t *obj, yyjson_val *json, int has_existing_ledger);
-/**
-* Interaction Account Parser
-* Integration Account Structure
-*/
-int lldc_interaction_account_parse (cwr_malloc_ctx_t *_mctx, lldc_interaction_account_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
 * Audit Log Changes Parser
 * audit log changes
@@ -829,6 +1772,16 @@ int lldc_audit_log_entry_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_entry_t 
 */
 int lldc_audit_log_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
+* Guild Member Parser
+* Guild Member
+*/
+int lldc_guild_member_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_member_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Partial Guild Member Parser
+* Partial Guild Member (excluding user)
+*/
+int lldc_partial_guild_member_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild_member_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
 * Channel Overwrite Parser
 * Represents a guild or DM channel within Discord
 */
@@ -848,6 +1801,151 @@ int lldc_thread_metadata_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_metadata_t 
 * A thread member is used to indicate whether a user has joined a thread or not.
 */
 int lldc_thread_member_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_member_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Attachment Parser
+* Attachment Structure
+*/
+int lldc_attachment_parse (cwr_malloc_ctx_t *_mctx, lldc_attachment_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Attachment Parser
+* Attachment Array
+*/
+int lldc_attachment_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_attachment_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Channel Mention Parser
+* Channel Mention Structure
+*/
+int lldc_channel_mention_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_mention_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Channel Mention Parser
+* Channel Mention Array
+*/
+int lldc_channel_mention_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_mention_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Embed Author Parser
+* Embed Author Structure
+*/
+int lldc_embed_author_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_author_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Embed Footer Parser
+* Embed Footer Structure
+*/
+int lldc_embed_footer_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_footer_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Embed Image Parser
+* Embed Image Structure
+*/
+int lldc_embed_image_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_image_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Embed Provider Parser
+* Embed Provider Structure
+*/
+int lldc_embed_provider_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_provider_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Embed Thumbnail Parser
+* Embed Thumbnail Structure
+*/
+int lldc_embed_thumbnail_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_thumbnail_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Embed Video Parser
+* Embed Video Structure
+*/
+int lldc_embed_video_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_video_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Embed Field Parser
+* Embed Field Structure
+*/
+int lldc_embed_field_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_field_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Embed Field Parser
+* Embed Field Array
+*/
+int lldc_embed_field_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_field_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Embed Parser
+* Embed Structure
+*/
+int lldc_embed_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Embed Parser
+* Embed Array
+*/
+int lldc_embed_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Emoji Parser
+* Emoji Structure
+*/
+int lldc_emoji_parse (cwr_malloc_ctx_t *_mctx, lldc_emoji_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Emoji Parser
+* Emoji Array
+*/
+int lldc_emoji_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_emoji_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Reaction Parser
+* Reaction Structure
+*/
+int lldc_reaction_parse (cwr_malloc_ctx_t *_mctx, lldc_reaction_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Reaction Parser
+* Reaction Array
+*/
+int lldc_reaction_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_reaction_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Interaction Account Parser
+* Integration Account Structure
+*/
+int lldc_interaction_account_parse (cwr_malloc_ctx_t *_mctx, lldc_interaction_account_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Select Option Parser
+* Select Option Structure
+*/
+int lldc_select_option_parse (cwr_malloc_ctx_t *_mctx, lldc_select_option_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Select Option Parser
+* Select Option Array
+*/
+int lldc_select_option_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_select_option_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Component Parser
+* Component Array
+*/
+int lldc_component_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_component_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Component Parser
+* Component Structure
+*/
+int lldc_component_parse (cwr_malloc_ctx_t *_mctx, lldc_component_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Sticker Item Parser
+* The smallest amount of data required to render a sticker. A partial sticker object.
+*/
+int lldc_sticker_item_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_item_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Sticker Item Parser
+* Sticker Item Array
+*/
+int lldc_sticker_item_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_item_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Message Activity Parser
+* Message Activity Structure
+*/
+int lldc_message_activity_parse (cwr_malloc_ctx_t *_mctx, lldc_message_activity_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Message Reference Parser
+* Message Reference Structure
+*/
+int lldc_message_reference_parse (cwr_malloc_ctx_t *_mctx, lldc_message_reference_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Message Interaction Parser
+* Message Interaction Structure
+*/
+int lldc_message_interaction_parse (cwr_malloc_ctx_t *_mctx, lldc_message_interaction_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Message Parser
+* Represents a message sent in a channel within Discord.
+*/
+int lldc_message_parse (cwr_malloc_ctx_t *_mctx, lldc_message_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
 * Channel Parser
 * Represents a guild or DM channel within Discord

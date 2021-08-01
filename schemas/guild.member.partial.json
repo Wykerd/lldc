@@ -1,0 +1,43 @@
+{
+    "title": "Partial Guild Member",
+    "description": "Partial Guild Member (excluding user)",
+    "type": "object",
+    "properties": {
+        "nick": {
+            "description": "OPTIONAL: this users guild nickname",
+            "type": "string"
+        },
+        "roles": {
+            "description": "array of role object ids",
+            "type": "array",
+            "items": {
+                "description": "role object ids",
+                "type": "snowflake"
+            }
+        },
+        "joined_at": {
+            "description": "when the user joined the guild",
+            "type": "timestamp"
+        },
+        "premium_since": {
+            "description": "OPTIONAL: when the user started boosting the guild",
+            "type": "timestamp"
+        },
+        "deaf": {
+            "description": "whether the user is deafened in voice channels",
+            "type": "boolean"
+        },
+        "mute": {
+            "description": "whether the user is muted in voice channels",
+            "type": "boolean"
+        },
+        "pending": {
+            "description": "OPTIONAL: whether the user has not yet passed the guild's Membership Screening requirements",
+            "type": "boolean"
+        },
+        "permissions": {
+            "description": "OPTIONAL: total permissions of the member in the channel, including overwrites, returned when in the interaction object",
+            "type": "string"
+        }
+    }
+}

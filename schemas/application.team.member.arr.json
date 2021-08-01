@@ -1,0 +1,10 @@
+{
+    "title": "Team Member",
+    "description": "Team Member Array",
+    "type": "array",
+    "items": {
+        "description": "Team Member Objects",
+        "type": "object",
+        "existing_parser": "team_member"
+    }
+}

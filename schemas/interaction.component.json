@@ -1,0 +1,107 @@
+{
+    "title": "Component",
+    "description": "Component Structure",
+    "type": "object",
+    "typedef_ahead": true,
+    "properties": {
+        "type": {
+            "description": "component type",
+            "type": "int",
+            "enum_prefix": "LLDC_COMPONENT_",
+            "enum_type": "component_type",
+            "enum": [
+                [
+                    "1",
+                    "Action Row",
+                    "A container for other components"
+                ],
+                [
+                    "2",
+                    "Button",
+                    "A button object"
+                ],
+                [
+                    "3",
+                    "Select Menu",
+                    "A select menu for picking from choices"
+                ]
+            ]
+        },
+        "custom_id": {
+            "description": "OPTIONAL: a developer-defined identifier for the component, max 100 characters",
+            "type": "string"
+        },
+        "disabled": {
+            "description": "OPTIONAL: whether the component is disabled, default false",
+            "type": "boolean"
+        },
+        "style": {
+            "description": "OPTIONAL: one of button styles",
+            "type": "int",
+            "enum_prefix": "LLDC_COMPONENT_STYLE_",
+            "enum_type": "component_style",
+            "enum": [
+                [
+                    "1",
+                    "Primary",
+                    "blurple"
+                ],
+                [
+                    "2",
+                    "Secondary",
+                    "grey"
+                ],
+                [
+                    "3",
+                    "Success",
+                    "green"
+                ],
+                [
+                    "4",
+                    "Danger",
+                    "red"
+                ],
+                [
+                    "5",
+                    "Link",
+                    "grey, navigates to a URL"
+                ]
+            ]
+        },
+        "label": {
+            "description": "OPTIONAL: text that appears on the button, max 80 characters",
+            "type": "string"
+        },
+        "emoji": {
+            "description": "OPTIONAL: name, id, and animated",
+            "type": "object",
+            "existing_parser": "emoji"
+        },
+        "url": {
+            "description": "OPTIONAL: a url for link-style buttons",
+            "type": "string"
+        },
+        "options": {
+            "description": "the choices in the select, max 25",
+            "type": "array",
+            "existing_parser": "select_option_arr"
+        },
+        "placeholder": {
+            "description": "OPTIONAL: custom placeholder text if nothing is selected, max 100 characters",
+            "type": "string"
+        },
+        "min_values": {
+            "description": "OPTIONAL: the minimum number of items that must be chosen; default 1, min 0, max 25",
+            "type": "int"
+        },
+        "max_values": {
+            "description": "OPTIONAL: the maximum number of items that can be chosen; default 1, max 25",
+            "type": "int"
+        },
+        "components": {
+            "description": "OPTIONAL: a list of child components",
+            "type": "array",
+            "existing_parser": "component_arr"
+        }
+    }
+}

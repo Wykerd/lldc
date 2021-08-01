@@ -1,0 +1,44 @@
+{
+    "title": "Emoji",
+    "description": "Emoji Structure",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "OPTIONAL: emoji id",
+            "type": "snowflake"
+        },
+        "name": {
+            "description": "OPTIONAL: emoji name",
+            "type": "string"
+        },
+        "roles": {
+            "description": "OPTIONAL: roles allowed to use this emoji",
+            "type": "array",
+            "items": {
+                "description": "roles allowed to use this emoji",
+                "type": "snowflake"
+            }
+        },
+        "user": {
+            "description": "OPTIONAL: user that created this emoji",
+            "type": "object",
+            "existing_parser": "user"
+        },
+        "require_colons": {
+            "description": "OPTIONAL: whether this emoji must be wrapped in colons",
+            "type": "boolean"
+        },
+        "managed": {
+            "description": "OPTIONAL: whether this emoji is managed",
+            "type": "boolean"
+        },
+        "animated": {
+            "description": "OPTIONAL: whether this emoji is animated",
+            "type": "boolean"
+        },
+        "available": {
+            "description": "OPTIONAL: whether this emoji can be used, may be false due to loss of Server Boosts",
+            "type": "boolean"
+        }
+    }
+}

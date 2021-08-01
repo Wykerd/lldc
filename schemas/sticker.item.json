@@ -1,0 +1,35 @@
+{
+    "title": "Sticker Item",
+    "description": "The smallest amount of data required to render a sticker. A partial sticker object.",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "id of the sticker",
+            "type": "snowflake"
+        },
+        "name": {
+            "description": "name of the sticker",
+            "type": "string"
+        },
+        "format_type": {
+            "description": "type of sticker format",
+            "type": "int",
+            "enum_prefix": "LLDC_STICKER_FORMAT_",
+            "enum_type": "sticker_format",
+            "enum": [
+                [
+                    "1",
+                    "PNG"
+                ],
+                [
+                    "2",
+                    "APNG"
+                ],
+                [
+                    "3",
+                    "LOTTIE"
+                ]
+            ]
+        }
+    }
+}

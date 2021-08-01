@@ -1,0 +1,10 @@
+{
+    "title": "Component",
+    "description": "Component Array",
+    "type": "array",
+    "items": {
+        "description": "Component Objects",
+        "type": "object",
+        "existing_parser": "component"
+    }
+}

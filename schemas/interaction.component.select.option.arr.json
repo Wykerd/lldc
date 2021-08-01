@@ -1,0 +1,10 @@
+{
+    "title": "Select Option",
+    "description": "Select Option Array",
+    "type": "array",
+    "items": {
+        "description": "Select Option Objects",
+        "type": "object",
+        "existing_parser": "select_option"
+    }
+}

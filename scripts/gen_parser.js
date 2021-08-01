@@ -17,6 +17,14 @@
  * Structures: array, object
  */
 
+
+const _snakeCase = require('./snakecase');
+
+function snakeCase (s)
+{
+    return _snakeCase(s?.replace?.(/inline$/, 'is_inline')?.replace?.(/default$/, 'is_default') ?? s); // dirty fix
+}
+
 const header = `/**
 * Copyright 2021 Daniel Wykerd
 *
@@ -38,6 +46,7 @@ class SchemaParser {
     methods = [];
     signatures = [];
     enums = [];
+    typedef = [];
 
     static getTableSize (entries)
     {
@@ -242,9 +251,16 @@ int lldc__${[...path, snakeCase(key)].join('_')}_parse (lldc_${path.join('_')}_t
     }
 
     objTypeGen (schema, path, keys, isRoot = false) {
+        if (schema.typedef_ahead)
+        {
+            this.typedef.push(
+`/* ${schema.description.replace(/\n/g, '\n * ')} */
+typedef struct lldc_${path.join('_')}_s lldc_${path.join('_')}_t;`
+            );
+        }
         this.types.push(
 `/* ${schema.description.replace(/\n/g, '\n * ')} */
-typedef struct lldc_${path.join('_')}_s {
+${schema.typedef_ahead ? '' : 'typedef '}struct lldc_${path.join('_')}_s {
     cwr_malloc_ctx_t *_mctx;
     lldc_parser_malloc_ledger_t *_mlog;${
         isRoot ? `
@@ -305,7 +321,22 @@ typedef struct lldc_${path.join('_')}_s {
                         if (schema.properties[key].existing_parser)
                             typedef += `lldc_${schema.properties[key].existing_parser}_t `
                         else if (schema.properties[key].items)
-                            typedef += `lldc_${[...path, snakeCase(key)].join('_')}_arr_t `
+                            switch (schema.properties[key].items.type) {
+                                case 'uint':
+                                case 'snowflake':
+                                case 'int':
+                                case 'toint':
+                                case 'boolean':
+                                case 'string':
+                                case 'double':
+                                case 'timestamp':
+                                    typedef += `lldc_parser_${schema.properties[key].items.type}_arr_t `;
+                                    break;
+                            
+                                default:
+                                    typedef += `lldc_${[...path, snakeCase(key)].join('_')}_arr_t `
+                                    break;
+                            }
                         else
                             typedef += 'yyjson_val *'
                     }
@@ -320,7 +351,7 @@ typedef struct lldc_${path.join('_')}_s {
             return typedef;
         }).join('\n    ')
     }
-} lldc_${path.join('_')}_t;`
+}${schema.typedef_ahead ? '' : ` lldc_${path.join('_')}_t`};`
         )
     }
 
@@ -347,9 +378,18 @@ typedef struct lldc_${path.join('_')}_s {
                     typedef = '// ';
                     break;
             }
+
+        if (schema.typedef_ahead)
+        {
+            this.typedef.push(
+`/* ${schema.description.replace(/\n/g, '\n * ')} */
+typedef struct lldc_${path.join('_')}_arr_s lldc_${path.join('_')}_arr_t;`
+            );
+        }
+
         this.types.push(
 `/* ${schema.description.replace(/\n/g, '\n * ')} */
-typedef struct lldc_${path.join('_')}_arr_s {
+${schema.typedef_ahead ? '' : 'typedef '}struct lldc_${path.join('_')}_arr_s {
     cwr_malloc_ctx_t *_mctx;
     lldc_parser_malloc_ledger_t *_mlog;
     ${
@@ -367,7 +407,7 @@ typedef struct lldc_${path.join('_')}_arr_s {
         isRoot ? `
     lldc_parser_malloc_ledger_t __mlog;` : ''
     }
-} lldc_${path.join('_')}_arr_t;`);
+}${schema.typedef_ahead ? '' : ` lldc_${path.join('_')}_arr_t`};`);
     }
 
     arrImpl (key, schema, path, isRoot = false, wantMallocSetters = true) {
@@ -819,14 +859,13 @@ ${this.arrImpl(key, schema, path, isRoot)}
                 return this.arr(schema.title, schema, [], true);
         
             default:
-                throw new Error('Expected "object" or "array" as root type');
+                throw new Error('Expected "object" or "array" as root type in ' + schema.title);
         }
     }
 }
 
 const fs = require('fs');
 const path = require('path');
-const snakeCase = require('./snakecase');
 const files = require('../schemas/index.json');
 
 const parser = new SchemaParser();
@@ -845,6 +884,7 @@ fs.writeFileSync(
         '#define LLDC_PARSERS_H',
         '#include <lldc/parse.h>',
         '#include <yyjson.h>',
+        ...parser.typedef,
         ...parser.enums, 
         ...parser.types, 
         ...parser.signatures,

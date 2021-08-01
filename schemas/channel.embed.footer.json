@@ -1,0 +1,19 @@
+{
+    "title": "Embed Footer",
+    "description": "Embed Footer Structure",
+    "type": "object",
+    "properties": {
+        "text": {
+            "description": "footer text",
+            "type": "string"
+        },
+        "icon_url": {
+            "description": "OPTIONAL: url of footer icon (only supports http(s) and attachments)",
+            "type": "string"
+        },
+        "proxy_icon_url": {
+            "description": "OPTIONAL: a proxied url of footer icon",
+            "type": "string"
+        }
+    }
+}

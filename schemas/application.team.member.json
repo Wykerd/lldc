@@ -1,0 +1,32 @@
+{
+    "title": "Team Member",
+    "description": "Team Member Object",
+    "type": "object",
+    "properties": {
+        "membership_state": {
+            "description": "the user's membership state on the team",
+            "type": "int",
+            "enum_prefix": "LLDC_APP_MS_",
+            "enum_type": "application_member_state",
+            "enum": [
+                [
+                    "1",
+                    "INVITED"
+                ],
+                [
+                    "2",
+                    "ACCEPTED"
+                ]
+            ]
+        },
+        "team_id": {
+            "description": "the id of the parent team of which they are a member",
+            "type": "snowflake"
+        },
+        "user": {
+            "description": "the avatar, discriminator, id, and username of the user",
+            "type": "object",
+            "existing_parser": "user"
+        }
+    }
+}

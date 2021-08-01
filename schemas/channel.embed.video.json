@@ -1,0 +1,23 @@
+{
+    "title": "Embed Video",
+    "description": "Embed Video Structure",
+    "type": "object",
+    "properties": {
+        "url": {
+            "description": "OPTIONAL: source url of video",
+            "type": "string"
+        },
+        "proxy_url": {
+            "description": "OPTIONAL: a proxied url of the video",
+            "type": "string"
+        },
+        "height": {
+            "description": "OPTIONAL: height of video",
+            "type": "int"
+        },
+        "width": {
+            "description": "OPTIONAL: width of video",
+            "type": "int"
+        }
+    }
+}

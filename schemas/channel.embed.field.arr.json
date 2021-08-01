@@ -1,0 +1,10 @@
+{
+    "title": "Embed Field",
+    "description": "Embed Field Array",
+    "type": "array",
+    "items": {
+        "description": "Embed Field Objects",
+        "type": "object",
+        "existing_parser": "embed_field"
+    }
+}

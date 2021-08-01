@@ -1,0 +1,19 @@
+{
+    "title": "Embed Field",
+    "description": "Embed Field Structure",
+    "type": "object",
+    "properties": {
+        "name": {
+            "description": "name of the field",
+            "type": "string"
+        },
+        "value": {
+            "description": "value of the field",
+            "type": "string"
+        },
+        "inline": {
+            "description": "OPTIONAL: whether or not this field should display inline",
+            "type": "boolean"
+        }
+    }
+}

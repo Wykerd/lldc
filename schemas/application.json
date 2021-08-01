@@ -1,0 +1,95 @@
+{
+    "title": "Application",
+    "description": "Application Structure",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "the id of the app",
+            "type": "snowflake"
+        },
+        "name": {
+            "description": "the name of the app",
+            "type": "string"
+        },
+        "icon": {
+            "description": "OPTIONAL: the icon hash of the app",
+            "type": "string"
+        },
+        "description": {
+            "description": "the description of the app",
+            "type": "string"
+        },
+        "rpc_origins": {
+            "description": "OPTIONAL: an array of rpc origin urls, if rpc is enabled",
+            "type": "array",
+            "items": {
+                "description": "array of strings",
+                "type": "string"
+            }
+        },
+        "bot_public": {
+            "description": "when false only app owner can join the app's bot to guilds",
+            "type": "boolean"
+        },
+        "bot_require_code_grant": {
+            "description": "when true the app's bot will only join upon completion of the full oauth2 code grant flow",
+            "type": "boolean"
+        },
+        "terms_of_service_url": {
+            "description": "OPTIONAL: the url of the app's terms of service",
+            "type": "string"
+        },
+        "privacy_policy_url": {
+            "description": "OPTIONAL: the url of the app's privacy policy",
+            "type": "string"
+        },
+        "owner": {
+            "description": "OPTIONAL: partial user object containing info on the owner of the application",
+            "type": "object",
+            "existing_parser": "user"
+        },
+        "summary": {
+            "description": "if this application is a game sold on Discord, this field will be the summary field for the store page of its primary sku",
+            "type": "string"
+        },
+        "verify_key": {
+            "description": "the hex encoded key for verification in interactions and the GameSDK's GetTicket",
+            "type": "string"
+        },
+        "team": {
+            "description": "OPTIONAL: if the application belongs to a team, this will be a list of the members of that team",
+            "type": "object",
+            "existing_parser": "team"
+        },
+        "guild_id": {
+            "description": "OPTIONAL: if this application is a game sold on Discord, this field will be the guild to which it has been linked",
+            "type": "snowflake"
+        },
+        "primary_sku_id": {
+            "description": "OPTIONAL: if this application is a game sold on Discord, this field will be the id of the \"Game SKU\" that is created, if exists",
+            "type": "snowflake"
+        },
+        "slug": {
+            "description": "OPTIONAL: if this application is a game sold on Discord, this field will be the URL slug that links to the store page",
+            "type": "string"
+        },
+        "cover_image": {
+            "description": "OPTIONAL: the application's default rich presence invite cover image hash",
+            "type": "string"
+        },
+        "flags": {
+            "description": "OPTIONAL: the application's public flags",
+            "type": "int",
+            "enum_prefix": "LLDC_APP_FLAG_",
+            "enum_type": "application_flags",
+            "enum": [
+                ["1 << 12", "GATEWAY_PRESENCE"],
+                ["1 << 13", "GATEWAY_PRESENCE_LIMITED"],
+                ["1 << 14", "GATEWAY_GUILD_MEMBERS"],
+                ["1 << 15", "GATEWAY_GUILD_MEMBERS_LIMITED"],
+                ["1 << 16", "VERIFICATION_PENDING_GUILD_LIMIT"],
+                ["1 << 17", "EMBEDDED"]
+            ]
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "title": "Embed",
+    "description": "Embed Array",
+    "type": "array",
+    "items": {
+        "description": "Embed Objects",
+        "type": "object",
+        "existing_parser": "embed"
+    }
+}

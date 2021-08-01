@@ -1,0 +1,28 @@
+{
+    "title": "Team",
+    "description": "Team Object",
+    "type": "object",
+    "properties": {
+        "icon": {
+            "description": "OPTIONAL: a hash of the image of the team's icon",
+            "type": "string"
+        },
+        "id": {
+            "description": "the unique id of the team",
+            "type": "snowflake"
+        },
+        "members": {
+            "description": "the members of the team",
+            "type": "array",
+            "existing_parser": "team_member_arr"
+        },
+        "name": {
+            "description": "the name of the team",
+            "type": "string"
+        },
+        "owner_user_id": {
+            "description": "the user id of the current team owner",
+            "type": "snowflake"
+        }
+    }
+}

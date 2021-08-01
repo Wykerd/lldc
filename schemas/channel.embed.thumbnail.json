@@ -1,0 +1,23 @@
+{
+    "title": "Embed Thumbnail",
+    "description": "Embed Thumbnail Structure",
+    "type": "object",
+    "properties": {
+        "url": {
+            "description": "OPTIONAL: source url of thumbnail (only supports http(s) and attachments)",
+            "type": "string"
+        },
+        "proxy_url": {
+            "description": "OPTIONAL: a proxied url of the thumbnail",
+            "type": "string"
+        },
+        "height": {
+            "description": "OPTIONAL: height of thumbnail",
+            "type": "int"
+        },
+        "width": {
+            "description": "OPTIONAL: width of thumbnail",
+            "type": "int"
+        }
+    }
+}

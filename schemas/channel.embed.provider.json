@@ -1,0 +1,15 @@
+{
+    "title": "Embed Provider",
+    "description": "Embed Provider Structure",
+    "type": "object",
+    "properties": {
+        "name": {
+            "description": "OPTIONAL: name of provider",
+            "type": "string"
+        },
+        "url": {
+            "description": "OPTIONAL: url of provider",
+            "type": "string"
+        }
+    }
+}

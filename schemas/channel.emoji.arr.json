@@ -1,0 +1,10 @@
+{
+    "title": "Emoji",
+    "description": "Emoji Array",
+    "type": "array",
+    "items": {
+        "description": "Emoji Objects",
+        "type": "object",
+        "existing_parser": "emoji"
+    }
+}

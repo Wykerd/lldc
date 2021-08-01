@@ -1,0 +1,10 @@
+{
+    "title": "Channel Mention",
+    "description": "Channel Mention Array",
+    "type": "array",
+    "items": {
+        "description": "Channel Mention Objects",
+        "type": "object",
+        "existing_parser": "channel_mention"
+    }
+}
