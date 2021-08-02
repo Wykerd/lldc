@@ -1835,6 +1835,63 @@ int lldc__stage_instance_id_parse (lldc_stage_instance_t *obj, yyjson_val *json)
     return 0;
 }
 /**
+ * t Parser
+ * OPTIONAL: the event name for this payload
+ * type: object.string
+ */
+static
+int lldc__gateway_payload_t_parse (lldc_gateway_payload_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->t = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * s Parser
+ * OPTIONAL: sequence number, used for resuming sessions and heartbeats
+ * type: object.int
+ */
+static
+int lldc__gateway_payload_s_parse (lldc_gateway_payload_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->s = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * d Parser
+ * OPTIONAL: event data
+ * type: object.rawobj
+ */
+static
+int lldc__gateway_payload_d_parse (lldc_gateway_payload_t *obj, yyjson_val *json) 
+{
+    obj->d = json;
+
+    return 0;
+}
+/**
+ * op Parser
+ * opcode for the payload
+ * type: object.int
+ */
+static
+int lldc__gateway_payload_op_parse (lldc_gateway_payload_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->op = yyjson_get_int(json);
+
+    return 0;
+}
+/**
  * status Parser
  * either "idle", "dnd", "online", or "offline"
  * type: object.string
@@ -10603,6 +10660,53 @@ int lldc_presence_update_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_presence_updat
         obj->items[idx]._mctx = obj->_mctx;
         obj->items[idx]._mlog = obj->_mlog;
         lldc__presence_update_item_parse(&obj->items[idx], val);
+    }
+
+    return 0;
+}
+int lldc_gateway_payload_parse (cwr_malloc_ctx_t *_mctx, lldc_gateway_payload_t *obj, yyjson_val *json, int has_existing_ledger)
+{
+
+    static lldc_struct_def_t parser_def[4] = {
+        { "op", (int (*)(void *, yyjson_val *))lldc__gateway_payload_op_parse },
+        { "d", (int (*)(void *, yyjson_val *))lldc__gateway_payload_d_parse },
+        { "s", (int (*)(void *, yyjson_val *))lldc__gateway_payload_s_parse },
+        { "t", (int (*)(void *, yyjson_val *))lldc__gateway_payload_t_parse }
+    };
+
+    static lldc_hashmap_entry_t parser_table[8] = { 0 };
+    static lldc_hashmap_t parsers = {  
+        .size = 8,
+        .len = 0,
+        .table = parser_table,
+        .hash = lldc_hashmap_hash_str,
+        .compare = (int (*)(const void *, const void *))strcmp,
+        .dup_key = lldc_hashmap_dup_echo,
+        .free_key = lldc_hashmap_free_noop
+    };
+    LLDC_PARSER_LOAD(4)
+
+    if (!yyjson_is_obj(json))
+        return -1;
+
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
+    
+    memset(obj, 0, sizeof(lldc_gateway_payload_t));
+
+    obj->_mctx = _mctx;
+    if (!has_existing_ledger)
+        obj->_mlog = &obj->__mlog;
+    else
+        obj->_mlog = ledger;
+
+    yyjson_val *key, *val;
+    yyjson_obj_iter iter;
+    yyjson_obj_iter_init(json, &iter);
+    while ((key = yyjson_obj_iter_next(&iter))) {
+        val = yyjson_obj_iter_get_val(key);
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        if (parser)
+            parser(obj, val);
     }
 
     return 0;

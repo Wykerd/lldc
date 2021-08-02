@@ -88,7 +88,7 @@ void lldc_struct_init (cwr_malloc_ctx_t *_mctx, lldc_struct_obj_root_t *st);
  * @param val the value to copy (strdup)
  * @return NULL if fail else pointer to the newly set value
  */
-const char *lldc_struct_set_str (lldc_struct_obj_t *st, const char **ptr, const char *val);
+const char *lldc_struct_set_str (lldc_struct_obj_t *st, char **ptr, const char *val);
 /**
  * Set the value of a string member
  * 
@@ -97,7 +97,7 @@ const char *lldc_struct_set_str (lldc_struct_obj_t *st, const char **ptr, const 
  * @param len length of the string
  * @return NULL if fail else pointer to the newly set value
  */
-const char *lldc_struct_set_strn (lldc_struct_obj_t *st, const char **ptr, const char *val, size_t len);
+const char *lldc_struct_set_strn (lldc_struct_obj_t *st, char **ptr, const char *val, size_t len);
 /**
  * Initialize array not previously initialized by a parser
  * 

@@ -95,6 +95,7 @@
     "gateway.presence.status.json",
     "gateway.presence.update.json",
     "gateway.presence.update.arr.json",
+    "gateway.payload.json",
 
     "stage_instance.json",
     "stage_instance.arr.json",

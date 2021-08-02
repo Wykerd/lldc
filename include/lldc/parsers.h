@@ -427,6 +427,30 @@ typedef enum lldc_activity_flags {
 #define LLDC_CLIENT_STATUS_IDLE "idle"
 /* DND */
 #define LLDC_CLIENT_STATUS_DND "dnd"
+typedef enum lldc_gateway_opcode {
+    /* An event was dispatched. */
+    LLDC_GW_OP_DISPATCH = (0),
+    /* Fired periodically by the client to keep the connection alive. */
+    LLDC_GW_OP_HEARTBEAT = (1),
+    /* Starts a new session during the initial handshake. */
+    LLDC_GW_OP_IDENTIFY = (2),
+    /* Update the client's presence. */
+    LLDC_GW_OP_PRESENCE_UPDATE = (3),
+    /* Used to join/leave or move between voice channels. */
+    LLDC_GW_OP_VOICE_STATE_UPDATE = (4),
+    /* Resume a previous session that was disconnected. */
+    LLDC_GW_OP_RESUME = (6),
+    /* You should attempt to reconnect and resume immediately. */
+    LLDC_GW_OP_RECONNECT = (7),
+    /* Request information about offline guild members in a large guild. */
+    LLDC_GW_OP_REQUEST_GUILD_MEMBERS = (8),
+    /* The session has been invalidated. You should reconnect and identify/resume accordingly. */
+    LLDC_GW_OP_INVALID_SESSION = (9),
+    /* Sent immediately after connecting, contains the heartbeat_interval to use. */
+    LLDC_GW_OP_HELLO = (10),
+    /* Sent in response to receiving a heartbeat to acknowledge that it has been received. */
+    LLDC_GW_OP_HEARTBEAT_ACK = (11)
+} lldc_gateway_opcode_t;
 typedef enum lldc_stage_instance_privacy_level {
     /* The Stage instance is visible publicly, such as on Stage discovery. */
     LLDC_STAGE_INSTANCE_PRIVACY_PUBLIC = (1),
@@ -2502,6 +2526,28 @@ typedef struct lldc_presence_update_arr_s {
     size_t len;
     lldc_struct_malloc_ledger_t __mlog;
 } lldc_presence_update_arr_t;
+/* s and t are null when op is not 0 (Gateway Dispatch Opcode). */
+typedef struct lldc_gateway_payload_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
+    /** 
+     * opcode for the payload 
+     */
+    lldc_gateway_opcode_t op;
+    /** 
+     * OPTIONAL: event data 
+     */
+    yyjson_val *d;
+    /** 
+     * OPTIONAL: sequence number, used for resuming sessions and heartbeats 
+     */
+    int s;
+    /** 
+     * OPTIONAL: the event name for this payload 
+     */
+    const char *t;
+} lldc_gateway_payload_t;
 /* Stage Instance Structure */
 typedef struct lldc_stage_instance_s {
     cwr_malloc_ctx_t *_mctx;
@@ -3629,6 +3675,11 @@ int lldc_presence_update_parse (cwr_malloc_ctx_t *_mctx, lldc_presence_update_t 
 * Presence Update Array
 */
 int lldc_presence_update_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_presence_update_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Gateway Payload Parser
+* s and t are null when op is not 0 (Gateway Dispatch Opcode).
+*/
+int lldc_gateway_payload_parse (cwr_malloc_ctx_t *_mctx, lldc_gateway_payload_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
 * Stage Instance Parser
 * Stage Instance Structure

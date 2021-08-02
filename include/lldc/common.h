@@ -20,6 +20,21 @@
 #define LLDC_VERSION_LONG           "lldc " LLDC_VERSION_STR
 #define LLDC_GIT_REPO               "https://github.com/Wykerd/lldc.git"
 
+#define LLDC_GW_COMPRESS 1
+
+/* Gateway defines */
+#define LLDC_GW_VERSION             9
+#define LLDC_GW_VERSION_STR         "9"
+#ifdef LLDC_GW_COMPRESS
+#define LLDC_GW_WS_QUERY            "?v=" LLDC_GW_VERSION_STR "&encoding=json&compress=zlib-stream"
+#else
+#define LLDC_GW_WS_QUERY            "?v=" LLDC_GW_VERSION_STR "&encoding=json"
+#endif
+#define LLDC_GW_WS_URI              "wss://gateway.discord.gg/" LLDC_GW_WS_QUERY
+#define LLDC_GW_HOST                "gateway.discord.gg"
+#define LLDC_FRAME_BUF_SIZE         4096
+#define LLDC_DECOMP_BUF_SIZE        LLDC_FRAME_BUF_SIZE
+
 /* API Defines */
 #define LLDC_DEFAULT_PORT           "443"
 #define LLDC_API_HOST               "discord.com"

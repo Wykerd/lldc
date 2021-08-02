@@ -19,7 +19,6 @@ double lldc_hashmap_load_factor (lldc_hashmap_t *map)
 
 uint64_t lldc_hashmap_hash_str (const void *str)
 {
-    const char*ss = str;
     return spooky_hash64(str, strlen(str), 0);
 }
 
@@ -106,7 +105,7 @@ int lldc__hashmap_grow (lldc_hashmap_t *map)
         if (old_table[i].key)
         {
             lldc_hashmap_entry_t *entry;
-            size_t idx = lldc__hashmap_find(map, old_table[i].hash, old_table[i].key, &entry);
+            lldc__hashmap_find(map, old_table[i].hash, old_table[i].key, &entry);
 
             entry->key = old_table[i].key;
             entry->value = old_table[i].value;
@@ -119,10 +118,9 @@ int lldc__hashmap_grow (lldc_hashmap_t *map)
 
 int lldc_hashmap_set (lldc_hashmap_t *map, const void *key, void *value)
 {
-    int r = 0;
     lldc_hashmap_entry_t *entry;
     uint64_t hash = map->hash(key);
-    size_t idx = lldc__hashmap_find(map, hash, key, &entry);
+    lldc__hashmap_find(map, hash, key, &entry);
 
     if (entry->key)
         return EEXIST;
@@ -145,10 +143,9 @@ int lldc_hashmap_set (lldc_hashmap_t *map, const void *key, void *value)
 
 int lldc_hashmap_replace (lldc_hashmap_t *map, const void *key, void *value)
 {
-    int r = 0;
     lldc_hashmap_entry_t *entry;
     uint64_t hash = map->hash(key);
-    size_t idx = lldc__hashmap_find(map, hash, key, &entry);
+    lldc__hashmap_find(map, hash, key, &entry);
 
     if (!entry->key)
     {
@@ -210,7 +207,7 @@ void *lldc_hashmap_get (lldc_hashmap_t *map, const void *key)
 {
     lldc_hashmap_entry_t *entry;
     uint64_t hash = map->hash(key);
-    size_t idx = lldc__hashmap_find(map, hash, key, &entry);
+    lldc__hashmap_find(map, hash, key, &entry);
 
     if (entry->key)
         return entry->value;

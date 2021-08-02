@@ -1,21 +1,27 @@
 #include <lldc/parsers.h>
+#include <lldc/gateway.h>
 
 int main(int argc, char const *argv[])
 {
-    yyjson_doc *doc = yyjson_read("{\"id\":\"784340056030576660\",\"last_message_id\":\"871070902048149504\",\"last_pin_timestamp\":\"2021-05-17T12:15:43+00:00\",\"type\":0,\"name\":\"💬general-chat\",\"position\":11,\"parent_id\":\"739120567751409685\",\"topic\":null,\"guild_id\":\"715899956581630062\",\"permission_overwrites\":[{\"id\":\"715899956581630062\",\"type\":0,\"allow\":\"65536\",\"deny\":\"50176\"},{\"id\":\"716369069258833922\",\"type\":0,\"allow\":\"379968\",\"deny\":\"0\"},{\"id\":\"727199682840887396\",\"type\":0,\"allow\":\"388160\",\"deny\":\"135168\"},{\"id\":\"729056238968504391\",\"type\":0,\"allow\":\"66560\",\"deny\":\"192512\"},{\"id\":\"729354798637514803\",\"type\":0,\"allow\":\"66560\",\"deny\":\"2361408\"},{\"id\":\"731155521897496596\",\"type\":0,\"allow\":\"0\",\"deny\":\"49152\"},{\"id\":\"731440222205902908\",\"type\":0,\"allow\":\"392256\",\"deny\":\"805437457\"},{\"id\":\"737972678681690132\",\"type\":0,\"allow\":\"388160\",\"deny\":\"135168\"},{\"id\":\"752556415469748308\",\"type\":0,\"allow\":\"0\",\"deny\":\"1024\"},{\"id\":\"810599326400512010\",\"type\":0,\"allow\":\"114688\",\"deny\":\"393280\"},{\"id\":\"854106723601874984\",\"type\":0,\"allow\":\"379968\",\"deny\":\"2952933393\"}],\"nsfw\":false,\"rate_limit_per_user\":0}", 1061, 0);
-
     cwr_malloc_ctx_t m_ctx;
     cwr_malloc_ctx_new(&m_ctx); 
 
-    lldc_channel_t err;
 
-    lldc_channel_parse(&m_ctx, &err, yyjson_doc_get_root(doc), 0);
+    const yyjson_alc json_alc = {
+        .free = m_ctx.mf.cwr_free,
+        .malloc = m_ctx.mf.cwr_malloc,
+        .realloc = m_ctx.mf.cwr_realloc,
+        .ctx = &m_ctx.ms
+    };
 
-    lldc_parser_free(&err);
+    lldc_gateway_client_t gw;
 
+    lldc_gateway_client_init(&m_ctx, uv_default_loop(), &gw);
+    lldc_gateway_client_connect(&gw);
+    gw.json_alc = &json_alc;
+
+    uv_run(uv_default_loop(), UV_RUN_DEFAULT);
     cwr_malloc_ctx_dump_leaks(&m_ctx);
-
-    yyjson_doc_free(doc);
 
     return 0;
 }

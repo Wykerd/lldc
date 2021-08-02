@@ -1,0 +1,82 @@
+{
+    "title": "Gateway Payload",
+    "description": "s and t are null when op is not 0 (Gateway Dispatch Opcode).",
+    "type": "object",
+    "properties": {
+        "op": {
+            "description": "opcode for the payload",
+            "type": "int",
+            "enum_prefix": "LLDC_GW_OP_",
+            "enum_type": "gateway_opcode",
+            "enum": [
+                [
+                    "0",
+                    "Dispatch",
+                    "An event was dispatched."
+                ],
+                [
+                    "1",
+                    "Heartbeat",
+                    "Fired periodically by the client to keep the connection alive."
+                ],
+                [
+                    "2",
+                    "Identify",
+                    "Starts a new session during the initial handshake."
+                ],
+                [
+                    "3",
+                    "Presence Update",
+                    "Update the client's presence."
+                ],
+                [
+                    "4",
+                    "Voice State Update",
+                    "Used to join/leave or move between voice channels."
+                ],
+                [
+                    "6",
+                    "Resume",
+                    "Resume a previous session that was disconnected."
+                ],
+                [
+                    "7",
+                    "Reconnect",
+                    "You should attempt to reconnect and resume immediately."
+                ],
+                [
+                    "8",
+                    "Request Guild Members",
+                    "Request information about offline guild members in a large guild."
+                ],
+                [
+                    "9",
+                    "Invalid Session",
+                    "The session has been invalidated. You should reconnect and identify/resume accordingly."
+                ],
+                [
+                    "10",
+                    "Hello",
+                    "Sent immediately after connecting, contains the heartbeat_interval to use."
+                ],
+                [
+                    "11",
+                    "Heartbeat ACK",
+                    "Sent in response to receiving a heartbeat to acknowledge that it has been received."
+                ]
+            ]
+        },
+        "d": {
+            "description": "OPTIONAL: event data",
+            "type": "raw"
+        },
+        "s": {
+            "description": "OPTIONAL: sequence number, used for resuming sessions and heartbeats",
+            "type": "int"
+        },
+        "t": {
+            "description": "OPTIONAL: the event name for this payload",
+            "type": "string"
+        }
+    }
+}

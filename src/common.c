@@ -256,7 +256,6 @@ double lldc_date_parse (const char *s)
     int64_t fields[] = { 0, 1, 1, 0, 0, 0, 0 };
     double fields1[7];
     int64_t tz, hh, mm;
-    double d;
     int p, i, c, sgn, l;
     const char *sp;
     size_t sp_len;

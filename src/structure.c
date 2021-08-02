@@ -77,7 +77,7 @@ void lldc_struct_free (lldc_struct_obj_t *parser)
     parser->_mlog->size = 0;
 }
 
-const char *lldc_struct_set_strn (lldc_struct_obj_t *st, const char **ptr, const char *val, size_t len)
+const char *lldc_struct_set_strn (lldc_struct_obj_t *st, char **ptr, const char *val, size_t len)
 {
     if (*ptr == NULL)
     {
@@ -89,7 +89,7 @@ const char *lldc_struct_set_strn (lldc_struct_obj_t *st, const char **ptr, const
     }
 
     char *str = lldc_struct_realloc(st, *ptr, len);
-    if (*str = NULL)
+    if (str == NULL)
         return NULL;
     
     *ptr = str;
@@ -98,7 +98,7 @@ const char *lldc_struct_set_strn (lldc_struct_obj_t *st, const char **ptr, const
     return *ptr;
 }
 
-const char *lldc_struct_set_str (lldc_struct_obj_t *st, const char **ptr, const char *val)
+const char *lldc_struct_set_str (lldc_struct_obj_t *st, char **ptr, const char *val)
 {
     if (*ptr == NULL)
     {
@@ -132,7 +132,7 @@ void *lldc_struct_add_elem_arr (lldc_struct_opaque_arr_t *arr, size_t elem_size,
     }
 
     char *n_arr = lldc_struct_realloc((lldc_struct_obj_t *)arr, arr->items, (arr->len + count) * elem_size);
-    if (*n_arr = NULL)
+    if (n_arr == NULL)
         return NULL;
 
     arr->items = n_arr;
