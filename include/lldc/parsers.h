@@ -2278,11 +2278,11 @@ typedef struct lldc_activity_timestamps_s {
     /** 
      * OPTIONAL: unix time (in milliseconds) of when the activity started 
      */
-    int start;
+    uint64_t start;
     /** 
      * OPTIONAL: unix time (in milliseconds) of when the activity ends 
      */
-    int end;
+    uint64_t end;
 } lldc_activity_timestamps_t;
 /* Activity Party Structure */
 typedef struct lldc_activity_party_s {
@@ -2378,7 +2378,7 @@ typedef struct lldc_activity_s {
     /** 
      * unix timestamp (in milliseconds) of when the activity was added to the user's session 
      */
-    int created_at;
+    uint64_t created_at;
     /** 
      * OPTIONAL: unix timestamps for start and/or end of the game 
      */

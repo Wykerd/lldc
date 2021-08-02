@@ -45,7 +45,7 @@
         },
         "created_at": {
             "description": "unix timestamp (in milliseconds) of when the activity was added to the user's session",
-            "type": "int"
+            "type": "uint"
         },
         "timestamps": {
             "description": "OPTIONAL: unix timestamps for start and/or end of the game",

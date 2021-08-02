@@ -15,21 +15,5 @@
             "description": "Human readable error message",
             "type": "string"
         }
-    },
-    "_test": [
-        {
-            "code": 50035,
-            "errors": {
-                "access_token": {
-                    "_errors": [
-                        {
-                            "code": "BASE_TYPE_REQUIRED",
-                            "message": "This field is required"
-                        }
-                    ]
-                }
-            },
-            "message": "Invalid Form Body"
-        }
-    ]
+    }
 }

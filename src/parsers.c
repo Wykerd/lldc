@@ -2017,15 +2017,15 @@ int lldc__activity_application_id_parse (lldc_activity_t *obj, yyjson_val *json)
 /**
  * created_at Parser
  * unix timestamp (in milliseconds) of when the activity was added to the user's session
- * type: object.int
+ * type: object.uint
  */
 static
 int lldc__activity_created_at_parse (lldc_activity_t *obj, yyjson_val *json) 
 {
-    if (!yyjson_is_int(json))
+    if (!yyjson_is_uint(json))
         return -1;
 
-    obj->created_at = yyjson_get_int(json);
+    obj->created_at = yyjson_get_uint(json);
 
     return 0;
 }
@@ -2197,30 +2197,30 @@ int lldc__activity_party_id_parse (lldc_activity_party_t *obj, yyjson_val *json)
 /**
  * end Parser
  * OPTIONAL: unix time (in milliseconds) of when the activity ends
- * type: object.int
+ * type: object.uint
  */
 static
 int lldc__activity_timestamps_end_parse (lldc_activity_timestamps_t *obj, yyjson_val *json) 
 {
-    if (!yyjson_is_int(json))
+    if (!yyjson_is_uint(json))
         return -1;
 
-    obj->end = yyjson_get_int(json);
+    obj->end = yyjson_get_uint(json);
 
     return 0;
 }
 /**
  * start Parser
  * OPTIONAL: unix time (in milliseconds) of when the activity started
- * type: object.int
+ * type: object.uint
  */
 static
 int lldc__activity_timestamps_start_parse (lldc_activity_timestamps_t *obj, yyjson_val *json) 
 {
-    if (!yyjson_is_int(json))
+    if (!yyjson_is_uint(json))
         return -1;
 
-    obj->start = yyjson_get_int(json);
+    obj->start = yyjson_get_uint(json);
 
     return 0;
 }
