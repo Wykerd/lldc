@@ -81,7 +81,7 @@ int lldc__${[...path, snakeCase(key)].join('_')}_parse (lldc_${path.join('_')}_t
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->${snakeCase(key)} = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->${snakeCase(key)} = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }`)
@@ -280,9 +280,9 @@ typedef struct lldc_${path.join('_')}_s lldc_${path.join('_')}_t;`
 `/* ${schema.description.replace(/\n/g, '\n * ')} */
 ${schema.typedef_ahead ? '' : 'typedef '}struct lldc_${path.join('_')}_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;${
+    lldc_struct_malloc_ledger_t *_mlog;${
         isRoot ? `
-    lldc_parser_malloc_ledger_t __mlog;` : ''
+    lldc_struct_malloc_ledger_t __mlog;` : ''
     }
     ${
         keys.map(key => {
@@ -348,7 +348,7 @@ ${schema.typedef_ahead ? '' : 'typedef '}struct lldc_${path.join('_')}_s {
                                 case 'string':
                                 case 'double':
                                 case 'timestamp':
-                                    typedef += `lldc_parser_${schema.properties[key].items.type}_arr_t `;
+                                    typedef += `lldc_struct_${schema.properties[key].items.type}_arr_t `;
                                     break;
                             
                                 default:
@@ -385,7 +385,7 @@ ${schema.typedef_ahead ? '' : 'typedef '}struct lldc_${path.join('_')}_s {
                 case 'string':
                 case 'double':
                 case 'timestamp':
-                    typedef = `lldc_parser_${schema.items.items.type}_arr_t `;
+                    typedef = `lldc_struct_${schema.items.items.type}_arr_t `;
                     break;
 
                 case 'array':
@@ -409,7 +409,7 @@ typedef struct lldc_${path.join('_')}_arr_s lldc_${path.join('_')}_arr_t;`
 `/* ${schema.description.replace(/\n/g, '\n * ')} */
 ${schema.typedef_ahead ? '' : 'typedef '}struct lldc_${path.join('_')}_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     ${
         schema.items.type == 'raw' ?
             'yyjson_val *' :
@@ -423,7 +423,7 @@ ${schema.typedef_ahead ? '' : 'typedef '}struct lldc_${path.join('_')}_arr_s {
     }*items;
     size_t len;${
         isRoot ? `
-    lldc_parser_malloc_ledger_t __mlog;` : ''
+    lldc_struct_malloc_ledger_t __mlog;` : ''
     }
 }${schema.typedef_ahead ? '' : ` lldc_${path.join('_')}_arr_t`};`);
     }
@@ -451,7 +451,7 @@ ${schema.typedef_ahead ? '' : 'typedef '}struct lldc_${path.join('_')}_arr_s {
     obj->_mlog = _obj->_mlog;
 ` : ``
     }
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -476,7 +476,7 @@ ${schema.typedef_ahead ? '' : 'typedef '}struct lldc_${path.join('_')}_arr_s {
         this.objTypeGen(schema, path, keys, isRoot);
 
         return `
-    static lldc_parser_def_t parser_def[${keys.length}] = {
+    static lldc_struct_def_t parser_def[${keys.length}] = {
         ${
             keys.map(key => 
                 `{ ${JSON.stringify(key)}, (int (*)(void *, yyjson_val *))lldc__${[...path, snakeCase(key)].join('_')}_parse }`    
@@ -499,7 +499,7 @@ ${schema.typedef_ahead ? '' : 'typedef '}struct lldc_${path.join('_')}_arr_s {
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     ${!wantMallocSetters ? 'cwr_malloc_ctx_t *mctx = obj->_mctx;' : ''}
     memset(obj, 0, sizeof(lldc_${path.join('_')}_t));
 
@@ -519,7 +519,7 @@ ${schema.typedef_ahead ? '' : 'typedef '}struct lldc_${path.join('_')}_arr_s {
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -612,8 +612,8 @@ ${this.objImpl(key, schema, path, keys, false, false)}
         let impl = `
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
-    return lldc_parser_${schema.items.type}_arr_parse(obj, json);`;
-        let type = `parser_${schema.items.type == 'toint' ? 'uint': schema.items.type}`;
+    return lldc_struct_${schema.items.type}_arr_parse(obj, json);`;
+        let type = `struct_${schema.items.type == 'toint' ? 'uint': schema.items.type}`;
 
         switch (schema.items.type) {
             case 'object':
@@ -640,8 +640,8 @@ ${impl}
     arrArrNest (key, schema, path) {
         const n_path = [...path, 'item'];
 
-        let impl = `lldc_parser_${schema.items.type}_arr_parse(obj, val)`;
-        let type = `parser_${schema.items.type}`;
+        let impl = `lldc_struct_${schema.items.type}_arr_parse(obj, val)`;
+        let type = `struct_${schema.items.type}`;
 
         switch (schema.items.type) {
             case 'object':
@@ -979,7 +979,7 @@ fs.writeFileSync(
         header,
         '#ifndef LLDC_PARSERS_H',
         '#define LLDC_PARSERS_H',
-        '#include <lldc/parse.h>',
+        '#include <lldc/structure.h>',
         '#include <yyjson.h>',
         ...parser.typedef,
         ...parser.enums, 

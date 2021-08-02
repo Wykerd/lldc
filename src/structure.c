@@ -6,13 +6,13 @@
  * https://opensource.org/licenses/MIT.
  */
 
-#include <lldc/parse.h>
+#include <lldc/structure.h>
 #include <string.h>
 #include <stdlib.h>
 
 #define LLDC_PARSER_LEDGER_DEF_SIZE 8
 
-void *lldc_parser_malloc (lldc_parser_obj_t *parser, size_t size)
+void *lldc_struct_malloc (lldc_struct_obj_t *parser, size_t size)
 {
     if (parser->_mlog->pointers == NULL)
     {
@@ -41,10 +41,10 @@ void *lldc_parser_malloc (lldc_parser_obj_t *parser, size_t size)
     return ptr;
 }
 
-void *lldc_parser_strdup (lldc_parser_obj_t *parser, const char *str)
+void *lldc_struct_strdup (lldc_struct_obj_t *parser, const char *str)
 {
     size_t len = strlen(str);
-    char *n_str = lldc_parser_malloc(parser, len + 1);
+    char *n_str = lldc_struct_malloc(parser, len + 1);
     if (!n_str)
         return NULL;
     memcpy(n_str, str, len);
@@ -52,7 +52,12 @@ void *lldc_parser_strdup (lldc_parser_obj_t *parser, const char *str)
     return n_str;
 }
 
-void lldc_parser_free (lldc_parser_obj_t *parser)
+void lldc_struct_init (cwr_malloc_ctx_t *_mctx, lldc_struct_obj_root_t *parser)
+{
+    parser->_mlog = &parser->__mlog;
+}
+
+void lldc_struct_free (lldc_struct_obj_t *parser)
 {
     for (size_t i = 0; i < parser->_mlog->len; i++)
         cwr_free(parser->_mctx, parser->_mlog->pointers[i]);
@@ -64,7 +69,7 @@ void lldc_parser_free (lldc_parser_obj_t *parser)
     parser->_mlog->size = 0;
 }
 
-int lldc_parser_int_arr_parse (lldc_parser_int_arr_t *arr, yyjson_val *json)
+int lldc_struct_int_arr_parse (lldc_struct_int_arr_t *arr, yyjson_val *json)
 {
     if (!yyjson_is_arr(json))
         return -1;
@@ -77,7 +82,7 @@ int lldc_parser_int_arr_parse (lldc_parser_int_arr_t *arr, yyjson_val *json)
         return 0;
     }
 
-    arr->items = lldc_parser_malloc((lldc_parser_obj_t *)arr, sizeof(*arr->items) * arr_size);
+    arr->items = lldc_struct_malloc((lldc_struct_obj_t *)arr, sizeof(*arr->items) * arr_size);
     if (arr->items == NULL)
     {
         arr->len = 0;
@@ -95,7 +100,7 @@ int lldc_parser_int_arr_parse (lldc_parser_int_arr_t *arr, yyjson_val *json)
     return 0;
 }
 
-int lldc_parser_uint_arr_parse (lldc_parser_uint_arr_t *arr, yyjson_val *json)
+int lldc_struct_uint_arr_parse (lldc_struct_uint_arr_t *arr, yyjson_val *json)
 {
     if (!yyjson_is_arr(json))
         return -1;
@@ -108,7 +113,7 @@ int lldc_parser_uint_arr_parse (lldc_parser_uint_arr_t *arr, yyjson_val *json)
         return 0;
     }
 
-    arr->items = lldc_parser_malloc((lldc_parser_obj_t *)arr, sizeof(*arr->items) * arr_size);
+    arr->items = lldc_struct_malloc((lldc_struct_obj_t *)arr, sizeof(*arr->items) * arr_size);
     if (arr->items == NULL)
     {
         arr->len = 0;
@@ -126,7 +131,7 @@ int lldc_parser_uint_arr_parse (lldc_parser_uint_arr_t *arr, yyjson_val *json)
     return 0;
 }
 
-int lldc_parser_string_arr_parse (lldc_parser_string_arr_t *arr, yyjson_val *json)
+int lldc_struct_string_arr_parse (lldc_struct_string_arr_t *arr, yyjson_val *json)
 {
     if (!yyjson_is_arr(json))
         return -1;
@@ -139,7 +144,7 @@ int lldc_parser_string_arr_parse (lldc_parser_string_arr_t *arr, yyjson_val *jso
         return 0;
     }
 
-    arr->items = lldc_parser_malloc((lldc_parser_obj_t *)arr, sizeof(*arr->items) * arr_size);
+    arr->items = lldc_struct_malloc((lldc_struct_obj_t *)arr, sizeof(*arr->items) * arr_size);
     if (arr->items == NULL)
     {
         arr->len = 0;
@@ -151,13 +156,13 @@ int lldc_parser_string_arr_parse (lldc_parser_string_arr_t *arr, yyjson_val *jso
     yyjson_val *val;
     yyjson_arr_foreach(json, idx, max, val) {
         if (yyjson_is_str(val))
-            arr->items[idx] = lldc_parser_strdup((lldc_parser_obj_t *)arr, yyjson_get_str(val));
+            arr->items[idx] = lldc_struct_strdup((lldc_struct_obj_t *)arr, yyjson_get_str(val));
     }
 
     return 0;
 }
 
-int lldc_parser_toint_arr_parse(lldc_parser_uint_arr_t *arr, yyjson_val *json)
+int lldc_struct_toint_arr_parse(lldc_struct_uint_arr_t *arr, yyjson_val *json)
 {
     if (!yyjson_is_arr(json))
         return -1;
@@ -170,7 +175,7 @@ int lldc_parser_toint_arr_parse(lldc_parser_uint_arr_t *arr, yyjson_val *json)
         return 0;
     }
 
-    arr->items = lldc_parser_malloc((lldc_parser_obj_t *)arr, sizeof(*arr->items) * arr_size);
+    arr->items = lldc_struct_malloc((lldc_struct_obj_t *)arr, sizeof(*arr->items) * arr_size);
     if (arr->items == NULL)
     {
         arr->len = 0;
@@ -188,7 +193,7 @@ int lldc_parser_toint_arr_parse(lldc_parser_uint_arr_t *arr, yyjson_val *json)
     return 0;
 }
 
-int lldc_parser_double_arr_parse(lldc_parser_double_arr_t *arr, yyjson_val *json)
+int lldc_struct_double_arr_parse(lldc_struct_double_arr_t *arr, yyjson_val *json)
 {
     if (!yyjson_is_arr(json))
         return -1;
@@ -201,7 +206,7 @@ int lldc_parser_double_arr_parse(lldc_parser_double_arr_t *arr, yyjson_val *json
         return 0;
     }
 
-    arr->items = lldc_parser_malloc((lldc_parser_obj_t *)arr, sizeof(*arr->items) * arr_size);
+    arr->items = lldc_struct_malloc((lldc_struct_obj_t *)arr, sizeof(*arr->items) * arr_size);
     if (arr->items == NULL)
     {
         arr->len = 0;
@@ -219,7 +224,7 @@ int lldc_parser_double_arr_parse(lldc_parser_double_arr_t *arr, yyjson_val *json
     return 0;
 }
 
-int lldc_parser_timestamp_arr_parse(lldc_parser_timestamp_arr_t *arr, yyjson_val *json)
+int lldc_struct_timestamp_arr_parse(lldc_struct_timestamp_arr_t *arr, yyjson_val *json)
 {
     if (!yyjson_is_arr(json))
         return -1;
@@ -232,7 +237,7 @@ int lldc_parser_timestamp_arr_parse(lldc_parser_timestamp_arr_t *arr, yyjson_val
         return 0;
     }
 
-    arr->items = lldc_parser_malloc((lldc_parser_obj_t *)arr, sizeof(*arr->items) * arr_size);
+    arr->items = lldc_struct_malloc((lldc_struct_obj_t *)arr, sizeof(*arr->items) * arr_size);
     if (arr->items == NULL)
     {
         arr->len = 0;

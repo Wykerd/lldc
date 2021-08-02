@@ -22,8 +22,14 @@ add_library(lldc
     ${CMAKE_CURRENT_SOURCE_DIR}/src/hashmap.c
     # Parsing
     ${CMAKE_CURRENT_SOURCE_DIR}/deps/yyjson/yyjson.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/parse.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/structure.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/parsers.c
+    # Client
+    # ${CMAKE_CURRENT_SOURCE_DIR}/src/client.c
+    # Gateway
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/gateway.c
+    # Rest
+    # ${CMAKE_CURRENT_SOURCE_DIR}/src/rest.c
 )
 
 set_target_properties(cwire PROPERTIES

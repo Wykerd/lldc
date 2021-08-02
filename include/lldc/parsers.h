@@ -15,7 +15,7 @@
  */
 #ifndef LLDC_PARSERS_H
 #define LLDC_PARSERS_H
-#include <lldc/parse.h>
+#include <lldc/structure.h>
 #include <yyjson.h>
 /* Component Structure */
 typedef struct lldc_component_s lldc_component_t;
@@ -556,8 +556,8 @@ typedef enum lldc_connection_visibility {
 /* Error Messages */
 typedef struct lldc_discord_error_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * Error code 
      */
@@ -575,8 +575,8 @@ typedef struct lldc_discord_error_s {
 /* User Structure */
 typedef struct lldc_user_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the user's id 
      */
@@ -625,16 +625,16 @@ typedef struct lldc_user_s {
 /* User Array */
 typedef struct lldc_user_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_user_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_user_arr_t;
 /* Team Member Object */
 typedef struct lldc_team_member_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the user's membership state on the team 
      */
@@ -651,16 +651,16 @@ typedef struct lldc_team_member_s {
 /* Team Member Array */
 typedef struct lldc_team_member_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_team_member_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_team_member_arr_t;
 /* Team Object */
 typedef struct lldc_team_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: a hash of the image of the team's icon 
      */
@@ -685,8 +685,8 @@ typedef struct lldc_team_s {
 /* Application Structure */
 typedef struct lldc_application_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the id of the app 
      */
@@ -706,7 +706,7 @@ typedef struct lldc_application_s {
     /** 
      * OPTIONAL: an array of rpc origin urls, if rpc is enabled 
      */
-    lldc_parser_string_arr_t rpc_origins;
+    lldc_struct_string_arr_t rpc_origins;
     /** 
      * when false only app owner can join the app's bot to guilds 
      */
@@ -763,8 +763,8 @@ typedef struct lldc_application_s {
 /* Subsection of channel */
 typedef struct lldc_partial_channel_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the id of this channel 
      */
@@ -785,16 +785,16 @@ typedef struct lldc_partial_channel_s {
 /* Partial Channel Array */
 typedef struct lldc_partial_channel_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_partial_channel_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_partial_channel_arr_t;
 /* Subsection of guild */
 typedef struct lldc_partial_guild_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * guild id 
      */
@@ -822,7 +822,7 @@ typedef struct lldc_partial_guild_s {
     /** 
      * enabled guild features 
      */
-    lldc_parser_string_arr_t features;
+    lldc_struct_string_arr_t features;
     /** 
      * OPTIONAL: the vanity url code for the guild 
      */
@@ -839,8 +839,8 @@ typedef struct lldc_partial_guild_s {
 /* Used to represent a webhook */
 typedef struct lldc_webhook_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the id of the webhook 
      */
@@ -893,16 +893,16 @@ typedef struct lldc_webhook_s {
 /* Webhook Array */
 typedef struct lldc_webhook_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_webhook_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_webhook_arr_t;
 /* Integration Account Structure */
 typedef struct lldc_interaction_account_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * id of the account 
      */
@@ -915,8 +915,8 @@ typedef struct lldc_interaction_account_s {
 /* audit log changes */
 typedef struct lldc_audit_log_changes_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: new value of the key 
      */
@@ -933,8 +933,8 @@ typedef struct lldc_audit_log_changes_s {
 /* Optional Audit Entry Info */
 typedef struct lldc_audit_log_options_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * number of days after which inactive members were kicked 
      */
@@ -971,15 +971,15 @@ typedef struct lldc_audit_log_options_s {
 /* OPTIONAL: changes made to the target_id */
 typedef struct lldc_audit_log_entry_changes_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_audit_log_changes_t *items;
     size_t len;
 } lldc_audit_log_entry_changes_arr_t;
 /* audit log entry */
 typedef struct lldc_audit_log_entry_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: id of the affected entity (webhook, user, role, etc.) 
      */
@@ -1012,7 +1012,7 @@ typedef struct lldc_audit_log_entry_s {
 /* partial integration objects */
 typedef struct lldc_audit_log_integrations_item_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     /** 
      * integration id 
      */
@@ -1033,22 +1033,22 @@ typedef struct lldc_audit_log_integrations_item_s {
 /* list of partial integration objects */
 typedef struct lldc_audit_log_integrations_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_audit_log_integrations_item_t *items;
     size_t len;
 } lldc_audit_log_integrations_arr_t;
 /* list of audit log entries */
 typedef struct lldc_audit_log_audit_log_entries_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_audit_log_entry_t *items;
     size_t len;
 } lldc_audit_log_audit_log_entries_arr_t;
 /* Audit Logs */
 typedef struct lldc_audit_log_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * list of webhooks found in the audit log 
      */
@@ -1069,8 +1069,8 @@ typedef struct lldc_audit_log_s {
 /* Guild Member */
 typedef struct lldc_guild_member_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: the user this guild member represents 
      */
@@ -1082,7 +1082,7 @@ typedef struct lldc_guild_member_s {
     /** 
      * array of role object ids 
      */
-    lldc_parser_snowflake_arr_t roles;
+    lldc_struct_snowflake_arr_t roles;
     /** 
      * when the user joined the guild 
      */
@@ -1111,16 +1111,16 @@ typedef struct lldc_guild_member_s {
 /* Guild Member Array */
 typedef struct lldc_guild_member_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_guild_member_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_guild_member_arr_t;
 /* Partial Guild Member (excluding user) */
 typedef struct lldc_partial_guild_member_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: this users guild nickname 
      */
@@ -1128,7 +1128,7 @@ typedef struct lldc_partial_guild_member_s {
     /** 
      * array of role object ids 
      */
-    lldc_parser_snowflake_arr_t roles;
+    lldc_struct_snowflake_arr_t roles;
     /** 
      * when the user joined the guild 
      */
@@ -1157,16 +1157,16 @@ typedef struct lldc_partial_guild_member_s {
 /* Partial Guild Member Array */
 typedef struct lldc_partial_guild_member_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_partial_guild_member_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_partial_guild_member_arr_t;
 /* Represents a guild or DM channel within Discord */
 typedef struct lldc_channel_overwrite_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * role or user id 
      */
@@ -1187,16 +1187,16 @@ typedef struct lldc_channel_overwrite_s {
 /* Channel Overwrite Array */
 typedef struct lldc_channel_overwrite_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_channel_overwrite_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_channel_overwrite_arr_t;
 /* Role Tags Structure */
 typedef struct lldc_role_tags_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: the id of the bot this role belongs to 
      */
@@ -1209,8 +1209,8 @@ typedef struct lldc_role_tags_s {
 /* Roles represent a set of permissions attached to a group of users. Roles have unique names, colors, and can be "pinned" to the side bar, causing their members to be listed separately. Roles are unique per guild, and can have separate permission profiles for the global context (guild) and channel context. The @everyone role has the same ID as the guild it belongs to. */
 typedef struct lldc_role_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * role id 
      */
@@ -1251,16 +1251,16 @@ typedef struct lldc_role_s {
 /* Role Array */
 typedef struct lldc_role_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_role_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_role_arr_t;
 /* The thread metadata object contains a number of thread-specific channel fields that are not needed by other channel types. */
 typedef struct lldc_thread_metadata_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * whether the thread is archived 
      */
@@ -1281,8 +1281,8 @@ typedef struct lldc_thread_metadata_s {
 /* A thread member is used to indicate whether a user has joined a thread or not. */
 typedef struct lldc_thread_member_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: the id of the thread 
      */
@@ -1303,8 +1303,8 @@ typedef struct lldc_thread_member_s {
 /* Attachment Structure */
 typedef struct lldc_attachment_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * attachment id 
      */
@@ -1341,16 +1341,16 @@ typedef struct lldc_attachment_s {
 /* Attachment Array */
 typedef struct lldc_attachment_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_attachment_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_attachment_arr_t;
 /* Channel Mention Structure */
 typedef struct lldc_channel_mention_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * id of the channel 
      */
@@ -1371,16 +1371,16 @@ typedef struct lldc_channel_mention_s {
 /* Channel Mention Array */
 typedef struct lldc_channel_mention_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_channel_mention_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_channel_mention_arr_t;
 /* Embed Author Structure */
 typedef struct lldc_embed_author_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: name of author 
      */
@@ -1401,8 +1401,8 @@ typedef struct lldc_embed_author_s {
 /* Embed Footer Structure */
 typedef struct lldc_embed_footer_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * footer text 
      */
@@ -1419,8 +1419,8 @@ typedef struct lldc_embed_footer_s {
 /* Embed Image Structure */
 typedef struct lldc_embed_image_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: source url of image (only supports http(s) and attachments) 
      */
@@ -1441,8 +1441,8 @@ typedef struct lldc_embed_image_s {
 /* Embed Provider Structure */
 typedef struct lldc_embed_provider_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: name of provider 
      */
@@ -1455,8 +1455,8 @@ typedef struct lldc_embed_provider_s {
 /* Embed Thumbnail Structure */
 typedef struct lldc_embed_thumbnail_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: source url of thumbnail (only supports http(s) and attachments) 
      */
@@ -1477,8 +1477,8 @@ typedef struct lldc_embed_thumbnail_s {
 /* Embed Video Structure */
 typedef struct lldc_embed_video_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: source url of video 
      */
@@ -1499,8 +1499,8 @@ typedef struct lldc_embed_video_s {
 /* Embed Field Structure */
 typedef struct lldc_embed_field_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * name of the field 
      */
@@ -1517,16 +1517,16 @@ typedef struct lldc_embed_field_s {
 /* Embed Field Array */
 typedef struct lldc_embed_field_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_embed_field_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_embed_field_arr_t;
 /* Embed Structure */
 typedef struct lldc_embed_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: title of embed 
      */
@@ -1583,16 +1583,16 @@ typedef struct lldc_embed_s {
 /* Embed Array */
 typedef struct lldc_embed_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_embed_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_embed_arr_t;
 /* Emoji Structure */
 typedef struct lldc_emoji_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: emoji id 
      */
@@ -1604,7 +1604,7 @@ typedef struct lldc_emoji_s {
     /** 
      * OPTIONAL: roles allowed to use this emoji 
      */
-    lldc_parser_snowflake_arr_t roles;
+    lldc_struct_snowflake_arr_t roles;
     /** 
      * OPTIONAL: user that created this emoji 
      */
@@ -1629,16 +1629,16 @@ typedef struct lldc_emoji_s {
 /* Emoji Array */
 typedef struct lldc_emoji_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_emoji_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_emoji_arr_t;
 /* Reaction Structure */
 typedef struct lldc_reaction_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * times this emoji has been used to react 
      */
@@ -1655,16 +1655,16 @@ typedef struct lldc_reaction_s {
 /* Reaction Array */
 typedef struct lldc_reaction_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_reaction_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_reaction_arr_t;
 /* Select Option Structure */
 typedef struct lldc_select_option_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the user-facing name of the option, max 25 characters 
      */
@@ -1689,24 +1689,24 @@ typedef struct lldc_select_option_s {
 /* Select Option Array */
 typedef struct lldc_select_option_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_select_option_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_select_option_arr_t;
 /* Component Array */
 typedef struct lldc_component_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_component_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_component_arr_t;
 /* Component Structure */
 struct lldc_component_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * component type 
      */
@@ -1759,8 +1759,8 @@ struct lldc_component_s {
 /* Represents a sticker that can be sent in messages. */
 typedef struct lldc_sticker_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * id of the sticker 
      */
@@ -1809,16 +1809,16 @@ typedef struct lldc_sticker_s {
 /* Sticker Array */
 typedef struct lldc_sticker_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_sticker_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_sticker_arr_t;
 /* The smallest amount of data required to render a sticker. A partial sticker object. */
 typedef struct lldc_sticker_item_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * id of the sticker 
      */
@@ -1835,16 +1835,16 @@ typedef struct lldc_sticker_item_s {
 /* Sticker Item Array */
 typedef struct lldc_sticker_item_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_sticker_item_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_sticker_item_arr_t;
 /* Represents a pack of standard stickers. */
 typedef struct lldc_sticker_packs_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * id of the sticker pack 
      */
@@ -1877,8 +1877,8 @@ typedef struct lldc_sticker_packs_s {
 /* Message Activity Structure */
 typedef struct lldc_message_activity_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * type of message activity 
      */
@@ -1891,8 +1891,8 @@ typedef struct lldc_message_activity_s {
 /* Message Reference Structure */
 typedef struct lldc_message_reference_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: id of the originating message 
      */
@@ -1913,8 +1913,8 @@ typedef struct lldc_message_reference_s {
 /* Message Interaction Structure */
 typedef struct lldc_message_interaction_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * id of the interaction 
      */
@@ -1935,8 +1935,8 @@ typedef struct lldc_message_interaction_s {
 /* Represents a message sent in a channel within Discord. */
 typedef struct lldc_message_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * id of the message 
      */
@@ -1984,7 +1984,7 @@ typedef struct lldc_message_s {
     /** 
      * roles specifically mentioned in this message 
      */
-    lldc_parser_snowflake_arr_t mention_roles;
+    lldc_struct_snowflake_arr_t mention_roles;
     /** 
      * OPTIONAL: channels specifically mentioned in this message 
      */
@@ -2053,20 +2053,20 @@ typedef struct lldc_message_s {
 /* The allowed mention field allows for more granular control over mentions without various hacks to the message content. This will always validate against message content to avoid phantom pings (e.g. to ping everyone, you must still have @everyone in the message content), and check against user/bot permissions. */
 typedef struct lldc_allowed_mentions_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * An array of allowed mention types to parse from the content. 
      */
-    lldc_parser_string_arr_t parse;
+    lldc_struct_string_arr_t parse;
     /** 
      * Array of role_ids to mention (Max size of 100) 
      */
-    lldc_parser_snowflake_arr_t roles;
+    lldc_struct_snowflake_arr_t roles;
     /** 
      * Array of user_ids to mention (Max size of 100) 
      */
-    lldc_parser_snowflake_arr_t users;
+    lldc_struct_snowflake_arr_t users;
     /** 
      * For replies, whether to mention the author of the message being replied to (default false) 
      */
@@ -2075,8 +2075,8 @@ typedef struct lldc_allowed_mentions_s {
 /* Followed Channel Structure */
 typedef struct lldc_followed_channel_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * source channel id 
      */
@@ -2089,8 +2089,8 @@ typedef struct lldc_followed_channel_s {
 /* Represents a guild or DM channel within Discord */
 typedef struct lldc_channel_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the id of this channel 
      */
@@ -2199,16 +2199,16 @@ typedef struct lldc_channel_s {
 /* Channel Array */
 typedef struct lldc_channel_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_channel_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_channel_arr_t;
 /* Used to represent a user's voice connection status. */
 typedef struct lldc_voice_state_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: the guild id this voice state is for 
      */
@@ -2265,16 +2265,16 @@ typedef struct lldc_voice_state_s {
 /* Voice State Array */
 typedef struct lldc_voice_state_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_voice_state_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_voice_state_arr_t;
 /* Start and End timestamps */
 typedef struct lldc_activity_timestamps_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: unix time (in milliseconds) of when the activity started 
      */
@@ -2287,8 +2287,8 @@ typedef struct lldc_activity_timestamps_s {
 /* Activity Party Structure */
 typedef struct lldc_activity_party_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: the id of the party 
      */
@@ -2296,13 +2296,13 @@ typedef struct lldc_activity_party_s {
     /** 
      * OPTIONAL: used to show the party's current and maximum size 
      */
-    lldc_parser_int_arr_t size;
+    lldc_struct_int_arr_t size;
 } lldc_activity_party_t;
 /* Activity Assets Structure */
 typedef struct lldc_activity_assets_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: the id for a large asset of the activity, usually a snowflake 
      */
@@ -2323,8 +2323,8 @@ typedef struct lldc_activity_assets_s {
 /* Activity Secrets Structure */
 typedef struct lldc_activity_secrets_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: the secret for joining a party 
      */
@@ -2341,7 +2341,7 @@ typedef struct lldc_activity_secrets_s {
 /* When received over the gateway, the buttons field is an array of strings, which are the button labels. Bots cannot access a user's activity button URLs. When sending, the buttons field must be an array of the below object: */
 typedef struct lldc_activity_buttons_item_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     /** 
      * the text shown on the button (1-32 characters) 
      */
@@ -2354,15 +2354,15 @@ typedef struct lldc_activity_buttons_item_s {
 /* OPTIONAL: the custom buttons shown in the Rich Presence (max 2) */
 typedef struct lldc_activity_buttons_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_activity_buttons_item_t *items;
     size_t len;
 } lldc_activity_buttons_arr_t;
 /* Presence Activity */
 typedef struct lldc_activity_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the activity's name 
      */
@@ -2427,8 +2427,8 @@ typedef struct lldc_activity_s {
 /* Presence Activity for Bot */
 typedef struct lldc_activity_bot_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the activity's name 
      */
@@ -2445,16 +2445,16 @@ typedef struct lldc_activity_bot_s {
 /* Activity Array */
 typedef struct lldc_activity_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_activity_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_activity_arr_t;
 /* Active sessions are indicated with an "online", "idle", or "dnd" string per platform. If a user is offline or invisible, the corresponding field is not present. */
 typedef struct lldc_client_status_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: the user's status set for an active desktop (Windows, Linux, Mac) application session 
      */
@@ -2471,8 +2471,8 @@ typedef struct lldc_client_status_s {
 /* A user's presence is their current state on a guild. This event is sent when a user's presence or info, such as name or avatar, is updated. */
 typedef struct lldc_presence_update_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the user presence is being updated for 
      */
@@ -2497,16 +2497,16 @@ typedef struct lldc_presence_update_s {
 /* Presence Update Array */
 typedef struct lldc_presence_update_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_presence_update_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_presence_update_arr_t;
 /* Stage Instance Structure */
 typedef struct lldc_stage_instance_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * The id of this Stage instance 
      */
@@ -2535,16 +2535,16 @@ typedef struct lldc_stage_instance_s {
 /* Stage Instance Array */
 typedef struct lldc_stage_instance_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_stage_instance_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_stage_instance_arr_t;
 /* Welcome Screen Channel Structure */
 typedef struct lldc_welcome_screen_channel_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the channel's id 
      */
@@ -2565,16 +2565,16 @@ typedef struct lldc_welcome_screen_channel_s {
 /* Welcome Screen Channel Array */
 typedef struct lldc_welcome_screen_channel_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_welcome_screen_channel_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_welcome_screen_channel_arr_t;
 /* Welcome Screen Structure */
 typedef struct lldc_welcome_screen_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: the server description shown in the welcome screen 
      */
@@ -2587,8 +2587,8 @@ typedef struct lldc_welcome_screen_s {
 /* Guild Widget Structure - it's called guilds 'cause of conflict */
 typedef struct lldc_guilds_widget_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * whether the widget is enabled 
      */
@@ -2601,8 +2601,8 @@ typedef struct lldc_guilds_widget_s {
 /* Guild Preview Structure */
 typedef struct lldc_guild_preview_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * guild id 
      */
@@ -2630,7 +2630,7 @@ typedef struct lldc_guild_preview_s {
     /** 
      * enabled guild features 
      */
-    lldc_parser_string_arr_t features;
+    lldc_struct_string_arr_t features;
     /** 
      * approximate number of members in this guild 
      */
@@ -2647,8 +2647,8 @@ typedef struct lldc_guild_preview_s {
 /* Integration Account Structure */
 typedef struct lldc_integration_account_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * id of the account 
      */
@@ -2661,8 +2661,8 @@ typedef struct lldc_integration_account_s {
 /* Integration Application Structure */
 typedef struct lldc_integration_application_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the id of the app 
      */
@@ -2691,8 +2691,8 @@ typedef struct lldc_integration_application_s {
 /* Integration Structure */
 typedef struct lldc_integration_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * integration id 
      */
@@ -2757,16 +2757,16 @@ typedef struct lldc_integration_s {
 /* Integration Array */
 typedef struct lldc_integration_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_integration_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_integration_arr_t;
 /* Partial Integration Structure */
 typedef struct lldc_partial_integration_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * integration id 
      */
@@ -2791,16 +2791,16 @@ typedef struct lldc_partial_integration_s {
 /* Partial Integration Array */
 typedef struct lldc_partial_integration_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_partial_integration_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_partial_integration_arr_t;
 /* Ban Structure */
 typedef struct lldc_ban_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * OPTIONAL: the reason for the ban 
      */
@@ -2813,16 +2813,16 @@ typedef struct lldc_ban_s {
 /* Ban Array */
 typedef struct lldc_ban_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_ban_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_ban_arr_t;
 /* Guilds in Discord represent an isolated collection of users and channels, and are often referred to as "servers" in the UI. */
 typedef struct lldc_guild_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * guild id 
      */
@@ -2902,7 +2902,7 @@ typedef struct lldc_guild_s {
     /** 
      * enabled guild features 
      */
-    lldc_parser_string_arr_t features;
+    lldc_struct_string_arr_t features;
     /** 
      * required MFA level for the guild 
      */
@@ -3027,16 +3027,16 @@ typedef struct lldc_guild_s {
 /* Guild Array */
 typedef struct lldc_guild_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_guild_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_guild_arr_t;
 /* Represents a code that when used, creates a guild based on a snapshot of an existing guild. */
 typedef struct lldc_guild_template_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the template code (unique ID) 
      */
@@ -3081,16 +3081,16 @@ typedef struct lldc_guild_template_s {
 /* Guild Template Array */
 typedef struct lldc_guild_template_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_guild_template_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_guild_template_arr_t;
 /* Invite Stage Instance Structure */
 typedef struct lldc_invite_stage_instance_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the members speaking in the Stage 
      */
@@ -3111,8 +3111,8 @@ typedef struct lldc_invite_stage_instance_s {
 /* Extra information about an invite, will extend the invite object. */
 typedef struct lldc_invite_metadata_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * number of times this invite has been used 
      */
@@ -3137,8 +3137,8 @@ typedef struct lldc_invite_metadata_s {
 /* Represents a code that when used, adds a user to a guild or group DM channel. */
 typedef struct lldc_invite_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * the invite code (unique ID) 
      */
@@ -3187,8 +3187,8 @@ typedef struct lldc_invite_s {
 /* Connection Structure */
 typedef struct lldc_connection_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * id of the connection account 
      */
@@ -3229,8 +3229,8 @@ typedef struct lldc_connection_s {
 /* Voice Region Structure */
 typedef struct lldc_voice_region_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t __mlog;
     /** 
      * unique ID for the region 
      */
@@ -3259,10 +3259,10 @@ typedef struct lldc_voice_region_s {
 /* Voice Region Array */
 typedef struct lldc_voice_region_arr_s {
     cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_struct_malloc_ledger_t *_mlog;
     lldc_voice_region_t *items;
     size_t len;
-    lldc_parser_malloc_ledger_t __mlog;
+    lldc_struct_malloc_ledger_t __mlog;
 } lldc_voice_region_arr_t;
 /**
 * Discord Error Parser
