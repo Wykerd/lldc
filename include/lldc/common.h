@@ -37,6 +37,30 @@
 #define LLDC_MIME_GIF               "image/gif"
 #define LLDC_MIME_WEBP              "image/webp"
 
+/* Message Formatting */
+#define LLDC_FORMAT_USER            "<@%s>"
+#define LLDC_FORMAT_USER_NICK       "<@!%s>"
+#define LLDC_FORMAT_CHANNEL         "<#%s>"
+#define LLDC_FORMAT_ROLE            "<#&%s>"
+/* NAME, ID */
+#define LLDC_FORMAT_CUSTOM_EMOJI    "<:%s:%s>"
+/* NAME, ID */
+#define LLDC_FORMAT_CUSTOM_AEMOJI   "<a:%s:%s>"
+/* Unix timestamp (seconds) */
+#define LLDC_FORMAT_TIMESTAMP       "<t:%llu>"
+/** 
+ * Unix timestamp (seconds)
+ * Format:
+ * t	16:20	                        Short Time
+ * T	16:20:30	                    Long Time
+ * d	20/04/2021	                    Short Date
+ * D	20 April 2021	                Long Date
+ * f 	20 April 2021 16:20	            Short Date/Time
+ * F	Tuesday, 20 April 2021 16:20	Long Date/Time
+ * R	2 months ago	                Relative Time
+ */
+#define LLDC_FORMAT_TIMESTAMP_F      "<t:%llu:%c>"
+
 typedef uint64_t snowflake_t;
 
 /**
