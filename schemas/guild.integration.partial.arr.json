@@ -1,0 +1,10 @@
+{
+    "title": "Partial Integration",
+    "description": "Partial Integration Array",
+    "type": "array",
+    "items": {
+        "description": "Partial Integration Objects",
+        "type": "object",
+        "existing_parser": "partial_integration"
+    }
+}

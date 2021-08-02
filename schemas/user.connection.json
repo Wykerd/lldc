@@ -1,0 +1,58 @@
+{
+    "title": "Connection",
+    "description": "Connection Structure",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "id of the connection account",
+            "type": "string"
+        },
+        "name": {
+            "description": "the username of the connection account",
+            "type": "string"
+        },
+        "type": {
+            "description": "the service of the connection (twitch, youtube)",
+            "type": "string"
+        },
+        "revoked": {
+            "description": "OPTIONAL: whether the connection is revoked",
+            "type": "boolean"
+        },
+        "integrations": {
+            "description": "OPTIONAL: an array of partial server integrations",
+            "type": "array",
+            "existing_parser": "partial_integration_arr"
+        },
+        "verified": {
+            "description": "whether the connection is verified",
+            "type": "boolean"
+        },
+        "friend_sync": {
+            "description": "whether friend sync is enabled for this connection",
+            "type": "boolean"
+        },
+        "show_activity": {
+            "description": "whether activities related to this connection will be shown in presence updates",
+            "type": "boolean"
+        },
+        "visibility": {
+            "description": "visibility of this connection",
+            "type": "int",
+            "enum_type": "connection_visibility",
+            "enum_prefix": "LLDC_CONNECTION_VISIBLE_",
+            "enum": [
+                [
+                    "0",
+                    "None",
+                    "invisible to everyone except the user themselves"
+                ],
+                [
+                    "1",
+                    "Everyone",
+                    "visible to everyone"
+                ]
+            ]
+        }
+    }
+}

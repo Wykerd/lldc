@@ -17,6 +17,126 @@
 #include <lldc/hashmap.h>
 #include <stdlib.h>
 /**
+ * visibility Parser
+ * visibility of this connection
+ * type: object.int
+ */
+static
+int lldc__connection_visibility_parse (lldc_connection_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->visibility = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * show_activity Parser
+ * whether activities related to this connection will be shown in presence updates
+ * type: object.bool
+ */
+static
+int lldc__connection_show_activity_parse (lldc_connection_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_bool(json))
+        return -1;
+
+    obj->show_activity = yyjson_get_bool(json);
+
+    return 0;
+}
+/**
+ * friend_sync Parser
+ * whether friend sync is enabled for this connection
+ * type: object.bool
+ */
+static
+int lldc__connection_friend_sync_parse (lldc_connection_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_bool(json))
+        return -1;
+
+    obj->friend_sync = yyjson_get_bool(json);
+
+    return 0;
+}
+/**
+ * verified Parser
+ * whether the connection is verified
+ * type: object.bool
+ */
+static
+int lldc__connection_verified_parse (lldc_connection_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_bool(json))
+        return -1;
+
+    obj->verified = yyjson_get_bool(json);
+
+    return 0;
+}
+/**
+ * revoked Parser
+ * OPTIONAL: whether the connection is revoked
+ * type: object.bool
+ */
+static
+int lldc__connection_revoked_parse (lldc_connection_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_bool(json))
+        return -1;
+
+    obj->revoked = yyjson_get_bool(json);
+
+    return 0;
+}
+/**
+ * type Parser
+ * the service of the connection (twitch, youtube)
+ * type: object.string
+ */
+static
+int lldc__connection_type_parse (lldc_connection_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->type = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * name Parser
+ * the username of the connection account
+ * type: object.string
+ */
+static
+int lldc__connection_name_parse (lldc_connection_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * id Parser
+ * id of the connection account
+ * type: object.string
+ */
+static
+int lldc__connection_id_parse (lldc_connection_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->id = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
  * expires_at Parser
  * OPTIONAL: the expiration date of this invite, returned from the GET /invites/<code> endpoint when with_expiration is true
  * type: object.timestamp
@@ -11083,6 +11203,52 @@ int lldc_partial_integration_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_integr
     return 0;
 }
 /**
+* Partial Integration Parser
+* Partial Integration Objects
+* type: object.object
+*/
+static
+int lldc__partial_integration_item_parse (lldc_partial_integration_t *_obj, yyjson_val *json)
+{
+    return lldc_partial_integration_parse(_obj->_mctx, _obj, json, 1);
+}
+int lldc_partial_integration_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_integration_arr_t *obj, yyjson_val *json, int has_existing_ledger)
+{
+
+    if (!yyjson_is_arr(json))
+        return -1;
+
+    size_t arr_size = yyjson_arr_size(json);
+    if (!arr_size)
+    {
+        obj->items = NULL;
+        obj->len = 0;
+        return 0;
+    }
+
+    obj->_mctx = _mctx;
+    if (!has_existing_ledger)
+        obj->_mlog = &obj->__mlog;
+
+    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    if (obj->items == NULL)
+    {
+        obj->len = 0;
+        return -1;
+    }
+    obj->len = arr_size;
+
+    size_t idx, max;
+    yyjson_val *val;
+    yyjson_arr_foreach(json, idx, max, val) {
+        obj->items[idx]._mctx = obj->_mctx;
+        obj->items[idx]._mlog = obj->_mlog;
+        lldc__partial_integration_item_parse(&obj->items[idx], val);
+    }
+
+    return 0;
+}
+/**
 * user Parser
 * the banned user
 * type: object.object
@@ -11831,6 +11997,69 @@ int lldc_invite_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_t *obj, yyjson_val *
     lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_invite_t));
+
+    obj->_mctx = _mctx;
+    if (!has_existing_ledger)
+        obj->_mlog = &obj->__mlog;
+    else
+        obj->_mlog = ledger;
+
+    yyjson_val *key, *val;
+    yyjson_obj_iter iter;
+    yyjson_obj_iter_init(json, &iter);
+    while ((key = yyjson_obj_iter_next(&iter))) {
+        val = yyjson_obj_iter_get_val(key);
+        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        if (parser)
+            parser(obj, val);
+    }
+
+    return 0;
+}
+/**
+* integrations Parser
+* OPTIONAL: an array of partial server integrations
+* type: object.object
+*/
+static
+int lldc__connection_integrations_parse (lldc_connection_t *_obj, yyjson_val *json)
+{
+    _obj->integrations._mlog = _obj->_mlog;
+    return lldc_partial_integration_arr_parse(_obj->_mctx, &_obj->integrations, json, 1);
+}
+int lldc_connection_parse (cwr_malloc_ctx_t *_mctx, lldc_connection_t *obj, yyjson_val *json, int has_existing_ledger)
+{
+
+    static lldc_parser_def_t parser_def[9] = {
+        { "id", (int (*)(void *, yyjson_val *))lldc__connection_id_parse },
+        { "name", (int (*)(void *, yyjson_val *))lldc__connection_name_parse },
+        { "type", (int (*)(void *, yyjson_val *))lldc__connection_type_parse },
+        { "revoked", (int (*)(void *, yyjson_val *))lldc__connection_revoked_parse },
+        { "integrations", (int (*)(void *, yyjson_val *))lldc__connection_integrations_parse },
+        { "verified", (int (*)(void *, yyjson_val *))lldc__connection_verified_parse },
+        { "friend_sync", (int (*)(void *, yyjson_val *))lldc__connection_friend_sync_parse },
+        { "show_activity", (int (*)(void *, yyjson_val *))lldc__connection_show_activity_parse },
+        { "visibility", (int (*)(void *, yyjson_val *))lldc__connection_visibility_parse }
+    };
+
+    static lldc_hashmap_entry_t parser_table[16] = { 0 };
+    static lldc_hashmap_t parsers = {  
+        .size = 16,
+        .len = 0,
+        .table = parser_table,
+        .hash = lldc_hashmap_hash_str,
+        .compare = (int (*)(const void *, const void *))strcmp,
+        .dup_key = lldc_hashmap_dup_echo,
+        .free_key = lldc_hashmap_free_noop
+    };
+    LLDC_PARSER_LOAD(9)
+
+    if (!yyjson_is_obj(json))
+        return -1;
+
+    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    
+    memset(obj, 0, sizeof(lldc_connection_t));
 
     obj->_mctx = _mctx;
     if (!has_existing_ledger)

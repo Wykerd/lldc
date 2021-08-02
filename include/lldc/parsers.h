@@ -547,6 +547,12 @@ typedef enum lldc_invite_target {
     /* EMBEDDED_APPLICATION */
     LLDC_INVITE_TARGET_EMBEDDED_APPLICATION = (2)
 } lldc_invite_target_t;
+typedef enum lldc_connection_visibility {
+    /* invisible to everyone except the user themselves */
+    LLDC_CONNECTION_VISIBLE_NONE = (0),
+    /* visible to everyone */
+    LLDC_CONNECTION_VISIBLE_EVERYONE = (1)
+} lldc_connection_visibility_t;
 /* Error Messages */
 typedef struct lldc_discord_error_s {
     cwr_malloc_ctx_t *_mctx;
@@ -2753,6 +2759,14 @@ typedef struct lldc_partial_integration_s {
      */
     lldc_integration_account_t account;
 } lldc_partial_integration_t;
+/* Partial Integration Array */
+typedef struct lldc_partial_integration_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_partial_integration_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_partial_integration_arr_t;
 /* Ban Structure */
 typedef struct lldc_ban_s {
     cwr_malloc_ctx_t *_mctx;
@@ -3187,6 +3201,48 @@ typedef struct lldc_invite_s {
      */
     lldc_invite_stage_instance_t stage_instance;
 } lldc_invite_t;
+/* Connection Structure */
+typedef struct lldc_connection_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * id of the connection account 
+     */
+    const char *id;
+    /** 
+     * the username of the connection account 
+     */
+    const char *name;
+    /** 
+     * the service of the connection (twitch, youtube) 
+     */
+    const char *type;
+    /** 
+     * OPTIONAL: whether the connection is revoked 
+     */
+    int revoked;
+    /** 
+     * OPTIONAL: an array of partial server integrations 
+     */
+    lldc_partial_integration_arr_t integrations;
+    /** 
+     * whether the connection is verified 
+     */
+    int verified;
+    /** 
+     * whether friend sync is enabled for this connection 
+     */
+    int friend_sync;
+    /** 
+     * whether activities related to this connection will be shown in presence updates 
+     */
+    int show_activity;
+    /** 
+     * visibility of this connection 
+     */
+    lldc_connection_visibility_t visibility;
+} lldc_connection_t;
 /**
 * Discord Error Parser
 * Error Messages
@@ -3608,6 +3664,11 @@ int lldc_integration_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_arr_t 
 */
 int lldc_partial_integration_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_integration_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
+* Partial Integration Parser
+* Partial Integration Array
+*/
+int lldc_partial_integration_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_integration_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
 * Ban Parser
 * Ban Structure
 */
@@ -3657,4 +3718,9 @@ int lldc_invite_metadata_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_metadata_t 
 * Represents a code that when used, adds a user to a guild or group DM channel.
 */
 int lldc_invite_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Connection Parser
+* Connection Structure
+*/
+int lldc_connection_parse (cwr_malloc_ctx_t *_mctx, lldc_connection_t *obj, yyjson_val *json, int has_existing_ledger);
 #endif

@@ -109,6 +109,7 @@
     "guild.integration.json",
     "guild.integration.arr.json",
     "guild.integration.partial.json",
+    "guild.integration.partial.arr.json",
     "guild.ban.json",
     "guild.ban.arr.json",
     "guild.json",
@@ -119,5 +120,7 @@
 
     "invite.stage_instance.json",
     "invite.metadata.json",
-    "invite.json"
+    "invite.json",
+
+    "user.connection.json"
 ]
