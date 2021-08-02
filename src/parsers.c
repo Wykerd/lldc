@@ -87,7 +87,7 @@ int lldc__voice_region_name_parse (lldc_voice_region_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -102,7 +102,7 @@ int lldc__voice_region_id_parse (lldc_voice_region_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->id = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->id = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -192,7 +192,7 @@ int lldc__connection_type_parse (lldc_connection_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->type = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->type = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -207,7 +207,7 @@ int lldc__connection_name_parse (lldc_connection_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -222,7 +222,7 @@ int lldc__connection_id_parse (lldc_connection_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->id = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->id = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -300,7 +300,7 @@ int lldc__invite_code_parse (lldc_invite_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->code = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->code = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -393,7 +393,7 @@ int lldc__invite_stage_instance_topic_parse (lldc_invite_stage_instance_t *obj, 
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->topic = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->topic = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -534,7 +534,7 @@ int lldc__guild_template_description_parse (lldc_guild_template_t *obj, yyjson_v
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->description = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -549,7 +549,7 @@ int lldc__guild_template_name_parse (lldc_guild_template_t *obj, yyjson_val *jso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -564,7 +564,7 @@ int lldc__guild_template_code_parse (lldc_guild_template_t *obj, yyjson_val *jso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->code = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->code = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -654,7 +654,7 @@ int lldc__guild_preferred_locale_parse (lldc_guild_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->preferred_locale = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->preferred_locale = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -699,7 +699,7 @@ int lldc__guild_banner_parse (lldc_guild_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->banner = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->banner = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -714,7 +714,7 @@ int lldc__guild_description_parse (lldc_guild_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->description = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -729,7 +729,7 @@ int lldc__guild_vanity_url_code_parse (lldc_guild_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->vanity_url_code = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->vanity_url_code = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1017,7 +1017,7 @@ int lldc__guild_region_parse (lldc_guild_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->region = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->region = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1077,7 +1077,7 @@ int lldc__guild_discovery_splash_parse (lldc_guild_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->discovery_splash = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->discovery_splash = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1092,7 +1092,7 @@ int lldc__guild_splash_parse (lldc_guild_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->splash = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->splash = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1107,7 +1107,7 @@ int lldc__guild_icon_hash_parse (lldc_guild_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->icon_hash = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->icon_hash = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1122,7 +1122,7 @@ int lldc__guild_icon_parse (lldc_guild_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->icon = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->icon = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1137,7 +1137,7 @@ int lldc__guild_name_parse (lldc_guild_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1167,7 +1167,7 @@ int lldc__ban_reason_parse (lldc_ban_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->reason = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->reason = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1197,7 +1197,7 @@ int lldc__partial_integration_type_parse (lldc_partial_integration_t *obj, yyjso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->type = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->type = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1212,7 +1212,7 @@ int lldc__partial_integration_name_parse (lldc_partial_integration_t *obj, yyjso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1380,7 +1380,7 @@ int lldc__integration_type_parse (lldc_integration_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->type = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->type = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1395,7 +1395,7 @@ int lldc__integration_name_parse (lldc_integration_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1425,7 +1425,7 @@ int lldc__integration_application_summary_parse (lldc_integration_application_t 
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->summary = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->summary = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1440,7 +1440,7 @@ int lldc__integration_application_description_parse (lldc_integration_applicatio
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->description = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1455,7 +1455,7 @@ int lldc__integration_application_icon_parse (lldc_integration_application_t *ob
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->icon = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->icon = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1470,7 +1470,7 @@ int lldc__integration_application_name_parse (lldc_integration_application_t *ob
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1500,7 +1500,7 @@ int lldc__integration_account_name_parse (lldc_integration_account_t *obj, yyjso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1515,7 +1515,7 @@ int lldc__integration_account_id_parse (lldc_integration_account_t *obj, yyjson_
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->id = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->id = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1530,7 +1530,7 @@ int lldc__guild_preview_description_parse (lldc_guild_preview_t *obj, yyjson_val
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->description = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1575,7 +1575,7 @@ int lldc__guild_preview_discovery_splash_parse (lldc_guild_preview_t *obj, yyjso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->discovery_splash = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->discovery_splash = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1590,7 +1590,7 @@ int lldc__guild_preview_splash_parse (lldc_guild_preview_t *obj, yyjson_val *jso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->splash = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->splash = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1605,7 +1605,7 @@ int lldc__guild_preview_icon_parse (lldc_guild_preview_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->icon = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->icon = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1620,7 +1620,7 @@ int lldc__guild_preview_name_parse (lldc_guild_preview_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1680,7 +1680,7 @@ int lldc__welcome_screen_description_parse (lldc_welcome_screen_t *obj, yyjson_v
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->description = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1695,7 +1695,7 @@ int lldc__welcome_screen_channel_emoji_name_parse (lldc_welcome_screen_channel_t
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->emoji_name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->emoji_name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1725,7 +1725,7 @@ int lldc__welcome_screen_channel_description_parse (lldc_welcome_screen_channel_
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->description = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1785,7 +1785,7 @@ int lldc__stage_instance_topic_parse (lldc_stage_instance_t *obj, yyjson_val *js
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->topic = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->topic = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1845,7 +1845,7 @@ int lldc__presence_update_status_parse (lldc_presence_update_t *obj, yyjson_val 
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->status = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->status = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1875,7 +1875,7 @@ int lldc__client_status_web_parse (lldc_client_status_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->web = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->web = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1890,7 +1890,7 @@ int lldc__client_status_mobile_parse (lldc_client_status_t *obj, yyjson_val *jso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->mobile = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->mobile = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1905,7 +1905,7 @@ int lldc__client_status_desktop_parse (lldc_client_status_t *obj, yyjson_val *js
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->desktop = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->desktop = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1920,7 +1920,7 @@ int lldc__activity_buttons_item_url_parse (lldc_activity_buttons_item_t *obj, yy
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1935,7 +1935,7 @@ int lldc__activity_buttons_item_label_parse (lldc_activity_buttons_item_t *obj, 
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->label = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->label = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1980,7 +1980,7 @@ int lldc__activity_state_parse (lldc_activity_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->state = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->state = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -1995,7 +1995,7 @@ int lldc__activity_details_parse (lldc_activity_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->details = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->details = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2040,7 +2040,7 @@ int lldc__activity_url_parse (lldc_activity_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2070,7 +2070,7 @@ int lldc__activity_name_parse (lldc_activity_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2085,7 +2085,7 @@ int lldc__activity_secrets_match_parse (lldc_activity_secrets_t *obj, yyjson_val
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->match = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->match = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2100,7 +2100,7 @@ int lldc__activity_secrets_spectate_parse (lldc_activity_secrets_t *obj, yyjson_
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->spectate = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->spectate = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2115,7 +2115,7 @@ int lldc__activity_secrets_join_parse (lldc_activity_secrets_t *obj, yyjson_val 
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->join = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->join = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2130,7 +2130,7 @@ int lldc__activity_assets_small_text_parse (lldc_activity_assets_t *obj, yyjson_
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->small_text = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->small_text = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2145,7 +2145,7 @@ int lldc__activity_assets_small_image_parse (lldc_activity_assets_t *obj, yyjson
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->small_image = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->small_image = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2160,7 +2160,7 @@ int lldc__activity_assets_large_text_parse (lldc_activity_assets_t *obj, yyjson_
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->large_text = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->large_text = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2175,7 +2175,7 @@ int lldc__activity_assets_large_image_parse (lldc_activity_assets_t *obj, yyjson
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->large_image = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->large_image = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2190,7 +2190,7 @@ int lldc__activity_party_id_parse (lldc_activity_party_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->id = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->id = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2358,7 +2358,7 @@ int lldc__voice_state_session_id_parse (lldc_voice_state_t *obj, yyjson_val *jso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->session_id = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->session_id = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2493,7 +2493,7 @@ int lldc__channel_rtc_region_parse (lldc_channel_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->rtc_region = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->rtc_region = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2571,7 +2571,7 @@ int lldc__channel_icon_parse (lldc_channel_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->icon = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->icon = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2661,7 +2661,7 @@ int lldc__channel_topic_parse (lldc_channel_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->topic = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->topic = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2676,7 +2676,7 @@ int lldc__channel_name_parse (lldc_channel_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2934,7 +2934,7 @@ int lldc__message_content_parse (lldc_message_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->content = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->content = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -2994,7 +2994,7 @@ int lldc__message_interaction_name_parse (lldc_message_interaction_t *obj, yyjso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3099,7 +3099,7 @@ int lldc__message_activity_party_id_parse (lldc_message_activity_t *obj, yyjson_
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->party_id = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->party_id = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3144,7 +3144,7 @@ int lldc__sticker_packs_description_parse (lldc_sticker_packs_t *obj, yyjson_val
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->description = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3189,7 +3189,7 @@ int lldc__sticker_packs_name_parse (lldc_sticker_packs_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3234,7 +3234,7 @@ int lldc__sticker_item_name_parse (lldc_sticker_item_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3339,7 +3339,7 @@ int lldc__sticker_tags_parse (lldc_sticker_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->tags = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->tags = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3354,7 +3354,7 @@ int lldc__sticker_description_parse (lldc_sticker_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->description = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3369,7 +3369,7 @@ int lldc__sticker_name_parse (lldc_sticker_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3444,7 +3444,7 @@ int lldc__component_placeholder_parse (lldc_component_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->placeholder = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->placeholder = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3459,7 +3459,7 @@ int lldc__component_url_parse (lldc_component_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3474,7 +3474,7 @@ int lldc__component_label_parse (lldc_component_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->label = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->label = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3519,7 +3519,7 @@ int lldc__component_custom_id_parse (lldc_component_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->custom_id = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->custom_id = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3564,7 +3564,7 @@ int lldc__select_option_description_parse (lldc_select_option_t *obj, yyjson_val
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->description = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3579,7 +3579,7 @@ int lldc__select_option_value_parse (lldc_select_option_t *obj, yyjson_val *json
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->value = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->value = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3594,7 +3594,7 @@ int lldc__select_option_label_parse (lldc_select_option_t *obj, yyjson_val *json
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->label = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->label = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3699,7 +3699,7 @@ int lldc__emoji_name_parse (lldc_emoji_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3762,7 +3762,7 @@ int lldc__embed_url_parse (lldc_embed_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3777,7 +3777,7 @@ int lldc__embed_description_parse (lldc_embed_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->description = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3792,7 +3792,7 @@ int lldc__embed_type_parse (lldc_embed_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->type = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->type = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3807,7 +3807,7 @@ int lldc__embed_title_parse (lldc_embed_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->title = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->title = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3837,7 +3837,7 @@ int lldc__embed_field_value_parse (lldc_embed_field_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->value = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->value = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3852,7 +3852,7 @@ int lldc__embed_field_name_parse (lldc_embed_field_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3897,7 +3897,7 @@ int lldc__embed_video_proxy_url_parse (lldc_embed_video_t *obj, yyjson_val *json
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->proxy_url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->proxy_url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3912,7 +3912,7 @@ int lldc__embed_video_url_parse (lldc_embed_video_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3957,7 +3957,7 @@ int lldc__embed_thumbnail_proxy_url_parse (lldc_embed_thumbnail_t *obj, yyjson_v
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->proxy_url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->proxy_url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3972,7 +3972,7 @@ int lldc__embed_thumbnail_url_parse (lldc_embed_thumbnail_t *obj, yyjson_val *js
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -3987,7 +3987,7 @@ int lldc__embed_provider_url_parse (lldc_embed_provider_t *obj, yyjson_val *json
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4002,7 +4002,7 @@ int lldc__embed_provider_name_parse (lldc_embed_provider_t *obj, yyjson_val *jso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4047,7 +4047,7 @@ int lldc__embed_image_proxy_url_parse (lldc_embed_image_t *obj, yyjson_val *json
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->proxy_url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->proxy_url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4062,7 +4062,7 @@ int lldc__embed_image_url_parse (lldc_embed_image_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4077,7 +4077,7 @@ int lldc__embed_footer_proxy_icon_url_parse (lldc_embed_footer_t *obj, yyjson_va
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->proxy_icon_url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->proxy_icon_url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4092,7 +4092,7 @@ int lldc__embed_footer_icon_url_parse (lldc_embed_footer_t *obj, yyjson_val *jso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->icon_url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->icon_url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4107,7 +4107,7 @@ int lldc__embed_footer_text_parse (lldc_embed_footer_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->text = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->text = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4122,7 +4122,7 @@ int lldc__embed_author_proxy_icon_url_parse (lldc_embed_author_t *obj, yyjson_va
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->proxy_icon_url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->proxy_icon_url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4137,7 +4137,7 @@ int lldc__embed_author_icon_url_parse (lldc_embed_author_t *obj, yyjson_val *jso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->icon_url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->icon_url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4152,7 +4152,7 @@ int lldc__embed_author_url_parse (lldc_embed_author_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4167,7 +4167,7 @@ int lldc__embed_author_name_parse (lldc_embed_author_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4182,7 +4182,7 @@ int lldc__channel_mention_name_parse (lldc_channel_mention_t *obj, yyjson_val *j
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4272,7 +4272,7 @@ int lldc__attachment_proxy_url_parse (lldc_attachment_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->proxy_url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->proxy_url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4287,7 +4287,7 @@ int lldc__attachment_url_parse (lldc_attachment_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4317,7 +4317,7 @@ int lldc__attachment_content_type_parse (lldc_attachment_t *obj, yyjson_val *jso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->content_type = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->content_type = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4332,7 +4332,7 @@ int lldc__attachment_filename_parse (lldc_attachment_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->filename = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->filename = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4578,7 +4578,7 @@ int lldc__role_name_parse (lldc_role_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4794,7 +4794,7 @@ int lldc__partial_guild_member_nick_parse (lldc_partial_guild_member_t *obj, yyj
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->nick = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->nick = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4905,7 +4905,7 @@ int lldc__guild_member_nick_parse (lldc_guild_member_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->nick = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->nick = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4920,7 +4920,7 @@ int lldc__audit_log_integrations_item_type_parse (lldc_audit_log_integrations_it
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->type = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->type = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4935,7 +4935,7 @@ int lldc__audit_log_integrations_item_name_parse (lldc_audit_log_integrations_it
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -4965,7 +4965,7 @@ int lldc__audit_log_entry_reason_parse (lldc_audit_log_entry_t *obj, yyjson_val 
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->reason = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->reason = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5040,7 +5040,7 @@ int lldc__audit_log_options_role_name_parse (lldc_audit_log_options_t *obj, yyjs
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->role_name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->role_name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5055,7 +5055,7 @@ int lldc__audit_log_options_type_parse (lldc_audit_log_options_t *obj, yyjson_va
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->type = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->type = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5085,7 +5085,7 @@ int lldc__audit_log_options_count_parse (lldc_audit_log_options_t *obj, yyjson_v
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->count = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->count = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5130,7 +5130,7 @@ int lldc__audit_log_options_members_removed_parse (lldc_audit_log_options_t *obj
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->members_removed = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->members_removed = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5145,7 +5145,7 @@ int lldc__audit_log_options_delete_member_days_parse (lldc_audit_log_options_t *
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->delete_member_days = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->delete_member_days = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5160,7 +5160,7 @@ int lldc__audit_log_changes_key_parse (lldc_audit_log_changes_t *obj, yyjson_val
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->key = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->key = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5199,7 +5199,7 @@ int lldc__interaction_account_name_parse (lldc_interaction_account_t *obj, yyjso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5214,7 +5214,7 @@ int lldc__interaction_account_id_parse (lldc_interaction_account_t *obj, yyjson_
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->id = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->id = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5229,7 +5229,7 @@ int lldc__webhook_url_parse (lldc_webhook_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5259,7 +5259,7 @@ int lldc__webhook_token_parse (lldc_webhook_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->token = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->token = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5274,7 +5274,7 @@ int lldc__webhook_avatar_parse (lldc_webhook_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->avatar = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->avatar = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5289,7 +5289,7 @@ int lldc__webhook_name_parse (lldc_webhook_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5364,7 +5364,7 @@ int lldc__partial_guild_banner_parse (lldc_partial_guild_t *obj, yyjson_val *jso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->banner = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->banner = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5379,7 +5379,7 @@ int lldc__partial_guild_description_parse (lldc_partial_guild_t *obj, yyjson_val
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->description = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5394,7 +5394,7 @@ int lldc__partial_guild_vanity_url_code_parse (lldc_partial_guild_t *obj, yyjson
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->vanity_url_code = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->vanity_url_code = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5424,7 +5424,7 @@ int lldc__partial_guild_discovery_splash_parse (lldc_partial_guild_t *obj, yyjso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->discovery_splash = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->discovery_splash = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5439,7 +5439,7 @@ int lldc__partial_guild_splash_parse (lldc_partial_guild_t *obj, yyjson_val *jso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->splash = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->splash = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5454,7 +5454,7 @@ int lldc__partial_guild_icon_parse (lldc_partial_guild_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->icon = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->icon = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5469,7 +5469,7 @@ int lldc__partial_guild_name_parse (lldc_partial_guild_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5514,7 +5514,7 @@ int lldc__partial_channel_name_parse (lldc_partial_channel_t *obj, yyjson_val *j
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5574,7 +5574,7 @@ int lldc__application_cover_image_parse (lldc_application_t *obj, yyjson_val *js
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->cover_image = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->cover_image = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5589,7 +5589,7 @@ int lldc__application_slug_parse (lldc_application_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->slug = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->slug = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5634,7 +5634,7 @@ int lldc__application_verify_key_parse (lldc_application_t *obj, yyjson_val *jso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->verify_key = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->verify_key = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5649,7 +5649,7 @@ int lldc__application_summary_parse (lldc_application_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->summary = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->summary = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5664,7 +5664,7 @@ int lldc__application_privacy_policy_url_parse (lldc_application_t *obj, yyjson_
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->privacy_policy_url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->privacy_policy_url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5679,7 +5679,7 @@ int lldc__application_terms_of_service_url_parse (lldc_application_t *obj, yyjso
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->terms_of_service_url = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->terms_of_service_url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5724,7 +5724,7 @@ int lldc__application_description_parse (lldc_application_t *obj, yyjson_val *js
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->description = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5739,7 +5739,7 @@ int lldc__application_icon_parse (lldc_application_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->icon = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->icon = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5754,7 +5754,7 @@ int lldc__application_name_parse (lldc_application_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5799,7 +5799,7 @@ int lldc__team_name_parse (lldc_team_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5829,7 +5829,7 @@ int lldc__team_icon_parse (lldc_team_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->icon = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->icon = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5919,7 +5919,7 @@ int lldc__user_locale_parse (lldc_user_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->locale = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->locale = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5979,7 +5979,7 @@ int lldc__user_avatar_parse (lldc_user_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->avatar = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->avatar = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -5994,7 +5994,7 @@ int lldc__user_discriminator_parse (lldc_user_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->discriminator = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->discriminator = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -6009,7 +6009,7 @@ int lldc__user_username_parse (lldc_user_t *obj, yyjson_val *json)
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->username = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->username = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -6039,7 +6039,7 @@ int lldc__discord_error_message_parse (lldc_discord_error_t *obj, yyjson_val *js
     if (!yyjson_is_str(json))
         return -1;
 
-    obj->message = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+    obj->message = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
 
     return 0;
 }
@@ -6077,7 +6077,7 @@ int lldc__discord_error_code_parse (lldc_discord_error_t *obj, yyjson_val *json)
 int lldc_discord_error_parse (cwr_malloc_ctx_t *_mctx, lldc_discord_error_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[3] = {
+    static lldc_struct_def_t parser_def[3] = {
         { "code", (int (*)(void *, yyjson_val *))lldc__discord_error_code_parse },
         { "errors", (int (*)(void *, yyjson_val *))lldc__discord_error_errors_parse },
         { "message", (int (*)(void *, yyjson_val *))lldc__discord_error_message_parse }
@@ -6098,7 +6098,7 @@ int lldc_discord_error_parse (cwr_malloc_ctx_t *_mctx, lldc_discord_error_t *obj
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_discord_error_t));
 
@@ -6113,7 +6113,7 @@ int lldc_discord_error_parse (cwr_malloc_ctx_t *_mctx, lldc_discord_error_t *obj
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -6123,7 +6123,7 @@ int lldc_discord_error_parse (cwr_malloc_ctx_t *_mctx, lldc_discord_error_t *obj
 int lldc_user_parse (cwr_malloc_ctx_t *_mctx, lldc_user_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[11] = {
+    static lldc_struct_def_t parser_def[11] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__user_id_parse },
         { "username", (int (*)(void *, yyjson_val *))lldc__user_username_parse },
         { "discriminator", (int (*)(void *, yyjson_val *))lldc__user_discriminator_parse },
@@ -6152,7 +6152,7 @@ int lldc_user_parse (cwr_malloc_ctx_t *_mctx, lldc_user_t *obj, yyjson_val *json
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_user_t));
 
@@ -6167,7 +6167,7 @@ int lldc_user_parse (cwr_malloc_ctx_t *_mctx, lldc_user_t *obj, yyjson_val *json
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -6202,7 +6202,7 @@ int lldc_user_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_user_arr_t *obj, yyjson_v
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -6234,7 +6234,7 @@ int lldc__team_member_user_parse (lldc_team_member_t *_obj, yyjson_val *json)
 int lldc_team_member_parse (cwr_malloc_ctx_t *_mctx, lldc_team_member_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[3] = {
+    static lldc_struct_def_t parser_def[3] = {
         { "membership_state", (int (*)(void *, yyjson_val *))lldc__team_member_membership_state_parse },
         { "team_id", (int (*)(void *, yyjson_val *))lldc__team_member_team_id_parse },
         { "user", (int (*)(void *, yyjson_val *))lldc__team_member_user_parse }
@@ -6255,7 +6255,7 @@ int lldc_team_member_parse (cwr_malloc_ctx_t *_mctx, lldc_team_member_t *obj, yy
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_team_member_t));
 
@@ -6270,7 +6270,7 @@ int lldc_team_member_parse (cwr_malloc_ctx_t *_mctx, lldc_team_member_t *obj, yy
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -6305,7 +6305,7 @@ int lldc_team_member_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_team_member_arr_t 
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -6337,7 +6337,7 @@ int lldc__team_members_parse (lldc_team_t *_obj, yyjson_val *json)
 int lldc_team_parse (cwr_malloc_ctx_t *_mctx, lldc_team_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[5] = {
+    static lldc_struct_def_t parser_def[5] = {
         { "icon", (int (*)(void *, yyjson_val *))lldc__team_icon_parse },
         { "id", (int (*)(void *, yyjson_val *))lldc__team_id_parse },
         { "members", (int (*)(void *, yyjson_val *))lldc__team_members_parse },
@@ -6360,7 +6360,7 @@ int lldc_team_parse (cwr_malloc_ctx_t *_mctx, lldc_team_t *obj, yyjson_val *json
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_team_t));
 
@@ -6375,7 +6375,7 @@ int lldc_team_parse (cwr_malloc_ctx_t *_mctx, lldc_team_t *obj, yyjson_val *json
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -6390,11 +6390,11 @@ int lldc_team_parse (cwr_malloc_ctx_t *_mctx, lldc_team_t *obj, yyjson_val *json
 static
 int lldc__application_rpc_origins_parse (lldc_application_t *_obj, yyjson_val *json)
 {
-    lldc_parser_string_arr_t *obj = &_obj->rpc_origins;
+    lldc_struct_string_arr_t *obj = &_obj->rpc_origins;
 
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
-    return lldc_parser_string_arr_parse(obj, json);
+    return lldc_struct_string_arr_parse(obj, json);
 }
 /**
 * owner Parser
@@ -6421,7 +6421,7 @@ int lldc__application_team_parse (lldc_application_t *_obj, yyjson_val *json)
 int lldc_application_parse (cwr_malloc_ctx_t *_mctx, lldc_application_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[18] = {
+    static lldc_struct_def_t parser_def[18] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__application_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__application_name_parse },
         { "icon", (int (*)(void *, yyjson_val *))lldc__application_icon_parse },
@@ -6457,7 +6457,7 @@ int lldc_application_parse (cwr_malloc_ctx_t *_mctx, lldc_application_t *obj, yy
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_application_t));
 
@@ -6472,7 +6472,7 @@ int lldc_application_parse (cwr_malloc_ctx_t *_mctx, lldc_application_t *obj, yy
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -6482,7 +6482,7 @@ int lldc_application_parse (cwr_malloc_ctx_t *_mctx, lldc_application_t *obj, yy
 int lldc_partial_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_channel_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__partial_channel_id_parse },
         { "type", (int (*)(void *, yyjson_val *))lldc__partial_channel_type_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__partial_channel_name_parse },
@@ -6504,7 +6504,7 @@ int lldc_partial_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_channel_t 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_partial_channel_t));
 
@@ -6519,7 +6519,7 @@ int lldc_partial_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_channel_t 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -6554,7 +6554,7 @@ int lldc_partial_channel_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_channe
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -6580,16 +6580,16 @@ int lldc_partial_channel_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_channe
 static
 int lldc__partial_guild_features_parse (lldc_partial_guild_t *_obj, yyjson_val *json)
 {
-    lldc_parser_string_arr_t *obj = &_obj->features;
+    lldc_struct_string_arr_t *obj = &_obj->features;
 
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
-    return lldc_parser_string_arr_parse(obj, json);
+    return lldc_struct_string_arr_parse(obj, json);
 }
 int lldc_partial_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[10] = {
+    static lldc_struct_def_t parser_def[10] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__partial_guild_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__partial_guild_name_parse },
         { "icon", (int (*)(void *, yyjson_val *))lldc__partial_guild_icon_parse },
@@ -6617,7 +6617,7 @@ int lldc_partial_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild_t *obj
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_partial_guild_t));
 
@@ -6632,7 +6632,7 @@ int lldc_partial_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild_t *obj
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -6675,7 +6675,7 @@ int lldc__webhook_source_channel_parse (lldc_webhook_t *_obj, yyjson_val *json)
 int lldc_webhook_parse (cwr_malloc_ctx_t *_mctx, lldc_webhook_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[12] = {
+    static lldc_struct_def_t parser_def[12] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__webhook_id_parse },
         { "type", (int (*)(void *, yyjson_val *))lldc__webhook_type_parse },
         { "guild_id", (int (*)(void *, yyjson_val *))lldc__webhook_guild_id_parse },
@@ -6705,7 +6705,7 @@ int lldc_webhook_parse (cwr_malloc_ctx_t *_mctx, lldc_webhook_t *obj, yyjson_val
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_webhook_t));
 
@@ -6720,7 +6720,7 @@ int lldc_webhook_parse (cwr_malloc_ctx_t *_mctx, lldc_webhook_t *obj, yyjson_val
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -6755,7 +6755,7 @@ int lldc_webhook_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_webhook_arr_t *obj, yy
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -6776,7 +6776,7 @@ int lldc_webhook_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_webhook_arr_t *obj, yy
 int lldc_interaction_account_parse (cwr_malloc_ctx_t *_mctx, lldc_interaction_account_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[2] = {
+    static lldc_struct_def_t parser_def[2] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__interaction_account_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__interaction_account_name_parse }
     };
@@ -6796,7 +6796,7 @@ int lldc_interaction_account_parse (cwr_malloc_ctx_t *_mctx, lldc_interaction_ac
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_interaction_account_t));
 
@@ -6811,7 +6811,7 @@ int lldc_interaction_account_parse (cwr_malloc_ctx_t *_mctx, lldc_interaction_ac
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -6821,7 +6821,7 @@ int lldc_interaction_account_parse (cwr_malloc_ctx_t *_mctx, lldc_interaction_ac
 int lldc_audit_log_changes_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_changes_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[3] = {
+    static lldc_struct_def_t parser_def[3] = {
         { "new_value", (int (*)(void *, yyjson_val *))lldc__audit_log_changes_new_value_parse },
         { "old_value", (int (*)(void *, yyjson_val *))lldc__audit_log_changes_old_value_parse },
         { "key", (int (*)(void *, yyjson_val *))lldc__audit_log_changes_key_parse }
@@ -6842,7 +6842,7 @@ int lldc_audit_log_changes_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_change
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_audit_log_changes_t));
 
@@ -6857,7 +6857,7 @@ int lldc_audit_log_changes_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_change
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -6867,7 +6867,7 @@ int lldc_audit_log_changes_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_change
 int lldc_audit_log_options_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_options_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[8] = {
+    static lldc_struct_def_t parser_def[8] = {
         { "delete_member_days", (int (*)(void *, yyjson_val *))lldc__audit_log_options_delete_member_days_parse },
         { "members_removed", (int (*)(void *, yyjson_val *))lldc__audit_log_options_members_removed_parse },
         { "channel_id", (int (*)(void *, yyjson_val *))lldc__audit_log_options_channel_id_parse },
@@ -6893,7 +6893,7 @@ int lldc_audit_log_options_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_option
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_audit_log_options_t));
 
@@ -6908,7 +6908,7 @@ int lldc_audit_log_options_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_option
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -6949,7 +6949,7 @@ int lldc__audit_log_entry_changes_parse (lldc_audit_log_entry_t *_obj, yyjson_va
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -6981,7 +6981,7 @@ int lldc__audit_log_entry_options_parse (lldc_audit_log_entry_t *_obj, yyjson_va
 int lldc_audit_log_entry_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_entry_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[7] = {
+    static lldc_struct_def_t parser_def[7] = {
         { "target_id", (int (*)(void *, yyjson_val *))lldc__audit_log_entry_target_id_parse },
         { "changes", (int (*)(void *, yyjson_val *))lldc__audit_log_entry_changes_parse },
         { "user_id", (int (*)(void *, yyjson_val *))lldc__audit_log_entry_user_id_parse },
@@ -7006,7 +7006,7 @@ int lldc_audit_log_entry_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_entry_t 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_audit_log_entry_t));
 
@@ -7021,7 +7021,7 @@ int lldc_audit_log_entry_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_entry_t 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -7070,7 +7070,7 @@ static
 int lldc__audit_log_integrations_item_parse (lldc_audit_log_integrations_item_t *obj, yyjson_val *json)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__audit_log_integrations_item_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__audit_log_integrations_item_name_parse },
         { "type", (int (*)(void *, yyjson_val *))lldc__audit_log_integrations_item_type_parse },
@@ -7092,7 +7092,7 @@ int lldc__audit_log_integrations_item_parse (lldc_audit_log_integrations_item_t 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     cwr_malloc_ctx_t *mctx = obj->_mctx;
     memset(obj, 0, sizeof(lldc_audit_log_integrations_item_t));
 
@@ -7103,7 +7103,7 @@ int lldc__audit_log_integrations_item_parse (lldc_audit_log_integrations_item_t 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -7134,7 +7134,7 @@ int lldc__audit_log_integrations_parse (lldc_audit_log_t *_obj, yyjson_val *json
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -7186,7 +7186,7 @@ int lldc__audit_log_audit_log_entries_parse (lldc_audit_log_t *_obj, yyjson_val 
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -7207,7 +7207,7 @@ int lldc__audit_log_audit_log_entries_parse (lldc_audit_log_t *_obj, yyjson_val 
 int lldc_audit_log_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "webhooks", (int (*)(void *, yyjson_val *))lldc__audit_log_webhooks_parse },
         { "users", (int (*)(void *, yyjson_val *))lldc__audit_log_users_parse },
         { "integrations", (int (*)(void *, yyjson_val *))lldc__audit_log_integrations_parse },
@@ -7229,7 +7229,7 @@ int lldc_audit_log_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_t *obj, yyjson
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_audit_log_t));
 
@@ -7244,7 +7244,7 @@ int lldc_audit_log_parse (cwr_malloc_ctx_t *_mctx, lldc_audit_log_t *obj, yyjson
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -7270,16 +7270,16 @@ int lldc__guild_member_user_parse (lldc_guild_member_t *_obj, yyjson_val *json)
 static
 int lldc__guild_member_roles_parse (lldc_guild_member_t *_obj, yyjson_val *json)
 {
-    lldc_parser_snowflake_arr_t *obj = &_obj->roles;
+    lldc_struct_snowflake_arr_t *obj = &_obj->roles;
 
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
-    return lldc_parser_snowflake_arr_parse(obj, json);
+    return lldc_struct_snowflake_arr_parse(obj, json);
 }
 int lldc_guild_member_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_member_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[9] = {
+    static lldc_struct_def_t parser_def[9] = {
         { "user", (int (*)(void *, yyjson_val *))lldc__guild_member_user_parse },
         { "nick", (int (*)(void *, yyjson_val *))lldc__guild_member_nick_parse },
         { "roles", (int (*)(void *, yyjson_val *))lldc__guild_member_roles_parse },
@@ -7306,7 +7306,7 @@ int lldc_guild_member_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_member_t *obj, 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_guild_member_t));
 
@@ -7321,7 +7321,7 @@ int lldc_guild_member_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_member_t *obj, 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -7356,7 +7356,7 @@ int lldc_guild_member_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_member_arr_
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -7382,16 +7382,16 @@ int lldc_guild_member_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_member_arr_
 static
 int lldc__partial_guild_member_roles_parse (lldc_partial_guild_member_t *_obj, yyjson_val *json)
 {
-    lldc_parser_snowflake_arr_t *obj = &_obj->roles;
+    lldc_struct_snowflake_arr_t *obj = &_obj->roles;
 
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
-    return lldc_parser_snowflake_arr_parse(obj, json);
+    return lldc_struct_snowflake_arr_parse(obj, json);
 }
 int lldc_partial_guild_member_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild_member_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[8] = {
+    static lldc_struct_def_t parser_def[8] = {
         { "nick", (int (*)(void *, yyjson_val *))lldc__partial_guild_member_nick_parse },
         { "roles", (int (*)(void *, yyjson_val *))lldc__partial_guild_member_roles_parse },
         { "joined_at", (int (*)(void *, yyjson_val *))lldc__partial_guild_member_joined_at_parse },
@@ -7417,7 +7417,7 @@ int lldc_partial_guild_member_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_partial_guild_member_t));
 
@@ -7432,7 +7432,7 @@ int lldc_partial_guild_member_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -7467,7 +7467,7 @@ int lldc_partial_guild_member_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_g
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -7488,7 +7488,7 @@ int lldc_partial_guild_member_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_g
 int lldc_channel_overwrite_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_overwrite_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__channel_overwrite_id_parse },
         { "type", (int (*)(void *, yyjson_val *))lldc__channel_overwrite_type_parse },
         { "allow", (int (*)(void *, yyjson_val *))lldc__channel_overwrite_allow_parse },
@@ -7510,7 +7510,7 @@ int lldc_channel_overwrite_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_overwrit
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_channel_overwrite_t));
 
@@ -7525,7 +7525,7 @@ int lldc_channel_overwrite_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_overwrit
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -7560,7 +7560,7 @@ int lldc_channel_overwrite_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_over
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -7581,7 +7581,7 @@ int lldc_channel_overwrite_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_over
 int lldc_role_tags_parse (cwr_malloc_ctx_t *_mctx, lldc_role_tags_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[2] = {
+    static lldc_struct_def_t parser_def[2] = {
         { "bot_id", (int (*)(void *, yyjson_val *))lldc__role_tags_bot_id_parse },
         { "integration_id", (int (*)(void *, yyjson_val *))lldc__role_tags_integration_id_parse }
     };
@@ -7601,7 +7601,7 @@ int lldc_role_tags_parse (cwr_malloc_ctx_t *_mctx, lldc_role_tags_t *obj, yyjson
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_role_tags_t));
 
@@ -7616,7 +7616,7 @@ int lldc_role_tags_parse (cwr_malloc_ctx_t *_mctx, lldc_role_tags_t *obj, yyjson
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -7637,7 +7637,7 @@ int lldc__role_tags_parse (lldc_role_t *_obj, yyjson_val *json)
 int lldc_role_parse (cwr_malloc_ctx_t *_mctx, lldc_role_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[9] = {
+    static lldc_struct_def_t parser_def[9] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__role_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__role_name_parse },
         { "color", (int (*)(void *, yyjson_val *))lldc__role_color_parse },
@@ -7664,7 +7664,7 @@ int lldc_role_parse (cwr_malloc_ctx_t *_mctx, lldc_role_t *obj, yyjson_val *json
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_role_t));
 
@@ -7679,7 +7679,7 @@ int lldc_role_parse (cwr_malloc_ctx_t *_mctx, lldc_role_t *obj, yyjson_val *json
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -7714,7 +7714,7 @@ int lldc_role_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_role_arr_t *obj, yyjson_v
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -7735,7 +7735,7 @@ int lldc_role_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_role_arr_t *obj, yyjson_v
 int lldc_thread_metadata_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_metadata_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "archived", (int (*)(void *, yyjson_val *))lldc__thread_metadata_archived_parse },
         { "auto_archive_duration", (int (*)(void *, yyjson_val *))lldc__thread_metadata_auto_archive_duration_parse },
         { "archive_timestamp", (int (*)(void *, yyjson_val *))lldc__thread_metadata_archive_timestamp_parse },
@@ -7757,7 +7757,7 @@ int lldc_thread_metadata_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_metadata_t 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_thread_metadata_t));
 
@@ -7772,7 +7772,7 @@ int lldc_thread_metadata_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_metadata_t 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -7782,7 +7782,7 @@ int lldc_thread_metadata_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_metadata_t 
 int lldc_thread_member_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_member_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__thread_member_id_parse },
         { "user_id", (int (*)(void *, yyjson_val *))lldc__thread_member_user_id_parse },
         { "join_timestamp", (int (*)(void *, yyjson_val *))lldc__thread_member_join_timestamp_parse },
@@ -7804,7 +7804,7 @@ int lldc_thread_member_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_member_t *obj
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_thread_member_t));
 
@@ -7819,7 +7819,7 @@ int lldc_thread_member_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_member_t *obj
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -7829,7 +7829,7 @@ int lldc_thread_member_parse (cwr_malloc_ctx_t *_mctx, lldc_thread_member_t *obj
 int lldc_attachment_parse (cwr_malloc_ctx_t *_mctx, lldc_attachment_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[8] = {
+    static lldc_struct_def_t parser_def[8] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__attachment_id_parse },
         { "filename", (int (*)(void *, yyjson_val *))lldc__attachment_filename_parse },
         { "content_type", (int (*)(void *, yyjson_val *))lldc__attachment_content_type_parse },
@@ -7855,7 +7855,7 @@ int lldc_attachment_parse (cwr_malloc_ctx_t *_mctx, lldc_attachment_t *obj, yyjs
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_attachment_t));
 
@@ -7870,7 +7870,7 @@ int lldc_attachment_parse (cwr_malloc_ctx_t *_mctx, lldc_attachment_t *obj, yyjs
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -7905,7 +7905,7 @@ int lldc_attachment_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_attachment_arr_t *o
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -7926,7 +7926,7 @@ int lldc_attachment_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_attachment_arr_t *o
 int lldc_channel_mention_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_mention_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__channel_mention_id_parse },
         { "guild_id", (int (*)(void *, yyjson_val *))lldc__channel_mention_guild_id_parse },
         { "type", (int (*)(void *, yyjson_val *))lldc__channel_mention_type_parse },
@@ -7948,7 +7948,7 @@ int lldc_channel_mention_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_mention_t 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_channel_mention_t));
 
@@ -7963,7 +7963,7 @@ int lldc_channel_mention_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_mention_t 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -7998,7 +7998,7 @@ int lldc_channel_mention_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_mentio
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -8019,7 +8019,7 @@ int lldc_channel_mention_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_mentio
 int lldc_embed_author_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_author_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "name", (int (*)(void *, yyjson_val *))lldc__embed_author_name_parse },
         { "url", (int (*)(void *, yyjson_val *))lldc__embed_author_url_parse },
         { "icon_url", (int (*)(void *, yyjson_val *))lldc__embed_author_icon_url_parse },
@@ -8041,7 +8041,7 @@ int lldc_embed_author_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_author_t *obj, 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_embed_author_t));
 
@@ -8056,7 +8056,7 @@ int lldc_embed_author_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_author_t *obj, 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -8066,7 +8066,7 @@ int lldc_embed_author_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_author_t *obj, 
 int lldc_embed_footer_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_footer_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[3] = {
+    static lldc_struct_def_t parser_def[3] = {
         { "text", (int (*)(void *, yyjson_val *))lldc__embed_footer_text_parse },
         { "icon_url", (int (*)(void *, yyjson_val *))lldc__embed_footer_icon_url_parse },
         { "proxy_icon_url", (int (*)(void *, yyjson_val *))lldc__embed_footer_proxy_icon_url_parse }
@@ -8087,7 +8087,7 @@ int lldc_embed_footer_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_footer_t *obj, 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_embed_footer_t));
 
@@ -8102,7 +8102,7 @@ int lldc_embed_footer_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_footer_t *obj, 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -8112,7 +8112,7 @@ int lldc_embed_footer_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_footer_t *obj, 
 int lldc_embed_image_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_image_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "url", (int (*)(void *, yyjson_val *))lldc__embed_image_url_parse },
         { "proxy_url", (int (*)(void *, yyjson_val *))lldc__embed_image_proxy_url_parse },
         { "height", (int (*)(void *, yyjson_val *))lldc__embed_image_height_parse },
@@ -8134,7 +8134,7 @@ int lldc_embed_image_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_image_t *obj, yy
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_embed_image_t));
 
@@ -8149,7 +8149,7 @@ int lldc_embed_image_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_image_t *obj, yy
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -8159,7 +8159,7 @@ int lldc_embed_image_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_image_t *obj, yy
 int lldc_embed_provider_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_provider_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[2] = {
+    static lldc_struct_def_t parser_def[2] = {
         { "name", (int (*)(void *, yyjson_val *))lldc__embed_provider_name_parse },
         { "url", (int (*)(void *, yyjson_val *))lldc__embed_provider_url_parse }
     };
@@ -8179,7 +8179,7 @@ int lldc_embed_provider_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_provider_t *o
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_embed_provider_t));
 
@@ -8194,7 +8194,7 @@ int lldc_embed_provider_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_provider_t *o
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -8204,7 +8204,7 @@ int lldc_embed_provider_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_provider_t *o
 int lldc_embed_thumbnail_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_thumbnail_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "url", (int (*)(void *, yyjson_val *))lldc__embed_thumbnail_url_parse },
         { "proxy_url", (int (*)(void *, yyjson_val *))lldc__embed_thumbnail_proxy_url_parse },
         { "height", (int (*)(void *, yyjson_val *))lldc__embed_thumbnail_height_parse },
@@ -8226,7 +8226,7 @@ int lldc_embed_thumbnail_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_thumbnail_t 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_embed_thumbnail_t));
 
@@ -8241,7 +8241,7 @@ int lldc_embed_thumbnail_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_thumbnail_t 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -8251,7 +8251,7 @@ int lldc_embed_thumbnail_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_thumbnail_t 
 int lldc_embed_video_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_video_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "url", (int (*)(void *, yyjson_val *))lldc__embed_video_url_parse },
         { "proxy_url", (int (*)(void *, yyjson_val *))lldc__embed_video_proxy_url_parse },
         { "height", (int (*)(void *, yyjson_val *))lldc__embed_video_height_parse },
@@ -8273,7 +8273,7 @@ int lldc_embed_video_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_video_t *obj, yy
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_embed_video_t));
 
@@ -8288,7 +8288,7 @@ int lldc_embed_video_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_video_t *obj, yy
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -8298,7 +8298,7 @@ int lldc_embed_video_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_video_t *obj, yy
 int lldc_embed_field_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_field_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[3] = {
+    static lldc_struct_def_t parser_def[3] = {
         { "name", (int (*)(void *, yyjson_val *))lldc__embed_field_name_parse },
         { "value", (int (*)(void *, yyjson_val *))lldc__embed_field_value_parse },
         { "inline", (int (*)(void *, yyjson_val *))lldc__embed_field_is_inline_parse }
@@ -8319,7 +8319,7 @@ int lldc_embed_field_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_field_t *obj, yy
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_embed_field_t));
 
@@ -8334,7 +8334,7 @@ int lldc_embed_field_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_field_t *obj, yy
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -8369,7 +8369,7 @@ int lldc_embed_field_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_field_arr_t 
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -8467,7 +8467,7 @@ int lldc__embed_fields_parse (lldc_embed_t *_obj, yyjson_val *json)
 int lldc_embed_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[13] = {
+    static lldc_struct_def_t parser_def[13] = {
         { "title", (int (*)(void *, yyjson_val *))lldc__embed_title_parse },
         { "type", (int (*)(void *, yyjson_val *))lldc__embed_type_parse },
         { "description", (int (*)(void *, yyjson_val *))lldc__embed_description_parse },
@@ -8498,7 +8498,7 @@ int lldc_embed_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_t *obj, yyjson_val *js
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_embed_t));
 
@@ -8513,7 +8513,7 @@ int lldc_embed_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_t *obj, yyjson_val *js
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -8548,7 +8548,7 @@ int lldc_embed_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_arr_t *obj, yyjson
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -8574,11 +8574,11 @@ int lldc_embed_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_embed_arr_t *obj, yyjson
 static
 int lldc__emoji_roles_parse (lldc_emoji_t *_obj, yyjson_val *json)
 {
-    lldc_parser_snowflake_arr_t *obj = &_obj->roles;
+    lldc_struct_snowflake_arr_t *obj = &_obj->roles;
 
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
-    return lldc_parser_snowflake_arr_parse(obj, json);
+    return lldc_struct_snowflake_arr_parse(obj, json);
 }
 /**
 * user Parser
@@ -8594,7 +8594,7 @@ int lldc__emoji_user_parse (lldc_emoji_t *_obj, yyjson_val *json)
 int lldc_emoji_parse (cwr_malloc_ctx_t *_mctx, lldc_emoji_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[8] = {
+    static lldc_struct_def_t parser_def[8] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__emoji_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__emoji_name_parse },
         { "roles", (int (*)(void *, yyjson_val *))lldc__emoji_roles_parse },
@@ -8620,7 +8620,7 @@ int lldc_emoji_parse (cwr_malloc_ctx_t *_mctx, lldc_emoji_t *obj, yyjson_val *js
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_emoji_t));
 
@@ -8635,7 +8635,7 @@ int lldc_emoji_parse (cwr_malloc_ctx_t *_mctx, lldc_emoji_t *obj, yyjson_val *js
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -8670,7 +8670,7 @@ int lldc_emoji_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_emoji_arr_t *obj, yyjson
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -8702,7 +8702,7 @@ int lldc__reaction_emoji_parse (lldc_reaction_t *_obj, yyjson_val *json)
 int lldc_reaction_parse (cwr_malloc_ctx_t *_mctx, lldc_reaction_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[3] = {
+    static lldc_struct_def_t parser_def[3] = {
         { "count", (int (*)(void *, yyjson_val *))lldc__reaction_count_parse },
         { "me", (int (*)(void *, yyjson_val *))lldc__reaction_me_parse },
         { "emoji", (int (*)(void *, yyjson_val *))lldc__reaction_emoji_parse }
@@ -8723,7 +8723,7 @@ int lldc_reaction_parse (cwr_malloc_ctx_t *_mctx, lldc_reaction_t *obj, yyjson_v
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_reaction_t));
 
@@ -8738,7 +8738,7 @@ int lldc_reaction_parse (cwr_malloc_ctx_t *_mctx, lldc_reaction_t *obj, yyjson_v
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -8773,7 +8773,7 @@ int lldc_reaction_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_reaction_arr_t *obj, 
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -8805,7 +8805,7 @@ int lldc__select_option_emoji_parse (lldc_select_option_t *_obj, yyjson_val *jso
 int lldc_select_option_parse (cwr_malloc_ctx_t *_mctx, lldc_select_option_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[5] = {
+    static lldc_struct_def_t parser_def[5] = {
         { "label", (int (*)(void *, yyjson_val *))lldc__select_option_label_parse },
         { "value", (int (*)(void *, yyjson_val *))lldc__select_option_value_parse },
         { "description", (int (*)(void *, yyjson_val *))lldc__select_option_description_parse },
@@ -8828,7 +8828,7 @@ int lldc_select_option_parse (cwr_malloc_ctx_t *_mctx, lldc_select_option_t *obj
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_select_option_t));
 
@@ -8843,7 +8843,7 @@ int lldc_select_option_parse (cwr_malloc_ctx_t *_mctx, lldc_select_option_t *obj
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -8878,7 +8878,7 @@ int lldc_select_option_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_select_option_ar
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -8924,7 +8924,7 @@ int lldc_component_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_component_arr_t *obj
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -8978,7 +8978,7 @@ int lldc__component_components_parse (lldc_component_t *_obj, yyjson_val *json)
 int lldc_component_parse (cwr_malloc_ctx_t *_mctx, lldc_component_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[12] = {
+    static lldc_struct_def_t parser_def[12] = {
         { "type", (int (*)(void *, yyjson_val *))lldc__component_type_parse },
         { "custom_id", (int (*)(void *, yyjson_val *))lldc__component_custom_id_parse },
         { "disabled", (int (*)(void *, yyjson_val *))lldc__component_disabled_parse },
@@ -9008,7 +9008,7 @@ int lldc_component_parse (cwr_malloc_ctx_t *_mctx, lldc_component_t *obj, yyjson
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_component_t));
 
@@ -9023,7 +9023,7 @@ int lldc_component_parse (cwr_malloc_ctx_t *_mctx, lldc_component_t *obj, yyjson
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -9044,7 +9044,7 @@ int lldc__sticker_user_parse (lldc_sticker_t *_obj, yyjson_val *json)
 int lldc_sticker_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[11] = {
+    static lldc_struct_def_t parser_def[11] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__sticker_id_parse },
         { "pack_id", (int (*)(void *, yyjson_val *))lldc__sticker_pack_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__sticker_name_parse },
@@ -9073,7 +9073,7 @@ int lldc_sticker_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_t *obj, yyjson_val
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_sticker_t));
 
@@ -9088,7 +9088,7 @@ int lldc_sticker_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_t *obj, yyjson_val
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -9123,7 +9123,7 @@ int lldc_sticker_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_arr_t *obj, yy
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -9144,7 +9144,7 @@ int lldc_sticker_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_arr_t *obj, yy
 int lldc_sticker_item_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_item_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[3] = {
+    static lldc_struct_def_t parser_def[3] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__sticker_item_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__sticker_item_name_parse },
         { "format_type", (int (*)(void *, yyjson_val *))lldc__sticker_item_format_type_parse }
@@ -9165,7 +9165,7 @@ int lldc_sticker_item_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_item_t *obj, 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_sticker_item_t));
 
@@ -9180,7 +9180,7 @@ int lldc_sticker_item_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_item_t *obj, 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -9215,7 +9215,7 @@ int lldc_sticker_item_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_item_arr_
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -9247,7 +9247,7 @@ int lldc__sticker_packs_stickers_parse (lldc_sticker_packs_t *_obj, yyjson_val *
 int lldc_sticker_packs_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_packs_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[7] = {
+    static lldc_struct_def_t parser_def[7] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__sticker_packs_id_parse },
         { "stickers", (int (*)(void *, yyjson_val *))lldc__sticker_packs_stickers_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__sticker_packs_name_parse },
@@ -9272,7 +9272,7 @@ int lldc_sticker_packs_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_packs_t *obj
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_sticker_packs_t));
 
@@ -9287,7 +9287,7 @@ int lldc_sticker_packs_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_packs_t *obj
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -9297,7 +9297,7 @@ int lldc_sticker_packs_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_packs_t *obj
 int lldc_message_activity_parse (cwr_malloc_ctx_t *_mctx, lldc_message_activity_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[2] = {
+    static lldc_struct_def_t parser_def[2] = {
         { "type", (int (*)(void *, yyjson_val *))lldc__message_activity_type_parse },
         { "party_id", (int (*)(void *, yyjson_val *))lldc__message_activity_party_id_parse }
     };
@@ -9317,7 +9317,7 @@ int lldc_message_activity_parse (cwr_malloc_ctx_t *_mctx, lldc_message_activity_
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_message_activity_t));
 
@@ -9332,7 +9332,7 @@ int lldc_message_activity_parse (cwr_malloc_ctx_t *_mctx, lldc_message_activity_
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -9342,7 +9342,7 @@ int lldc_message_activity_parse (cwr_malloc_ctx_t *_mctx, lldc_message_activity_
 int lldc_message_reference_parse (cwr_malloc_ctx_t *_mctx, lldc_message_reference_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "message_id", (int (*)(void *, yyjson_val *))lldc__message_reference_message_id_parse },
         { "channel_id", (int (*)(void *, yyjson_val *))lldc__message_reference_channel_id_parse },
         { "guild_id", (int (*)(void *, yyjson_val *))lldc__message_reference_guild_id_parse },
@@ -9364,7 +9364,7 @@ int lldc_message_reference_parse (cwr_malloc_ctx_t *_mctx, lldc_message_referenc
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_message_reference_t));
 
@@ -9379,7 +9379,7 @@ int lldc_message_reference_parse (cwr_malloc_ctx_t *_mctx, lldc_message_referenc
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -9400,7 +9400,7 @@ int lldc__message_interaction_user_parse (lldc_message_interaction_t *_obj, yyjs
 int lldc_message_interaction_parse (cwr_malloc_ctx_t *_mctx, lldc_message_interaction_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__message_interaction_id_parse },
         { "type", (int (*)(void *, yyjson_val *))lldc__message_interaction_type_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__message_interaction_name_parse },
@@ -9422,7 +9422,7 @@ int lldc_message_interaction_parse (cwr_malloc_ctx_t *_mctx, lldc_message_intera
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_message_interaction_t));
 
@@ -9437,7 +9437,7 @@ int lldc_message_interaction_parse (cwr_malloc_ctx_t *_mctx, lldc_message_intera
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -9485,11 +9485,11 @@ int lldc__message_mentions_parse (lldc_message_t *_obj, yyjson_val *json)
 static
 int lldc__message_mention_roles_parse (lldc_message_t *_obj, yyjson_val *json)
 {
-    lldc_parser_snowflake_arr_t *obj = &_obj->mention_roles;
+    lldc_struct_snowflake_arr_t *obj = &_obj->mention_roles;
 
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
-    return lldc_parser_snowflake_arr_parse(obj, json);
+    return lldc_struct_snowflake_arr_parse(obj, json);
 }
 /**
 * mention_channels Parser
@@ -9604,7 +9604,7 @@ int lldc__message_sticker_items_parse (lldc_message_t *_obj, yyjson_val *json)
 int lldc_message_parse (cwr_malloc_ctx_t *_mctx, lldc_message_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[28] = {
+    static lldc_struct_def_t parser_def[28] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__message_id_parse },
         { "channel_id", (int (*)(void *, yyjson_val *))lldc__message_channel_id_parse },
         { "guild_id", (int (*)(void *, yyjson_val *))lldc__message_guild_id_parse },
@@ -9650,7 +9650,7 @@ int lldc_message_parse (cwr_malloc_ctx_t *_mctx, lldc_message_t *obj, yyjson_val
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_message_t));
 
@@ -9665,7 +9665,7 @@ int lldc_message_parse (cwr_malloc_ctx_t *_mctx, lldc_message_t *obj, yyjson_val
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -9675,7 +9675,7 @@ int lldc_message_parse (cwr_malloc_ctx_t *_mctx, lldc_message_t *obj, yyjson_val
 int lldc_followed_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_followed_channel_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[2] = {
+    static lldc_struct_def_t parser_def[2] = {
         { "channel_id", (int (*)(void *, yyjson_val *))lldc__followed_channel_channel_id_parse },
         { "webhook_id", (int (*)(void *, yyjson_val *))lldc__followed_channel_webhook_id_parse }
     };
@@ -9695,7 +9695,7 @@ int lldc_followed_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_followed_channel_
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_followed_channel_t));
 
@@ -9710,7 +9710,7 @@ int lldc_followed_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_followed_channel_
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -9764,7 +9764,7 @@ int lldc__channel_member_parse (lldc_channel_t *_obj, yyjson_val *json)
 int lldc_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[26] = {
+    static lldc_struct_def_t parser_def[26] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__channel_id_parse },
         { "type", (int (*)(void *, yyjson_val *))lldc__channel_type_parse },
         { "guild_id", (int (*)(void *, yyjson_val *))lldc__channel_guild_id_parse },
@@ -9808,7 +9808,7 @@ int lldc_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_t *obj, yyjson_val
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_channel_t));
 
@@ -9823,7 +9823,7 @@ int lldc_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_t *obj, yyjson_val
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -9858,7 +9858,7 @@ int lldc_channel_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_channel_arr_t *obj, yy
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -9890,7 +9890,7 @@ int lldc__voice_state_member_parse (lldc_voice_state_t *_obj, yyjson_val *json)
 int lldc_voice_state_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_state_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[13] = {
+    static lldc_struct_def_t parser_def[13] = {
         { "guild_id", (int (*)(void *, yyjson_val *))lldc__voice_state_guild_id_parse },
         { "channel_id", (int (*)(void *, yyjson_val *))lldc__voice_state_channel_id_parse },
         { "user_id", (int (*)(void *, yyjson_val *))lldc__voice_state_user_id_parse },
@@ -9921,7 +9921,7 @@ int lldc_voice_state_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_state_t *obj, yy
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_voice_state_t));
 
@@ -9936,7 +9936,7 @@ int lldc_voice_state_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_state_t *obj, yy
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -9971,7 +9971,7 @@ int lldc_voice_state_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_state_arr_t 
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -9992,7 +9992,7 @@ int lldc_voice_state_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_state_arr_t 
 int lldc_activity_timestamps_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_timestamps_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[2] = {
+    static lldc_struct_def_t parser_def[2] = {
         { "start", (int (*)(void *, yyjson_val *))lldc__activity_timestamps_start_parse },
         { "end", (int (*)(void *, yyjson_val *))lldc__activity_timestamps_end_parse }
     };
@@ -10012,7 +10012,7 @@ int lldc_activity_timestamps_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_times
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_activity_timestamps_t));
 
@@ -10027,7 +10027,7 @@ int lldc_activity_timestamps_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_times
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -10042,16 +10042,16 @@ int lldc_activity_timestamps_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_times
 static
 int lldc__activity_party_size_parse (lldc_activity_party_t *_obj, yyjson_val *json)
 {
-    lldc_parser_int_arr_t *obj = &_obj->size;
+    lldc_struct_int_arr_t *obj = &_obj->size;
 
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
-    return lldc_parser_int_arr_parse(obj, json);
+    return lldc_struct_int_arr_parse(obj, json);
 }
 int lldc_activity_party_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_party_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[2] = {
+    static lldc_struct_def_t parser_def[2] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__activity_party_id_parse },
         { "size", (int (*)(void *, yyjson_val *))lldc__activity_party_size_parse }
     };
@@ -10071,7 +10071,7 @@ int lldc_activity_party_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_party_t *o
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_activity_party_t));
 
@@ -10086,7 +10086,7 @@ int lldc_activity_party_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_party_t *o
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -10096,7 +10096,7 @@ int lldc_activity_party_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_party_t *o
 int lldc_activity_assets_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_assets_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "large_image", (int (*)(void *, yyjson_val *))lldc__activity_assets_large_image_parse },
         { "large_text", (int (*)(void *, yyjson_val *))lldc__activity_assets_large_text_parse },
         { "small_image", (int (*)(void *, yyjson_val *))lldc__activity_assets_small_image_parse },
@@ -10118,7 +10118,7 @@ int lldc_activity_assets_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_assets_t 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_activity_assets_t));
 
@@ -10133,7 +10133,7 @@ int lldc_activity_assets_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_assets_t 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -10143,7 +10143,7 @@ int lldc_activity_assets_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_assets_t 
 int lldc_activity_secrets_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_secrets_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[3] = {
+    static lldc_struct_def_t parser_def[3] = {
         { "join", (int (*)(void *, yyjson_val *))lldc__activity_secrets_join_parse },
         { "spectate", (int (*)(void *, yyjson_val *))lldc__activity_secrets_spectate_parse },
         { "match", (int (*)(void *, yyjson_val *))lldc__activity_secrets_match_parse }
@@ -10164,7 +10164,7 @@ int lldc_activity_secrets_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_secrets_
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_activity_secrets_t));
 
@@ -10179,7 +10179,7 @@ int lldc_activity_secrets_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_secrets_
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -10250,7 +10250,7 @@ static
 int lldc__activity_buttons_item_parse (lldc_activity_buttons_item_t *obj, yyjson_val *json)
 {
 
-    static lldc_parser_def_t parser_def[2] = {
+    static lldc_struct_def_t parser_def[2] = {
         { "label", (int (*)(void *, yyjson_val *))lldc__activity_buttons_item_label_parse },
         { "url", (int (*)(void *, yyjson_val *))lldc__activity_buttons_item_url_parse }
     };
@@ -10270,7 +10270,7 @@ int lldc__activity_buttons_item_parse (lldc_activity_buttons_item_t *obj, yyjson
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     cwr_malloc_ctx_t *mctx = obj->_mctx;
     memset(obj, 0, sizeof(lldc_activity_buttons_item_t));
 
@@ -10281,7 +10281,7 @@ int lldc__activity_buttons_item_parse (lldc_activity_buttons_item_t *obj, yyjson
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -10312,7 +10312,7 @@ int lldc__activity_buttons_parse (lldc_activity_t *_obj, yyjson_val *json)
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -10333,7 +10333,7 @@ int lldc__activity_buttons_parse (lldc_activity_t *_obj, yyjson_val *json)
 int lldc_activity_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[15] = {
+    static lldc_struct_def_t parser_def[15] = {
         { "name", (int (*)(void *, yyjson_val *))lldc__activity_name_parse },
         { "type", (int (*)(void *, yyjson_val *))lldc__activity_type_parse },
         { "url", (int (*)(void *, yyjson_val *))lldc__activity_url_parse },
@@ -10366,7 +10366,7 @@ int lldc_activity_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_t *obj, yyjson_v
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_activity_t));
 
@@ -10381,7 +10381,7 @@ int lldc_activity_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_t *obj, yyjson_v
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -10416,7 +10416,7 @@ int lldc_activity_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_arr_t *obj, 
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -10437,7 +10437,7 @@ int lldc_activity_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_arr_t *obj, 
 int lldc_client_status_parse (cwr_malloc_ctx_t *_mctx, lldc_client_status_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[3] = {
+    static lldc_struct_def_t parser_def[3] = {
         { "desktop", (int (*)(void *, yyjson_val *))lldc__client_status_desktop_parse },
         { "mobile", (int (*)(void *, yyjson_val *))lldc__client_status_mobile_parse },
         { "web", (int (*)(void *, yyjson_val *))lldc__client_status_web_parse }
@@ -10458,7 +10458,7 @@ int lldc_client_status_parse (cwr_malloc_ctx_t *_mctx, lldc_client_status_t *obj
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_client_status_t));
 
@@ -10473,7 +10473,7 @@ int lldc_client_status_parse (cwr_malloc_ctx_t *_mctx, lldc_client_status_t *obj
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -10516,7 +10516,7 @@ int lldc__presence_update_client_status_parse (lldc_presence_update_t *_obj, yyj
 int lldc_presence_update_parse (cwr_malloc_ctx_t *_mctx, lldc_presence_update_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[5] = {
+    static lldc_struct_def_t parser_def[5] = {
         { "user", (int (*)(void *, yyjson_val *))lldc__presence_update_user_parse },
         { "guild_id", (int (*)(void *, yyjson_val *))lldc__presence_update_guild_id_parse },
         { "status", (int (*)(void *, yyjson_val *))lldc__presence_update_status_parse },
@@ -10539,7 +10539,7 @@ int lldc_presence_update_parse (cwr_malloc_ctx_t *_mctx, lldc_presence_update_t 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_presence_update_t));
 
@@ -10554,7 +10554,7 @@ int lldc_presence_update_parse (cwr_malloc_ctx_t *_mctx, lldc_presence_update_t 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -10589,7 +10589,7 @@ int lldc_presence_update_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_presence_updat
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -10610,7 +10610,7 @@ int lldc_presence_update_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_presence_updat
 int lldc_stage_instance_parse (cwr_malloc_ctx_t *_mctx, lldc_stage_instance_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[6] = {
+    static lldc_struct_def_t parser_def[6] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__stage_instance_id_parse },
         { "guild_id", (int (*)(void *, yyjson_val *))lldc__stage_instance_guild_id_parse },
         { "channel_id", (int (*)(void *, yyjson_val *))lldc__stage_instance_channel_id_parse },
@@ -10634,7 +10634,7 @@ int lldc_stage_instance_parse (cwr_malloc_ctx_t *_mctx, lldc_stage_instance_t *o
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_stage_instance_t));
 
@@ -10649,7 +10649,7 @@ int lldc_stage_instance_parse (cwr_malloc_ctx_t *_mctx, lldc_stage_instance_t *o
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -10684,7 +10684,7 @@ int lldc_stage_instance_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_stage_instance_
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -10705,7 +10705,7 @@ int lldc_stage_instance_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_stage_instance_
 int lldc_welcome_screen_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_welcome_screen_channel_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "channel_id", (int (*)(void *, yyjson_val *))lldc__welcome_screen_channel_channel_id_parse },
         { "description", (int (*)(void *, yyjson_val *))lldc__welcome_screen_channel_description_parse },
         { "emoji_id", (int (*)(void *, yyjson_val *))lldc__welcome_screen_channel_emoji_id_parse },
@@ -10727,7 +10727,7 @@ int lldc_welcome_screen_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_welcome_scr
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_welcome_screen_channel_t));
 
@@ -10742,7 +10742,7 @@ int lldc_welcome_screen_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_welcome_scr
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -10777,7 +10777,7 @@ int lldc_welcome_screen_channel_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_welcome
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -10809,7 +10809,7 @@ int lldc__welcome_screen_welcome_channels_parse (lldc_welcome_screen_t *_obj, yy
 int lldc_welcome_screen_parse (cwr_malloc_ctx_t *_mctx, lldc_welcome_screen_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[2] = {
+    static lldc_struct_def_t parser_def[2] = {
         { "description", (int (*)(void *, yyjson_val *))lldc__welcome_screen_description_parse },
         { "welcome_channels", (int (*)(void *, yyjson_val *))lldc__welcome_screen_welcome_channels_parse }
     };
@@ -10829,7 +10829,7 @@ int lldc_welcome_screen_parse (cwr_malloc_ctx_t *_mctx, lldc_welcome_screen_t *o
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_welcome_screen_t));
 
@@ -10844,7 +10844,7 @@ int lldc_welcome_screen_parse (cwr_malloc_ctx_t *_mctx, lldc_welcome_screen_t *o
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -10854,7 +10854,7 @@ int lldc_welcome_screen_parse (cwr_malloc_ctx_t *_mctx, lldc_welcome_screen_t *o
 int lldc_guilds_widget_parse (cwr_malloc_ctx_t *_mctx, lldc_guilds_widget_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[2] = {
+    static lldc_struct_def_t parser_def[2] = {
         { "enabled", (int (*)(void *, yyjson_val *))lldc__guilds_widget_enabled_parse },
         { "channel_id", (int (*)(void *, yyjson_val *))lldc__guilds_widget_channel_id_parse }
     };
@@ -10874,7 +10874,7 @@ int lldc_guilds_widget_parse (cwr_malloc_ctx_t *_mctx, lldc_guilds_widget_t *obj
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_guilds_widget_t));
 
@@ -10889,7 +10889,7 @@ int lldc_guilds_widget_parse (cwr_malloc_ctx_t *_mctx, lldc_guilds_widget_t *obj
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -10915,16 +10915,16 @@ int lldc__guild_preview_emojis_parse (lldc_guild_preview_t *_obj, yyjson_val *js
 static
 int lldc__guild_preview_features_parse (lldc_guild_preview_t *_obj, yyjson_val *json)
 {
-    lldc_parser_string_arr_t *obj = &_obj->features;
+    lldc_struct_string_arr_t *obj = &_obj->features;
 
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
-    return lldc_parser_string_arr_parse(obj, json);
+    return lldc_struct_string_arr_parse(obj, json);
 }
 int lldc_guild_preview_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_preview_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[10] = {
+    static lldc_struct_def_t parser_def[10] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__guild_preview_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__guild_preview_name_parse },
         { "icon", (int (*)(void *, yyjson_val *))lldc__guild_preview_icon_parse },
@@ -10952,7 +10952,7 @@ int lldc_guild_preview_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_preview_t *obj
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_guild_preview_t));
 
@@ -10967,7 +10967,7 @@ int lldc_guild_preview_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_preview_t *obj
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -10977,7 +10977,7 @@ int lldc_guild_preview_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_preview_t *obj
 int lldc_integration_account_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_account_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[2] = {
+    static lldc_struct_def_t parser_def[2] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__integration_account_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__integration_account_name_parse }
     };
@@ -10997,7 +10997,7 @@ int lldc_integration_account_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_ac
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_integration_account_t));
 
@@ -11012,7 +11012,7 @@ int lldc_integration_account_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_ac
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -11033,7 +11033,7 @@ int lldc__integration_application_bot_parse (lldc_integration_application_t *_ob
 int lldc_integration_application_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_application_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[6] = {
+    static lldc_struct_def_t parser_def[6] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__integration_application_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__integration_application_name_parse },
         { "icon", (int (*)(void *, yyjson_val *))lldc__integration_application_icon_parse },
@@ -11057,7 +11057,7 @@ int lldc_integration_application_parse (cwr_malloc_ctx_t *_mctx, lldc_integratio
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_integration_application_t));
 
@@ -11072,7 +11072,7 @@ int lldc_integration_application_parse (cwr_malloc_ctx_t *_mctx, lldc_integratio
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -11115,7 +11115,7 @@ int lldc__integration_application_parse (lldc_integration_t *_obj, yyjson_val *j
 int lldc_integration_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[15] = {
+    static lldc_struct_def_t parser_def[15] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__integration_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__integration_name_parse },
         { "type", (int (*)(void *, yyjson_val *))lldc__integration_type_parse },
@@ -11148,7 +11148,7 @@ int lldc_integration_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_t *obj, yy
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_integration_t));
 
@@ -11163,7 +11163,7 @@ int lldc_integration_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_t *obj, yy
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -11198,7 +11198,7 @@ int lldc_integration_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_arr_t 
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -11230,7 +11230,7 @@ int lldc__partial_integration_account_parse (lldc_partial_integration_t *_obj, y
 int lldc_partial_integration_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_integration_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[5] = {
+    static lldc_struct_def_t parser_def[5] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__partial_integration_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__partial_integration_name_parse },
         { "type", (int (*)(void *, yyjson_val *))lldc__partial_integration_type_parse },
@@ -11253,7 +11253,7 @@ int lldc_partial_integration_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_integr
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_partial_integration_t));
 
@@ -11268,7 +11268,7 @@ int lldc_partial_integration_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_integr
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -11303,7 +11303,7 @@ int lldc_partial_integration_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_in
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -11335,7 +11335,7 @@ int lldc__ban_user_parse (lldc_ban_t *_obj, yyjson_val *json)
 int lldc_ban_parse (cwr_malloc_ctx_t *_mctx, lldc_ban_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[2] = {
+    static lldc_struct_def_t parser_def[2] = {
         { "reason", (int (*)(void *, yyjson_val *))lldc__ban_reason_parse },
         { "user", (int (*)(void *, yyjson_val *))lldc__ban_user_parse }
     };
@@ -11355,7 +11355,7 @@ int lldc_ban_parse (cwr_malloc_ctx_t *_mctx, lldc_ban_t *obj, yyjson_val *json, 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_ban_t));
 
@@ -11370,7 +11370,7 @@ int lldc_ban_parse (cwr_malloc_ctx_t *_mctx, lldc_ban_t *obj, yyjson_val *json, 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -11405,7 +11405,7 @@ int lldc_ban_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_ban_arr_t *obj, yyjson_val
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -11453,11 +11453,11 @@ int lldc__guild_emojis_parse (lldc_guild_t *_obj, yyjson_val *json)
 static
 int lldc__guild_features_parse (lldc_guild_t *_obj, yyjson_val *json)
 {
-    lldc_parser_string_arr_t *obj = &_obj->features;
+    lldc_struct_string_arr_t *obj = &_obj->features;
 
     obj->_mctx = _obj->_mctx;
     obj->_mlog = _obj->_mlog;
-    return lldc_parser_string_arr_parse(obj, json);
+    return lldc_struct_string_arr_parse(obj, json);
 }
 /**
 * voice_states Parser
@@ -11550,7 +11550,7 @@ int lldc__guild_stickers_parse (lldc_guild_t *_obj, yyjson_val *json)
 int lldc_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[50] = {
+    static lldc_struct_def_t parser_def[50] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__guild_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__guild_name_parse },
         { "icon", (int (*)(void *, yyjson_val *))lldc__guild_icon_parse },
@@ -11618,7 +11618,7 @@ int lldc_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_t *obj, yyjson_val *js
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_guild_t));
 
@@ -11633,7 +11633,7 @@ int lldc_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_t *obj, yyjson_val *js
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -11668,7 +11668,7 @@ int lldc_guild_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_arr_t *obj, yyjson
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -11700,7 +11700,7 @@ int lldc__guild_template_creator_parse (lldc_guild_template_t *_obj, yyjson_val 
 int lldc_guild_template_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_template_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[10] = {
+    static lldc_struct_def_t parser_def[10] = {
         { "code", (int (*)(void *, yyjson_val *))lldc__guild_template_code_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__guild_template_name_parse },
         { "description", (int (*)(void *, yyjson_val *))lldc__guild_template_description_parse },
@@ -11728,7 +11728,7 @@ int lldc_guild_template_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_template_t *o
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_guild_template_t));
 
@@ -11743,7 +11743,7 @@ int lldc_guild_template_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_template_t *o
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -11778,7 +11778,7 @@ int lldc_guild_template_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_template_
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
@@ -11810,7 +11810,7 @@ int lldc__invite_stage_instance_members_parse (lldc_invite_stage_instance_t *_ob
 int lldc_invite_stage_instance_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_stage_instance_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[4] = {
+    static lldc_struct_def_t parser_def[4] = {
         { "members", (int (*)(void *, yyjson_val *))lldc__invite_stage_instance_members_parse },
         { "participant_count", (int (*)(void *, yyjson_val *))lldc__invite_stage_instance_participant_count_parse },
         { "speaker_count", (int (*)(void *, yyjson_val *))lldc__invite_stage_instance_speaker_count_parse },
@@ -11832,7 +11832,7 @@ int lldc_invite_stage_instance_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_stage
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_invite_stage_instance_t));
 
@@ -11847,7 +11847,7 @@ int lldc_invite_stage_instance_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_stage
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -11857,7 +11857,7 @@ int lldc_invite_stage_instance_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_stage
 int lldc_invite_metadata_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_metadata_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[5] = {
+    static lldc_struct_def_t parser_def[5] = {
         { "uses", (int (*)(void *, yyjson_val *))lldc__invite_metadata_uses_parse },
         { "max_uses", (int (*)(void *, yyjson_val *))lldc__invite_metadata_max_uses_parse },
         { "max_age", (int (*)(void *, yyjson_val *))lldc__invite_metadata_max_age_parse },
@@ -11880,7 +11880,7 @@ int lldc_invite_metadata_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_metadata_t 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_invite_metadata_t));
 
@@ -11895,7 +11895,7 @@ int lldc_invite_metadata_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_metadata_t 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -11971,7 +11971,7 @@ int lldc__invite_stage_instance_parse (lldc_invite_t *_obj, yyjson_val *json)
 int lldc_invite_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[11] = {
+    static lldc_struct_def_t parser_def[11] = {
         { "code", (int (*)(void *, yyjson_val *))lldc__invite_code_parse },
         { "guild", (int (*)(void *, yyjson_val *))lldc__invite_guild_parse },
         { "channel", (int (*)(void *, yyjson_val *))lldc__invite_channel_parse },
@@ -12000,7 +12000,7 @@ int lldc_invite_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_t *obj, yyjson_val *
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_invite_t));
 
@@ -12015,7 +12015,7 @@ int lldc_invite_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_t *obj, yyjson_val *
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -12036,7 +12036,7 @@ int lldc__connection_integrations_parse (lldc_connection_t *_obj, yyjson_val *js
 int lldc_connection_parse (cwr_malloc_ctx_t *_mctx, lldc_connection_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[9] = {
+    static lldc_struct_def_t parser_def[9] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__connection_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__connection_name_parse },
         { "type", (int (*)(void *, yyjson_val *))lldc__connection_type_parse },
@@ -12063,7 +12063,7 @@ int lldc_connection_parse (cwr_malloc_ctx_t *_mctx, lldc_connection_t *obj, yyjs
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_connection_t));
 
@@ -12078,7 +12078,7 @@ int lldc_connection_parse (cwr_malloc_ctx_t *_mctx, lldc_connection_t *obj, yyjs
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -12088,7 +12088,7 @@ int lldc_connection_parse (cwr_malloc_ctx_t *_mctx, lldc_connection_t *obj, yyjs
 int lldc_voice_region_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_region_t *obj, yyjson_val *json, int has_existing_ledger)
 {
 
-    static lldc_parser_def_t parser_def[6] = {
+    static lldc_struct_def_t parser_def[6] = {
         { "id", (int (*)(void *, yyjson_val *))lldc__voice_region_id_parse },
         { "name", (int (*)(void *, yyjson_val *))lldc__voice_region_name_parse },
         { "vip", (int (*)(void *, yyjson_val *))lldc__voice_region_vip_parse },
@@ -12112,7 +12112,7 @@ int lldc_voice_region_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_region_t *obj, 
     if (!yyjson_is_obj(json))
         return -1;
 
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
     
     memset(obj, 0, sizeof(lldc_voice_region_t));
 
@@ -12127,7 +12127,7 @@ int lldc_voice_region_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_region_t *obj, 
     yyjson_obj_iter_init(json, &iter);
     while ((key = yyjson_obj_iter_next(&iter))) {
         val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
     }
@@ -12162,7 +12162,7 @@ int lldc_voice_region_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_region_arr_
     if (!has_existing_ledger)
         obj->_mlog = &obj->__mlog;
 
-    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
     if (obj->items == NULL)
     {
         obj->len = 0;
