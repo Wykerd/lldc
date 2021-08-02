@@ -17,6 +17,96 @@
 #include <lldc/hashmap.h>
 #include <stdlib.h>
 /**
+ * custom Parser
+ * whether this is a custom voice region (used for events/etc)
+ * type: object.bool
+ */
+static
+int lldc__voice_region_custom_parse (lldc_voice_region_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_bool(json))
+        return -1;
+
+    obj->custom = yyjson_get_bool(json);
+
+    return 0;
+}
+/**
+ * deprecated Parser
+ * whether this is a deprecated voice region (avoid switching to these)
+ * type: object.bool
+ */
+static
+int lldc__voice_region_deprecated_parse (lldc_voice_region_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_bool(json))
+        return -1;
+
+    obj->deprecated = yyjson_get_bool(json);
+
+    return 0;
+}
+/**
+ * optimal Parser
+ * true for a single server that is closest to the current user's client
+ * type: object.bool
+ */
+static
+int lldc__voice_region_optimal_parse (lldc_voice_region_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_bool(json))
+        return -1;
+
+    obj->optimal = yyjson_get_bool(json);
+
+    return 0;
+}
+/**
+ * vip Parser
+ * true if this is a vip-only server
+ * type: object.bool
+ */
+static
+int lldc__voice_region_vip_parse (lldc_voice_region_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_bool(json))
+        return -1;
+
+    obj->vip = yyjson_get_bool(json);
+
+    return 0;
+}
+/**
+ * name Parser
+ * name of the region
+ * type: object.string
+ */
+static
+int lldc__voice_region_name_parse (lldc_voice_region_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * id Parser
+ * unique ID for the region
+ * type: object.string
+ */
+static
+int lldc__voice_region_id_parse (lldc_voice_region_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->id = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
  * visibility Parser
  * visibility of this connection
  * type: object.int
@@ -475,141 +565,6 @@ int lldc__guild_template_code_parse (lldc_guild_template_t *obj, yyjson_val *jso
         return -1;
 
     obj->code = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
-
-    return 0;
-}
-/**
- * banner Parser
- * OPTIONAL: banner hash
- * type: object.string
- */
-static
-int lldc__partial_guild_banner_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
-{
-    if (!yyjson_is_str(json))
-        return -1;
-
-    obj->banner = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
-
-    return 0;
-}
-/**
- * description Parser
- * OPTIONAL: the description of a Community guild
- * type: object.string
- */
-static
-int lldc__partial_guild_description_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
-{
-    if (!yyjson_is_str(json))
-        return -1;
-
-    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
-
-    return 0;
-}
-/**
- * vanity_url_code Parser
- * OPTIONAL: the vanity url code for the guild
- * type: object.string
- */
-static
-int lldc__partial_guild_vanity_url_code_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
-{
-    if (!yyjson_is_str(json))
-        return -1;
-
-    obj->vanity_url_code = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
-
-    return 0;
-}
-/**
- * verification_level Parser
- * verification level required for the guild
- * type: object.int
- */
-static
-int lldc__partial_guild_verification_level_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
-{
-    if (!yyjson_is_int(json))
-        return -1;
-
-    obj->verification_level = yyjson_get_int(json);
-
-    return 0;
-}
-/**
- * discovery_splash Parser
- * OPTIONAL: discovery splash hash; only present for guilds with the "DISCOVERABLE" feature
- * type: object.string
- */
-static
-int lldc__partial_guild_discovery_splash_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
-{
-    if (!yyjson_is_str(json))
-        return -1;
-
-    obj->discovery_splash = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
-
-    return 0;
-}
-/**
- * splash Parser
- * OPTIONAL: splash hash
- * type: object.string
- */
-static
-int lldc__partial_guild_splash_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
-{
-    if (!yyjson_is_str(json))
-        return -1;
-
-    obj->splash = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
-
-    return 0;
-}
-/**
- * icon Parser
- * OPTIONAL: icon hash
- * type: object.string
- */
-static
-int lldc__partial_guild_icon_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
-{
-    if (!yyjson_is_str(json))
-        return -1;
-
-    obj->icon = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
-
-    return 0;
-}
-/**
- * name Parser
- * guild name (2-100 characters, excluding trailing and leading whitespace)
- * type: object.string
- */
-static
-int lldc__partial_guild_name_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
-{
-    if (!yyjson_is_str(json))
-        return -1;
-
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
-
-    return 0;
-}
-/**
- * id Parser
- * guild id
- * type: object.snowflake
- */
-static
-int lldc__partial_guild_id_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
-{
-    if (!yyjson_get_str(json))
-        return -1;
-
-    obj->id = (snowflake_t)atoll(yyjson_get_str(json));
 
     return 0;
 }
@@ -5279,51 +5234,6 @@ int lldc__webhook_url_parse (lldc_webhook_t *obj, yyjson_val *json)
     return 0;
 }
 /**
- * icon Parser
- * OPTIONAL: icon hash
- * type: object.string
- */
-static
-int lldc__webhook_source_guild_icon_parse (lldc_webhook_source_guild_t *obj, yyjson_val *json) 
-{
-    if (!yyjson_is_str(json))
-        return -1;
-
-    obj->icon = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
-
-    return 0;
-}
-/**
- * name Parser
- * guild name (2-100 characters, excluding trailing and leading whitespace)
- * type: object.string
- */
-static
-int lldc__webhook_source_guild_name_parse (lldc_webhook_source_guild_t *obj, yyjson_val *json) 
-{
-    if (!yyjson_is_str(json))
-        return -1;
-
-    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
-
-    return 0;
-}
-/**
- * id Parser
- * guild id
- * type: object.snowflake
- */
-static
-int lldc__webhook_source_guild_id_parse (lldc_webhook_source_guild_t *obj, yyjson_val *json) 
-{
-    if (!yyjson_get_str(json))
-        return -1;
-
-    obj->id = (snowflake_t)atoll(yyjson_get_str(json));
-
-    return 0;
-}
-/**
  * application_id Parser
  * OPTIONAL: the bot/OAuth2 application that created this webhook
  * type: object.snowflake
@@ -5435,6 +5345,141 @@ int lldc__webhook_type_parse (lldc_webhook_t *obj, yyjson_val *json)
  */
 static
 int lldc__webhook_id_parse (lldc_webhook_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_get_str(json))
+        return -1;
+
+    obj->id = (snowflake_t)atoll(yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * banner Parser
+ * OPTIONAL: banner hash
+ * type: object.string
+ */
+static
+int lldc__partial_guild_banner_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->banner = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * description Parser
+ * OPTIONAL: the description of a Community guild
+ * type: object.string
+ */
+static
+int lldc__partial_guild_description_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->description = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * vanity_url_code Parser
+ * OPTIONAL: the vanity url code for the guild
+ * type: object.string
+ */
+static
+int lldc__partial_guild_vanity_url_code_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->vanity_url_code = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * verification_level Parser
+ * verification level required for the guild
+ * type: object.int
+ */
+static
+int lldc__partial_guild_verification_level_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->verification_level = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * discovery_splash Parser
+ * OPTIONAL: discovery splash hash; only present for guilds with the "DISCOVERABLE" feature
+ * type: object.string
+ */
+static
+int lldc__partial_guild_discovery_splash_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->discovery_splash = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * splash Parser
+ * OPTIONAL: splash hash
+ * type: object.string
+ */
+static
+int lldc__partial_guild_splash_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->splash = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * icon Parser
+ * OPTIONAL: icon hash
+ * type: object.string
+ */
+static
+int lldc__partial_guild_icon_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->icon = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * name Parser
+ * guild name (2-100 characters, excluding trailing and leading whitespace)
+ * type: object.string
+ */
+static
+int lldc__partial_guild_name_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->name = lldc_parser_strdup((lldc_parser_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * id Parser
+ * guild id
+ * type: object.snowflake
+ */
+static
+int lldc__partial_guild_id_parse (lldc_partial_guild_t *obj, yyjson_val *json) 
 {
     if (!yyjson_get_str(json))
         return -1;
@@ -6528,35 +6573,38 @@ int lldc_partial_channel_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_channe
     return 0;
 }
 /**
-* user Parser
-* OPTIONAL: the user this webhook was created by (not returned when getting a webhook with its token)
-* type: object.object
+* features Parser
+* enabled guild features
+* type: object.array[string]
 */
 static
-int lldc__webhook_user_parse (lldc_webhook_t *_obj, yyjson_val *json)
+int lldc__partial_guild_features_parse (lldc_partial_guild_t *_obj, yyjson_val *json)
 {
-    _obj->user._mlog = _obj->_mlog;
-    return lldc_user_parse(_obj->_mctx, &_obj->user, json, 1);
-}
-/**
-* source_guild Parser
-* OPTIONAL: the partial guild of the channel that this webhook is following (returned for Channel Follower Webhooks)
-* type: object.object
-*/
-static
-int lldc__webhook_source_guild_parse (lldc_webhook_t *_obj, yyjson_val *json)
-{
-    lldc_webhook_source_guild_t *obj = &_obj->source_guild;
+    lldc_parser_string_arr_t *obj = &_obj->features;
 
-    static lldc_parser_def_t parser_def[3] = {
-        { "id", (int (*)(void *, yyjson_val *))lldc__webhook_source_guild_id_parse },
-        { "name", (int (*)(void *, yyjson_val *))lldc__webhook_source_guild_name_parse },
-        { "icon", (int (*)(void *, yyjson_val *))lldc__webhook_source_guild_icon_parse }
+    obj->_mctx = _obj->_mctx;
+    obj->_mlog = _obj->_mlog;
+    return lldc_parser_string_arr_parse(obj, json);
+}
+int lldc_partial_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild_t *obj, yyjson_val *json, int has_existing_ledger)
+{
+
+    static lldc_parser_def_t parser_def[10] = {
+        { "id", (int (*)(void *, yyjson_val *))lldc__partial_guild_id_parse },
+        { "name", (int (*)(void *, yyjson_val *))lldc__partial_guild_name_parse },
+        { "icon", (int (*)(void *, yyjson_val *))lldc__partial_guild_icon_parse },
+        { "splash", (int (*)(void *, yyjson_val *))lldc__partial_guild_splash_parse },
+        { "discovery_splash", (int (*)(void *, yyjson_val *))lldc__partial_guild_discovery_splash_parse },
+        { "verification_level", (int (*)(void *, yyjson_val *))lldc__partial_guild_verification_level_parse },
+        { "features", (int (*)(void *, yyjson_val *))lldc__partial_guild_features_parse },
+        { "vanity_url_code", (int (*)(void *, yyjson_val *))lldc__partial_guild_vanity_url_code_parse },
+        { "description", (int (*)(void *, yyjson_val *))lldc__partial_guild_description_parse },
+        { "banner", (int (*)(void *, yyjson_val *))lldc__partial_guild_banner_parse }
     };
 
-    static lldc_hashmap_entry_t parser_table[8] = { 0 };
+    static lldc_hashmap_entry_t parser_table[16] = { 0 };
     static lldc_hashmap_t parsers = {  
-        .size = 8,
+        .size = 16,
         .len = 0,
         .table = parser_table,
         .hash = lldc_hashmap_hash_str,
@@ -6564,17 +6612,20 @@ int lldc__webhook_source_guild_parse (lldc_webhook_t *_obj, yyjson_val *json)
         .dup_key = lldc_hashmap_dup_echo,
         .free_key = lldc_hashmap_free_noop
     };
-    LLDC_PARSER_LOAD(3)
+    LLDC_PARSER_LOAD(10)
 
     if (!yyjson_is_obj(json))
         return -1;
 
     lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
     
-    memset(obj, 0, sizeof(lldc_webhook_source_guild_t));
+    memset(obj, 0, sizeof(lldc_partial_guild_t));
 
-    obj->_mctx = _obj->_mctx;
-    obj->_mlog = _obj->_mlog;
+    obj->_mctx = _mctx;
+    if (!has_existing_ledger)
+        obj->_mlog = &obj->__mlog;
+    else
+        obj->_mlog = ledger;
 
     yyjson_val *key, *val;
     yyjson_obj_iter iter;
@@ -6589,8 +6640,30 @@ int lldc__webhook_source_guild_parse (lldc_webhook_t *_obj, yyjson_val *json)
     return 0;
 }
 /**
+* user Parser
+* OPTIONAL: the user this webhook was created by (not returned when getting a webhook with its token)
+* type: object.object
+*/
+static
+int lldc__webhook_user_parse (lldc_webhook_t *_obj, yyjson_val *json)
+{
+    _obj->user._mlog = _obj->_mlog;
+    return lldc_user_parse(_obj->_mctx, &_obj->user, json, 1);
+}
+/**
+* source_guild Parser
+* OPTIONAL: the guild of the channel that this webhook is following (returned for Channel Follower Webhooks)
+* type: object.object
+*/
+static
+int lldc__webhook_source_guild_parse (lldc_webhook_t *_obj, yyjson_val *json)
+{
+    _obj->source_guild._mlog = _obj->_mlog;
+    return lldc_partial_guild_parse(_obj->_mctx, &_obj->source_guild, json, 1);
+}
+/**
 * source_channel Parser
-* OPTIONAL: the partial channel that this webhook is following (returned for Channel Follower Webhooks)
+* OPTIONAL: the channel that this webhook is following (returned for Channel Follower Webhooks)
 * type: object.object
 */
 static
@@ -11614,73 +11687,6 @@ int lldc_guild_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_arr_t *obj, yyjson
     return 0;
 }
 /**
-* features Parser
-* enabled guild features
-* type: object.array[string]
-*/
-static
-int lldc__partial_guild_features_parse (lldc_partial_guild_t *_obj, yyjson_val *json)
-{
-    lldc_parser_string_arr_t *obj = &_obj->features;
-
-    obj->_mctx = _obj->_mctx;
-    obj->_mlog = _obj->_mlog;
-    return lldc_parser_string_arr_parse(obj, json);
-}
-int lldc_partial_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild_t *obj, yyjson_val *json, int has_existing_ledger)
-{
-
-    static lldc_parser_def_t parser_def[10] = {
-        { "id", (int (*)(void *, yyjson_val *))lldc__partial_guild_id_parse },
-        { "name", (int (*)(void *, yyjson_val *))lldc__partial_guild_name_parse },
-        { "icon", (int (*)(void *, yyjson_val *))lldc__partial_guild_icon_parse },
-        { "splash", (int (*)(void *, yyjson_val *))lldc__partial_guild_splash_parse },
-        { "discovery_splash", (int (*)(void *, yyjson_val *))lldc__partial_guild_discovery_splash_parse },
-        { "verification_level", (int (*)(void *, yyjson_val *))lldc__partial_guild_verification_level_parse },
-        { "features", (int (*)(void *, yyjson_val *))lldc__partial_guild_features_parse },
-        { "vanity_url_code", (int (*)(void *, yyjson_val *))lldc__partial_guild_vanity_url_code_parse },
-        { "description", (int (*)(void *, yyjson_val *))lldc__partial_guild_description_parse },
-        { "banner", (int (*)(void *, yyjson_val *))lldc__partial_guild_banner_parse }
-    };
-
-    static lldc_hashmap_entry_t parser_table[16] = { 0 };
-    static lldc_hashmap_t parsers = {  
-        .size = 16,
-        .len = 0,
-        .table = parser_table,
-        .hash = lldc_hashmap_hash_str,
-        .compare = (int (*)(const void *, const void *))strcmp,
-        .dup_key = lldc_hashmap_dup_echo,
-        .free_key = lldc_hashmap_free_noop
-    };
-    LLDC_PARSER_LOAD(10)
-
-    if (!yyjson_is_obj(json))
-        return -1;
-
-    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
-    
-    memset(obj, 0, sizeof(lldc_partial_guild_t));
-
-    obj->_mctx = _mctx;
-    if (!has_existing_ledger)
-        obj->_mlog = &obj->__mlog;
-    else
-        obj->_mlog = ledger;
-
-    yyjson_val *key, *val;
-    yyjson_obj_iter iter;
-    yyjson_obj_iter_init(json, &iter);
-    while ((key = yyjson_obj_iter_next(&iter))) {
-        val = yyjson_obj_iter_get_val(key);
-        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
-        if (parser)
-            parser(obj, val);
-    }
-
-    return 0;
-}
-/**
 * creator Parser
 * the user who created the template
 * type: object.object
@@ -12075,6 +12081,101 @@ int lldc_connection_parse (cwr_malloc_ctx_t *_mctx, lldc_connection_t *obj, yyjs
         lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
         if (parser)
             parser(obj, val);
+    }
+
+    return 0;
+}
+int lldc_voice_region_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_region_t *obj, yyjson_val *json, int has_existing_ledger)
+{
+
+    static lldc_parser_def_t parser_def[6] = {
+        { "id", (int (*)(void *, yyjson_val *))lldc__voice_region_id_parse },
+        { "name", (int (*)(void *, yyjson_val *))lldc__voice_region_name_parse },
+        { "vip", (int (*)(void *, yyjson_val *))lldc__voice_region_vip_parse },
+        { "optimal", (int (*)(void *, yyjson_val *))lldc__voice_region_optimal_parse },
+        { "deprecated", (int (*)(void *, yyjson_val *))lldc__voice_region_deprecated_parse },
+        { "custom", (int (*)(void *, yyjson_val *))lldc__voice_region_custom_parse }
+    };
+
+    static lldc_hashmap_entry_t parser_table[16] = { 0 };
+    static lldc_hashmap_t parsers = {  
+        .size = 16,
+        .len = 0,
+        .table = parser_table,
+        .hash = lldc_hashmap_hash_str,
+        .compare = (int (*)(const void *, const void *))strcmp,
+        .dup_key = lldc_hashmap_dup_echo,
+        .free_key = lldc_hashmap_free_noop
+    };
+    LLDC_PARSER_LOAD(6)
+
+    if (!yyjson_is_obj(json))
+        return -1;
+
+    lldc_parser_malloc_ledger_t *ledger = obj->_mlog;
+    
+    memset(obj, 0, sizeof(lldc_voice_region_t));
+
+    obj->_mctx = _mctx;
+    if (!has_existing_ledger)
+        obj->_mlog = &obj->__mlog;
+    else
+        obj->_mlog = ledger;
+
+    yyjson_val *key, *val;
+    yyjson_obj_iter iter;
+    yyjson_obj_iter_init(json, &iter);
+    while ((key = yyjson_obj_iter_next(&iter))) {
+        val = yyjson_obj_iter_get_val(key);
+        lldc_parser_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        if (parser)
+            parser(obj, val);
+    }
+
+    return 0;
+}
+/**
+* Voice Region Parser
+* Voice Region Objects
+* type: object.object
+*/
+static
+int lldc__voice_region_item_parse (lldc_voice_region_t *_obj, yyjson_val *json)
+{
+    return lldc_voice_region_parse(_obj->_mctx, _obj, json, 1);
+}
+int lldc_voice_region_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_region_arr_t *obj, yyjson_val *json, int has_existing_ledger)
+{
+
+    if (!yyjson_is_arr(json))
+        return -1;
+
+    size_t arr_size = yyjson_arr_size(json);
+    if (!arr_size)
+    {
+        obj->items = NULL;
+        obj->len = 0;
+        return 0;
+    }
+
+    obj->_mctx = _mctx;
+    if (!has_existing_ledger)
+        obj->_mlog = &obj->__mlog;
+
+    obj->items = lldc_parser_malloc((lldc_parser_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    if (obj->items == NULL)
+    {
+        obj->len = 0;
+        return -1;
+    }
+    obj->len = arr_size;
+
+    size_t idx, max;
+    yyjson_val *val;
+    yyjson_arr_foreach(json, idx, max, val) {
+        obj->items[idx]._mctx = obj->_mctx;
+        obj->items[idx]._mlog = obj->_mlog;
+        lldc__voice_region_item_parse(&obj->items[idx], val);
     }
 
     return 0;

@@ -1,0 +1,31 @@
+{
+    "title": "Voice Region",
+    "description": "Voice Region Structure",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "unique ID for the region",
+            "type": "string"
+        },
+        "name": {
+            "description": "name of the region",
+            "type": "string"
+        },
+        "vip": {
+            "description": "true if this is a vip-only server",
+            "type": "boolean"
+        },
+        "optimal": {
+            "description": "true for a single server that is closest to the current user's client",
+            "type": "boolean"
+        },
+        "deprecated": {
+            "description": "whether this is a deprecated voice region (avoid switching to these)",
+            "type": "boolean"
+        },
+        "custom": {
+            "description": "whether this is a custom voice region (used for events/etc)",
+            "type": "boolean"
+        }
+    }
+}

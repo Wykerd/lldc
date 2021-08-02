@@ -1,0 +1,10 @@
+{
+    "title": "Voice Region",
+    "description": "Voice Region Array",
+    "type": "array",
+    "items": {
+        "description": "Voice Region Objects",
+        "type": "object",
+        "existing_parser": "voice_region"
+    }
+}

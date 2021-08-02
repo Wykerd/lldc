@@ -10,12 +10,24 @@
         "type": {
             "description": "the type of the webhook",
             "type": "int",
-            "enum_prefix": "LLDC_WEBHOOK_",
             "enum_type": "webhook_type",
+            "enum_prefix": "LLDC_WEBHOOK_",
             "enum": [
-                [1, "Incoming", "Incoming Webhooks can post messages to channels with a generated token"],
-                [2, "Channel Follower", "Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels"],
-                [3, "Application", "Application webhooks are webhooks used with Interactions"]
+                [
+                    "1",
+                    "Incoming",
+                    "Incoming Webhooks can post messages to channels with a generated token"
+                ],
+                [
+                    "2",
+                    "Channel Follower",
+                    "Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels"
+                ],
+                [
+                    "3",
+                    "Application",
+                    "Application webhooks are webhooks used with Interactions"
+                ]
             ]
         },
         "guild_id": {
@@ -48,25 +60,12 @@
             "type": "snowflake"
         },
         "source_guild": {
-            "description": "OPTIONAL: the partial guild of the channel that this webhook is following (returned for Channel Follower Webhooks)",
+            "description": "OPTIONAL: the guild of the channel that this webhook is following (returned for Channel Follower Webhooks)",
             "type": "object",
-            "properties": {
-                "id": {
-                    "description": "guild id",
-                    "type": "snowflake"
-                },
-                "name": {
-                    "description": "guild name (2-100 characters, excluding trailing and leading whitespace)",
-                    "type": "string"
-                },
-                "icon": {
-                    "description": "OPTIONAL: icon hash",
-                    "type": "string"
-                }
-            }
+            "existing_parser": "partial_guild"
         },
         "source_channel": {
-            "description": "OPTIONAL: the partial channel that this webhook is following (returned for Channel Follower Webhooks)",
+            "description": "OPTIONAL: the channel that this webhook is following (returned for Channel Follower Webhooks)",
             "type": "object",
             "existing_parser": "partial_channel"
         },

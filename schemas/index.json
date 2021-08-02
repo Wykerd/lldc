@@ -11,6 +11,7 @@
     
     "channel.partial.json",
     "channel.partial.arr.json",
+    "guild.partial.json",
 
     "webhook.json",
     "webhook.arr.json",
@@ -114,7 +115,6 @@
     "guild.ban.arr.json",
     "guild.json",
     "guild.arr.json",
-    "guild.partial.json",
     "guild.template.json",
     "guild.template.arr.json",
 
@@ -122,5 +122,7 @@
     "invite.metadata.json",
     "invite.json",
 
-    "user.connection.json"
+    "user.connection.json",
+    "voice.region.json",
+    "voice.region.arr.json"
 ]

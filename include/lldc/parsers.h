@@ -790,10 +790,11 @@ typedef struct lldc_partial_channel_arr_s {
     size_t len;
     lldc_parser_malloc_ledger_t __mlog;
 } lldc_partial_channel_arr_t;
-/* OPTIONAL: the partial guild of the channel that this webhook is following (returned for Channel Follower Webhooks) */
-typedef struct lldc_webhook_source_guild_s {
+/* Subsection of guild */
+typedef struct lldc_partial_guild_s {
     cwr_malloc_ctx_t *_mctx;
     lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
     /** 
      * guild id 
      */
@@ -806,7 +807,35 @@ typedef struct lldc_webhook_source_guild_s {
      * OPTIONAL: icon hash 
      */
     const char *icon;
-} lldc_webhook_source_guild_t;
+    /** 
+     * OPTIONAL: splash hash 
+     */
+    const char *splash;
+    /** 
+     * OPTIONAL: discovery splash hash; only present for guilds with the "DISCOVERABLE" feature 
+     */
+    const char *discovery_splash;
+    /** 
+     * verification level required for the guild 
+     */
+    lldc_guild_verification_level_t verification_level;
+    /** 
+     * enabled guild features 
+     */
+    lldc_parser_string_arr_t features;
+    /** 
+     * OPTIONAL: the vanity url code for the guild 
+     */
+    const char *vanity_url_code;
+    /** 
+     * OPTIONAL: the description of a Community guild 
+     */
+    const char *description;
+    /** 
+     * OPTIONAL: banner hash 
+     */
+    const char *banner;
+} lldc_partial_guild_t;
 /* Used to represent a webhook */
 typedef struct lldc_webhook_s {
     cwr_malloc_ctx_t *_mctx;
@@ -849,11 +878,11 @@ typedef struct lldc_webhook_s {
      */
     snowflake_t application_id;
     /** 
-     * OPTIONAL: the partial guild of the channel that this webhook is following (returned for Channel Follower Webhooks) 
+     * OPTIONAL: the guild of the channel that this webhook is following (returned for Channel Follower Webhooks) 
      */
-    lldc_webhook_source_guild_t source_guild;
+    lldc_partial_guild_t source_guild;
     /** 
-     * OPTIONAL: the partial channel that this webhook is following (returned for Channel Follower Webhooks) 
+     * OPTIONAL: the channel that this webhook is following (returned for Channel Follower Webhooks) 
      */
     lldc_partial_channel_t source_channel;
     /** 
@@ -3003,52 +3032,6 @@ typedef struct lldc_guild_arr_s {
     size_t len;
     lldc_parser_malloc_ledger_t __mlog;
 } lldc_guild_arr_t;
-/* Subsection of guild */
-typedef struct lldc_partial_guild_s {
-    cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
-    /** 
-     * guild id 
-     */
-    snowflake_t id;
-    /** 
-     * guild name (2-100 characters, excluding trailing and leading whitespace) 
-     */
-    const char *name;
-    /** 
-     * OPTIONAL: icon hash 
-     */
-    const char *icon;
-    /** 
-     * OPTIONAL: splash hash 
-     */
-    const char *splash;
-    /** 
-     * OPTIONAL: discovery splash hash; only present for guilds with the "DISCOVERABLE" feature 
-     */
-    const char *discovery_splash;
-    /** 
-     * verification level required for the guild 
-     */
-    lldc_guild_verification_level_t verification_level;
-    /** 
-     * enabled guild features 
-     */
-    lldc_parser_string_arr_t features;
-    /** 
-     * OPTIONAL: the vanity url code for the guild 
-     */
-    const char *vanity_url_code;
-    /** 
-     * OPTIONAL: the description of a Community guild 
-     */
-    const char *description;
-    /** 
-     * OPTIONAL: banner hash 
-     */
-    const char *banner;
-} lldc_partial_guild_t;
 /* Represents a code that when used, creates a guild based on a snapshot of an existing guild. */
 typedef struct lldc_guild_template_s {
     cwr_malloc_ctx_t *_mctx;
@@ -3243,6 +3226,44 @@ typedef struct lldc_connection_s {
      */
     lldc_connection_visibility_t visibility;
 } lldc_connection_t;
+/* Voice Region Structure */
+typedef struct lldc_voice_region_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * unique ID for the region 
+     */
+    const char *id;
+    /** 
+     * name of the region 
+     */
+    const char *name;
+    /** 
+     * true if this is a vip-only server 
+     */
+    int vip;
+    /** 
+     * true for a single server that is closest to the current user's client 
+     */
+    int optimal;
+    /** 
+     * whether this is a deprecated voice region (avoid switching to these) 
+     */
+    int deprecated;
+    /** 
+     * whether this is a custom voice region (used for events/etc) 
+     */
+    int custom;
+} lldc_voice_region_t;
+/* Voice Region Array */
+typedef struct lldc_voice_region_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_voice_region_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_voice_region_arr_t;
 /**
 * Discord Error Parser
 * Error Messages
@@ -3288,6 +3309,11 @@ int lldc_partial_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_channel_t 
 * Partial Channel Array
 */
 int lldc_partial_channel_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_channel_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Partial Guild Parser
+* Subsection of guild
+*/
+int lldc_partial_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
 * Webhook Parser
 * Used to represent a webhook
@@ -3689,11 +3715,6 @@ int lldc_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_t *obj, yyjson_val *js
 */
 int lldc_guild_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_arr_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
-* Partial Guild Parser
-* Subsection of guild
-*/
-int lldc_partial_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild_t *obj, yyjson_val *json, int has_existing_ledger);
-/**
 * Guild Template Parser
 * Represents a code that when used, creates a guild based on a snapshot of an existing guild.
 */
@@ -3723,4 +3744,14 @@ int lldc_invite_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_t *obj, yyjson_val *
 * Connection Structure
 */
 int lldc_connection_parse (cwr_malloc_ctx_t *_mctx, lldc_connection_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Voice Region Parser
+* Voice Region Structure
+*/
+int lldc_voice_region_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_region_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Voice Region Parser
+* Voice Region Array
+*/
+int lldc_voice_region_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_voice_region_arr_t *obj, yyjson_val *json, int has_existing_ledger);
 #endif
