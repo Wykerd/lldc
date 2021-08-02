@@ -1,0 +1,15 @@
+{
+    "title": "Integration Account",
+    "description": "Integration Account Structure",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "id of the account",
+            "type": "string"
+        },
+        "name": {
+            "description": "name of the account",
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "title": "Guild Template",
+    "description": "Guild Template Array",
+    "type": "array",
+    "items": {
+        "description": "Guild Template Objects",
+        "type": "object",
+        "existing_parser": "guild_template"
+    }
+}

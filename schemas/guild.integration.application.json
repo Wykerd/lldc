@@ -1,0 +1,32 @@
+{
+    "title": "Integration Application",
+    "description": "Integration Application Structure",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "the id of the app",
+            "type": "snowflake"
+        },
+        "name": {
+            "description": "the name of the app",
+            "type": "string"
+        },
+        "icon": {
+            "description": "OPTIONAL: the icon hash of the app",
+            "type": "string"
+        },
+        "description": {
+            "description": "the description of the app",
+            "type": "string"
+        },
+        "summary": {
+            "description": "the summary of the app",
+            "type": "string"
+        },
+        "bot": {
+            "description": "OPTIONAL: the bot associated with this application",
+            "type": "object",
+            "existing_parser": "user"
+        }
+    }
+}

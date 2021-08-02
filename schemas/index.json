@@ -12,6 +12,8 @@
     "webhook.json",
     "webhook.arr.json",
 
+    "interaction.account.json",
+
     "auditlog.changes.json",
     "auditlog.options.json",
     "auditlog.entries.json",
@@ -53,7 +55,6 @@
     "channel.reaction.json",
     "channel.reaction.arr.json",
 
-    "interaction.account.json",
     "interaction.component.select.option.json",
     "interaction.component.select.option.arr.json",
     "interaction.component.arr.json",
@@ -96,5 +97,16 @@
     "guild.welcome_screen.channel.json",
     "guild.welcome_screen.channel.arr.json",
     "guild.welcome_screen.json",
-    "guild.json"
+    "guild.widget.json",
+    "guild.preview.json",
+    "guild.integration.account.json",
+    "guild.integration.application.json",
+    "guild.integration.json",
+    "guild.integration.arr.json",
+    "guild.ban.json",
+    "guild.ban.arr.json",
+    "guild.json",
+    "guild.arr.json",
+    "guild.template.json",
+    "guild.template.arr.json"
 ]

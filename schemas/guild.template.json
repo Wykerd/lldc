@@ -1,0 +1,48 @@
+{
+    "title": "Guild Template",
+    "description": "Represents a code that when used, creates a guild based on a snapshot of an existing guild.",
+    "type": "object",
+    "properties": {
+        "code": {
+            "description": "the template code (unique ID)",
+            "type": "string"
+        },
+        "name": {
+            "description": "template name",
+            "type": "string"
+        },
+        "description": {
+            "description": "OPTIONAL: the description for the template",
+            "type": "string"
+        },
+        "usage_count": {
+            "description": "number of times this template has been used",
+            "type": "int"
+        },
+        "creator_id": {
+            "description": "the ID of the user who created the template",
+            "type": "snowflake"
+        },
+        "creator": {
+            "description": "the user who created the template",
+            "type": "object",
+            "existing_parser": "user"
+        },
+        "created_at": {
+            "description": "when this template was created",
+            "type": "timestamp"
+        },
+        "updated_at": {
+            "description": "when this template was last synced to the source guild",
+            "type": "timestamp"
+        },
+        "source_guild_id": {
+            "description": "the ID of the guild this template is based on",
+            "type": "snowflake"
+        },
+        "is_dirty": {
+            "description": "OPTIONAL: whether the template has unsynced changes",
+            "type": "boolean"
+        }
+    }
+}

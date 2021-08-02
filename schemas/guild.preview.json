@@ -1,0 +1,52 @@
+{
+    "title": "Guild Preview",
+    "description": "Guild Preview Structure",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "guild id",
+            "type": "snowflake"
+        },
+        "name": {
+            "description": "guild name (2-100 characters)",
+            "type": "string"
+        },
+        "icon": {
+            "description": "OPTIONAL: icon hash",
+            "type": "string"
+        },
+        "splash": {
+            "description": "OPTIONAL: splash hash",
+            "type": "string"
+        },
+        "discovery_splash": {
+            "description": "OPTIONAL: discovery splash hash",
+            "type": "string"
+        },
+        "emojis": {
+            "description": "custom guild emojis",
+            "type": "array",
+            "existing_parser": "emoji_arr"
+        },
+        "features": {
+            "description": "enabled guild features",
+            "type": "array",
+            "items": {
+                "description": "array of guild feature strings",
+                "type": "string"
+            }
+        },
+        "approximate_member_count": {
+            "description": "approximate number of members in this guild",
+            "type": "int"
+        },
+        "approximate_presence_count": {
+            "description": "approximate number of online members in this guild",
+            "type": "int"
+        },
+        "description": {
+            "description": "OPTIONAL: the description for the guild, if the guild is discoverable",
+            "type": "string"
+        }
+    }
+}

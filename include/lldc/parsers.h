@@ -475,6 +475,12 @@ typedef enum lldc_stage_instance_privacy_level {
 #define LLDC_GUILD_FEATURE_SEVEN_DAY_THREAD_ARCHIVE "SEVEN_DAY_THREAD_ARCHIVE"
 /* guild has access to create private threads */
 #define LLDC_GUILD_FEATURE_PRIVATE_THREADS "PRIVATE_THREADS"
+typedef enum lldc_integration_expire_behavior {
+    /* Remove role */
+    LLDC_INTEGRATION_EXPIRE_REMOVE_ROLE = (0),
+    /* Kick */
+    LLDC_INTEGRATION_EXPIRE_KICK = (1)
+} lldc_integration_expire_behavior_t;
 typedef enum lldc_guild_verification_level {
     /* unrestricted */
     LLDC_VERIFICATION_LEVEL_NONE = (0),
@@ -834,6 +840,20 @@ typedef struct lldc_webhook_arr_s {
     size_t len;
     lldc_parser_malloc_ledger_t __mlog;
 } lldc_webhook_arr_t;
+/* Integration Account Structure */
+typedef struct lldc_interaction_account_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * id of the account 
+     */
+    const char *id;
+    /** 
+     * name of the account 
+     */
+    const char *name;
+} lldc_interaction_account_t;
 /* audit log changes */
 typedef struct lldc_audit_log_changes_s {
     cwr_malloc_ctx_t *_mctx;
@@ -1574,20 +1594,6 @@ typedef struct lldc_reaction_arr_s {
     size_t len;
     lldc_parser_malloc_ledger_t __mlog;
 } lldc_reaction_arr_t;
-/* Integration Account Structure */
-typedef struct lldc_interaction_account_s {
-    cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    lldc_parser_malloc_ledger_t __mlog;
-    /** 
-     * id of the account 
-     */
-    const char *id;
-    /** 
-     * name of the account 
-     */
-    const char *name;
-} lldc_interaction_account_t;
 /* Select Option Structure */
 typedef struct lldc_select_option_s {
     cwr_malloc_ctx_t *_mctx;
@@ -2478,6 +2484,206 @@ typedef struct lldc_welcome_screen_s {
      */
     lldc_welcome_screen_channel_arr_t welcome_channels;
 } lldc_welcome_screen_t;
+/* Guild Widget Structure - it's called guilds 'cause of conflict */
+typedef struct lldc_guilds_widget_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * whether the widget is enabled 
+     */
+    int enabled;
+    /** 
+     * OPTIONAL: the widget channel id 
+     */
+    snowflake_t channel_id;
+} lldc_guilds_widget_t;
+/* Guild Preview Structure */
+typedef struct lldc_guild_preview_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * guild id 
+     */
+    snowflake_t id;
+    /** 
+     * guild name (2-100 characters) 
+     */
+    const char *name;
+    /** 
+     * OPTIONAL: icon hash 
+     */
+    const char *icon;
+    /** 
+     * OPTIONAL: splash hash 
+     */
+    const char *splash;
+    /** 
+     * OPTIONAL: discovery splash hash 
+     */
+    const char *discovery_splash;
+    /** 
+     * custom guild emojis 
+     */
+    lldc_emoji_arr_t emojis;
+    /** 
+     * enabled guild features 
+     */
+    lldc_parser_string_arr_t features;
+    /** 
+     * approximate number of members in this guild 
+     */
+    int approximate_member_count;
+    /** 
+     * approximate number of online members in this guild 
+     */
+    int approximate_presence_count;
+    /** 
+     * OPTIONAL: the description for the guild, if the guild is discoverable 
+     */
+    const char *description;
+} lldc_guild_preview_t;
+/* Integration Account Structure */
+typedef struct lldc_integration_account_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * id of the account 
+     */
+    const char *id;
+    /** 
+     * name of the account 
+     */
+    const char *name;
+} lldc_integration_account_t;
+/* Integration Application Structure */
+typedef struct lldc_integration_application_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * the id of the app 
+     */
+    snowflake_t id;
+    /** 
+     * the name of the app 
+     */
+    const char *name;
+    /** 
+     * OPTIONAL: the icon hash of the app 
+     */
+    const char *icon;
+    /** 
+     * the description of the app 
+     */
+    const char *description;
+    /** 
+     * the summary of the app 
+     */
+    const char *summary;
+    /** 
+     * OPTIONAL: the bot associated with this application 
+     */
+    lldc_user_t bot;
+} lldc_integration_application_t;
+/* Integration Structure */
+typedef struct lldc_integration_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * integration id 
+     */
+    snowflake_t id;
+    /** 
+     * integration name 
+     */
+    const char *name;
+    /** 
+     * integration type (twitch, youtube, or discord) 
+     */
+    const char *type;
+    /** 
+     * is this integration enabled 
+     */
+    int enabled;
+    /** 
+     * OPTIONAL: is this integration syncing 
+     */
+    int syncing;
+    /** 
+     * OPTIONAL: id that this integration uses for "subscribers" 
+     */
+    snowflake_t role_id;
+    /** 
+     * OPTIONAL: whether emoticons should be synced for this integration (twitch only currently) 
+     */
+    int enable_emoticons;
+    /** 
+     * OPTIONAL: the behavior of expiring subscribers 
+     */
+    lldc_integration_expire_behavior_t expire_behavior;
+    /** 
+     * OPTIONAL: the grace period (in days) before expiring subscribers 
+     */
+    int expire_grace_period;
+    /** 
+     * OPTIONAL: user for this integration 
+     */
+    lldc_user_t user;
+    /** 
+     * integration account information 
+     */
+    lldc_integration_account_t account;
+    /** 
+     * OPTIONAL: when this integration was last synced 
+     */
+    double synced_at;
+    /** 
+     * OPTIONAL: how many subscribers this integration has 
+     */
+    int subscriber_count;
+    /** 
+     * OPTIONAL: has this integration been revoked 
+     */
+    int revoked;
+    /** 
+     * OPTIONAL: The bot/OAuth2 application for discord integrations 
+     */
+    lldc_integration_application_t application;
+} lldc_integration_t;
+/* Integration Array */
+typedef struct lldc_integration_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_integration_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_integration_arr_t;
+/* Ban Structure */
+typedef struct lldc_ban_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * OPTIONAL: the reason for the ban 
+     */
+    const char *reason;
+    /** 
+     * the banned user 
+     */
+    lldc_user_t user;
+} lldc_ban_t;
+/* Ban Array */
+typedef struct lldc_ban_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_ban_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_ban_arr_t;
 /* Guilds in Discord represent an isolated collection of users and channels, and are often referred to as "servers" in the UI. */
 typedef struct lldc_guild_s {
     cwr_malloc_ctx_t *_mctx;
@@ -2684,6 +2890,68 @@ typedef struct lldc_guild_s {
      */
     lldc_sticker_arr_t stickers;
 } lldc_guild_t;
+/* Guild Array */
+typedef struct lldc_guild_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_guild_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_guild_arr_t;
+/* Represents a code that when used, creates a guild based on a snapshot of an existing guild. */
+typedef struct lldc_guild_template_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * the template code (unique ID) 
+     */
+    const char *code;
+    /** 
+     * template name 
+     */
+    const char *name;
+    /** 
+     * OPTIONAL: the description for the template 
+     */
+    const char *description;
+    /** 
+     * number of times this template has been used 
+     */
+    int usage_count;
+    /** 
+     * the ID of the user who created the template 
+     */
+    snowflake_t creator_id;
+    /** 
+     * the user who created the template 
+     */
+    lldc_user_t creator;
+    /** 
+     * when this template was created 
+     */
+    double created_at;
+    /** 
+     * when this template was last synced to the source guild 
+     */
+    double updated_at;
+    /** 
+     * the ID of the guild this template is based on 
+     */
+    snowflake_t source_guild_id;
+    /** 
+     * OPTIONAL: whether the template has unsynced changes 
+     */
+    int is_dirty;
+} lldc_guild_template_t;
+/* Guild Template Array */
+typedef struct lldc_guild_template_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_guild_template_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_guild_template_arr_t;
 /**
 * Discord Error Parser
 * Error Messages
@@ -2729,6 +2997,11 @@ int lldc_webhook_parse (cwr_malloc_ctx_t *_mctx, lldc_webhook_t *obj, yyjson_val
 * Webhook Array
 */
 int lldc_webhook_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_webhook_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Interaction Account Parser
+* Integration Account Structure
+*/
+int lldc_interaction_account_parse (cwr_malloc_ctx_t *_mctx, lldc_interaction_account_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
 * Audit Log Changes Parser
 * audit log changes
@@ -2890,11 +3163,6 @@ int lldc_reaction_parse (cwr_malloc_ctx_t *_mctx, lldc_reaction_t *obj, yyjson_v
 */
 int lldc_reaction_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_reaction_arr_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
-* Interaction Account Parser
-* Integration Account Structure
-*/
-int lldc_interaction_account_parse (cwr_malloc_ctx_t *_mctx, lldc_interaction_account_t *obj, yyjson_val *json, int has_existing_ledger);
-/**
 * Select Option Parser
 * Select Option Structure
 */
@@ -3050,8 +3318,63 @@ int lldc_welcome_screen_channel_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_welcome
 */
 int lldc_welcome_screen_parse (cwr_malloc_ctx_t *_mctx, lldc_welcome_screen_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
+* Guilds Widget Parser
+* Guild Widget Structure - it's called guilds 'cause of conflict
+*/
+int lldc_guilds_widget_parse (cwr_malloc_ctx_t *_mctx, lldc_guilds_widget_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Guild Preview Parser
+* Guild Preview Structure
+*/
+int lldc_guild_preview_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_preview_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Integration Account Parser
+* Integration Account Structure
+*/
+int lldc_integration_account_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_account_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Integration Application Parser
+* Integration Application Structure
+*/
+int lldc_integration_application_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_application_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Integration Parser
+* Integration Structure
+*/
+int lldc_integration_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Integration Parser
+* Integration Array
+*/
+int lldc_integration_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Ban Parser
+* Ban Structure
+*/
+int lldc_ban_parse (cwr_malloc_ctx_t *_mctx, lldc_ban_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Ban Parser
+* Ban Array
+*/
+int lldc_ban_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_ban_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
 * Guild Parser
 * Guilds in Discord represent an isolated collection of users and channels, and are often referred to as "servers" in the UI.
 */
 int lldc_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Guild Parser
+* Guild Array
+*/
+int lldc_guild_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Guild Template Parser
+* Represents a code that when used, creates a guild based on a snapshot of an existing guild.
+*/
+int lldc_guild_template_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_template_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Guild Template Parser
+* Guild Template Array
+*/
+int lldc_guild_template_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_template_arr_t *obj, yyjson_val *json, int has_existing_ledger);
 #endif

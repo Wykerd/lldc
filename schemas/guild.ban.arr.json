@@ -1,0 +1,10 @@
+{
+    "title": "Ban",
+    "description": "Ban Array",
+    "type": "array",
+    "items": {
+        "description": "Ban Objects",
+        "type": "object",
+        "existing_parser": "ban"
+    }
+}

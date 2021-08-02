@@ -1,0 +1,15 @@
+{
+    "title": "Guilds Widget",
+    "description": "Guild Widget Structure - it's called guilds 'cause of conflict",
+    "type": "object",
+    "properties": {
+        "enabled": {
+            "description": "whether the widget is enabled",
+            "type": "boolean"
+        },
+        "channel_id": {
+            "description": "OPTIONAL: the widget channel id",
+            "type": "snowflake"
+        }
+    }
+}

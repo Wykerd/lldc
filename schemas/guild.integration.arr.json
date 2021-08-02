@@ -1,0 +1,10 @@
+{
+    "title": "Integration",
+    "description": "Integration Array",
+    "type": "array",
+    "items": {
+        "description": "Integration Objects",
+        "type": "object",
+        "existing_parser": "integration"
+    }
+}

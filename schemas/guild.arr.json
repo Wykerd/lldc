@@ -1,0 +1,10 @@
+{
+    "title": "Guild",
+    "description": "Guild Array",
+    "type": "array",
+    "items": {
+        "description": "Guild Objects",
+        "type": "object",
+        "existing_parser": "guild"
+    }
+}

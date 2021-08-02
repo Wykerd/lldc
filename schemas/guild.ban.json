@@ -1,0 +1,16 @@
+{
+    "title": "Ban",
+    "description": "Ban Structure",
+    "type": "object",
+    "properties": {
+        "reason": {
+            "description": "OPTIONAL: the reason for the ban",
+            "type": "string"
+        },
+        "user": {
+            "description": "the banned user",
+            "type": "object",
+            "existing_parser": "user"
+        }
+    }
+}

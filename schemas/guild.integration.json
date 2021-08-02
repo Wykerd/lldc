@@ -1,0 +1,82 @@
+{
+    "title": "Integration",
+    "description": "Integration Structure",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "integration id",
+            "type": "snowflake"
+        },
+        "name": {
+            "description": "integration name",
+            "type": "string"
+        },
+        "type": {
+            "description": "integration type (twitch, youtube, or discord)",
+            "type": "string"
+        },
+        "enabled": {
+            "description": "is this integration enabled",
+            "type": "boolean"
+        },
+        "syncing": {
+            "description": "OPTIONAL: is this integration syncing",
+            "type": "boolean"
+        },
+        "role_id": {
+            "description": "OPTIONAL: id that this integration uses for \"subscribers\"",
+            "type": "snowflake"
+        },
+        "enable_emoticons": {
+            "description": "OPTIONAL: whether emoticons should be synced for this integration (twitch only currently)",
+            "type": "boolean"
+        },
+        "expire_behavior": {
+            "description": "OPTIONAL: the behavior of expiring subscribers",
+            "type": "int",
+            "enum_prefix": "LLDC_INTEGRATION_EXPIRE_",
+            "enum_type": "integration_expire_behavior",
+            "enum": [
+                [
+                    "0",
+                    "Remove role"
+                ],
+                [
+                    "1",
+                    "Kick"
+                ]
+            ]
+        },
+        "expire_grace_period": {
+            "description": "OPTIONAL: the grace period (in days) before expiring subscribers",
+            "type": "int"
+        },
+        "user": {
+            "description": "OPTIONAL: user for this integration",
+            "type": "object",
+            "existing_parser": "user"
+        },
+        "account": {
+            "description": "integration account information",
+            "type": "object",
+            "existing_parser": "integration_account"
+        },
+        "synced_at": {
+            "description": "OPTIONAL: when this integration was last synced",
+            "type": "timestamp"
+        },
+        "subscriber_count": {
+            "description": "OPTIONAL: how many subscribers this integration has",
+            "type": "int"
+        },
+        "revoked": {
+            "description": "OPTIONAL: has this integration been revoked",
+            "type": "boolean"
+        },
+        "application": {
+            "description": "OPTIONAL: The bot/OAuth2 application for discord integrations",
+            "type": "object",
+            "existing_parser": "integration_application"
+        }
+    }
+}
