@@ -1,0 +1,24 @@
+{
+    "title": "Invite Stage Instance",
+    "description": "Invite Stage Instance Structure",
+    "type": "object",
+    "properties": {
+        "members": {
+            "description": "the members speaking in the Stage",
+            "type": "array",
+            "existing_parser": "partial_guild_member_arr"
+        },
+        "participant_count": {
+            "description": "the number of users in the Stage",
+            "type": "int"
+        },
+        "speaker_count": {
+            "description": "the number of users speaking in the Stage",
+            "type": "int"
+        },
+        "topic": {
+            "description": "the topic of the Stage instance (1-120 characters)",
+            "type": "string"
+        }
+    }
+}

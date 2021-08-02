@@ -1,0 +1,10 @@
+{
+    "title": "Partial Channel",
+    "description": "Partial Channel Array",
+    "type": "array",
+    "items": {
+        "description": "Partial Channel Objects",
+        "type": "object",
+        "existing_parser": "partial_channel"
+    }
+}

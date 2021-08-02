@@ -1,0 +1,10 @@
+{
+    "title": "Partial Guild Member",
+    "description": "Partial Guild Member Array",
+    "type": "array",
+    "items": {
+        "description": "Partial Guild Member Objects",
+        "type": "object",
+        "existing_parser": "partial_guild_member"
+    }
+}

@@ -541,6 +541,12 @@ typedef enum lldc_guild_nsfw_level {
     /* AGE_RESTRICTED */
     LLDC_GUILD_NSFW_AGE_RESTRICTED = (3)
 } lldc_guild_nsfw_level_t;
+typedef enum lldc_invite_target {
+    /* STREAM */
+    LLDC_INVITE_TARGET_STREAM = (1),
+    /* EMBEDDED_APPLICATION */
+    LLDC_INVITE_TARGET_EMBEDDED_APPLICATION = (2)
+} lldc_invite_target_t;
 /* Error Messages */
 typedef struct lldc_discord_error_s {
     cwr_malloc_ctx_t *_mctx;
@@ -748,6 +754,36 @@ typedef struct lldc_application_s {
      */
     lldc_application_flags_t flags;
 } lldc_application_t;
+/* Subsection of channel */
+typedef struct lldc_partial_channel_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * the id of this channel 
+     */
+    snowflake_t id;
+    /** 
+     * the type of channel 
+     */
+    lldc_channel_type_t type;
+    /** 
+     * OPTIONAL: the name of the channel (1-100 characters) 
+     */
+    const char *name;
+    /** 
+     * OPTIONAL: for guild channels: id of the parent category for a channel (each parent category can contain up to 50 channels), for threads: id of the text channel this thread was created 
+     */
+    snowflake_t parent_id;
+} lldc_partial_channel_t;
+/* Partial Channel Array */
+typedef struct lldc_partial_channel_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_partial_channel_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_partial_channel_arr_t;
 /* OPTIONAL: the partial guild of the channel that this webhook is following (returned for Channel Follower Webhooks) */
 typedef struct lldc_webhook_source_guild_s {
     cwr_malloc_ctx_t *_mctx;
@@ -765,19 +801,6 @@ typedef struct lldc_webhook_source_guild_s {
      */
     const char *icon;
 } lldc_webhook_source_guild_t;
-/* OPTIONAL: the partial channel that this webhook is following (returned for Channel Follower Webhooks) */
-typedef struct lldc_webhook_source_channel_s {
-    cwr_malloc_ctx_t *_mctx;
-    lldc_parser_malloc_ledger_t *_mlog;
-    /** 
-     * the id of this channel 
-     */
-    snowflake_t id;
-    /** 
-     * the name of the channel (1-100 characters) 
-     */
-    const char *name;
-} lldc_webhook_source_channel_t;
 /* Used to represent a webhook */
 typedef struct lldc_webhook_s {
     cwr_malloc_ctx_t *_mctx;
@@ -826,7 +849,7 @@ typedef struct lldc_webhook_s {
     /** 
      * OPTIONAL: the partial channel that this webhook is following (returned for Channel Follower Webhooks) 
      */
-    lldc_webhook_source_channel_t source_channel;
+    lldc_partial_channel_t source_channel;
     /** 
      * OPTIONAL: the url used for executing the webhook (returned by the webhooks OAuth2 flow) 
      */
@@ -1096,6 +1119,14 @@ typedef struct lldc_partial_guild_member_s {
      */
     uint64_t permissions;
 } lldc_partial_guild_member_t;
+/* Partial Guild Member Array */
+typedef struct lldc_partial_guild_member_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_partial_guild_member_t *items;
+    size_t len;
+    lldc_parser_malloc_ledger_t __mlog;
+} lldc_partial_guild_member_arr_t;
 /* Represents a guild or DM channel within Discord */
 typedef struct lldc_channel_overwrite_s {
     cwr_malloc_ctx_t *_mctx;
@@ -1774,6 +1805,40 @@ typedef struct lldc_sticker_item_arr_s {
     size_t len;
     lldc_parser_malloc_ledger_t __mlog;
 } lldc_sticker_item_arr_t;
+/* Represents a pack of standard stickers. */
+typedef struct lldc_sticker_packs_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * id of the sticker pack 
+     */
+    snowflake_t id;
+    /** 
+     * the stickers in the pack 
+     */
+    lldc_sticker_arr_t stickers;
+    /** 
+     * name of the sticker pack 
+     */
+    const char *name;
+    /** 
+     * id of the pack's SKU 
+     */
+    snowflake_t sku_id;
+    /** 
+     * OPTIONAL: id of a sticker in the pack which is shown as the pack's icon 
+     */
+    snowflake_t cover_sticker_id;
+    /** 
+     * description of the sticker pack 
+     */
+    const char *description;
+    /** 
+     * id of the sticker pack's banner image 
+     */
+    snowflake_t banner_asset_id;
+} lldc_sticker_packs_t;
 /* Message Activity Structure */
 typedef struct lldc_message_activity_s {
     cwr_malloc_ctx_t *_mctx;
@@ -2662,6 +2727,32 @@ typedef struct lldc_integration_arr_s {
     size_t len;
     lldc_parser_malloc_ledger_t __mlog;
 } lldc_integration_arr_t;
+/* Partial Integration Structure */
+typedef struct lldc_partial_integration_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * integration id 
+     */
+    snowflake_t id;
+    /** 
+     * integration name 
+     */
+    const char *name;
+    /** 
+     * integration type (twitch, youtube, or discord) 
+     */
+    const char *type;
+    /** 
+     * is this integration enabled 
+     */
+    int enabled;
+    /** 
+     * integration account information 
+     */
+    lldc_integration_account_t account;
+} lldc_partial_integration_t;
 /* Ban Structure */
 typedef struct lldc_ban_s {
     cwr_malloc_ctx_t *_mctx;
@@ -2898,6 +2989,52 @@ typedef struct lldc_guild_arr_s {
     size_t len;
     lldc_parser_malloc_ledger_t __mlog;
 } lldc_guild_arr_t;
+/* Subsection of guild */
+typedef struct lldc_partial_guild_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * guild id 
+     */
+    snowflake_t id;
+    /** 
+     * guild name (2-100 characters, excluding trailing and leading whitespace) 
+     */
+    const char *name;
+    /** 
+     * OPTIONAL: icon hash 
+     */
+    const char *icon;
+    /** 
+     * OPTIONAL: splash hash 
+     */
+    const char *splash;
+    /** 
+     * OPTIONAL: discovery splash hash; only present for guilds with the "DISCOVERABLE" feature 
+     */
+    const char *discovery_splash;
+    /** 
+     * verification level required for the guild 
+     */
+    lldc_guild_verification_level_t verification_level;
+    /** 
+     * enabled guild features 
+     */
+    lldc_parser_string_arr_t features;
+    /** 
+     * OPTIONAL: the vanity url code for the guild 
+     */
+    const char *vanity_url_code;
+    /** 
+     * OPTIONAL: the description of a Community guild 
+     */
+    const char *description;
+    /** 
+     * OPTIONAL: banner hash 
+     */
+    const char *banner;
+} lldc_partial_guild_t;
 /* Represents a code that when used, creates a guild based on a snapshot of an existing guild. */
 typedef struct lldc_guild_template_s {
     cwr_malloc_ctx_t *_mctx;
@@ -2952,6 +3089,104 @@ typedef struct lldc_guild_template_arr_s {
     size_t len;
     lldc_parser_malloc_ledger_t __mlog;
 } lldc_guild_template_arr_t;
+/* Invite Stage Instance Structure */
+typedef struct lldc_invite_stage_instance_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * the members speaking in the Stage 
+     */
+    lldc_partial_guild_member_arr_t members;
+    /** 
+     * the number of users in the Stage 
+     */
+    int participant_count;
+    /** 
+     * the number of users speaking in the Stage 
+     */
+    int speaker_count;
+    /** 
+     * the topic of the Stage instance (1-120 characters) 
+     */
+    const char *topic;
+} lldc_invite_stage_instance_t;
+/* Extra information about an invite, will extend the invite object. */
+typedef struct lldc_invite_metadata_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * number of times this invite has been used 
+     */
+    int uses;
+    /** 
+     * max number of times this invite can be used 
+     */
+    int max_uses;
+    /** 
+     * duration (in seconds) after which the invite expires 
+     */
+    int max_age;
+    /** 
+     * whether this invite only grants temporary membership 
+     */
+    int temporary;
+    /** 
+     * when this invite was created 
+     */
+    double created_at;
+} lldc_invite_metadata_t;
+/* Represents a code that when used, adds a user to a guild or group DM channel. */
+typedef struct lldc_invite_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_parser_malloc_ledger_t *_mlog;
+    lldc_parser_malloc_ledger_t __mlog;
+    /** 
+     * the invite code (unique ID) 
+     */
+    const char *code;
+    /** 
+     * OPTIONAL: the guild this invite is for 
+     */
+    lldc_partial_guild_t guild;
+    /** 
+     * the channel this invite is for 
+     */
+    lldc_partial_channel_t channel;
+    /** 
+     * OPTIONAL: the user who created the invite 
+     */
+    lldc_user_t inviter;
+    /** 
+     * OPTIONAL: the type of target for this voice channel invite 
+     */
+    lldc_invite_target_t target_type;
+    /** 
+     * OPTIONAL: the user whose stream to display for this voice channel stream invite 
+     */
+    lldc_user_t target_user;
+    /** 
+     * OPTIONAL: the embedded application to open for this voice channel embedded application invite 
+     */
+    lldc_application_t target_application;
+    /** 
+     * OPTIONAL: approximate count of online members, returned from the GET /invites/<code> endpoint when with_counts is true 
+     */
+    int approximate_presence_count;
+    /** 
+     * OPTIONAL: approximate count of total members, returned from the GET /invites/<code> endpoint when with_counts is true 
+     */
+    int approximate_member_count;
+    /** 
+     * OPTIONAL: the expiration date of this invite, returned from the GET /invites/<code> endpoint when with_expiration is true 
+     */
+    double expires_at;
+    /** 
+     * OPTIONAL: stage instance data if there is a public Stage instance in the Stage channel this invite is for 
+     */
+    lldc_invite_stage_instance_t stage_instance;
+} lldc_invite_t;
 /**
 * Discord Error Parser
 * Error Messages
@@ -2987,6 +3222,16 @@ int lldc_team_parse (cwr_malloc_ctx_t *_mctx, lldc_team_t *obj, yyjson_val *json
 * Application Structure
 */
 int lldc_application_parse (cwr_malloc_ctx_t *_mctx, lldc_application_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Partial Channel Parser
+* Subsection of channel
+*/
+int lldc_partial_channel_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_channel_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Partial Channel Parser
+* Partial Channel Array
+*/
+int lldc_partial_channel_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_channel_arr_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
 * Webhook Parser
 * Used to represent a webhook
@@ -3037,6 +3282,11 @@ int lldc_guild_member_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_member_arr_
 * Partial Guild Member (excluding user)
 */
 int lldc_partial_guild_member_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild_member_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Partial Guild Member Parser
+* Partial Guild Member Array
+*/
+int lldc_partial_guild_member_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild_member_arr_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
 * Channel Overwrite Parser
 * Represents a guild or DM channel within Discord
@@ -3203,6 +3453,11 @@ int lldc_sticker_item_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_item_t *obj, 
 */
 int lldc_sticker_item_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_item_arr_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
+* Sticker Packs Parser
+* Represents a pack of standard stickers.
+*/
+int lldc_sticker_packs_parse (cwr_malloc_ctx_t *_mctx, lldc_sticker_packs_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
 * Message Activity Parser
 * Message Activity Structure
 */
@@ -3348,6 +3603,11 @@ int lldc_integration_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_t *obj, yy
 */
 int lldc_integration_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_integration_arr_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
+* Partial Integration Parser
+* Partial Integration Structure
+*/
+int lldc_partial_integration_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_integration_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
 * Ban Parser
 * Ban Structure
 */
@@ -3368,6 +3628,11 @@ int lldc_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_t *obj, yyjson_val *js
 */
 int lldc_guild_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_arr_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
+* Partial Guild Parser
+* Subsection of guild
+*/
+int lldc_partial_guild_parse (cwr_malloc_ctx_t *_mctx, lldc_partial_guild_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
 * Guild Template Parser
 * Represents a code that when used, creates a guild based on a snapshot of an existing guild.
 */
@@ -3377,4 +3642,19 @@ int lldc_guild_template_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_template_t *o
 * Guild Template Array
 */
 int lldc_guild_template_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_guild_template_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Invite Stage Instance Parser
+* Invite Stage Instance Structure
+*/
+int lldc_invite_stage_instance_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_stage_instance_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Invite Metadata Parser
+* Extra information about an invite, will extend the invite object.
+*/
+int lldc_invite_metadata_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_metadata_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Invite Parser
+* Represents a code that when used, adds a user to a guild or group DM channel.
+*/
+int lldc_invite_parse (cwr_malloc_ctx_t *_mctx, lldc_invite_t *obj, yyjson_val *json, int has_existing_ledger);
 #endif

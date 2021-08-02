@@ -1,0 +1,52 @@
+{
+    "title": "Partial Guild",
+    "description": "Subsection of guild",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "guild id",
+            "type": "snowflake"
+        },
+        "name": {
+            "description": "guild name (2-100 characters, excluding trailing and leading whitespace)",
+            "type": "string"
+        },
+        "icon": {
+            "description": "OPTIONAL: icon hash",
+            "type": "string"
+        },
+        "splash": {
+            "description": "OPTIONAL: splash hash",
+            "type": "string"
+        },
+        "discovery_splash": {
+            "description": "OPTIONAL: discovery splash hash; only present for guilds with the \"DISCOVERABLE\" feature",
+            "type": "string"
+        },
+        "verification_level": {
+            "description": "verification level required for the guild",
+            "type": "int",
+            "enum_type": "guild_verification_level"
+        },
+        "features": {
+            "description": "enabled guild features",
+            "type": "array",
+            "items": {
+                "description": "array of guild feature strings",
+                "type": "string"
+            }
+        },
+        "vanity_url_code": {
+            "description": "OPTIONAL: the vanity url code for the guild",
+            "type": "string"
+        },
+        "description": {
+            "description": "OPTIONAL: the description of a Community guild",
+            "type": "string"
+        },
+        "banner": {
+            "description": "OPTIONAL: banner hash",
+            "type": "string"
+        }
+    }
+}

@@ -9,6 +9,9 @@
     "application.team.json",
     "application.json",
     
+    "channel.partial.json",
+    "channel.partial.arr.json",
+
     "webhook.json",
     "webhook.arr.json",
 
@@ -22,6 +25,7 @@
     "guild.member.json",
     "guild.member.arr.json",
     "guild.member.partial.json",
+    "guild.member.partial.arr.json",
 
     "channel.overwrite.json",
     "channel.overwrite.arr.json",
@@ -64,6 +68,7 @@
     "sticker.arr.json",
     "sticker.item.json",
     "sticker.item.arr.json",
+    "sticker.packs.json",
 
     "channel.message.activity.json",
     "channel.message.reference.json",
@@ -103,10 +108,16 @@
     "guild.integration.application.json",
     "guild.integration.json",
     "guild.integration.arr.json",
+    "guild.integration.partial.json",
     "guild.ban.json",
     "guild.ban.arr.json",
     "guild.json",
     "guild.arr.json",
+    "guild.partial.json",
     "guild.template.json",
-    "guild.template.arr.json"
+    "guild.template.arr.json",
+
+    "invite.stage_instance.json",
+    "invite.metadata.json",
+    "invite.json"
 ]

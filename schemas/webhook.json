@@ -68,16 +68,7 @@
         "source_channel": {
             "description": "OPTIONAL: the partial channel that this webhook is following (returned for Channel Follower Webhooks)",
             "type": "object",
-            "properties": {
-                "id": {
-                    "description": "the id of this channel",
-                    "type": "snowflake"
-                },
-                "name": {
-                    "description": "the name of the channel (1-100 characters)",
-                    "type": "string"
-                }
-            }
+            "existing_parser": "partial_channel"
         },
         "url": {
             "description": "OPTIONAL: the url used for executing the webhook (returned by the webhooks OAuth2 flow)",

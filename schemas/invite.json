@@ -1,0 +1,69 @@
+{
+    "title": "Invite",
+    "description": "Represents a code that when used, adds a user to a guild or group DM channel.",
+    "type": "object",
+    "properties": {
+        "code": {
+            "description": "the invite code (unique ID)",
+            "type": "string"
+        },
+        "guild": {
+            "description": "OPTIONAL: the guild this invite is for",
+            "type": "object",
+            "existing_parser": "partial_guild"
+        },
+        "channel": {
+            "description": "the channel this invite is for",
+            "type": "object",
+            "existing_parser": "partial_channel"
+        },
+        "inviter": {
+            "description": "OPTIONAL: the user who created the invite",
+            "type": "object",
+            "existing_parser": "user"
+        },
+        "target_type": {
+            "description": "OPTIONAL: the type of target for this voice channel invite",
+            "type": "int",
+            "enum_prefix": "LLDC_INVITE_TARGET_",
+            "enum_type": "invite_target",
+            "enum": [
+                [
+                    "1",
+                    "STREAM"
+                ],
+                [
+                    "2",
+                    "EMBEDDED_APPLICATION"
+                ]
+            ]
+        },
+        "target_user": {
+            "description": "OPTIONAL: the user whose stream to display for this voice channel stream invite",
+            "type": "object",
+            "existing_parser": "user"
+        },
+        "target_application": {
+            "description": "OPTIONAL: the embedded application to open for this voice channel embedded application invite",
+            "type": "object",
+            "existing_parser": "application"
+        },
+        "approximate_presence_count": {
+            "description": "OPTIONAL: approximate count of online members, returned from the GET /invites/<code> endpoint when with_counts is true",
+            "type": "int"
+        },
+        "approximate_member_count": {
+            "description": "OPTIONAL: approximate count of total members, returned from the GET /invites/<code> endpoint when with_counts is true",
+            "type": "int"
+        },
+        "expires_at": {
+            "description": "OPTIONAL: the expiration date of this invite, returned from the GET /invites/<code> endpoint when with_expiration is true",
+            "type": "timestamp"
+        },
+        "stage_instance": {
+            "description": "OPTIONAL: stage instance data if there is a public Stage instance in the Stage channel this invite is for",
+            "type": "object",
+            "existing_parser": "invite_stage_instance"
+        }
+    }
+}

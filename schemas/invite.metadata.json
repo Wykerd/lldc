@@ -1,0 +1,27 @@
+{
+    "title": "Invite Metadata",
+    "description": "Extra information about an invite, will extend the invite object.",
+    "type": "object",
+    "properties": {
+        "uses": {
+            "description": "number of times this invite has been used",
+            "type": "int"
+        },
+        "max_uses": {
+            "description": "max number of times this invite can be used",
+            "type": "int"
+        },
+        "max_age": {
+            "description": "duration (in seconds) after which the invite expires",
+            "type": "int"
+        },
+        "temporary": {
+            "description": "whether this invite only grants temporary membership",
+            "type": "boolean"
+        },
+        "created_at": {
+            "description": "when this invite was created",
+            "type": "timestamp"
+        }
+    }
+}

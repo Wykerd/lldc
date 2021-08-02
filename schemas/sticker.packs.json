@@ -1,0 +1,36 @@
+{
+    "title": "Sticker Packs",
+    "description": "Represents a pack of standard stickers.",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "id of the sticker pack",
+            "type": "snowflake"
+        },
+        "stickers": {
+            "description": "the stickers in the pack",
+            "type": "array",
+            "existing_parser": "sticker_arr"
+        },
+        "name": {
+            "description": "name of the sticker pack",
+            "type": "string"
+        },
+        "sku_id": {
+            "description": "id of the pack's SKU",
+            "type": "snowflake"
+        },
+        "cover_sticker_id": {
+            "description": "OPTIONAL: id of a sticker in the pack which is shown as the pack's icon",
+            "type": "snowflake"
+        },
+        "description": {
+            "description": "description of the sticker pack",
+            "type": "string"
+        },
+        "banner_asset_id": {
+            "description": "id of the sticker pack's banner image",
+            "type": "snowflake"
+        }
+    }
+}
