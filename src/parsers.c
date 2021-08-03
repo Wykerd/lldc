@@ -1968,6 +1968,51 @@ int lldc__client_status_desktop_parse (lldc_client_status_t *obj, yyjson_val *js
 }
 /**
  * url Parser
+ * OPTIONAL: stream url, is validated when type is 1
+ * type: object.string
+ */
+static
+int lldc__activity_bot_url_parse (lldc_activity_bot_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->url = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * type Parser
+ * activity type
+ * type: object.int
+ */
+static
+int lldc__activity_bot_type_parse (lldc_activity_bot_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_int(json))
+        return -1;
+
+    obj->type = yyjson_get_int(json);
+
+    return 0;
+}
+/**
+ * name Parser
+ * the activity's name
+ * type: object.string
+ */
+static
+int lldc__activity_bot_name_parse (lldc_activity_bot_t *obj, yyjson_val *json) 
+{
+    if (!yyjson_is_str(json))
+        return -1;
+
+    obj->name = lldc_struct_strdup((lldc_struct_obj_t *)obj, yyjson_get_str(json));
+
+    return 0;
+}
+/**
+ * url Parser
  * the url opened when clicking the button (1-512 characters)
  * type: object.string
  */
@@ -10445,6 +10490,52 @@ int lldc_activity_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_t *obj, yyjson_v
 
     return 0;
 }
+int lldc_activity_bot_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_bot_t *obj, yyjson_val *json, int has_existing_ledger)
+{
+
+    static lldc_struct_def_t parser_def[3] = {
+        { "name", (int (*)(void *, yyjson_val *))lldc__activity_bot_name_parse },
+        { "type", (int (*)(void *, yyjson_val *))lldc__activity_bot_type_parse },
+        { "url", (int (*)(void *, yyjson_val *))lldc__activity_bot_url_parse }
+    };
+
+    static lldc_hashmap_entry_t parser_table[8] = { 0 };
+    static lldc_hashmap_t parsers = {  
+        .size = 8,
+        .len = 0,
+        .table = parser_table,
+        .hash = lldc_hashmap_hash_str,
+        .compare = (int (*)(const void *, const void *))strcmp,
+        .dup_key = lldc_hashmap_dup_echo,
+        .free_key = lldc_hashmap_free_noop
+    };
+    LLDC_PARSER_LOAD(3)
+
+    if (!yyjson_is_obj(json))
+        return -1;
+
+    lldc_struct_malloc_ledger_t *ledger = obj->_mlog;
+    
+    memset(obj, 0, sizeof(lldc_activity_bot_t));
+
+    obj->_mctx = _mctx;
+    if (!has_existing_ledger)
+        obj->_mlog = &obj->__mlog;
+    else
+        obj->_mlog = ledger;
+
+    yyjson_val *key, *val;
+    yyjson_obj_iter iter;
+    yyjson_obj_iter_init(json, &iter);
+    while ((key = yyjson_obj_iter_next(&iter))) {
+        val = yyjson_obj_iter_get_val(key);
+        lldc_struct_func parser = lldc_hashmap_get(&parsers, yyjson_get_str(key));
+        if (parser)
+            parser(obj, val);
+    }
+
+    return 0;
+}
 /**
 * Activity Parser
 * Activity Objects
@@ -10487,6 +10578,52 @@ int lldc_activity_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_arr_t *obj, 
         obj->items[idx]._mctx = obj->_mctx;
         obj->items[idx]._mlog = obj->_mlog;
         lldc__activity_item_parse(&obj->items[idx], val);
+    }
+
+    return 0;
+}
+/**
+* Activity Bot Parser
+* Activity Bot Objects
+* type: object.object
+*/
+static
+int lldc__activity_bot_item_parse (lldc_activity_bot_t *_obj, yyjson_val *json)
+{
+    return lldc_activity_bot_parse(_obj->_mctx, _obj, json, 1);
+}
+int lldc_activity_bot_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_bot_arr_t *obj, yyjson_val *json, int has_existing_ledger)
+{
+
+    if (!yyjson_is_arr(json))
+        return -1;
+
+    size_t arr_size = yyjson_arr_size(json);
+    if (!arr_size)
+    {
+        obj->items = NULL;
+        obj->len = 0;
+        return 0;
+    }
+
+    obj->_mctx = _mctx;
+    if (!has_existing_ledger)
+        obj->_mlog = &obj->__mlog;
+
+    obj->items = lldc_struct_malloc((lldc_struct_obj_t *)obj, sizeof(*obj->items) * arr_size);
+    if (obj->items == NULL)
+    {
+        obj->len = 0;
+        return -1;
+    }
+    obj->len = arr_size;
+
+    size_t idx, max;
+    yyjson_val *val;
+    yyjson_arr_foreach(json, idx, max, val) {
+        obj->items[idx]._mctx = obj->_mctx;
+        obj->items[idx]._mlog = obj->_mlog;
+        lldc__activity_bot_item_parse(&obj->items[idx], val);
     }
 
     return 0;

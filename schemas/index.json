@@ -92,6 +92,7 @@
     "gateway.presence.activity.json",
     "gateway.presence.activity.bot.json",
     "gateway.presence.activity.arr.json",
+    "gateway.presence.activity.bot.arr.json",
     "gateway.presence.status.json",
     "gateway.presence.update.json",
     "gateway.presence.update.arr.json",

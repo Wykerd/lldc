@@ -2474,6 +2474,14 @@ typedef struct lldc_activity_arr_s {
     size_t len;
     lldc_struct_malloc_ledger_t __mlog;
 } lldc_activity_arr_t;
+/* Activity Array for Bots */
+typedef struct lldc_activity_bot_arr_s {
+    cwr_malloc_ctx_t *_mctx;
+    lldc_struct_malloc_ledger_t *_mlog;
+    lldc_activity_bot_t *items;
+    size_t len;
+    lldc_struct_malloc_ledger_t __mlog;
+} lldc_activity_bot_arr_t;
 /* Active sessions are indicated with an "online", "idle", or "dnd" string per platform. If a user is offline or invisible, the corresponding field is not present. */
 typedef struct lldc_client_status_s {
     cwr_malloc_ctx_t *_mctx;
@@ -3656,10 +3664,20 @@ int lldc_activity_secrets_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_secrets_
 */
 int lldc_activity_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
+* Activity Bot Parser
+* Presence Activity for Bot
+*/
+int lldc_activity_bot_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_bot_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
 * Activity Parser
 * Activity Array
 */
 int lldc_activity_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_arr_t *obj, yyjson_val *json, int has_existing_ledger);
+/**
+* Activity Bot Parser
+* Activity Array for Bots
+*/
+int lldc_activity_bot_arr_parse (cwr_malloc_ctx_t *_mctx, lldc_activity_bot_arr_t *obj, yyjson_val *json, int has_existing_ledger);
 /**
 * Client Status Parser
 * Active sessions are indicated with an "online", "idle", or "dnd" string per platform. If a user is offline or invisible, the corresponding field is not present.

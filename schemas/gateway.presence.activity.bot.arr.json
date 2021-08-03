@@ -1,0 +1,10 @@
+{
+    "title": "Activity Bot",
+    "description": "Activity Array for Bots",
+    "type": "array",
+    "items": {
+        "description": "Activity Bot Objects",
+        "type": "object",
+        "existing_parser": "activity_bot"
+    }
+}

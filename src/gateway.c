@@ -56,6 +56,45 @@ static void lldc__gw_msg_chunk (cwr_ws_t *ws, const char *data, size_t len)
         return; // TODO: OOM
 }
 
+static void lldc__gw_heartbeat (uv_timer_t* handle)
+{
+    puts("BEAT");
+    lldc_gateway_client_t *client = handle->data;
+
+    if (client->want_ack)
+        return; // TODO: reconnect
+
+    client->gp_buf.len = 0;
+
+    int r = 0;
+
+    if (!client->last_s)
+        r = cwr_ws_send(&client->ws, "{\"op\":1,\"d\":null}", 17, CWR_WS_OP_TEXT);
+    else
+    {
+        if (cwr_buf_printf(&client->gp_buf, "{\"op\":1,\"d\":%d}", client->last_s) == NULL)
+            return; // TODO: fatal oom
+        r = cwr_ws_send(&client->ws, client->gp_buf.base, client->gp_buf.len, CWR_WS_OP_TEXT);
+    }
+
+    if (r)
+        return; // TODO: fatal
+
+    client->want_ack = 1;
+}
+
+static inline
+int lldc__gw_payload_header (cwr_buf_t *buf, lldc_gateway_opcode_t opcode)
+{
+    return !cwr_buf_printf(buf, "{\"op\":%d,\"d\":", opcode);
+}
+
+static inline
+int lldc__gw_payload_footer (cwr_buf_t *buf)
+{
+    return !cwr_buf_push_back(buf, "}", 1);
+}
+
 static void lldc__gw_msg_recv (cwr_ws_t *ws)
 {
     lldc_gateway_client_t *client = ws->data;
@@ -90,15 +129,13 @@ static void lldc__gw_msg_recv (cwr_ws_t *ws)
 
     fwrite(msg->base, 1, msg->len, stdout);
     fputc('\n', stdout);
+    fflush(stdout);
 
     lldc_gateway_payload_t payload;
 
     yyjson_read_err err;
-
     yyjson_doc *doc = yyjson_read_opts(msg->base, msg->len, 0, client->json_alc, &err);
-
     yyjson_val *root = yyjson_doc_get_root(doc);
-
 
     lldc_gateway_payload_parse(client->m_ctx, &payload, root, 0);
 
@@ -106,24 +143,64 @@ static void lldc__gw_msg_recv (cwr_ws_t *ws)
     {
         if (err.code == YYJSON_READ_ERROR_MEMORY_ALLOCATION) // TODO: oom
         {
-            
+
         }
         // else just ignore the error
         goto end;
     }
 
-    cwr_malloc_ctx_dump_leaks(client->m_ctx);
     switch (payload.op)
     {
-    case /* constant-expression */:
-        /* code */
+    case LLDC_GW_OP_HEARTBEAT:
+        {
+            client->want_ack = 0;
+            lldc__gw_heartbeat(&client->heartbeat_timer);   
+        }
+        break;
+
+    case LLDC_GW_OP_HELLO:
+        if (!client->is_ready)
+        {
+            /* Since this has one field we don't need a fancy parser */
+            yyjson_val *hb = yyjson_obj_get(payload.d, "heartbeat_interval");
+
+            if (!hb || !yyjson_is_int(hb))
+                return; // TODO: this is critical
+
+            client->heartbeat_interval = yyjson_get_int(hb);
+
+            /* Start the beating */
+            int r = uv_timer_start(&client->heartbeat_timer, lldc__gw_heartbeat, 0, client->heartbeat_interval);
+            if (r)
+                return; // TODO: this is critical
+
+            client->is_ready = 1;
+
+            /* We can now identify */
+            client->gp_buf.len = 0;
+            if (lldc__gw_payload_header(&client->gp_buf, LLDC_GW_OP_IDENTIFY) ||
+                !lldc_gateway_identify_stringify(&client->identify, &client->gp_buf) ||
+                lldc__gw_payload_footer(&client->gp_buf))
+                return; // TODO: fatal
+
+            fwrite(client->gp_buf.base, client->gp_buf.len, 1, stdout);
+
+            if (cwr_ws_send(&client->ws, client->gp_buf.base, client->gp_buf.len, CWR_WS_OP_TEXT) != CWR_E_WS_OK)
+                return; // TODO: fatal
+
+            puts("ok");
+        }
+        break;
+
+    case LLDC_GW_OP_HEARTBEAT_ACK:
+        client->want_ack = 0;
         break;
     
     default:
         break;
     }
 
-    lldc_struct_free(&payload);
+    lldc_struct_free((lldc_struct_obj_t *)&payload);
     yyjson_doc_free(doc);
 end:
 #ifdef LLDC_GW_COMPRESS
@@ -141,8 +218,14 @@ int lldc_gateway_client_init (cwr_malloc_ctx_t *m_ctx, uv_loop_t *loop, lldc_gat
     client->m_ctx = m_ctx;
     client->loop = loop;
 
+    uv_timer_init(loop, &client->heartbeat_timer);
+    client->heartbeat_timer.data = client;
+
     if (cwr_buf_malloc(&client->frame_buffer, m_ctx, LLDC_FRAME_BUF_SIZE) == NULL)
         return 1;
+
+    if (cwr_buf_malloc(&client->gp_buf, m_ctx, LLDC_FRAME_BUF_SIZE) == NULL)
+        goto fail1;
 
     r = cwr_sock_init(m_ctx, loop, &client->tcp);
 
@@ -203,6 +286,8 @@ wss_fail:
     if (cwr_buf_malloc(&client->decomp_buffer, m_ctx, LLDC_DECOMP_BUF_SIZE) == NULL)
     {
 fail:
+        cwr_buf_free(&client->gp_buf);
+fail1:
         r = 1;
         cwr_buf_free(&client->frame_buffer);
         goto wss_fail;
@@ -218,3 +303,81 @@ int lldc_gateway_client_connect (lldc_gateway_client_t *client)
     return 0;
 }
 
+void *lldc_activity_bot_stringify (lldc_activity_bot_t *activity, cwr_buf_t *buf)
+{
+    if (!cwr_buf_printf(buf, "{\"type\":%d,\"name\":", activity->type))
+        return NULL;
+    if (activity->name)
+    {
+        if (!cwr_buf_push_back(buf, "\"", 1) ||
+            !lldc_buf_write_json_str(buf, activity->name) ||
+            !cwr_buf_push_back(buf, "\"", 1))
+            return NULL;
+        
+    }
+    else if (!cwr_buf_push_back(buf, "null", 4))
+        return NULL;
+    if (activity->url)
+        if (!cwr_buf_push_back(buf, ",\"url\":\"", 8) ||
+            !lldc_buf_write_json_str(buf, activity->name) ||
+            !cwr_buf_push_back(buf, "\"", 1))
+            return NULL;
+
+    if (!cwr_buf_push_back(buf, "}", 1))
+        return NULL;
+
+    return buf->base;
+}
+
+void *lldc_update_presence_stringify (lldc_gateway_update_presence_t *presence, cwr_buf_t *buf)
+{
+    if (!cwr_buf_printf(buf, "{\"afk\":%s,\"activities\":[", presence->afk ? "true" : "false"))
+        return NULL;
+    for (size_t i = 0; i < presence->activities.len; i++)
+    {
+        if (i && !cwr_buf_push_back(buf, ",", 1))
+            return NULL;
+        if (!lldc_activity_bot_stringify(&presence->activities.items[i], buf))
+            return NULL;
+    }
+    if (!cwr_buf_push_back(buf, "]", 1))
+        return NULL;
+
+    if (presence->since)
+        if (!cwr_buf_printf(buf, ",\"since\":%d", presence->since))
+            return NULL;
+
+    if (presence->status)
+        if (!cwr_buf_printf(buf, ",\"status\":\"%s\"", presence->status))
+            return NULL;
+
+    if (!cwr_buf_push_back(buf, "}", 1))
+        return NULL;
+
+    return buf->base;
+}
+
+void *lldc_gateway_identify_stringify (lldc_gateway_identify_t *identify, cwr_buf_t *buf)
+{
+    int p = 
+        !cwr_buf_push_back(buf, "{\"token\":\"", 10) ||
+        !lldc_buf_write_json_str(buf, identify->token) ||
+        !cwr_buf_push_back(buf, "\",\"properties\":{\"$os\":\"", 23) ||
+        !lldc_buf_write_json_str(buf, identify->properties.os) ||
+        !cwr_buf_push_back(buf, "\",\"$browser\":\"", 14) ||
+        !lldc_buf_write_json_str(buf, identify->properties.lib_name) ||
+        !cwr_buf_push_back(buf, "\",\"$device\":\"", 13) ||
+        !lldc_buf_write_json_str(buf, identify->properties.lib_name) ||
+        !cwr_buf_printf(buf, 
+            "\"},\"intents\":%d,\"compress\":false,\"large_threshold\":%d,\"shard\":[%d,%d],\"presence\":", 
+            identify->intents, 
+            identify->large_threshold < 50 ? 50 : identify->large_threshold,
+            identify->shard[0], identify->shard[1] ? identify->shard[1] : 1) ||
+        !lldc_update_presence_stringify(&identify->presence, buf) ||
+        !cwr_buf_push_back(buf, "}", 1);
+
+    if (p)
+        return NULL;
+
+    return buf->base;
+}

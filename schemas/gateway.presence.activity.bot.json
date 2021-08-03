@@ -2,7 +2,6 @@
     "title": "Activity Bot",
     "description": "Presence Activity for Bot",
     "type": "object",
-    "no_parse": true,
     "properties": {
         "name": {
             "description": "the activity's name",

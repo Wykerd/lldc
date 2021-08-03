@@ -47,6 +47,38 @@ size_t lldc_urlencode(char* dst, const char *str)
     return (dst - pbuf) - 1;
 }
 
+static const char *escape_table[] = {
+    "\\u0000","\\u0001","\\u0002","\\u0003","\\u0004","\\u0005","\\u0006","\\u0007","\\b","\\t","\\n","\\u000b","\\f","\\r","\\u000e","\\u000f","\\u0010","\\u0011","\\u0012","\\u0013","\\u0014","\\u0015","\\u0016","\\u0017","\\u0018","\\u0019","\\u001a","\\u001b","\\u001c","\\u001d","\\u001e","\\u001f","\\u0020","\\u0021","\\\""
+};
+
+static const char *escape_len[] = {
+    6,6,6,6,6,6,6,6,2,2,2,6,2,2,6,6,6,6,6,6,6,
+    6,6,6,6,6,6,6,6,6,6,6,6,6,2
+};
+
+void *lldc_buf_write_json_str (cwr_buf_t *buf, const char *s) 
+{
+    const char *last = s;
+    char *cur = (char *)s;
+    while (*cur != '\0') {
+        if (((*cur >= '\x00') && (*cur <= '\x1f')) || 
+            (*cur == '"') || (*cur == '\\'))
+        {
+            if (!cwr_buf_push_back(buf, last, cur - last))
+                return NULL;
+            if (!cwr_buf_push_back(buf, escape_table[(uint8_t)*cur], escape_len[(uint8_t)*cur]))
+                return NULL;
+            last = cur + 1;
+        }
+        cur++;
+    }
+    if (*last != '\0')
+        if (!cwr_buf_push_back(buf, last, cur - last))
+            return NULL;
+
+    return buf;
+}
+
 /**
  * The date functions below (until comment "End Date Utils") are from QuickJS
  *

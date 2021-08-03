@@ -104,6 +104,11 @@ size_t lldc_urldecode(char* dst, const char* src);
 size_t lldc_urlencode(char* dst, const char *str);
 
 /**
+ * Escape string for use in json
+ */
+void *lldc_buf_write_json_str (cwr_buf_t *buf, const char *s);
+
+/**
  * ISO Date parser
  * @param s     ISO date
  * @return      number of milliseconds since the Unix Epoch
