@@ -107,20 +107,26 @@ typedef struct lldc_gateway_client_s {
     uv_loop_t *loop;
     uv_timer_t heartbeat_timer;
     int heartbeat_interval;
-    /**
-     * If a client does not receive a heartbeat ack between its attempts at sending heartbeats, 
-     * this may be due to a failed or "zombied" connection. 
-     * The client should then immediately terminate the connection with a non-1000 close code, 
-     * reconnect, and attempt to Resume.
-     */
-    int want_ack;
+    uv_timer_t identify_timeout;
     
     int last_s;
+    /* Used to keep track of whether the shard may identify */
+    /* This should have an initial value of 1000 as to avoid hitting rate limits */
+    int *identify_remaining; 
+    /* Useful for updating a global @me user */
+    lldc_user_t *me;
 
-    /* Bot is heartbeating to gateway */
-    int is_ready;
-    /* Bot is connected */
-    int is_connected; 
+    struct {
+        unsigned int want_ack : 1;
+        /* We're sending heartbeats and sent an IDENTIFY */
+        unsigned int ready : 1;
+        /* We're connected (READY/RESUMED) */
+        unsigned int connected : 1;
+        /* We're in the resume process */
+        unsigned int resuming : 1;
+        /* We're in the reidentify process */
+        unsigned int reidentifying : 1;
+    } status;
 
     /* Incomplete frame buffer */
     cwr_buf_t frame_buffer;

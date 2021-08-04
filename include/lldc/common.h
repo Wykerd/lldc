@@ -34,6 +34,9 @@
 #define LLDC_GW_HOST                "gateway.discord.gg"
 #define LLDC_FRAME_BUF_SIZE         4096
 #define LLDC_DECOMP_BUF_SIZE        LLDC_FRAME_BUF_SIZE
+/* Allow sending 2 gateway commands per second */
+#define LLDC_GW_COMMAND_LIMIT       2
+#define LLDC_GW_COMMAND_LIMIT_RESET 1000
 
 /* API Defines */
 #define LLDC_DEFAULT_PORT           "443"

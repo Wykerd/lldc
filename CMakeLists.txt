@@ -28,6 +28,7 @@ add_library(lldc
     # ${CMAKE_CURRENT_SOURCE_DIR}/src/client.c
     # Gateway
     ${CMAKE_CURRENT_SOURCE_DIR}/src/gateway.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/events.c
     # Rest
     # ${CMAKE_CURRENT_SOURCE_DIR}/src/rest.c
 )
